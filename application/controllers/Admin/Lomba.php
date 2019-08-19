@@ -35,6 +35,8 @@ class Lomba extends MY_Controller
                 $desk = $this->input->post('des');
                 $n_gb = str_replace(' ', '_', $nama) . "IITF2019";
                 $harga = $this->input->post('harga');
+                $nl = $this->input->post('nama_lomba');
+                $nom = $this->input->post('nominal');
                 if (!empty($_FILES['gb']['name'])) {
                     $this->_uploadFile($n_gb);
                     if (!$this->upload->do_upload('gb')) {
@@ -59,6 +61,19 @@ class Lomba extends MY_Controller
                             "harga" => $harga
                         );
                         $this->DataModel->insert('tb_lomba', $data);
+                        $a = 0;
+                        // die(json_encode($nom));
+                        foreach($nl as $key => $val){
+                            // echo $val . "  ". $nom[$a] . "<br>";
+                            $dataa = array(
+                                "id_lomba" => $id,
+                                "nama" => $val,
+                                "nominal" => $nom[$a]
+                            );
+                            $this->DataModel->insert('tb_juara',$dataa);
+                            $a++;
+                        }
+                        // die();
                         $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissable fade show" role="alert">
                                                         <span class="alert-inner--icon"><i class="ni ni-bulb-61"></i></span>
                                                         <span class="alert-inner--text"> Tambah Data Berhasil </span>
@@ -81,13 +96,18 @@ class Lomba extends MY_Controller
     public function ubah($id)
     {
         if ($this->IsLoggedIn()) {
+            $lomba = $this->DataModel->select('tb_lomba.nama,tb_lomba.deskripsi,tb_lomba.harga,tb_lomba.id_kategori,tb_juara.nama as nama_lomba,tb_juara.nominal');
             $lomba = $this->DataModel->getWhere('id', $id);
-            $lomba = $this->DataModel->getData('tb_lomba')->row();
+            $lomba = $this->DataModel->getJoin('tb_juara','tb_juara.id_lomba = tb_lomba.id','inner');
+            $lomba = $this->DataModel->getData('tb_lomba')->result_array();
+            // die(json_encode($lomba));
             if ($this->input->post('kirim')) {
                 $id_k = $this->input->post('id_k');
                 $nama = $this->input->post('nama');
                 $desk = $this->input->post('des');
                 $harga = $this->input->post('harga');
+                $nl = $this->input->post('nama_lomba');
+                $nom = $this->input->post('nominal');
                 if (!empty($_FILES['gb']['name'])) {
                     $n_gb = str_replace(' ', '_', $nama) . "IITF2019";
                     $path = "assets/Guide_book/" . $lomba->guide_book;
@@ -115,6 +135,16 @@ class Lomba extends MY_Controller
                         );
                         $this->DataModel->getWhere('id', $id);
                         $this->DataModel->update('tb_lomba', $data);
+                        // $a=0;
+                        // foreach($nl as $key => $val){
+                        //     $dataa = array(
+                        //         "nama" => $val,
+                        //         "nominal" => $nom[$a]
+                        //     );
+                        //     $this->DataModel->getWhere('id_lomba', $id);
+                        //     $this->DataModel->update('tb_juara', $data);
+                        //     $a++;
+                        // }
                         $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissable fade show" role="alert">
                                                         <span class="alert-inner--icon"><i class="ni ni-bulb-61"></i></span>
                                                         <span class="alert-inner--text"> Tambah Data Berhasil </span>
@@ -157,6 +187,8 @@ class Lomba extends MY_Controller
             $gb = $this->input->post('gb');
             $path = "assets/Guide_book/" . $gb;
             unlink(FCPATH . $path);
+
+            $q = $this->DataModel->delete('id_lomba',$id,'tb_juara');
             $q = $this->DataModel->delete('id',$id,'tb_lomba');
             if($q){
                 $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissable fade show" role="alert">
@@ -176,6 +208,7 @@ class Lomba extends MY_Controller
         $config['upload_path'] = 'assets/Guide_book/';
         $config['allowed_types'] = 'pdf';
         $config['file_name'] = $name;
+        $config['overwrite'] = true;
         $this->upload->initialize($config);
     }
 }

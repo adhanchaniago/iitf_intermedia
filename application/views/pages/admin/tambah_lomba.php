@@ -83,6 +83,16 @@
                                         </div>
                                     </div>
                                     <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <button type="button" class="btn btn-success btn-md" id="tambah"><i class="fa fa-plus"></i> Tambah Juara</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12" id="sub_form"></div>
+                                    </div>
+                                    <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group focused">
                                                 <input type="submit" value="simpan" name="kirim" class="btn btn-primary">
@@ -100,5 +110,17 @@
     </div>
 </body>
 <?php $this->load->view('assets/admin/javascript') ?>
-
+<script>
+    $('#tambah').click(function(e) {
+        $('#sub_form').append('<div class="row form-group"><div class="col-lg-5"><input class="form-control" type="text" name="nama_lomba[]" placeholder="Ex : Juara 1"></div><div class="col-lg-5"><input class="form-control" type="number" name="nominal[]" placeholder="Nominal (1000000)"></div><div class="col-lg-2"><button onclick="btn_remove(this)" type="button" class="btn btn-md btn-danger"><i class="fa fa-trash"></i> Hapus</button></div></div>');
+    });
+</script>
+<script type="text/javascript">
+    function btn_remove(argument) {
+        var r = confirm("Apakah yakin mau dihapus?");
+        if (r == true) {
+            argument.parentElement.parentElement.remove();
+        }
+    }
+</script>
 </html>
