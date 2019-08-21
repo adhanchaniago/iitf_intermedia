@@ -56,5 +56,20 @@ class App_view extends CI_Controller{
         $this->load->view('component/ground');
     }
 
+    public function step(){
+        $payload['judul'] = "TIMELINE";
+        $payload['email'] = "trian@gmail.com";
+        $payload['page'] = "login";
+        $this->load->view('component/header',$payload);
+        $this->load->view('pages/user/user_step');
+        $this->load->view('component/ground');
+        $step = 0;
+        if($step == 1){
+            // step 1
+        }else if($step == 2){
+            //step 2
+        }
+    }
+
        
 }

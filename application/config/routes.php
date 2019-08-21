@@ -55,3 +55,4 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['login'] = 'App_view/login';
 $route['timeline'] = 'App_view/timeline';
+$route['user'] = 'App_view/step';
