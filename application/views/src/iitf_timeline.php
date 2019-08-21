@@ -7,21 +7,23 @@
                 <div class="hero-head">
                     <?php $this->load->view('component/nav') ?>
                 </div>
-        
+
+                <div id="particles-js"></div>
+
                 <div class="hero-body has-text-centered">
                     <div class="columns">
                         <div class="column is-6 is-offset-3">
                             <div class="roadmap-image">
-                                <img src="assets/images/illustrations/world.svg">
+                                <img src="assets/app/images/logo/banner.png">
                             </div>
-                            <h1 class="title is-2 is-light is-semibold is-spaced main-title">2018 Roadmap</h1>
-                            <h2 class="subtitle is-5 is-light is-thin">
-                                Cryptocurrency brought to the next level. Join our ICO for supercharged rates.
+                            <h1 class="title is-2  is-semibold is-spaced main-title" >TIMELINE</h1>
+                            <h2 class="subtitle is-5  is-thin">
+                                Timeline IITF 2019 secara lengkap
                             </h2>
                             <!-- CTA -->
                             <p>
                                 <a href="#roadmap" class="button k-button k-primary raised has-gradient is-fat is-bold">
-                                    <span class="text">More details</span>
+                                    <span class="text">Home</span>
                                     <span class="front-gradient"></span>
                                 </a>
                             </p>
@@ -180,7 +182,7 @@
         
             <section>
                 <div class="roadmap-end">
-                    <img src="assets/images/illustrations/roadmap-end.svg" alt="">
+                    <img src="assets/app/images/illustrations/roadmap-end.svg" alt="">
                 </div>
         
                 <div class="follow-us">
