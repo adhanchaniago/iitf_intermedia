@@ -45,7 +45,7 @@
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-nama">Nama</label>
-                                                <input type="text" name="nama" class="form-control form-control-alternative" value="<?=$lomba->nama?>" placeholder="Masukkan nama perlombaan">
+                                                <input type="text" name="nama" class="form-control form-control-alternative" value="<?= $lomba[0]['nama'] ?>" placeholder="Masukkan nama perlombaan">
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
@@ -54,7 +54,9 @@
                                                 <select name="id_k" class="form-control form-control-alternative">
                                                     <option value="">Pilih Kategori Lomba</option>
                                                     <?php foreach ($kategori as $key => $val) { ?>
-                                                        <option value="<?= $val['id'] ?>" <?php if($lomba->id_kategori == $val['id']){echo "selected"; } ?>><?= $val['nama'] ?></option>
+                                                    <option value="<?= $val['id'] ?>" <?php if ($lomba[0]['id_kategori'] == $val['id']) {
+                                                                                                echo "selected";
+                                                                                            } ?>><?= $val['nama'] ?></option>
                                                     <?php } ?>
                                                 </select>
                                             </div>
@@ -64,7 +66,7 @@
                                         <div class="col-lg-12">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-nama">Deskripsi</label>
-                                                <textarea name="des" rows="5" class="form-control form-control-alternative" placeholder="Masukkan deskripsi perlombaan"><?=$lomba->deskripsi?></textarea>
+                                                <textarea name="des" rows="5" class="form-control form-control-alternative" placeholder="Masukkan deskripsi perlombaan"><?= $lomba[0]['deskripsi'] ?></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -72,7 +74,7 @@
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-nama">HTM Lomba</label>
-                                                <input type="number" name="harga" class="form-control form-control-alternative" placeholder="Masukkan HTM Lomba" value="<?=$lomba->harga?>">
+                                                <input type="number" name="harga" class="form-control form-control-alternative" placeholder="Masukkan HTM Lomba" value="<?= $lomba[0]['harga'] ?>">
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
@@ -80,6 +82,17 @@
                                                 <label class="form-control-label" for="input-nama">Guide Book</label>
                                                 <input type="file" name="gb" class="form-control form-control-alternative">
                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <?php foreach($lomba as $key => $val){ ?>
+                                            <div class="row form-group">
+                                                <div class="col-lg-5"><input class="form-control" type="text" name="nama_lomba[]" value="<?=$val['nama_lomba']?>" placeholder="Ex : Juara 1"></div>
+                                                <div class="col-lg-5"><input class="form-control" type="number" name="nominal[]" value="<?=$val['nominal']?>" placeholder="Nominal (1000000)"></div>
+                                                <div class="col-lg-2"><button onclick="btn_remove(this)" type="button" class="btn btn-md btn-danger"><i class="fa fa-trash"></i> Hapus</button></div>
+                                            </div>
+                                            <?php } ?>
                                         </div>
                                     </div>
                                     <div class="row">
