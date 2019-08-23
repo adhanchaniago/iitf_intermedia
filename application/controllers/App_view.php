@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 
 
 class App_view extends CI_Controller{
-    
+
     public function __construct()
     {
         parent::__construct();
@@ -14,7 +14,7 @@ class App_view extends CI_Controller{
     public function index()
     {  
         $payload['judul'] = "HOME";
-        $payload['email'] = "trian@gmail.com";
+        $payload['email'] = ($this->session->userdata('email') == "" ? "LOGIN" : $this->session->userdata('email'));
         $payload['page'] = "home";
         $lomba = $this->DataModel->getData('tb_lomba')->result_array();
         $i=0;
@@ -37,19 +37,58 @@ class App_view extends CI_Controller{
 
     public function login(){
         $payload['judul'] = "LOGIN";
-        $payload['email'] = "trian@gail.com";
+        $payload['email'] = ($this->session->userdata('email') == "" ? "LOGIN" : $this->session->userdata('email'));;
         $payload['page'] = "login";
         $this->load->view('component/header',$payload);
         $this->load->view('src/iitf_login',$payload);
         $this->load->view('component/ground');
     }
+
+    public function loginProcess()
+    {
+        $user = $this->input->post('e');
+        $pass = $this->input->post('p');
+        
+        $query = $this->db->get_where('tb_user', array(
+            'email' => $user
+        ));
+        
+        if ($query->num_rows() !== 0) {
+            $result = $query->row();
+            if (base64_encode($pass) == $result->password) {
+                # sukses login
+                
+                $array = array(
+                    'email' => $result->email
+                );
+                
+                $this->session->set_userdata( $array );
+
+                echo "<script>location.href = '" . base_url() . "';</script>";
+                
+            } else {
+                # password salah
+                echo "<font color=\"red\">Password yang Anda masukkan salah!</font>";
+            }
+        } else {
+            # username salah
+            echo "<font color=\"red\">Email '" . $user . "' belum terdaftar!</font>";
+        }
+    }
+
+    public function logout()
+    {
+        $this->session->sess_destroy();
+        redirect(base_url(),'refresh');
+    }
+
     public function register(){
         
     }
 
     public function timeline(){
         $payload['judul'] = "TIMELINE";
-        $payload['email'] = "trian@gmail.com";
+        $payload['email'] = ($this->session->userdata('email') == "" ? "LOGIN" : $this->session->userdata('email'));;
         $payload['page'] = "timeline";
         $this->load->view('component/header',$payload);
         $this->load->view('src/iitf_timeline',$payload);
@@ -58,7 +97,7 @@ class App_view extends CI_Controller{
 
     public function step(){
         $payload['judul'] = "TIMELINE";
-        $payload['email'] = "trian@gmail.com";
+        $payload['email'] = ($this->session->userdata('email') == "" ? "LOGIN" : $this->session->userdata('email'));;
         $payload['page'] = "login";
         $this->load->view('component/header',$payload);
         $this->load->view('pages/user/user_step');
@@ -71,5 +110,4 @@ class App_view extends CI_Controller{
         }
     }
 
-       
 }

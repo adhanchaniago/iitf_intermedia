@@ -54,5 +54,7 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['login'] = 'App_view/login';
+$route['login/loginprocess'] = 'App_view/loginProcess';
+$route['logout'] = 'App_view/logout';
 $route['timeline'] = 'App_view/timeline';
 $route['user'] = 'App_view/step';
