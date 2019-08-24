@@ -3,6 +3,33 @@
     Trian
 
 */
+.lomba{
+    background-position: top right;
+    background-size: cover;
+    background-color: #cc7c7c; 
+}
+.lomba-box {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center; 
+}
+.lomba-box .box-lomba {
+    height: 300px;
+    width: 250px;
+    background-color: #17141d;
+    color: #a1a1af;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
+    margin: 25px;
+    text-align: center;
+    padding: 25px;
+    transition: 0.3s; 
+}
+.lomba-box .box-lomba:hover {
+    transform: scale(1.1);
+    transition: 0.3s; 
+}
 .hadiah {
     /* background-image: url("../images/confetti-png-39103.png"); */
     background-position: top right;
@@ -10,18 +37,21 @@
     background-color: #0d0b13; 
 }
 .hadiah .section-title {
-      margin-bottom: 40px; }
-      .hadiah .section-title p {
-        color: #a1a1af; }
-      .hadiah .section-title h1 {
-        color: white; }
-  
-  .hadiah-box {
+      margin-bottom: 40px; 
+}
+.hadiah .section-title p {
+        color: #a1a1af; 
+}
+.hadiah .section-title h1 {
+        color: white; 
+}  
+.hadiah-box {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center; 
-}.hadiah-box .box-hadiah {
+}
+.hadiah-box .box-hadiah {
       height: 300px;
       width: 250px;
       background-color: #17141d;
@@ -31,21 +61,27 @@
       margin: 25px;
       text-align: center;
       padding: 25px;
-      transition: 0.3s; }
-    .hadiah-box .box-hadiah:hover {
+      transition: 0.3s; 
+}
+.hadiah-box .box-hadiah:hover {
       transform: scale(1.1);
-      transition: 0.3s; }
-    .hadiah-box .hadiah-trophy {
+      transition: 0.3s; 
+} 
+.hadiah-box .hadiah-trophy {
       height: 100px;
-      margin: 0 0 20px 0; }
-    .hadiah-box .juara {
+      margin: 0 0 20px 0; 
+}
+.hadiah-box .juara {
       font-size: 2em;
       padding: 5px;
-      font-weight: bold; }
-    .hadiah-box .nominal {
-      font-size: 1.5em; }
-    .hadiah-box .sertif {
-      font-weight: bold; }
+      font-weight: bold; 
+}
+.hadiah-box .nominal {
+      font-size: 1.5em; 
+}
+.hadiah-box .sertif {
+      font-weight: bold; 
+}
 
 /*! core.scss | Krypton | Kit 1 | CSS Ninja *//*! _theme-default.scss | Cryptos | Kit1 | CSS Ninja */
 

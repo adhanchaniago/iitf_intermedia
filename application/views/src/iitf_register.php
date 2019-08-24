@@ -51,7 +51,7 @@
                                 
                                 <!-- Submit -->
                                 <span>
-                                    <button type="button" onclick="javascript:tryRegister('<?= base_url(); ?>');" class="button is-button k-button k-primary raised has-gradient is-bold">
+                                    <button type="submit"  class="button is-button k-button k-primary raised has-gradient is-bold">
                                         <span class="text">Daftar</span>
                                         <span class="front-gradient"></span>
                                     </button>
