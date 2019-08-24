@@ -60,12 +60,13 @@ class App_view extends CI_Controller{
                 # sukses login
                 
                 $array = array(
+                    'id' => $result->id,
                     'email' => $result->email
                 );
                 
                 $this->session->set_userdata( $array );
 
-                echo "<script>location.href = '" . base_url() . "';</script>";
+                echo "<script>location.href = '" . base_url() . "user';</script>";
                 
             } else {
                 # password salah
@@ -141,8 +142,8 @@ class App_view extends CI_Controller{
                     'institusi' => '',
                     'lampiran_identitas' => ''
                 ));
-                $uri = base_url('login');
-                echo "<script>window.alert(\"Selamat $nama, Anda berhasil mendaftarkan diri ke Perlombaan IITF 2019!\\nKlik OK untuk mulai dialihkan ke halaman login.\");window.location.href = \"" . $uri . "\";</script>";
+                $uri = base_url('user');
+                echo "<script>window.alert(\"Selamat $nama, Anda berhasil mendaftarkan diri ke Perlombaan IITF 2019!\\nKlik OK untuk mulai dialihkan ke halaman selanjutnya.\");window.location.href = \"" . $uri . "\";</script>";
                 return;
             }
         }
