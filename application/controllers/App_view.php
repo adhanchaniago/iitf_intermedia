@@ -8,6 +8,7 @@ class App_view extends CI_Controller{
     {
         parent::__construct();
         $this->load->model('DataModel');
+        $this->load->library('bcrypt');
     }
 
     //HomePage
@@ -55,7 +56,7 @@ class App_view extends CI_Controller{
         
         if ($query->num_rows() !== 0) {
             $result = $query->row();
-            if (base64_encode($pass) == $result->password) {
+            if ($this->bcrypt->check_password($pass, $result->password)) {
                 # sukses login
                 
                 $array = array(
@@ -89,6 +90,62 @@ class App_view extends CI_Controller{
         $this->load->view('component/header',$payload);
         $this->load->view('src/iitf_register',$payload);
         $this->load->view('component/ground');
+    }
+
+    public function registerProcess()
+    {
+        $nama = $this->input->post('n');
+        $mail = $this->input->post('e');
+        $pass = $this->input->post('p');
+        $pass2 = $this->input->post('p2');
+        
+        // Verify
+        if ($nama === "") {
+            echo "<font color=\"red\">Anda wajib memasukkan Nama Pendaftar!</font>";
+            return;
+        } else if ($mail === "") {
+            echo "<font color=\"red\">Anda wajib memasukkan Alamat E-Mail!</font>";
+            return;
+        } else if ($pass === "") {
+            echo "<font color=\"red\">Anda wajib memasukkan Kata Sandi!</font>";
+            return;
+        } else if ($pass2 === "") {
+            echo "<font color=\"red\">Anda wajib memasukkan ulang Kata Sandinya!</font>";
+            return;
+        } else {
+            if ($pass != $pass2) {
+                echo "<font color=\"red\">Kata Sandi yang Anda masukkan tidak sama, periksa kembali!</font>";
+                return;
+            } else {
+                $prefixUser = "U-";
+                $prefixKoor = "K-";
+                $randID = date("YmdHis");
+                $idUser = $prefixUser . $randID;
+                $idKoor = $prefixKoor . $randID;
+
+                // User
+                $this->db->insert('tb_user', array(
+                    'id' => $idUser,
+                    'email' => $mail,
+                    'password' => $this->bcrypt->hash_password($pass),
+                    'tanggal_reg' => date("Y-m-d")
+                ));
+                
+                // Koor
+                $this->db->insert('tb_koor', array(
+                    'id' => $idKoor,
+                    'id_user' => $idUser,
+                    'nama' => $nama,
+                    'email' => $mail,
+                    'no_hp' => '',
+                    'institusi' => '',
+                    'lampiran_identitas' => ''
+                ));
+                $uri = base_url('login');
+                echo "<script>window.alert(\"Selamat $nama, Anda berhasil mendaftarkan diri ke Perlombaan IITF 2019!\\nKlik OK untuk mulai dialihkan ke halaman login.\");window.location.href = \"" . $uri . "\";</script>";
+                return;
+            }
+        }
     }
 
     public function timeline(){
