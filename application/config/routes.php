@@ -57,4 +57,5 @@ $route['login'] = 'App_view/login';
 $route['login/loginprocess'] = 'App_view/loginProcess';
 $route['logout'] = 'App_view/logout';
 $route['timeline'] = 'App_view/timeline';
+$route['register'] = 'App_view/register';
 $route['user'] = 'App_view/step';

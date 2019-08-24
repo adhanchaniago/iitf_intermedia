@@ -338,7 +338,7 @@ $(document).ready(function() {
 						nb_sides: 4
 					},
 					image: {
-						src: "assets/app/images/particle/html5.svg",
+						src: "assets/app/images/particle/IITF_monochrome.png",
 						width: 1,
 						height: 1
 					}

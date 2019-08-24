@@ -2435,7 +2435,7 @@ ul#countdown li .label{
 
 }
 .control-material.is-primary input,.control-material.is-primary textarea{
-    color:#fff;
+    /* color:#fff; */
 }
 .control-material.is-primary .bar:before{
     background:#7F00FF;

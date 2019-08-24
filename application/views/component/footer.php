@@ -56,7 +56,7 @@
                     </div>
                 </div>
                 <!-- Copyright -->
-                <p class="k-copyright">© 2019 | IITF. All Rights Reserved</p>
+                <p class="k-copyright">© 2019 | IITF. All Rights Reserved | <a href="<?base_url()?>admin/home/login" target="_blank">Admin</a></p>
                 <br>
                 <!-- Made by -->
                 <p class="coded-by">Designed and Coded by <a href="https://cssninja.io" target="_blank">Css Ninja</a></p>

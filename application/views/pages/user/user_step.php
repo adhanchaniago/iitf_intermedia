@@ -192,8 +192,8 @@
       <div class="steps column">
         <div class="step column">
           <div class="step-header">
-            <div class="header">Hello This is step one!</div>
-            <div class="subheader">Hopefully this looks cool</div>
+            <div class="header">Pilih kategori Lomba !</div>
+            <div class="subheader">Kamu mau lomba apa ?</div>
           </div>
         </div>
         <div class="step minimized">

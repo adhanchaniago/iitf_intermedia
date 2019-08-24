@@ -37,7 +37,7 @@ class App_view extends CI_Controller{
 
     public function login(){
         $payload['judul'] = "LOGIN";
-        $payload['email'] = ($this->session->userdata('email') == "" ? "LOGIN" : $this->session->userdata('email'));;
+        $payload['email'] = ($this->session->userdata('email') == "" ? "DAFTAR" : $this->session->userdata('email'));;
         $payload['page'] = "login";
         $this->load->view('component/header',$payload);
         $this->load->view('src/iitf_login',$payload);
@@ -83,7 +83,12 @@ class App_view extends CI_Controller{
     }
 
     public function register(){
-        
+        $payload['judul'] = "REGISTER";
+        $payload['email'] = ($this->session->userdata('email') == "" ? "LOGIN" : $this->session->userdata('email'));;
+        $payload['page'] = "register";
+        $this->load->view('component/header',$payload);
+        $this->load->view('src/iitf_register',$payload);
+        $this->load->view('component/ground');
     }
 
     public function timeline(){

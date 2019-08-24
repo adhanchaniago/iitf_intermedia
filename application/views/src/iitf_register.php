@@ -15,8 +15,15 @@
         
                         <!-- Landing page Title -->
                         <div class="column is-6 landing-caption">
-                            <h1 class="title is-3 is-semibold is-spaced main-title has-text-centered">Masuk ke IITF</h1>
+                            <h1 class="title is-3 is-semibold is-spaced main-title has-text-centered">Buat Akun IITF</h1>
                             <form class="login-form" action="javascript:tryLogin('<?= base_url(); ?>');">
+                                <!-- Field -->
+                                <div class="control-material is-primary">      
+                                    <input class="material-input" id="u" type="text" required>
+                                    <span class="material-highlight"></span>
+                                    <span class="bar"></span>
+                                    <label for="u">Nama</label>
+                                </div>
                                 <!-- Field -->
                                 <div class="control-material is-primary">      
                                     <input class="material-input" id="u" type="email" required>
@@ -31,6 +38,13 @@
                                     <span class="bar"></span>
                                     <label for="p">Kata Sandi</label>
                                 </div>
+                                <!-- Field -->
+                                <div class="control-material is-primary">      
+                                    <input class="material-input" id="u" type="email" required>
+                                    <span class="material-highlight"></span>
+                                    <span class="bar"></span>
+                                    <label for="u">Ulang Kata Sandi</label>
+                                </div>
 
                                 <!-- Label Login -->
                                 <div id="loginWarnings"></div><br>
@@ -38,7 +52,7 @@
                                 <!-- Submit -->
                                 <span>
                                     <button type="button" onclick="javascript:tryLogin('<?= base_url(); ?>');" class="button is-button k-button k-primary raised has-gradient is-bold">
-                                        <span class="text">Masuk</span>
+                                        <span class="text">Daftar</span>
                                         <span class="front-gradient"></span>
                                     </button>
                                 </span>
