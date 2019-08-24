@@ -183,84 +183,174 @@
   .step.minimized:hover {
     background-color: rgba(0, 0, 0, 0.06);
   }
+
+  /*
+  */
+  
+
 </style>
 
 <?php $this->load->view('component/nav')?>
+
 <div class="container">
   <div class="columns">
-    <div class="column is-4">
+
+  <div class="column is-4">
       <div class="steps column">
         <div class="step column">
           <div class="step-header">
-            <div class="header">Pilih kategori Lomba !</div>
-            <div class="subheader">Kamu mau lomba apa ?</div>
+            <div class="header">Step 1 : Pendaftaraan Koor Team</div>
+            <div class="subheader">melengkapi biodata diri koordinator team</div>
+          </div>
+        </div>
+        <div class="step minimized">
+            <div class="step-header">
+              <div class="header">Step 2 : Pilih kategori Lomba</div>
+              <div class="subheader">melengkapi biodata diri anggota team</div>
+            </div>
+          </div>
+        <div class="step minimized">
+          <div class="step-header">
+            <div class="header">Step 3 : Pendaftaraan Team</div>
+            <div class="subheader">menentukan kategori lomba dan nama team</div>
           </div>
         </div>
         <div class="step minimized">
           <div class="step-header">
-            <div class="header">This is step two!</div>
-            <div class="subheader">The content is a little bigger!</div>
+            <div class="header">Step 4 : Pembayaran </div>
+            <div class="subheader">melakukan pembayaran dan aktifasi team</div>
           </div>
         </div>
         <div class="step minimized">
           <div class="step-header">
-            <div class="header">And finally step three!</div>
-            <div class="subheader">Last but not the least!</div>
+            <div class="header">Step 5 : Submisi File</div>
+            <div class="subheader">mengunggah file yang ingin diperlombakan</div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="column is-8">
+<!-- START INPUT DATA  -->
+<div class="column is-6">
+  <div class="container">
+    <div class="column">
+        <div class="lomba">
+            <div class="lomba-box box-lomba">
+              ha
+            </div>
+          </div>
+    </div>
+  </div>
       <div class="field">
         <div class="control">
           <input
+            name="nama"
             class="input is-primary"
             type="text"
-            placeholder="Primary input"
+            placeholder="Nama Lengkap"
           />
         </div>
       </div>
       <div class="field">
         <div class="control">
-          <input class="input is-info" type="text" placeholder="Info input" />
+          <input 
+          name="email"
+          class="input is-info" 
+          type="text" 
+          placeholder="Email" />
         </div>
       </div>
       <div class="field">
         <div class="control">
           <input
+            name="no_hp"
             class="input is-success"
             type="text"
-            placeholder="Success input"
+            placeholder="No. HP"
           />
         </div>
       </div>
       <div class="field">
         <div class="control">
           <input
+            name="institusi"
             class="input is-warning"
             type="text"
-            placeholder="Warning input"
+            placeholder="Asal Sekolah / Institusi"
           />
         </div>
       </div>
+
+      <!--GROUP UPLOAD SURAT PERNYATAAAN-->
       <div class="field">
-        <div class="control">
-          <input
-            class="input is-danger"
-            type="text"
-            placeholder="Danger input"
-          />
+        <div class="file is-info has-name">
+          <label class="file-label">
+          <input class="file-input" type="file" name="resume">
+          <span class="file-cta">
+            <span class="file-icon">
+              <i class="fas fa-upload"></i>
+            </span>
+            <span class="file-label">
+              Info file…
+            </span>
+          </span>
+          <span class="file-name">
+            Screen Shot 2017-07-29 at 15.54.25.png
+          </span>
+          </label>
         </div>
       </div>
+
+      <!--GROUP SUBMIT BUTTON-->
       <div class="field is-grouped">
         <div class="control">
-          <button class="button is-link">Submit</button>
+          <button class="button is-link">Simpan</button>
         </div>
+
         <div class="control">
           <button class="button is-text">Cancel</button>
-        </div>
+        </diSv>
       </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- modal -->
+  <div id="modal" class="modal is-active">
+  <div class="modal-background"></div>
+  <div class="modal-content">
+    <!-- Any other Bulma elements you want -->
+    <div class="card">
+  
+  <div class="card-content">
+    <div class="media">
+      <div class="media-content">
+        <p class="title is-4">Hallo ! John Smith</p>
+        <p class="subtitle is-6">@johnsmith</p>
+      </div>
+    </div>
+
+    <div class="content">
+      Akun kamu sudah terdaftar di iitf tetapi belum terdaftar sebagai peserta. Untuk itu kamu perlu mengisi bebrapa data yang diperlukan  ikuti langkah-langkah berikut ini untuk mendaftarkan diri sebagai peserta 
+      <a href="#">#panduan pendaftaran</a> 
+      <br>
+      <button id="btn-mengerti" class="button k-button k-primary raised has-gradient slanted">
+          <span class="text">
+            Saya Mengerti dan lanjutkan
+          </span>
+          <span class="front-gradient"></span>
+      </button>
+      <br>
+      <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
     </div>
   </div>
 </div>
+  </div>
+  <button class="modal-close is-large" aria-label="close"></button>
+</div>
+</div>
+
+
+  
