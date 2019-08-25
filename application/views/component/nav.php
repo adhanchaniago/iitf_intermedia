@@ -1,5 +1,4 @@
- 
- <?php if($page == "home"){?>
+<?php if($page == "home"){?>
                     <!-- Cloned navbar -->
                     <!-- Cloned navbar that comes in on scroll -->
                     <nav id="navbar-clone" class="navbar is-fixed ">
@@ -41,10 +40,10 @@
                                     </div>
                                     <!-- Sign up -->
                                     <div class="navbar-item is-nav-link">
-                                        <a href="<?= base_url()?>login" class="button k-button k-primary raised has-gradient slanted">
+                                        <a href="<?= base_url((($email == null) || ($email == '') ? 'login' : 'user'))?>" class="button k-button k-primary raised has-gradient slanted">
                                             <span class="text">
                                             <?php if($email == null || $email == ''){
-                                                echo '<i class="far fa-user-circle"></i>Area Peserta';
+                                                echo '<i class="far fa-user-circle"></i> Area Peserta';
                                             }else{
                                                 echo $email;
                                             } ?>
@@ -97,10 +96,10 @@
                                     </div>
                                     <!-- Sign up -->
                                     <div class="navbar-item is-nav-link">
-                                        <a href="<?= base_url()?>login" class="button k-button k-primary raised has-gradient slanted">
+                                        <a href="<?= base_url((($email == null) || ($email == '') ? 'login' : 'user'))?>" class="button k-button k-primary raised has-gradient slanted">
                                             <span class="text">
                                             <?php if($email == null || $email == ''){
-                                                echo '<i class="far fa-user-circle"></i>Area Peserta';
+                                                echo '<i class="far fa-user-circle"></i> Area Peserta';
                                             }else{
                                                 echo $email;
                                             } ?>
@@ -147,10 +146,10 @@
                                     </div>
                                     <!-- Sign up -->
                                     <div class="navbar-item is-nav-link">
-                                        <a href="<?= base_url()?>login" class="button k-button k-primary raised has-gradient slanted">
+                                        <a href="<?= base_url((($email == null) || ($email == '') ? 'login' : 'user'))?>" class="button k-button k-primary raised has-gradient slanted">
                                             <span class="text">
                                             <?php if($email == null || $email == ''){
-                                                echo '<i class="far fa-user-circle"></i>Area Peserta';
+                                                echo '<i class="far fa-user-circle"></i> Area Peserta';
                                             }else{
                                                 echo $email;
                                             } ?>
@@ -382,6 +381,19 @@
                                         </a>
                                     </div>
                                     
+                                    <!-- Sign up -->
+                                    <div class="navbar-item is-nav-link">
+                                        <a href="<?= base_url((($email == null) || ($email == '') ? 'login' : 'logout'))?>" class="button k-button k-primary raised has-gradient slanted">
+                                            <span class="text">
+                                            <?php if($email == null || $email == ''){
+                                                echo '<i class="far fa-user-circle"></i> Area Peserta';
+                                            }else{
+                                                echo 'Logout';
+                                            } ?>
+                                            </span>
+                                            <span class="front-gradient"></span>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

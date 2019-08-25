@@ -13,9 +13,10 @@ class App_view extends CI_Controller{
 
     //HomePage
     public function index()
-    {  
+    {
         $payload['judul'] = "HOME";
-        $payload['email'] = ($this->session->userdata('email') == "" ? "LOGIN" : $this->session->userdata('email'));
+        $payload['link'] = ($this->session->userdata('email') == "" ? base_url('login') : base_url('user'));
+        $payload['email'] = ($this->session->userdata('email') == "" ? "" : "LANJUTKAN DAFTAR: " . $this->session->userdata('email'));
         $payload['page'] = "home";
         $lomba = $this->DataModel->getData('tb_lomba')->result_array();
         $i=0;
@@ -37,8 +38,17 @@ class App_view extends CI_Controller{
     }
 
     public function login(){
+        $check = $this->db->get_where('tb_user', array(
+            'id' => $this->session->userdata('id'),
+            'email' => $this->session->userdata('email')
+        ));
+
+        if ($check->num_rows() !== 0) {
+            redirect('user');
+        }
         $payload['judul'] = "LOGIN";
-        $payload['email'] = ($this->session->userdata('email') == "" ? "DAFTAR" : $this->session->userdata('email'));;
+        $payload['link'] = ($this->session->userdata('email') == "" ? base_url('login') : base_url('user'));
+        $payload['email'] = ($this->session->userdata('email') == "" ? "" : "LANJUTKAN DAFTAR: " . $this->session->userdata('email'));
         $payload['page'] = "login";
         $this->load->view('component/header',$payload);
         $this->load->view('src/iitf_login',$payload);
@@ -85,8 +95,16 @@ class App_view extends CI_Controller{
     }
 
     public function register(){
+        $check = $this->db->get_where('tb_user', array(
+            'id' => $this->session->userdata('id'),
+            'email' => $this->session->userdata('email')
+        ));
+
+        if ($check->num_rows() !== 0) {
+            redirect('user');
+        }
         $payload['judul'] = "REGISTER";
-        $payload['email'] = ($this->session->userdata('email') == "" ? "LOGIN" : $this->session->userdata('email'));;
+        $payload['email'] = ($this->session->userdata('email') == "" ? "" : $this->session->userdata('email'));;
         $payload['page'] = "register";
         $this->load->view('component/header',$payload);
         $this->load->view('src/iitf_register',$payload);
@@ -151,7 +169,8 @@ class App_view extends CI_Controller{
 
     public function timeline(){
         $payload['judul'] = "TIMELINE";
-        $payload['email'] = ($this->session->userdata('email') == "" ? "LOGIN" : $this->session->userdata('email'));;
+        $payload['link'] = ($this->session->userdata('email') == "" ? base_url('login') : base_url('user'));
+        $payload['email'] = ($this->session->userdata('email') == "" ? "" : "LANJUTKAN DAFTAR: " . $this->session->userdata('email'));
         $payload['page'] = "timeline";
         $this->load->view('component/header',$payload);
         $this->load->view('src/iitf_timeline',$payload);
@@ -159,16 +178,36 @@ class App_view extends CI_Controller{
     }
 
     public function step(){
+        $check = $this->db->get_where('tb_user', array(
+            'id' => $this->session->userdata('id'),
+            'email' => $this->session->userdata('email')
+        ));
+
+        $koor = null;
+        $userdata = $check->row();
+        if ($check->num_rows() == 0) {
+            redirect('login');
+        } else {
+            $koorq = $this->db->get_where('tb_koor', array(
+                'id_user' => $this->session->userdata('id')
+            ));
+            $koor = $koorq->row();
+        }
+
         $payload['judul'] = "TIMELINE";
-        $payload['email'] = ($this->session->userdata('email') == "" ? "LOGIN" : $this->session->userdata('email'));;
-        $payload['page'] = "login";
+        $payload['link'] = ($this->session->userdata('email') == "" ? base_url('login') : base_url('user'));
+        $payload['email'] = ($this->session->userdata('email') == "" ? "" : $this->session->userdata('email'));
+        $payload['page'] = "steps";
+        $payload['nama'] = $koor->nama;
+        $payload['nohp'] = $koor->no_hp;
+        $payload['inst'] = $koor->institusi;
         $this->load->view('component/header',$payload);
         $this->load->view('pages/user/user_step');
         $this->load->view('component/ground');
-        $step = 0;
-        if($step == 1){
+        $payload['step'] = $userdata->step_selesai;
+        if($payload['step'] == 1){
             // step 1
-        }else if($step == 2){
+        }else if($payload['step'] == 2){
             //step 2
         }
     }

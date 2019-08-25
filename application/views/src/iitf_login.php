@@ -37,12 +37,11 @@
                                 
                                 <!-- Submit -->
                                 <span>
-                                    <button type="button" onclick="javascript:tryLogin('<?= base_url(); ?>');" class="button is-button k-button k-primary raised has-gradient is-bold">
+                                    <button type="submit" onclick="javascript:tryLogin('<?= base_url(); ?>');" class="button is-button k-button k-primary raised has-gradient is-bold">
                                         <span class="text">Masuk</span>
                                         <span class="front-gradient"></span>
                                     </button>
                                 </span>
-                                 
                             </form>
         
                         </div>
