@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: 18 Agu 2019 pada 12.20
--- Versi Server: 10.1.25-MariaDB
--- PHP Version: 7.1.7
+-- Host: localhost
+-- Waktu pembuatan: 25 Agu 2019 pada 19.44
+-- Versi server: 10.3.16-MariaDB
+-- Versi PHP: 7.3.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -28,11 +28,19 @@ SET time_zone = "+00:00";
 -- Struktur dari tabel `tb_admin`
 --
 
+DROP TABLE IF EXISTS `tb_admin`;
 CREATE TABLE `tb_admin` (
   `id` varchar(20) NOT NULL,
   `email` varchar(150) NOT NULL,
   `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tb_admin`
+--
+
+INSERT INTO `tb_admin` (`id`, `email`, `password`) VALUES
+('Z-18081921', 'zaenur.rochman98@gmail.com', '$2a$08$7SP.Rz1123gSsZ/RG5gXYOntlFD.wOg2lAVRb0UsloE8lyRY2LoEW');
 
 -- --------------------------------------------------------
 
@@ -40,6 +48,7 @@ CREATE TABLE `tb_admin` (
 -- Struktur dari tabel `tb_anggota`
 --
 
+DROP TABLE IF EXISTS `tb_anggota`;
 CREATE TABLE `tb_anggota` (
   `id` int(11) NOT NULL,
   `id_pendaftaran` varchar(20) NOT NULL,
@@ -51,14 +60,44 @@ CREATE TABLE `tb_anggota` (
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `tb_juara`
+--
+
+DROP TABLE IF EXISTS `tb_juara`;
+CREATE TABLE `tb_juara` (
+  `id_lomba` varchar(20) NOT NULL,
+  `nama` varchar(30) NOT NULL,
+  `nominal` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tb_juara`
+--
+
+INSERT INTO `tb_juara` (`id_lomba`, `nama`, `nominal`) VALUES
+('L-19081954', 'Juara 1', 1500000),
+('L-19081954', 'Juara 2', 750000);
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `tb_kategori`
 --
 
+DROP TABLE IF EXISTS `tb_kategori`;
 CREATE TABLE `tb_kategori` (
   `id` int(11) NOT NULL,
   `nama` varchar(20) NOT NULL,
   `deskripsi` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tb_kategori`
+--
+
+INSERT INTO `tb_kategori` (`id`, `nama`, `deskripsi`) VALUES
+(1, 'Mahasiswa atau umum', 'loren ipsum dolor sit amet loren'),
+(3, 'Pelajar', '');
 
 -- --------------------------------------------------------
 
@@ -66,6 +105,7 @@ CREATE TABLE `tb_kategori` (
 -- Struktur dari tabel `tb_koor`
 --
 
+DROP TABLE IF EXISTS `tb_koor`;
 CREATE TABLE `tb_koor` (
   `id` varchar(20) NOT NULL,
   `id_user` varchar(20) NOT NULL,
@@ -76,19 +116,35 @@ CREATE TABLE `tb_koor` (
   `lampiran_identitas` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `tb_koor`
+--
+
+INSERT INTO `tb_koor` (`id`, `id_user`, `nama`, `email`, `no_hp`, `institusi`, `lampiran_identitas`) VALUES
+('K-20190824173049', 'U-20190824173049', 'Dwi Candra Permana', 'dwichan@outlook.com', '', '', '');
+
 -- --------------------------------------------------------
 
 --
 -- Struktur dari tabel `tb_lomba`
 --
 
+DROP TABLE IF EXISTS `tb_lomba`;
 CREATE TABLE `tb_lomba` (
   `id` varchar(20) NOT NULL,
   `id_kategori` int(11) NOT NULL,
   `nama` varchar(50) NOT NULL,
   `deskripsi` text NOT NULL,
-  `guide_book` varchar(50) NOT NULL
+  `guide_book` varchar(50) NOT NULL,
+  `harga` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tb_lomba`
+--
+
+INSERT INTO `tb_lomba` (`id`, `id_kategori`, `nama`, `deskripsi`, `guide_book`, `harga`) VALUES
+('L-19081954', 1, 'Mobile application', 'loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet ', 'Mobile_applicationIITF2019.pdf', 100000);
 
 -- --------------------------------------------------------
 
@@ -96,6 +152,7 @@ CREATE TABLE `tb_lomba` (
 -- Struktur dari tabel `tb_pendaftaran`
 --
 
+DROP TABLE IF EXISTS `tb_pendaftaran`;
 CREATE TABLE `tb_pendaftaran` (
   `id` varchar(20) NOT NULL,
   `id_koor` varchar(20) NOT NULL,
@@ -114,6 +171,7 @@ CREATE TABLE `tb_pendaftaran` (
 -- Struktur dari tabel `tb_pengumuman`
 --
 
+DROP TABLE IF EXISTS `tb_pengumuman`;
 CREATE TABLE `tb_pengumuman` (
   `id` int(11) NOT NULL,
   `judul` varchar(100) NOT NULL,
@@ -121,45 +179,67 @@ CREATE TABLE `tb_pengumuman` (
   `tanggal` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `tb_pengumuman`
+--
+
+INSERT INTO `tb_pengumuman` (`id`, `judul`, `deskripsi`, `tanggal`) VALUES
+(1, 'testing', 'loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet ', '2019-08-19');
+
 -- --------------------------------------------------------
 
 --
 -- Struktur dari tabel `tb_user`
 --
 
+DROP TABLE IF EXISTS `tb_user`;
 CREATE TABLE `tb_user` (
   `id` varchar(20) NOT NULL,
   `email` varchar(150) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `tanggal_reg` date NOT NULL
+  `tanggal_reg` date NOT NULL,
+  `step_selesai` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tb_user`
+--
+
+INSERT INTO `tb_user` (`id`, `email`, `password`, `tanggal_reg`, `step_selesai`) VALUES
+('U-20190824173049', 'dwichan@outlook.com', '$2a$08$OZM8jYmdROWfmiHcy1myWuJPmMmeucN7cNHtkFynGdUT0QmY2BexW', '2019-08-24', 0);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `tb_admin`
+-- Indeks untuk tabel `tb_admin`
 --
 ALTER TABLE `tb_admin`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- Indexes for table `tb_anggota`
+-- Indeks untuk tabel `tb_anggota`
 --
 ALTER TABLE `tb_anggota`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_anggota_daftar` (`id_pendaftaran`);
 
 --
--- Indexes for table `tb_kategori`
+-- Indeks untuk tabel `tb_juara`
+--
+ALTER TABLE `tb_juara`
+  ADD KEY `fk_juara_lomba` (`id_lomba`);
+
+--
+-- Indeks untuk tabel `tb_kategori`
 --
 ALTER TABLE `tb_kategori`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tb_koor`
+-- Indeks untuk tabel `tb_koor`
 --
 ALTER TABLE `tb_koor`
   ADD PRIMARY KEY (`id`),
@@ -167,14 +247,14 @@ ALTER TABLE `tb_koor`
   ADD KEY `fk_user_koor` (`id_user`);
 
 --
--- Indexes for table `tb_lomba`
+-- Indeks untuk tabel `tb_lomba`
 --
 ALTER TABLE `tb_lomba`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_lomba_kategori` (`id_kategori`);
 
 --
--- Indexes for table `tb_pendaftaran`
+-- Indeks untuk tabel `tb_pendaftaran`
 --
 ALTER TABLE `tb_pendaftaran`
   ADD PRIMARY KEY (`id`),
@@ -182,32 +262,34 @@ ALTER TABLE `tb_pendaftaran`
   ADD KEY `fk_pendaftaran_koor` (`id_koor`);
 
 --
--- Indexes for table `tb_pengumuman`
+-- Indeks untuk tabel `tb_pengumuman`
 --
 ALTER TABLE `tb_pengumuman`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tb_user`
+-- Indeks untuk tabel `tb_user`
 --
 ALTER TABLE `tb_user`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `tb_kategori`
+-- AUTO_INCREMENT untuk tabel `tb_kategori`
 --
 ALTER TABLE `tb_kategori`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
--- AUTO_INCREMENT for table `tb_pengumuman`
+-- AUTO_INCREMENT untuk tabel `tb_pengumuman`
 --
 ALTER TABLE `tb_pengumuman`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
@@ -217,6 +299,12 @@ ALTER TABLE `tb_pengumuman`
 --
 ALTER TABLE `tb_anggota`
   ADD CONSTRAINT `fk_anggota_daftar` FOREIGN KEY (`id_pendaftaran`) REFERENCES `tb_pendaftaran` (`id`);
+
+--
+-- Ketidakleluasaan untuk tabel `tb_juara`
+--
+ALTER TABLE `tb_juara`
+  ADD CONSTRAINT `fk_juara_lomba` FOREIGN KEY (`id_lomba`) REFERENCES `tb_lomba` (`id`);
 
 --
 -- Ketidakleluasaan untuk tabel `tb_koor`
