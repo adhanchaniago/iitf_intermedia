@@ -50,7 +50,7 @@
                             </li>
         
                             <li>
-                                <a onclick="showWhatsApp();">WhatsApp</a>
+                                <a onclick="showWhatsApp();">Hubungi Kami</a>
                             </li>
                         </ul>
                     </div>

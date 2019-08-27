@@ -4,14 +4,14 @@
             <div class="modal-content">
                 <!-- Any other Bulma elements you want -->
                 <div class="card">
-                <div class="card-content">
-                    <div class="media">
-                    <div class="media-content">
-                        <p class="title is-4">
-                        Hubungi Kami
-                        </p>
-                    </div>
-                    </div>
+                    <div class="card-content">
+                        <div class="media">
+                            <!-- <div class="media-coantent"> -->
+                                <p class="title is-4">
+                                    Hubungi Kami
+                                </p>
+                            <!-- </div> -->
+                        </div>
 
                     <div class="content">
                     Untuk informasi lebih lanjut, Anda dapat menghubungi:<br><br>

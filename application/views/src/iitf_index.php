@@ -21,8 +21,8 @@
                         <img style="width:80%;  margin-top: 50px;" src="<?= base_url() ?>assets/app/images/logo/iitf_new.png" alt="banner">
                     </div>
                     <!-- <h1 class="title is-2  is-semibold is-spaced main-title">IITF 2019</h1> -->
-                    <h2 class="subtitle is-5  is-thin" style="margin-bottom: 100px;">
-                        < Jadikan Teknologi Sebagai Ruang Kreatifitas />
+                    <h2 class="subtitle is-4  is-thin" style="margin-top: 30px;font-style: oblique">
+                         "Jadikan Teknologi Sebagai Ruang Kreatifitas"
                     </h2>
                     <!-- Play video button -->
                     <!-- <div class="cta-wrapper has-text-centered">
@@ -47,7 +47,7 @@
                         <!-- Divider -->
                         <div class="divider"></div>
                         <h3 class="subtitle is-7 is-thin" style="font-size:1rem;">
-                            Lorem ipsum dolor amet. amet amet dah lorem ipsum dolor amet lorem ipsum dolor amet lorem ipsum dolor amet
+                        IITF  (Intermedia  Information  Technology  Festival) merupakan salah  satu  kegiatan yang diadakan oleh UKM INTERMEDIA UNIVERSITAS AMIKOM Purwokerto. Beberapa kegiatan diantaranya  terdiri  dari  Roadshow, Lomba-Lomba, dan Festival.  
                         </h3>
                         <!-- CTA -->
                         <!-- <p>
@@ -81,9 +81,9 @@
                 <div class="tabs is-centered">
                     <!-- Client / partner list -->
                     <ul>
-                        <li><a><img style="width:80px; height:10%;" class="hero-logo" src="assets/app/images/logo/logo_amikom.png" alt="AMIKOM Purwokerto"></a></li>
-                        <li><a><img style="width:80px; height:10%;" class="hero-logo" src="assets/app/images/logo/banner.png" alt="IITF 2019"></a></li>
-                        <li><a><img style="width:80px; height:10%;" class="hero-logo" src="assets/app/images/logo/intermedia.png" alt="INTERMEDIA"></a></li>
+                        <li><a href="http://amikompurwokerto.ac.id" target="_blank"><img style="width:80px; height:10%;" class="hero-logo" src="assets/app/images/logo/logo_amikom.png" alt="AMIKOM Purwokerto"></a></li>
+                        <li><a href="#"><img style="width:80px; height:10%;" class="hero-logo" src="assets/app/images/logo/banner.png" alt="IITF 2019"></a></li>
+                        <li><a href="https://intermediaamikom.org" target="_blank"><img style="width:80px; height:10%;" class="hero-logo" src="assets/app/images/logo/intermedia.png" alt="INTERMEDIA"></a></li>
                     </ul>
                 </div>
             </div>
@@ -108,33 +108,33 @@
                 <div class="columns is-vcentered">
                     <!-- Feature -->
                     <div class="column is-4">
-                        <a href="<?= base_url() ?>detail">
+                        <!-- <a href="#"> -->
                             <div class="feature">
                                 <img src="assets/app/images/rangkaian-kegiatan/roadshow.svg" alt="" data-aos="fade-up" data-aos-delay="100" data-aos-offset="200" data-aos-easing="ease-out-quart">
                                 <h4 class="title is-6 is-tight ">Roadshow</h4>
-                                <p>Supercharged features to make you happy and lorem ipsum sit dolor amet</p>
+                                <p>Roadshow merupakan  kegiatan berbagi ilmu kepada siswa / siswi  SMK .  Dengan  tujuan  membagi  ilmu  di  bidang  Pemrograman  dan  Multimedia  serta menumbuhkan minat dan bakat para peserta.</p>
                             </div>
-                        </a>
+                        <!-- </a> -->
                     </div>
                     <!-- Feature -->
                     <div class="column is-4">
-                        <a href="<?= base_url() ?>detail">
+                        <!-- <a href="<?= base_url() ?>detail"> -->
                             <div class="feature">
                                 <img src="assets/app/images/rangkaian-kegiatan/lomba.svg" alt="" data-aos="fade-up" data-aos-delay="300" data-aos-offset="200" data-aos-easing="ease-out-quart">
-                                <h4 class="title is-6 is-tight ">Lomba</h4>
-                                <p>Supercharged features to make you happy and lorem ipsum sit dolor amet</p>
+                                <h4 class="title is-6 is-tight ">Lomba IT</h4>
+                                <p>Lomba IT merupakan kegiatan kompetisi dalam bidang IT dengan tujuan untuk memfasilitasi para penggiat IT mulai dari kalangan pelajar, mahasiswa dan masyarakat umum untuk saling berkompetisi.</p>
                             </div>
-                        </a>
+                        <!-- </a> -->
                     </div>
                     <!-- Feature -->
                     <div class="column is-4">
-                        <a href="<?= base_url() ?>detail">
+                        <!-- <a href="<?= base_url() ?>detail"> -->
                             <div class="feature">
                                 <img src="assets/app/images/rangkaian-kegiatan/festival.svg" alt="" data-aos="fade-up" data-aos-delay="500" data-aos-offset="200" data-aos-easing="ease-out-quart">
                                 <h4 class="title is-6 is-tight ">Festival</h4>
-                                <p>Supercharged features to make you happy and lorem ipsum sit dolor amet</p>
+                                <p>Festival merupakan puncak acara dari IITF dengan beragam acara didalamnya mulai dari Expo Product IT , Seminar , sampai penganugerahan untuk yang menjuarai lomba IT.</p>
                             </div>
-                        </a>
+                        <!-- </a> -->
                     </div>
                 </div>
 
@@ -252,7 +252,7 @@
             <div class="divider is-centered"></div>
             <!-- Title & subtitle -->
             <h2 class="title is-dark is-semibold has-text-centered is-spaced">TIMELINE IITF 2019</h2>
-            <h4 class="subtitle is-6 is-dark has-text-centered is-compact">Seluruh rangkaian kegiatan akan diadakan pada bulan september dan oktober.</h4>
+            <h4 class="subtitle is-6 is-dark has-text-centered is-compact">Seluruh rangkaian kegiatan akan diadakan pada bulan Agustus sampai oktober.</h4>
 
             <!-- Content wrapper -->
             <div class="content-wrapper">
@@ -266,16 +266,16 @@
                                 <ol>
                                     <!-- Event -->
                                     <li>
-                                        <a href="#0" data-date="18/09/2019">
-                                            <span>SEP</span>
-                                            <span>18</span>
+                                        <a href="#0" data-date="22/08/2019">
+                                            <span>AUG</span>
+                                            <span>22</span>
                                         </a>
                                     </li>
                                     <!-- Event -->
                                     <li>
-                                        <a href="#0" data-date="20/09/2019">
-                                            <span>SEP</span>
-                                            <span>20</span>
+                                        <a href="#0" data-date="28/08/2019">
+                                            <span>AUG</span>
+                                            <span>28</span>
                                         </a>
                                     </li>
                                     <!-- Event -->
@@ -311,7 +311,7 @@
                     <div class="events-content">
                         <ol>
                             <!-- Event -->
-                            <li class="selected" data-date="18/09/2019">
+                            <li class="selected" data-date="22/08/2019">
                                 <!-- Inner -->
                                 <div class="inner-wrapper">
                                     <div class="title-wrapper">
@@ -319,28 +319,28 @@
                                         <img src="<?= base_url() ?>assets/app/images/icons/ico/platform-launch.svg" alt="">
                                         <!-- Title & date -->
                                         <div>
-                                            <span class="event-title">Satu</span>
-                                            <small>January 16th, 2018</small>
+                                            <span class="event-title">Roadshow</span>
+                                            <small>Kamis 22 Agustus 2019</small>
                                         </div>
                                     </div>
                                     <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum praesentium officia, fugit recusandae ipsa, quia velit nulla adipisci? Consequuntur aspernatur at, eaque hic repellendus sit dicta consequatur quae, ut harum ipsam molestias maxime non nisi reiciendis eligendi! Doloremque quia pariatur harum ea amet quibusdam quisquam, quae, temporibus dolores porro doloribus.
+                                        Kegiatan roadshow pertama kami adakan yang bertempat di SMK Negeri 1 Kebumen dengan materi Motion Graphic, kemudian diikuti dengan SMK Negeri 1 Purwokerto , SMK 1 Bawang, SMK N 1 Kaligondang, SMK Ma'arif NU 1 Ajibarang dan terakhir di SMK N 1 Cilacap pada tanggal 28 Agustus 2019.
                                     </p>
                                 </div>
                             </li>
 
                             <!-- Event -->
-                            <li data-date="20/09/2019">
+                            <li data-date="28/08/2019">
                                 <div class="inner-wrapper">
                                     <div class="title-wrapper">
                                         <img src="<?= base_url() ?>assets/app/images/icons/ico/presale.svg" alt="">
                                         <div>
-                                            <span class="event-title">Dua</span>
-                                            <small>February 28th, 2018</small>
+                                            <span class="event-title">Pembukaan Pendaftaran Perlombaan</span>
+                                            <small>Rabu 28 Agustus 2019</small>
                                         </div>
                                     </div>
                                     <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum praesentium officia, fugit recusandae ipsa, quia velit nulla adipisci? Consequuntur aspernatur at, eaque hic repellendus sit dicta consequatur quae, ut harum ipsam molestias maxime non nisi reiciendis eligendi! Doloremque quia pariatur harum ea amet quibusdam quisquam, quae, temporibus dolores porro doloribus.
+                                        Pembukaan Pendaftaran untuk Lomba IT yang akan diadakan pada tanggal 28 September 2019 mendatang.
                                     </p>
                                 </div>
                             </li>
@@ -351,12 +351,12 @@
                                     <div class="title-wrapper">
                                         <img src="<?= base_url() ?>assets/app/images/icons/ico/ico.svg" alt="">
                                         <div>
-                                            <span class="event-title">Tiga</span>
-                                            <small>February 28th, 2018</small>
+                                            <span class="event-title">Perlombaan</span>
+                                            <small>Sabtu 28 September 2019</small>
                                         </div>
                                     </div>
                                     <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum praesentium officia, fugit recusandae ipsa, quia velit nulla adipisci? Consequuntur aspernatur at, eaque hic repellendus sit dicta consequatur quae, ut harum ipsam molestias maxime non nisi reiciendis eligendi! Doloremque quia pariatur harum ea amet quibusdam quisquam, quae, temporibus dolores porro doloribus.
+                                        Hari Perlombaan yang kami selenggarakan di UNIVERSITAS AMIKOM Purwokerto.
                                     </p>
                                 </div>
                             </li>
@@ -367,12 +367,12 @@
                                     <div class="title-wrapper">
                                         <img src="assets/app/images/icons/ico/ico-2.svg" alt="">
                                         <div>
-                                            <span class="event-title">Empat</span>
-                                            <small>April 20th, 2018</small>
+                                            <span class="event-title">Festival</span>
+                                            <small>Minggu 13 Oktober 2019</small>
                                         </div>
                                     </div>
                                     <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum praesentium officia, fugit recusandae ipsa, quia velit nulla adipisci? Consequuntur aspernatur at, eaque hic repellendus sit dicta consequatur quae, ut harum ipsam molestias maxime non nisi reiciendis eligendi! Doloremque quia pariatur harum ea amet quibusdam quisquam, quae, temporibus dolores porro doloribus.
+                                        Puncak acara IITF 2019 yang diselenggarakan di Pendopo Si Panji Purwokerto.
                                     </p>
                                 </div>
                             </li>
@@ -440,7 +440,7 @@
 
             <!-- CTA -->
             <div class="cta-wrapper has-text-centered">
-                <a href="#" class="button k-button k-primary raised has-gradient is-fat is-bold">
+                <a href="https://api.whatsapp.com/send?phone=62859180664194" target="_blank" class="button k-button k-primary raised has-gradient is-fat is-bold">
                     <span class="text">Open Media Partner & Sponsorship</span>
                     <span class="front-gradient"></span>
                 </a>
@@ -448,8 +448,8 @@
 
         </div>
         <!-- /Content Media Partner -->
-        </div>
-    </section>
+</div>
+</section>
 <!-- /Company section -->
 <section class="section is-medium ">
     <!-- Spaced divider -->

@@ -166,7 +166,7 @@
                             $no = 1;
                             foreach ($lomba as $key => $val) { ?>
                             <li>
-                                Juara <?= $no++; ?> : Rp <?= number_format($val['juara']) ?> + Sertifikat + Trophi
+                                Juara <?= $no++; ?> : Uang Pembinaan + Sertifikat + Trophi
                             </li>
                             <?php } ?>
                         </ol>

@@ -55,6 +55,7 @@ class App_view extends CI_Controller{
         $this->load->view('component/ground');
     }
 
+<<<<<<< HEAD
     public function detailLomba(){
         $judul = $this->input->get('lomba');
 
@@ -74,6 +75,8 @@ class App_view extends CI_Controller{
         $this->load->view('src/iitf_detail_lomba');
         $this->load->view('component/ground');
     }
+=======
+>>>>>>> parent of 419479d... tambahan front end
     public function loginProcess()
     {
         $user = $this->input->post('e');
@@ -144,7 +147,6 @@ class App_view extends CI_Controller{
         $code = substr(str_shuffle($set), 0, 12);
 
         // die(json_encode(base64_encode($code)));
-       // die(json_encode($pass.$pass2));
         // Verify
         if ($nama === "") {
             echo "<font color=\"red\">Anda wajib memasukkan Nama Pendaftar!</font>";
@@ -159,9 +161,9 @@ class App_view extends CI_Controller{
             echo "<font color=\"red\">Anda wajib memasukkan ulang Kata Sandinya!</font>";
             return;
         } else {
-           if ($pass !== $pass2) {
-               echo "<font color=\"red\">Kata Sandi yang Anda masukkan tidak sama, periksa kembali!</font>";
-               return;
+            if ($pass != $pass2) {
+                echo "<font color=\"red\">Kata Sandi yang Anda masukkan tidak sama, periksa kembali!</font>";
+                return;
             } else {
                 $prefixUser = "U-";
                 $prefixKoor = "K-";
@@ -205,7 +207,7 @@ class App_view extends CI_Controller{
                     // echo "<script>console.log($this->send_verification(base64_encode($idUser),$mail,base64_decode($code)))</script>";
                     echo "<script>window.alert(\"Gagal mengirimkan verifikasi email error: \")</script>";
                 }
-           }
+            }
         }
     }
 
@@ -293,7 +295,8 @@ class App_view extends CI_Controller{
     public function step(){
         $check = $this->db->get_where('tb_user', array(
             'id' => $this->session->userdata('id'),
-            'email' => $this->session->userdata('email')
+            'email' => $this->session->userdata('email'),
+            'status' => 'true'
         ));
 
         $koor = null;
@@ -311,13 +314,33 @@ class App_view extends CI_Controller{
         $payload['link'] = ($this->session->userdata('email') == "" ? base_url('login') : base_url('user'));
         $payload['email'] = ($this->session->userdata('email') == "" ? "" : $this->session->userdata('email'));
         $payload['page'] = "steps";
+<<<<<<< Updated upstream
         $payload['nama'] = $koor->nama;
         $payload['nohp'] = $koor->no_hp;
         $payload['inst'] = $koor->institusi;
+=======
+<<<<<<< HEAD
+        $payload['nama'] = 'trian';//$koor->nama;
+        $payload['nohp'] = '5467';//$koor->no_hp;
+        $payload['inst'] = 'amikom';//$koor->institusi;
+>>>>>>> Stashed changes
         
         $payload['step'] = $userdata->step_selesai;
 
+<<<<<<< Updated upstream
         if($payload['step'] == 0){
+=======
+=======
+        $payload['nama'] = $koor->nama;
+        $payload['nohp'] = $koor->no_hp;
+        $payload['inst'] = $koor->institusi;
+        $this->load->view('component/header',$payload);
+        $this->load->view('pages/user/user_step');
+        $this->load->view('component/ground');
+        $payload['step'] = $userdata->step_selesai;
+>>>>>>> parent of 419479d... tambahan front end
+        if($payload['step'] == 1){
+>>>>>>> Stashed changes
             // step koor
             $this->load->view('component/header',$payload);
             $this->load->view('pages/user/user_step_koor');
@@ -347,4 +370,125 @@ class App_view extends CI_Controller{
         }
     }
 
+    public function lupaPassword()
+    {
+        $payload['judul'] = "TIMELINE";
+        $payload['link'] = ($this->session->userdata('email') == "" ? base_url('login') : base_url('user'));
+        $payload['email'] = ($this->session->userdata('email') == "" ? "" : "LANJUTKAN DAFTAR: " . $this->session->userdata('email'));
+        $payload['page'] = "timeline";
+
+        if ($this->input->post('kirim')) {
+            $email = $this->input->post('email');
+
+            $cek = $this->DataModel->getWhere('email', $email);
+            $cek = $this->DataModel->getData('tb_user');
+
+            if ($cek->num_rows() != 0) {
+                $d = $cek->row();
+                $token = $this->generateToken($d->id);
+                if ($this->send_reset_pass(base64_encode($d->id), $email, base64_encode($token))) {
+                    echo "<script>window.alert(\"Link untuk reset password telah dikirim ke email, Silahkan cek email anda.\")</script>";    
+                }
+            } else {
+                echo "<script>window.alert(\"Email yang anda masukkan belum terdaftar!, Silahkan masukkan email yang sudah terdaftar\")</script>";
+            }
+        }
+
+        $this->load->view('component/header', $payload);
+        $this->load->view('src/iitf_forgot_pass', $payload);
+        // $this->load->view('component/footer');
+        $this->load->view('component/ground');
+    }
+
+    public function lupaPasswordProcess(){
+        $id = $this->input->get('id');
+        $token = $this->input->get('token');
+
+        $cek = $this->DataModel->select('token');
+        $cek = $this->DataModel->getWhere('id', base64_decode($id));
+        $cek = $this->DataModel->getData('tb_user')->row();
+
+        if($cek->token == base64_decode($token)){
+            $payload['judul'] = "Ubah Password";
+            $payload['email'] = ($this->session->userdata('email') == "" ? "" : $this->session->userdata('email'));;
+            $payload['page'] = "Ubah Password";
+            if($this->input->post('kirim')){
+                $pass = $this->input->post('password');
+
+                $data = array(
+                    "password" => $this->bcrypt->hash_password($pass)
+                );
+
+                $q = $this->DataModel->getWhere('id',base64_decode($id));
+                $q = $this->DataModel->update('tb_user',$data);
+                if($q){
+                    $uri = base_url('user');
+                    echo "<script>window.alert(\"Password anda berhasil dirubah silahkan login untuk melanjutkan\\nKlik OK untuk mulai dialihkan ke halaman selanjutnya.\");window.location.href = \"" . $uri . "\";</script>";
+                }
+
+            }else{
+                $this->load->view('component/header', $payload);
+                $this->load->view('src/iitf_ubah_pass', $payload);
+                $this->load->view('component/ground');
+            }
+        }else{
+            $_SESSION['error_message'] = 'Error message';
+            header("location: " . base_url() . 'error.html');
+            exit;
+        }
+
+    }
+
+    private function send_reset_pass($id, $email, $token)
+    {
+        $config = array(
+            'protocol' => 'smtp',
+            'smtp_host' => 'ssl://smtp.googlemail.com',
+            'smtp_port' => '465',
+            'smtp_user' => 'iitfintermedia@gmail.com', // informasi rahasia ini jangan di gunakan sembarangan
+            'smtp_pass' => 'intermediaiitf2019', // informasi rahasia ini jangan di gunakan sembarangan
+            'mailtype' => 'html',
+            'charset' => 'iso-8859-1',
+            'wordwrap' => TRUE
+        );
+
+        $message =     "
+                  <html>
+                  <head>
+                      <title>Reset Password Akun anda</title>
+                  </head>
+                  <body>
+                      <h2>Anda menerima email ini karena ada permintaan untuk memperbaharui password anda.</h2>
+                      <p>Akun anda:</p>
+                      <p>Email: " . $email . "</p>
+                      <p>Silahkan klik link berikut untuk mereset password akun anda.</p>
+                      <h4><a href='" . base_url() . "lupa_password/process?id=" . $id . "&token=" . $token . "'>Reset Password Akun Saya</a></h4>
+                  </body>
+                  </html>
+                  ";
+
+        $this->load->library('email', $config);
+        $this->email->set_newline("\r\n");
+        $this->email->from($config['smtp_user']);
+        $this->email->to($email);
+        $this->email->subject('Reset Password');
+        $this->email->message($message);
+
+        return $this->email->send();
+    }
+
+    private function generateToken($id)
+    { 
+        $token = substr(sha1(rand()), 0, 30);   
+        $date = date('Y-m-d');  
+          
+        $string = array(  
+            'token'=> $token,  
+        ); 
+
+        $this->DataModel->getWhere('id',$id);
+        $this->DataModel->update('tb_user',$string);
+
+        return $token;  
+    }
 }

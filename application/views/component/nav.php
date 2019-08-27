@@ -6,7 +6,7 @@
                             <!-- Brand -->
                             <div class="navbar-brand">
                                 <a href="<?= base_url()?>" class="navbar-item">
-                                    <img class="" src="<?= base_url()?>assets/app/images/logo/logo_iitf.png" alt="">
+                                    <img class="" src="<?= base_url()?>assets/app/images/logo/logo.png" alt="">
                                     <span class="brand-name">IITF 2019</span>
                                 </a>
                                 <!-- Responsive toggle -->
@@ -35,7 +35,7 @@
                                     <div class="navbar-item is-nav-link">
                                         <a class="is-centered-responsive is-semibold" onclick="showWhatsApp();">
                                         <i class="fab fa-whatsapp"></i>
-                                            WhatsApp
+                                            Hubungi Kami
                                         </a>
                                     </div>
                                     <!-- Sign up -->
@@ -62,7 +62,7 @@
                             <!-- Brand -->
                             <div class="navbar-brand">
                                 <a href="<?= base_url()?>" class="navbar-item">
-                                <img class="" src="<?= base_url()?>assets/app/images/logo/logo_iitf.png" alt="">
+                                <img class="" src="<?= base_url()?>assets/app/images/logo/logo.png" alt="">
                                     <span class="brand-name">IITF 2019</span>
                                 </a>
                                 <!-- Responsive toggle -->
@@ -91,7 +91,7 @@
                                     <div class="navbar-item is-nav-link">
                                         <a class="is-centered-responsive is-semibold" onclick="showWhatsApp();">
                                         <i class="fab fa-whatsapp"></i>
-                                            WhatsApp
+                                            Hubungi Kami
                                         </a>
                                     </div>
                                     <!-- Sign up -->
@@ -119,7 +119,7 @@
                             <!-- Brand -->
                             <div class="navbar-brand">
                                 <a href="<?= base_url()?>" class="navbar-item">
-                                <img class="" src="<?= base_url()?>assets/app/images/logo/logo_iitf.png" alt="">
+                                <img class="" src="<?= base_url()?>assets/app/images/logo/logo.png" alt="">
                                     <span class="brand-name">IITF 2019</span>
                                 </a>
                                 <!-- Responsive toggle -->
@@ -148,7 +148,7 @@
                                     <div class="navbar-item is-nav-link">
                                         <a class="is-centered-responsive is-semibold" onclick="showWhatsApp();">
                                         <i class="fab fa-whatsapp"></i>
-                                            WhatsApp
+                                            Hubungi Kami
                                         </a>
                                     </div>
                                     <!-- Sign up -->
@@ -203,7 +203,7 @@
                                     <div class="navbar-item is-nav-link">
                                         <a class="is-centered-responsive is-semibold" onclick="showWhatsApp();">
                                         <i class="fab fa-whatsapp"></i>
-                                            WhatsApp
+                                            Hubungi Kami
                                         </a>
                                     </div>
                                     <!-- Sign up -->
@@ -282,7 +282,7 @@
                             <!-- Brand -->
                             <div class="navbar-brand">
                                 <a href="<?= base_url()?>" class="navbar-item">
-                                <img  src="<?= base_url()?>assets/app/images/logo/logo_iitf.png" alt="">
+                                <img class="rotating" src="<?= base_url()?>assets/app/images/logo/krypton-gradient.svg" alt="">
                                     <span class="brand-name">IITF 2019</span>
                                 </a>
                                 <!-- Responsive toggle -->
@@ -336,7 +336,7 @@
                             <!-- Brand -->
                             <div class="navbar-brand">
                                 <a href="<?= base_url()?>" class="navbar-item">
-                                <img  src="<?= base_url()?>assets/app/images/logo/logo_iitf.png" alt="">
+                                <img class="rotating" src="<?= base_url()?>assets/app/images/logo/krypton-gradient.svg" alt="">
                                     <span class="brand-name">IITF 2019</span>
                                 </a>
                                 <!-- Responsive toggle -->
@@ -390,7 +390,7 @@
                             <!-- Brand -->
                             <div class="navbar-brand">
                                 <a href="<?= base_url()?>" class="navbar-item">
-                                <img  src="<?= base_url()?>assets/app/images/logo/logo_iitf.png" alt="">
+                                <img class="rotating" src="<?= base_url()?>assets/app/images/logo/krypton-gradient.svg" alt="">
                                     <span class="brand-name">IITF 2019</span>
                                 </a>
                                 <!-- Responsive toggle -->

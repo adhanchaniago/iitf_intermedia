@@ -60,4 +60,8 @@ $route['timeline'] = 'App_view/timeline';
 $route['register'] = 'App_view/register';
 $route['register/registerprocess'] = 'App_view/registerProcess';
 $route['user'] = 'App_view/step';
+$route['user/verification'] = 'App_view/verification';
 $route['detail'] = 'App_view/detailLomba';
+$route['lupa_password'] = 'App_view/lupaPassword';
+$route['lupa_password/process'] = 'App_view/lupaPasswordProcess';
+

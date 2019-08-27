@@ -796,7 +796,7 @@ body{
     fill:#1195f7
 }
 .media-wrapper{
-    /* background:url(../images/bg/gradient-left-darker.png) no-repeat top left,url(../images/bg/gradient-right-darker.png) no-repeat top right,#1c004c */
+    background:url(../images/bg/gradient-left-darker.png) no-repeat top left,url(../images/bg/gradient-right-darker.png) no-repeat top right,#1c004c
 }
 .media-wrapper .blog-image img{
     height:550px
@@ -1024,26 +1024,26 @@ body{
 .media-wrapper .post-body .intro{
     font-style:italic;
     font-family:'Cabin', sans-serif;
-    color:#0d0b13;
+    color:#fff;
     opacity:0.8
 }
 .media-wrapper .post-body h2{
     font-family:'Cabin', sans-serif;
     font-size:1.5rem;
-    color:#0d0b13;
+    color:#fff;
     padding:10px 0
 }
 .media-wrapper .post-body p{
     font-family:'Cabin', sans-serif;
     font-size:.9rem;
-    color:#0d0b13;
+    color:#fff;
     padding-bottom:20px;
     opacity:0.7
 }
 .media-wrapper .post-body blockquote{
     padding:0 20px;
     border-left:3px solid #7F00FF;
-    color:#0d0b13;
+    color:#fff;
     opacity:0.6;
     margin-bottom:20px
 }
@@ -1194,18 +1194,10 @@ body{
 .feature{
     text-align:center
 }
-
-.feature:hover{
-    transform: scale(1);
-    transition: 0.3s;
-    box-shadow: 0 4px 8px 0 rgba(238,238,238,0.10), 0 6px 20px 0 rgba(170,170,170,0.2);
-    border-radius: 6px;
-}
 .feature img{
     display:block;
-    padding-top: 10px;
     margin:0 auto;
-    max-height:100px
+    max-height:120px
 }
 .feature h4{
     margin-top:10px;
@@ -1214,9 +1206,7 @@ body{
 .feature p{
     font-family:'Open Sans', sans-serif;
     font-size:.9rem;
-    padding: 10px;
-    opacity:0.8;
-    color: black;
+    opacity:0.8
 }
 .side-feature{
     max-height:500px
@@ -2201,8 +2191,7 @@ ul#countdown li .label{
     color:#0f9
 }
 .blog-post .content .post-meta .author-block .author-name span:nth-child(2) small{
-    color:#fff !important 
-    /* color: #0d0b13; */
+    color:#fff !important
 }
 .blog-post .content .post-meta .stats-block{
     margin-left:auto;
@@ -2256,7 +2245,7 @@ ul#countdown li .label{
 .post-caption .author-block .author-name{
     font-size:.75rem;
     font-family:'Cabin', sans-serif;
-    color:#0d0b13;
+    color:#fff;
     padding:0 10px
 }
 .post-caption .author-block .author-name span{

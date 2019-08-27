@@ -43,6 +43,9 @@
                                         <span class="front-gradient"></span>
                                     </button>
                                 </span>
+                                <span style="float:right; margin-top: 0px">
+                                    Lupa password anda? <a href="<?=base_url()?>lupa_password">Klik Disini</a>
+                                </span>
                             </form>
         
                         </div>
