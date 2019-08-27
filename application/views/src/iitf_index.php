@@ -3,7 +3,7 @@
 <div class="infraloader is-active"></div>
 <div class="dark-wrapper">
     <!-- Landing page Hero -->
-    <section class="hero is-fullheight my-header2" id="about">
+    <section class="hero is-fullheight my-header2">
         <div class="hero-head">
             <!-- nav-->
             <?php $this->load->view('component/nav') ?>
@@ -25,19 +25,19 @@
                         < Jadikan Teknologi Sebagai Ruang Kreatifitas />
                     </h2>
                     <!-- Play video button -->
-                <div class="cta-wrapper has-text-centered">
+                    <!-- <div class="cta-wrapper has-text-centered">
                     <div class="video-button levitate js-modal-btn" data-video-id="6WG7D47tGb0">
                         <img src="assets/app/images/icons/play.svg" alt="">
                     </div>
                 </div>
-                    
+                     -->
                 </div>
 
             </div>
         </div>
         <!-- Banner -->
         <!-- Hero Image and Title -->
-        <div class="hero-body">
+        <div class="hero-body" id="about">
             <div class="container">
                 <div class="columns is-vcentered">
 
@@ -108,42 +108,42 @@
                 <div class="columns is-vcentered">
                     <!-- Feature -->
                     <div class="column is-4">
-                    <a href="<?= base_url()?>detail">
-                        <div class="feature">
-                            <img src="assets/app/images/rangkaian-kegiatan/roadshow.svg" alt="" data-aos="fade-up" data-aos-delay="100" data-aos-offset="200" data-aos-easing="ease-out-quart">
-                            <h4 class="title is-6 is-tight ">Roadshow</h4>
-                            <p>Supercharged features to make you happy and lorem ipsum sit dolor amet</p>
-                        </div>
-                    </a>
-                    </div>
-                    <!-- Feature -->
-                    <div class="column is-4">
-                        <a href="<?= base_url()?>detail">
-                        <div class="feature">
-                            <img src="assets/app/images/rangkaian-kegiatan/lomba.svg" alt="" data-aos="fade-up" data-aos-delay="300" data-aos-offset="200" data-aos-easing="ease-out-quart">
-                            <h4 class="title is-6 is-tight ">Lomba</h4>
-                            <p>Supercharged features to make you happy and lorem ipsum sit dolor amet</p>
-                        </div>
+                        <a href="<?= base_url() ?>detail">
+                            <div class="feature">
+                                <img src="assets/app/images/rangkaian-kegiatan/roadshow.svg" alt="" data-aos="fade-up" data-aos-delay="100" data-aos-offset="200" data-aos-easing="ease-out-quart">
+                                <h4 class="title is-6 is-tight ">Roadshow</h4>
+                                <p>Supercharged features to make you happy and lorem ipsum sit dolor amet</p>
+                            </div>
                         </a>
                     </div>
                     <!-- Feature -->
                     <div class="column is-4">
-                    <a href="<?= base_url()?>detail">
-                        <div class="feature">
-                            <img src="assets/app/images/rangkaian-kegiatan/festival.svg" alt="" data-aos="fade-up" data-aos-delay="500" data-aos-offset="200" data-aos-easing="ease-out-quart">
-                            <h4 class="title is-6 is-tight ">Festival</h4>
-                            <p>Supercharged features to make you happy and lorem ipsum sit dolor amet</p>
-                        </div>
+                        <a href="<?= base_url() ?>detail">
+                            <div class="feature">
+                                <img src="assets/app/images/rangkaian-kegiatan/lomba.svg" alt="" data-aos="fade-up" data-aos-delay="300" data-aos-offset="200" data-aos-easing="ease-out-quart">
+                                <h4 class="title is-6 is-tight ">Lomba</h4>
+                                <p>Supercharged features to make you happy and lorem ipsum sit dolor amet</p>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Feature -->
+                    <div class="column is-4">
+                        <a href="<?= base_url() ?>detail">
+                            <div class="feature">
+                                <img src="assets/app/images/rangkaian-kegiatan/festival.svg" alt="" data-aos="fade-up" data-aos-delay="500" data-aos-offset="200" data-aos-easing="ease-out-quart">
+                                <h4 class="title is-6 is-tight ">Festival</h4>
+                                <p>Supercharged features to make you happy and lorem ipsum sit dolor amet</p>
+                            </div>
                         </a>
                     </div>
                 </div>
 
                 <!-- Play video button -->
-                <div class="cta-wrapper has-text-centered">
+                <!-- <div class="cta-wrapper has-text-centered">
                     <div class="video-button levitate js-modal-btn" data-video-id="6WG7D47tGb0">
-                        <!-- <a>Scroll Up !</a> -->
+                        <a>Scroll Up !</a>
                     </div>
-                </div>
+                </div> -->
                 <!-- CTA -->
                 <!-- <p>
                         <a href="#roadmap" class="button k-button k-primary raised has-gradient is-fat is-bold">
@@ -187,10 +187,6 @@
                             <?php
                                 $i++;
                             } ?>
-                            <!-- <div class="flying-child tab-1 is-active" data-tab="tab-1"><a href="javascript:void(0);">POSTER</a></div>
-                                    <div class="flying-child tab-2" data-tab="tab-2"><a href="javascript:void(0);">MOBILE APP</a></div>
-                                    <div class="flying-child tab-3" data-tab="tab-3"><a href="javascript:void(0);">WEB DESIGN</a></div>
-                                    <div class="flying-child tab-4" data-tab="tab-4"><a href="javascript:void(0);">MOTION GRAPHIC</a></div> -->
                             <div class="slider"></div>
                         </div>
                     </div>
@@ -215,13 +211,19 @@
                                             <div class="box-hadiah box-hadiah--<?= $a ?>">
                                                 <img class="hadiah-trophy" src="assets/app/images/hadiah/juara_<?= $a ?>.png" alt="juara <?= $a ?>">
                                                 <p class="juara"><?= $val['nama'] ?></p>
-                                                <p class="nominal">Rp <?= number_format($val['nominal']) ?></p>
+                                                <!-- <p class="nominal">Rp <?= number_format($val['nominal']) ?></p> -->
                                                 <p class="sertif">Sertifikat dan piala</p>
                                             </div>
                                             <?php
                                                     $a++;
                                                     // $k++;
                                                 } ?>
+                                        </div>
+                                        <div class="cta-wrapper has-text-centered animated preFadeInUp fadeInUp">
+                                            <a href="<?= base_url() ?>detail?lomba=<?= $value['nama'] ?>" class="button k-button k-primary raised has-gradient is-fat is-bold">
+                                                <span class="text">Detail Lomba</span>
+                                                <span class="front-gradient"></span>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -250,7 +252,7 @@
             <div class="divider is-centered"></div>
             <!-- Title & subtitle -->
             <h2 class="title is-light is-semibold has-text-centered is-spaced">TIMELINE IITF 2019</h2>
-            <h4 class="subtitle is-6 is-light has-text-centered is-compact">Seluruh rangkaian kegiatan akan diadakan pada bulan september .</h4>
+            <h4 class="subtitle is-6 is-light has-text-centered is-compact">Seluruh rangkaian kegiatan akan diadakan pada bulan september dan oktober.</h4>
 
             <!-- Content wrapper -->
             <div class="content-wrapper">
@@ -289,7 +291,7 @@
                                             <span>13</span>
                                         </a>
                                     </li>
-                                    
+
                                 </ol>
 
                                 <!-- Track line -->
@@ -406,29 +408,31 @@
 
 
             <!-- Title & subtitle -->
-            <h2 class="title is-light is-semibold has-text-centered is-spaced">Media & Partners</h2>
-            <h4 class="subtitle is-6 is-light has-text-centered is-compact">IITF didukung beberapa media partner .</h4>
+            <h2 class="title is-light is-semibold has-text-centered is-spaced">Media Partners & Sponsorship</h2>
+            <h4 class="subtitle is-6 is-light has-text-centered is-compact">IITF didukung beberapa media partner & Sponsor.</h4>
 
             <!-- Content wrapper -->
             <div class="content-wrapper is-large">
                 <!-- Partner logos -->
                 <div class="partners">
                     <!-- Partner -->
-                    <div class="partner-item">
+                    <!-- <div class="partner-item">
                         <img src="assets/app/images/media-partner/biznet.png" alt="biznet">
-                    </div>
+                    </div> -->
                     <!-- Partner -->
-                    <div class="partner-item">
+                    <!-- <div class="partner-item">
                         <img src="assets/app/images/media-partner/ampu-studio.png" alt="ampu studio">
-                    </div>
+                    </div> -->
                     <!-- Partner -->
                     <div class="partner-item">
-                        <img src="assets/app/images/media-partner/puskomedia.png" alt="puskomedia">
+                        <a href="https://puskomedia.id" target="_blank">
+                            <img src="assets/app/images/media-partner/puskomedia.png" alt="puskomedia">
+                        </a>
                     </div>
                     <!-- Partner -->
-                    <div class="partner-item">
+                    <!-- <div class="partner-item">
                         <img src="assets/app/images/media-partner/kaskus.png" alt="kaskus">
-                    </div>
+                    </div> -->
 
                 </div>
             </div>
@@ -437,7 +441,7 @@
             <!-- CTA -->
             <div class="cta-wrapper has-text-centered">
                 <a href="#" class="button k-button k-primary raised has-gradient is-fat is-bold">
-                    <span class="text">Semua Media & Partner</span>
+                    <span class="text">Open Media Partner & Sponsorship</span>
                     <span class="front-gradient"></span>
                 </a>
             </div>

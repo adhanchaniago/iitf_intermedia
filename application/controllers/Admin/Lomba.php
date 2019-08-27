@@ -33,6 +33,7 @@ class Lomba extends MY_Controller
                 $id_k = $this->input->post('id_k');
                 $nama = $this->input->post('nama');
                 $desk = $this->input->post('des');
+                $tema = $this->input->post('tema');
                 $n_gb = str_replace(' ', '_', $nama) . "IITF2019";
                 $harga = $this->input->post('harga');
                 $nl = $this->input->post('nama_lomba');
@@ -56,6 +57,7 @@ class Lomba extends MY_Controller
                             "id" => $id,
                             "id_kategori" => $id_k,
                             "nama" => $nama,
+                            "tema" => $tema,
                             "deskripsi" => $desk,
                             "guide_book" => $n_gb . "." . $eks,
                             "harga" => $harga
@@ -105,6 +107,7 @@ class Lomba extends MY_Controller
                 $id_k = $this->input->post('id_k');
                 $nama = $this->input->post('nama');
                 $desk = $this->input->post('des');
+                $tema = $this->input->post('tema');
                 $harga = $this->input->post('harga');
                 $nl = $this->input->post('nama_lomba');
                 $nom = $this->input->post('nominal');
@@ -129,6 +132,7 @@ class Lomba extends MY_Controller
                         $data = array(
                             "id_kategori" => $id_k,
                             "nama" => $nama,
+                            "tema" => $tema,
                             "deskripsi" => $desk,
                             "guide_book" => $n_gb . "." . $eks,
                             "harga" => $harga
@@ -156,6 +160,7 @@ class Lomba extends MY_Controller
                     $data = array(
                         "id_kategori" => $id_k,
                         "nama" => $nama,
+                        "tema" => $tema,
                         "deskripsi" => $desk,
                         "harga" => $harga
                     );
