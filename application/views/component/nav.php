@@ -6,7 +6,7 @@
                             <!-- Brand -->
                             <div class="navbar-brand">
                                 <a href="<?= base_url()?>" class="navbar-item">
-                                    <img class="rotating" src="<?= base_url()?>assets/app/images/logo/krypton-gradient.svg" alt="">
+                                    <img class="" src="<?= base_url()?>assets/app/images/logo/logo.png" alt="">
                                     <span class="brand-name">IITF 2019</span>
                                 </a>
                                 <!-- Responsive toggle -->
@@ -21,11 +21,11 @@
                                 <div class="navbar-end">
                                     <!-- Menu item -->
                                     <div class="navbar-item is-nav-link">
-                                        <a class="is-centered-responsive" href="#about"">Tentang</a>
+                                        <a class="is-centered-responsive" href="#about">Tentang</a>
                                     </div>
                                     <!-- Menu item -->
                                     <div class="navbar-item is-nav-link">
-                                        <a class="is-centered-responsive" href="#reward">Hadiah</a>
+                                        <a class="is-centered-responsive" href="#reward">Lomba</a>
                                     </div>
                                     <!-- Menu item -->
                                     <div class="navbar-item is-nav-link">
@@ -62,7 +62,7 @@
                             <!-- Brand -->
                             <div class="navbar-brand">
                                 <a href="<?= base_url()?>" class="navbar-item">
-                                <img class="rotating" src="<?= base_url()?>assets/app/images/logo/krypton-gradient.svg" alt="">
+                                <img class="" src="<?= base_url()?>assets/app/images/logo/logo.png" alt="">
                                     <span class="brand-name">IITF 2019</span>
                                 </a>
                                 <!-- Responsive toggle -->
@@ -81,7 +81,7 @@
                                     </div>
                                     <!-- Menu item -->
                                     <div class="navbar-item is-nav-link">
-                                        <a class="is-centered-responsive" href="#reward">Hadiah</a>
+                                        <a class="is-centered-responsive" href="#reward">Lomba</a>
                                     </div>
                                     <!-- Menu item -->
                                     <div class="navbar-item is-nav-link">
@@ -119,7 +119,7 @@
                             <!-- Brand -->
                             <div class="navbar-brand">
                                 <a href="<?= base_url()?>" class="navbar-item">
-                                <img class="rotating" src="<?= base_url()?>assets/app/images/logo/krypton-gradient.svg" alt="">
+                                <img class="" src="<?= base_url()?>assets/app/images/logo/logo.png" alt="">
                                     <span class="brand-name">IITF 2019</span>
                                 </a>
                                 <!-- Responsive toggle -->

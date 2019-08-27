@@ -155,7 +155,7 @@
             <h2 class="title is-light is-semibold has-text-centered is-spaced">LOMBA</h2>
             <!-- Divider -->
             <div class="divider is-centered"></div>
-            <h4 class="subtitle is-6 is-light has-text-centered is-compact">Hadiah perlombaan unutk para juara dan masih banyak reward lainnya.</h4>
+            <h4 class="subtitle is-6 is-light has-text-centered is-compact">Beberapa Perlombaan yang diadakan dengan beragam hadiah.</h4>
 
             <!-- Content wrapper -->
             <div class="content-wrapper is-large">
@@ -251,32 +251,32 @@
                                 <ol>
                                     <!-- Event -->
                                     <li>
-                                        <a href="#0" data-date="16/01/2018" class="selected">
-                                            <span>JAN</span>
-                                            <span>16</span>
+                                        <a href="#0" data-date="18/09/2019">
+                                            <span>SEP</span>
+                                            <span>18</span>
                                         </a>
                                     </li>
                                     <!-- Event -->
                                     <li>
-                                        <a href="#0" data-date="28/02/2018">
-                                            <span>FEB</span>
+                                        <a href="#0" data-date="20/09/2019">
+                                            <span>SEP</span>
+                                            <span>20</span>
+                                        </a>
+                                    </li>
+                                    <!-- Event -->
+                                    <li>
+                                        <a href="#0" data-date="28/09/2019">
+                                            <span>SEP</span>
                                             <span>28</span>
                                         </a>
                                     </li>
-                                    <!-- Event -->
                                     <li>
-                                        <a href="#0" data-date="20/03/2018">
-                                            <span>MAR</span>
-                                            <span>20</span>
+                                        <a href="#0" data-date="13/10/2019">
+                                            <span>OCT</span>
+                                            <span>13</span>
                                         </a>
                                     </li>
-                                    <!-- Event -->
-                                    <li>
-                                        <a href="#0" data-date="20/04/2018">
-                                            <span>APR</span>
-                                            <span>20</span>
-                                        </a>
-                                    </li>
+                                    
                                 </ol>
 
                                 <!-- Track line -->
@@ -296,7 +296,7 @@
                     <div class="events-content">
                         <ol>
                             <!-- Event -->
-                            <li class="selected" data-date="16/01/2018">
+                            <li class="selected" data-date="18/09/2019">
                                 <!-- Inner -->
                                 <div class="inner-wrapper">
                                     <div class="title-wrapper">
@@ -315,7 +315,7 @@
                             </li>
 
                             <!-- Event -->
-                            <li data-date="28/02/2018">
+                            <li data-date="20/09/2019">
                                 <div class="inner-wrapper">
                                     <div class="title-wrapper">
                                         <img src="<?= base_url() ?>assets/app/images/icons/ico/presale.svg" alt="">
@@ -331,7 +331,7 @@
                             </li>
 
                             <!-- Event -->
-                            <li data-date="20/03/2018">
+                            <li data-date="28/09/2019">
                                 <div class="inner-wrapper">
                                     <div class="title-wrapper">
                                         <img src="<?= base_url() ?>assets/app/images/icons/ico/ico.svg" alt="">
@@ -347,7 +347,7 @@
                             </li>
 
                             <!-- Event -->
-                            <li data-date="20/04/2018">
+                            <li data-date="13/10/2019">
                                 <div class="inner-wrapper">
                                     <div class="title-wrapper">
                                         <img src="assets/app/images/icons/ico/ico-2.svg" alt="">
@@ -384,7 +384,7 @@
 
 
     <!-- Company section -->
-    <section class="section is-medium has-big-dark-gradient">
+    <section class="section is-medium has-big-dark-gradient" id="mediapartner">
         <!-- Container -->
         <div class="container">
 
