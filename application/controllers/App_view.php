@@ -56,10 +56,20 @@ class App_view extends CI_Controller{
     }
 
     public function detailLomba(){
+        $judul = $this->input->get('lomba');
+
+        $lomba = $this->DataModel->select('tb_lomba.nama,tb_lomba.deskripsi,tb_lomba.harga,tb_lomba.guide_book,tb_lomba.tema,tb_juara.nominal as juara,tb_kategori.nama as kategori');
+        $lomba = $this->DataModel->getWhere('tb_lomba.nama',$judul);
+        $lomba = $this->DataModel->getJoin('tb_juara','tb_juara.id_lomba = tb_lomba.id','inner');
+        $lomba = $this->DataModel->getJoin('tb_kategori','tb_kategori.id = tb_lomba.id_kategori','inner');
+        $lomba = $this->DataModel->getData('tb_lomba')->result_array();
+        
+        // die(json_encode($lomba));
         $payload['judul'] = "HOME";
         $payload['link'] = ($this->session->userdata('email') == "" ? base_url('login') : base_url('user'));
         $payload['email'] = ($this->session->userdata('email') == "" ? "" : "LANJUTKAN DAFTAR: " . $this->session->userdata('email'));
         $payload['page'] = "home";
+        $payload['lomba'] = $lomba;
         $this->load->view('component/header',$payload);
         $this->load->view('src/iitf_detail_lomba');
         $this->load->view('component/ground');
