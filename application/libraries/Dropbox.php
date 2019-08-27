@@ -5,12 +5,55 @@ class Dropbox
 {
     protected $ci;
 
+    // Library written by DwiChan0905
+
     // Access Token didapat dari console Dropbox: https://www.dropbox.com/developers
     private $token = 'XIdehloNGvAAAAAAAAAAGPPZ7-_ZqU7GtvSaPjgY6j91rY77g5-SwbMcgxRXQROd';
 
     public function __construct()
     {
         $this->ci =& get_instance();
+    }
+
+    /**
+	 * Mulai proses download berkas dari Dropbox dan disimpan ke dalam hosting
+	 *
+	 * @access 	public
+	 * @param	string
+	 * @return	string
+	 */
+    public function downloadFile($path = "/", $output = "")
+    {
+        $api_url = 'https://content.dropboxapi.com/2/files/download'; //dropbox api url
+
+        $headers = array('Authorization: Bearer ' . $this->token, // Access Token, jangan kesebar
+            'Content-Type: application/octet-stream',
+            'Dropbox-API-Arg: '.
+            json_encode(
+                array(
+                    "path"=> $path
+                )
+            )
+
+        );
+
+        $ch = curl_init($api_url);
+
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_FILE, fopen($output, "w"));
+//        curl_setopt($ch, CURLOPT_VERBOSE, 1); // debug
+
+        $response = curl_exec($ch);
+        $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+        curl_close($ch);
+
+        return json_encode(array(
+            "response" => json_decode($response),
+            "http_code" => $http_code
+        ));
     }
 
     /**
