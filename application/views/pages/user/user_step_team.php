@@ -65,10 +65,10 @@
         <!--GROUP UPLOAD SURAT PERNYATAAAN-->
         <div class="field is-grouped">
           <div class="control">
-            <button class="button is-link">Submit</button>
+            <button class="button is-link">Simpan</button>
           </div>
           <div class="control">
-            <button class="button is-text">Cancel</button>
+            <button class="button is-text">Batal</button>
           </div>
         </div>
 
@@ -102,7 +102,7 @@
                   +'<p class="help is-success">Kalo sukses</p>'
                 +'</div>'
                 +'<div class="field">'
-                  +'<label class="label">Foto Koor</label>'
+                  +'<label class="label">Identitas diri</label>'
                   +'<div class="control">'
                     +'<div class="file is-info has-name">'
                       +'<label class="file-label">'
