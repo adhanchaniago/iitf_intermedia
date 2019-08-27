@@ -55,6 +55,15 @@ class App_view extends CI_Controller{
         $this->load->view('component/ground');
     }
 
+    public function detailLomba(){
+        $payload['judul'] = "HOME";
+        $payload['link'] = ($this->session->userdata('email') == "" ? base_url('login') : base_url('user'));
+        $payload['email'] = ($this->session->userdata('email') == "" ? "" : "LANJUTKAN DAFTAR: " . $this->session->userdata('email'));
+        $payload['page'] = "home";
+        $this->load->view('component/header',$payload);
+        $this->load->view('src/iitf_detail_lomba');
+        $this->load->view('component/ground');
+    }
     public function loginProcess()
     {
         $user = $this->input->post('e');
@@ -125,6 +134,7 @@ class App_view extends CI_Controller{
         $code = substr(str_shuffle($set), 0, 12);
 
         // die(json_encode(base64_encode($code)));
+       // die(json_encode($pass.$pass2));
         // Verify
         if ($nama === "") {
             echo "<font color=\"red\">Anda wajib memasukkan Nama Pendaftar!</font>";
@@ -139,9 +149,9 @@ class App_view extends CI_Controller{
             echo "<font color=\"red\">Anda wajib memasukkan ulang Kata Sandinya!</font>";
             return;
         } else {
-            if ($pass != $pass2) {
-                echo "<font color=\"red\">Kata Sandi yang Anda masukkan tidak sama, periksa kembali!</font>";
-                return;
+           if ($pass !== $pass2) {
+               echo "<font color=\"red\">Kata Sandi yang Anda masukkan tidak sama, periksa kembali!</font>";
+               return;
             } else {
                 $prefixUser = "U-";
                 $prefixKoor = "K-";
@@ -185,7 +195,7 @@ class App_view extends CI_Controller{
                     // echo "<script>console.log($this->send_verification(base64_encode($idUser),$mail,base64_decode($code)))</script>";
                     echo "<script>window.alert(\"Gagal mengirimkan verifikasi email error: \")</script>";
                 }
-            }
+           }
         }
     }
 
@@ -298,6 +308,7 @@ class App_view extends CI_Controller{
         $this->load->view('pages/user/user_step');
         $this->load->view('component/ground');
         $payload['step'] = $userdata->step_selesai;
+
         if($payload['step'] == 1){
             // step 1
         }else if($payload['step'] == 2){

@@ -6,7 +6,7 @@
                             <!-- Brand -->
                             <div class="navbar-brand">
                                 <a href="<?= base_url()?>" class="navbar-item">
-                                    <img class="" src="<?= base_url()?>assets/app/images/logo/logo.png" alt="">
+                                    <img class="" src="<?= base_url()?>assets/app/images/logo/logo_iitf.png" alt="">
                                     <span class="brand-name">IITF 2019</span>
                                 </a>
                                 <!-- Responsive toggle -->
@@ -62,7 +62,7 @@
                             <!-- Brand -->
                             <div class="navbar-brand">
                                 <a href="<?= base_url()?>" class="navbar-item">
-                                <img class="" src="<?= base_url()?>assets/app/images/logo/logo.png" alt="">
+                                <img class="" src="<?= base_url()?>assets/app/images/logo/logo_iitf.png" alt="">
                                     <span class="brand-name">IITF 2019</span>
                                 </a>
                                 <!-- Responsive toggle -->
@@ -119,7 +119,7 @@
                             <!-- Brand -->
                             <div class="navbar-brand">
                                 <a href="<?= base_url()?>" class="navbar-item">
-                                <img class="" src="<?= base_url()?>assets/app/images/logo/logo.png" alt="">
+                                <img class="" src="<?= base_url()?>assets/app/images/logo/logo_iitf.png" alt="">
                                     <span class="brand-name">IITF 2019</span>
                                 </a>
                                 <!-- Responsive toggle -->
@@ -167,7 +167,7 @@
                             <!-- Brand -->
                             <div class="navbar-brand">
                                 <a href="<?= base_url()?>" class="navbar-item">
-                                <img class="rotating" src="<?= base_url()?>assets/app/images/logo/krypton-gradient.svg" alt="">
+                                <img  src="<?= base_url()?>assets/app/images/logo/logo_iitf.png" alt="">
                                     <span class="brand-name">IITF 2019</span>
                                 </a>
                                 <!-- Responsive toggle -->
@@ -215,7 +215,7 @@
                             <!-- Brand -->
                             <div class="navbar-brand">
                                 <a href="<?= base_url()?>" class="navbar-item">
-                                <img class="rotating" src="<?= base_url()?>assets/app/images/logo/krypton-gradient.svg" alt="">
+                                <img  src="<?= base_url()?>assets/app/images/logo/logo_iitf.png" alt="">
                                     <span class="brand-name">IITF 2019</span>
                                 </a>
                                 <!-- Responsive toggle -->
@@ -261,7 +261,7 @@
                             <!-- Brand -->
                             <div class="navbar-brand">
                                 <a href="<?= base_url()?>" class="navbar-item">
-                                <img class="rotating" src="<?= base_url()?>assets/app/images/logo/krypton-gradient.svg" alt="">
+                                <img  src="<?= base_url()?>assets/app/images/logo/logo_iitf.png" alt="">
                                     <span class="brand-name">IITF 2019</span>
                                 </a>
                                 <!-- Responsive toggle -->
@@ -308,7 +308,7 @@
                             <!-- Brand -->
                             <div class="navbar-brand">
                                 <a href="<?= base_url()?>" class="navbar-item">
-                                <img class="rotating" src="<?= base_url()?>assets/app/images/logo/krypton-gradient.svg" alt="">
+                                <img  src="<?= base_url()?>assets/app/images/logo/logo_iitf.png" alt="">
                                     <span class="brand-name">IITF 2019</span>
                                 </a>
                                 <!-- Responsive toggle -->
@@ -355,7 +355,7 @@
                             <!-- Brand -->
                             <div class="navbar-brand">
                                 <a href="<?= base_url()?>" class="navbar-item">
-                                <img class="rotating" src="<?= base_url()?>assets/app/images/logo/krypton-gradient.svg" alt="">
+                                <img  src="<?= base_url()?>assets/app/images/logo/logo_iitf.png" alt="">
                                     <span class="brand-name">IITF 2019</span>
                                 </a>
                                 <!-- Responsive toggle -->

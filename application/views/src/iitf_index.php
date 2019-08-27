@@ -24,13 +24,13 @@
                     <h2 class="subtitle is-5  is-thin" style="margin-bottom: 100px;">
                         < Jadikan Teknologi Sebagai Ruang Kreatifitas />
                     </h2>
-                    <!-- CTA -->
-                    <p>
-                        <a href="#roadmap" class="button k-button k-primary raised has-gradient is-fat is-bold">
-                            <span class="text">Selengkapnya</span>
-                            <span class="front-gradient"></span>
-                        </a>
-                    </p>
+                    <!-- Play video button -->
+                <div class="cta-wrapper has-text-centered">
+                    <div class="video-button levitate js-modal-btn" data-video-id="6WG7D47tGb0">
+                        <img src="assets/app/images/icons/play.svg" alt="">
+                    </div>
+                </div>
+                    
                 </div>
 
             </div>
@@ -46,7 +46,7 @@
                         <h2 class="title is-1  is-semibold is-spaced main-title">Tentang IITF</h2>
                         <!-- Divider -->
                         <div class="divider"></div>
-                        <h3 class="subtitle is-7 is-thin">
+                        <h3 class="subtitle is-7 is-thin" style="font-size:1rem;">
                             Lorem ipsum dolor amet. amet amet dah lorem ipsum dolor amet lorem ipsum dolor amet lorem ipsum dolor amet
                         </h3>
                         <!-- CTA -->
@@ -56,10 +56,10 @@
                                         <span class="front-gradient"></span>
                                     </a>
                                 </p> -->
-                        <a class="button k-button k-secondary raised has-gradient is-fat is-bold rounded">
+                        <!-- <a class="button k-button k-secondary raised has-gradient is-fat is-bold rounded">
                             <span class="text">Selengkapnya</span>
                             <span class="front-gradient"></span>
-                        </a>
+                        </a> -->
 
                     </div>
                     <!-- Hero image -->
@@ -108,36 +108,49 @@
                 <div class="columns is-vcentered">
                     <!-- Feature -->
                     <div class="column is-4">
+                    <a href="<?= base_url()?>detail">
                         <div class="feature">
                             <img src="assets/app/images/rangkaian-kegiatan/roadshow.svg" alt="" data-aos="fade-up" data-aos-delay="100" data-aos-offset="200" data-aos-easing="ease-out-quart">
                             <h4 class="title is-6 is-tight ">Roadshow</h4>
                             <p>Supercharged features to make you happy and lorem ipsum sit dolor amet</p>
                         </div>
+                    </a>
                     </div>
                     <!-- Feature -->
                     <div class="column is-4">
+                        <a href="<?= base_url()?>detail">
                         <div class="feature">
                             <img src="assets/app/images/rangkaian-kegiatan/lomba.svg" alt="" data-aos="fade-up" data-aos-delay="300" data-aos-offset="200" data-aos-easing="ease-out-quart">
                             <h4 class="title is-6 is-tight ">Lomba</h4>
                             <p>Supercharged features to make you happy and lorem ipsum sit dolor amet</p>
                         </div>
+                        </a>
                     </div>
                     <!-- Feature -->
                     <div class="column is-4">
+                    <a href="<?= base_url()?>detail">
                         <div class="feature">
                             <img src="assets/app/images/rangkaian-kegiatan/festival.svg" alt="" data-aos="fade-up" data-aos-delay="500" data-aos-offset="200" data-aos-easing="ease-out-quart">
                             <h4 class="title is-6 is-tight ">Festival</h4>
                             <p>Supercharged features to make you happy and lorem ipsum sit dolor amet</p>
                         </div>
+                        </a>
                     </div>
                 </div>
 
                 <!-- Play video button -->
                 <div class="cta-wrapper has-text-centered">
                     <div class="video-button levitate js-modal-btn" data-video-id="6WG7D47tGb0">
-                        <img src="assets/app/images/icons/play.svg" alt="">
+                        <!-- <a>Scroll Up !</a> -->
                     </div>
                 </div>
+                <!-- CTA -->
+                <!-- <p>
+                        <a href="#roadmap" class="button k-button k-primary raised has-gradient is-fat is-bold">
+                            <span class="text">Selengkapnya</span>
+                            <span class="front-gradient"></span>
+                        </a>
+                    </p> -->
             </div>
             <!-- Content Rangkaian Kegiatan-->
         </div>

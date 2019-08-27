@@ -60,3 +60,4 @@ $route['timeline'] = 'App_view/timeline';
 $route['register'] = 'App_view/register';
 $route['register/registerprocess'] = 'App_view/registerProcess';
 $route['user'] = 'App_view/step';
+$route['detail'] = 'App_view/detailLomba';
