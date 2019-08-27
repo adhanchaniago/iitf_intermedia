@@ -298,46 +298,46 @@ class App_view extends CI_Controller{
 
         $koor = null;
         $userdata = $check->row();
-        // if ($check->num_rows() == 0) {
-        //     redirect('login');
-        // } else {
-        //     $koorq = $this->db->get_where('tb_koor', array(
-        //         'id_user' => $this->session->userdata('id')
-        //     ));
-        //     $koor = $koorq->row();
-        // }
+        if ($check->num_rows() == 0) {
+            redirect('login');
+        } else {
+            $koorq = $this->db->get_where('tb_koor', array(
+                'id_user' => $this->session->userdata('id')
+            ));
+            $koor = $koorq->row();
+        }
 
         $payload['judul'] = "TIMELINE";
         $payload['link'] = ($this->session->userdata('email') == "" ? base_url('login') : base_url('user'));
         $payload['email'] = ($this->session->userdata('email') == "" ? "" : $this->session->userdata('email'));
         $payload['page'] = "steps";
-        $payload['nama'] = 'trian';//$koor->nama;
-        $payload['nohp'] = '5467';//$koor->no_hp;
-        $payload['inst'] = 'amikom';//$koor->institusi;
+        $payload['nama'] = $koor->nama;
+        $payload['nohp'] = $koor->no_hp;
+        $payload['inst'] = $koor->institusi;
         
-        $payload['step'] = 3;//$userdata->step_selesai;
+        $payload['step'] = $userdata->step_selesai;
 
-        if($payload['step'] == 1){
+        if($payload['step'] == 0){
             // step koor
             $this->load->view('component/header',$payload);
             $this->load->view('pages/user/user_step_koor');
             $this->load->view('component/ground');
-        }else if($payload['step'] == 2){
+        }else if($payload['step'] == 1){
             //step 2
             $this->load->view('component/header',$payload);
             $this->load->view('pages/user/user_step_pilih_lomba');
             $this->load->view('component/ground');
-        }else if($payload['step'] == 3){
+        }else if($payload['step'] == 2){
             //biodata team
             $this->load->view('component/header',$payload);
             $this->load->view('pages/user/user_step_team');
             $this->load->view('component/ground');
-        }else if($payload['step'] == 4){
+        }else if($payload['step'] == 3){
             //pembayaran
             $this->load->view('component/header',$payload);
             $this->load->view('pages/user/user_step_pembayaran');
             $this->load->view('component/ground');
-        }else if($payload['step'] == 5){
+        }else if($payload['step'] == 4){
             //submisi file
             $this->load->view('component/header',$payload);
             $this->load->view('pages/user/user_step_submission');
