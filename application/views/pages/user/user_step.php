@@ -248,6 +248,7 @@
             class="input is-primary"
             type="text"
             placeholder="Nama Lengkap"
+            value="<?= $nama ?>"
           />
         </div>
       </div>
@@ -257,7 +258,8 @@
           name="email"
           class="input is-info" 
           type="text" 
-          placeholder="Email" />
+          placeholder="Email" 
+          value="<?= $email ?>" />
         </div>
       </div>
       <div class="field">
@@ -267,6 +269,7 @@
             class="input is-success"
             type="text"
             placeholder="No. HP"
+            value="<?= $nohp ?>"
           />
         </div>
       </div>
@@ -277,6 +280,7 @@
             class="input is-warning"
             type="text"
             placeholder="Asal Sekolah / Institusi"
+            value="<?= $inst ?>"
           />
         </div>
       </div>
@@ -291,7 +295,7 @@
               <i class="fas fa-upload"></i>
             </span>
             <span class="file-label">
-              Info file…
+              Pilih Berkas
             </span>
           </span>
           <span class="file-name">
@@ -309,7 +313,7 @@
 
         <div class="control">
           <button class="button is-text">Cancel</button>
-        </diSv>
+        </div>
       </div>
 
     </div>
@@ -327,18 +331,18 @@
   <div class="card-content">
     <div class="media">
       <div class="media-content">
-        <p class="title is-4">Hallo ! John Smith</p>
-        <p class="subtitle is-6">@johnsmith</p>
+        <p class="title is-4">Hallo, <?= $nama ?></p>
+        <p class="subtitle is-6"><?= $email ?></p>
       </div>
     </div>
 
     <div class="content">
-      Akun kamu sudah terdaftar di iitf tetapi belum terdaftar sebagai peserta. Untuk itu kamu perlu mengisi bebrapa data yang diperlukan  ikuti langkah-langkah berikut ini untuk mendaftarkan diri sebagai peserta 
+      Akun kamu sudah terdaftar di IITF, tetapi belum terdaftar sebagai peserta. Untuk itu, kamu perlu mengisi bebrapa data yang diperlukan. Ikuti langkah-langkah berikut ini untuk mendaftarkan diri sebagai peserta 
       <a href="#">#panduan pendaftaran</a> 
       <br>
       <button id="btn-mengerti" class="button k-button k-primary raised has-gradient slanted">
           <span class="text">
-            Saya Mengerti dan lanjutkan
+            Saya Mengerti dan Lanjutkan
           </span>
           <span class="front-gradient"></span>
       </button>
@@ -348,7 +352,7 @@
   </div>
 </div>
   </div>
-  <button class="modal-close is-large" aria-label="close"></button>
+  <!-- <button class="modal-close is-large" aria-label="close"></button> -->
 </div>
 </div>
 

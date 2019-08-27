@@ -3,7 +3,7 @@
                 <!-- Logo -->
                 <div class="footer-logo">
                     <a href="#">
-                        <img class="rotating" src="<?= base_url()?>assets/app/images/logo/krypton-gradient.svg" alt="">
+                        <img class="" src="<?= base_url()?>assets/app/images/logo/logo.png" alt="">
                         <div class="brand-name">IITF</div>
                         <div class="brand-subtitle">Intermedia's Information Technology Festival</div>
                     </a>
@@ -15,15 +15,15 @@
                         <!-- Links group -->
                         <ul class="footer-links">
                             <li>
-                                <a href="#">Tentang</a>
+                                <a href="#about">Tentang</a>
                             </li>
         
                             <li>
-                                <a href="#">Hadiah</a>
+                                <a href="#reward">Lomba</a>
                             </li>
         
                             <li>
-                                <a href="#">Timeline</a>
+                                <a href="#timeline">Timeline</a>
                             </li>
                         </ul>
                     </div>
@@ -42,11 +42,11 @@
                     <div class="column is-4">
                         <ul class="footer-links">
                             <li>
-                                <a href="#">Mendaftar</a>
+                                <a href="<?=base_url('user')?>">Daftar</a>
                             </li>
         
                             <li>
-                                <a href="#">Media Partner</a>
+                                <a href="#mediapartner">Media Partner</a>
                             </li>
         
                             <li>
@@ -56,7 +56,7 @@
                     </div>
                 </div>
                 <!-- Copyright -->
-                <p class="k-copyright">© 2019 | IITF. All Rights Reserved | <a href="<?base_url()?>admin/home/login" target="_blank">Admin</a></p>
+                <p class="k-copyright">© 2019 | IITF. All Rights Reserved | <a href="<?=base_url()?>admin/home/login" target="_blank">Admin</a></p>
                 <br>
                 <!-- Made by -->
                 <p class="coded-by">Designed and Coded by <a href="https://cssninja.io" target="_blank">Css Ninja</a></p>

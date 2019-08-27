@@ -1,5 +1,4 @@
- 
- <?php if($page == "home"){?>
+<?php if($page == "home"){?>
                     <!-- Cloned navbar -->
                     <!-- Cloned navbar that comes in on scroll -->
                     <nav id="navbar-clone" class="navbar is-fixed ">
@@ -7,7 +6,7 @@
                             <!-- Brand -->
                             <div class="navbar-brand">
                                 <a href="<?= base_url()?>" class="navbar-item">
-                                    <img class="rotating" src="<?= base_url()?>assets/app/images/logo/krypton-gradient.svg" alt="">
+                                    <img class="" src="<?= base_url()?>assets/app/images/logo/logo.png" alt="">
                                     <span class="brand-name">IITF 2019</span>
                                 </a>
                                 <!-- Responsive toggle -->
@@ -22,11 +21,11 @@
                                 <div class="navbar-end">
                                     <!-- Menu item -->
                                     <div class="navbar-item is-nav-link">
-                                        <a class="is-centered-responsive" href="#about"">Tentang</a>
+                                        <a class="is-centered-responsive" href="#about">Tentang</a>
                                     </div>
                                     <!-- Menu item -->
                                     <div class="navbar-item is-nav-link">
-                                        <a class="is-centered-responsive" href="#reward">Hadiah</a>
+                                        <a class="is-centered-responsive" href="#reward">Lomba</a>
                                     </div>
                                     <!-- Menu item -->
                                     <div class="navbar-item is-nav-link">
@@ -41,10 +40,10 @@
                                     </div>
                                     <!-- Sign up -->
                                     <div class="navbar-item is-nav-link">
-                                        <a href="<?= base_url()?>login" class="button k-button k-primary raised has-gradient slanted">
+                                        <a href="<?= base_url((($email == null) || ($email == '') ? 'login' : 'user'))?>" class="button k-button k-primary raised has-gradient slanted">
                                             <span class="text">
                                             <?php if($email == null || $email == ''){
-                                                echo '<i class="far fa-user-circle"></i>Area Peserta';
+                                                echo '<i class="far fa-user-circle"></i> Area Peserta';
                                             }else{
                                                 echo $email;
                                             } ?>
@@ -63,7 +62,7 @@
                             <!-- Brand -->
                             <div class="navbar-brand">
                                 <a href="<?= base_url()?>" class="navbar-item">
-                                <img class="rotating" src="<?= base_url()?>assets/app/images/logo/krypton-gradient.svg" alt="">
+                                <img class="" src="<?= base_url()?>assets/app/images/logo/logo.png" alt="">
                                     <span class="brand-name">IITF 2019</span>
                                 </a>
                                 <!-- Responsive toggle -->
@@ -82,7 +81,7 @@
                                     </div>
                                     <!-- Menu item -->
                                     <div class="navbar-item is-nav-link">
-                                        <a class="is-centered-responsive" href="#reward">Hadiah</a>
+                                        <a class="is-centered-responsive" href="#reward">Lomba</a>
                                     </div>
                                     <!-- Menu item -->
                                     <div class="navbar-item is-nav-link">
@@ -97,10 +96,10 @@
                                     </div>
                                     <!-- Sign up -->
                                     <div class="navbar-item is-nav-link">
-                                        <a href="<?= base_url()?>login" class="button k-button k-primary raised has-gradient slanted">
+                                        <a href="<?= base_url((($email == null) || ($email == '') ? 'login' : 'user'))?>" class="button k-button k-primary raised has-gradient slanted">
                                             <span class="text">
                                             <?php if($email == null || $email == ''){
-                                                echo '<i class="far fa-user-circle"></i>Area Peserta';
+                                                echo '<i class="far fa-user-circle"></i> Area Peserta';
                                             }else{
                                                 echo $email;
                                             } ?>
@@ -120,7 +119,7 @@
                             <!-- Brand -->
                             <div class="navbar-brand">
                                 <a href="<?= base_url()?>" class="navbar-item">
-                                <img class="rotating" src="<?= base_url()?>assets/app/images/logo/krypton-gradient.svg" alt="">
+                                <img class="" src="<?= base_url()?>assets/app/images/logo/logo.png" alt="">
                                     <span class="brand-name">IITF 2019</span>
                                 </a>
                                 <!-- Responsive toggle -->
@@ -147,10 +146,10 @@
                                     </div>
                                     <!-- Sign up -->
                                     <div class="navbar-item is-nav-link">
-                                        <a href="<?= base_url()?>login" class="button k-button k-primary raised has-gradient slanted">
+                                        <a href="<?= base_url((($email == null) || ($email == '') ? 'login' : 'user'))?>" class="button k-button k-primary raised has-gradient slanted">
                                             <span class="text">
                                             <?php if($email == null || $email == ''){
-                                                echo '<i class="far fa-user-circle"></i>Area Peserta';
+                                                echo '<i class="far fa-user-circle"></i> Area Peserta';
                                             }else{
                                                 echo $email;
                                             } ?>
@@ -382,6 +381,19 @@
                                         </a>
                                     </div>
                                     
+                                    <!-- Sign up -->
+                                    <div class="navbar-item is-nav-link">
+                                        <a href="<?= base_url((($email == null) || ($email == '') ? 'login' : 'logout'))?>" class="button k-button k-primary raised has-gradient slanted">
+                                            <span class="text">
+                                            <?php if($email == null || $email == ''){
+                                                echo '<i class="far fa-user-circle"></i> Area Peserta';
+                                            }else{
+                                                echo 'Logout';
+                                            } ?>
+                                            </span>
+                                            <span class="front-gradient"></span>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

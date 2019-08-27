@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 18 Agu 2019 pada 12.20
+-- Generation Time: 26 Agu 2019 pada 09.41
 -- Versi Server: 10.1.25-MariaDB
 -- PHP Version: 7.1.7
 
@@ -34,6 +34,13 @@ CREATE TABLE `tb_admin` (
   `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `tb_admin`
+--
+
+INSERT INTO `tb_admin` (`id`, `email`, `password`) VALUES
+('Z-18081921', 'zaenur.rochman98@gmail.com', '$2a$08$7SP.Rz1123gSsZ/RG5gXYOntlFD.wOg2lAVRb0UsloE8lyRY2LoEW');
+
 -- --------------------------------------------------------
 
 --
@@ -51,6 +58,26 @@ CREATE TABLE `tb_anggota` (
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `tb_juara`
+--
+
+CREATE TABLE `tb_juara` (
+  `id_lomba` varchar(20) NOT NULL,
+  `nama` varchar(30) NOT NULL,
+  `nominal` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tb_juara`
+--
+
+INSERT INTO `tb_juara` (`id_lomba`, `nama`, `nominal`) VALUES
+('L-19081954', 'Juara 1', 1500000),
+('L-19081954', 'Juara 2', 750000);
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `tb_kategori`
 --
 
@@ -59,6 +86,14 @@ CREATE TABLE `tb_kategori` (
   `nama` varchar(20) NOT NULL,
   `deskripsi` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tb_kategori`
+--
+
+INSERT INTO `tb_kategori` (`id`, `nama`, `deskripsi`) VALUES
+(1, 'Mahasiswa atau umum', 'loren ipsum dolor sit amet loren'),
+(3, 'Pelajar', '');
 
 -- --------------------------------------------------------
 
@@ -76,6 +111,15 @@ CREATE TABLE `tb_koor` (
   `lampiran_identitas` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `tb_koor`
+--
+
+INSERT INTO `tb_koor` (`id`, `id_user`, `nama`, `email`, `no_hp`, `institusi`, `lampiran_identitas`) VALUES
+('K-20190824173049', 'U-20190824173049', 'Dwi Candra Permana', 'dwichan@outlook.com', '', '', ''),
+('K-20190826081108', 'U-20190826081108', 'zaenur', 'zaenur.rochman98@outlook.com', '', '', ''),
+('K-20190826093701', 'U-20190826093701', 'zaenur', 'zaenur.rochman98@gmail.com', '', '', '');
+
 -- --------------------------------------------------------
 
 --
@@ -87,8 +131,16 @@ CREATE TABLE `tb_lomba` (
   `id_kategori` int(11) NOT NULL,
   `nama` varchar(50) NOT NULL,
   `deskripsi` text NOT NULL,
-  `guide_book` varchar(50) NOT NULL
+  `guide_book` varchar(50) NOT NULL,
+  `harga` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tb_lomba`
+--
+
+INSERT INTO `tb_lomba` (`id`, `id_kategori`, `nama`, `deskripsi`, `guide_book`, `harga`) VALUES
+('L-19081954', 1, 'Mobile application', 'loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet ', 'Mobile_applicationIITF2019.pdf', 100000);
 
 -- --------------------------------------------------------
 
@@ -121,6 +173,13 @@ CREATE TABLE `tb_pengumuman` (
   `tanggal` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `tb_pengumuman`
+--
+
+INSERT INTO `tb_pengumuman` (`id`, `judul`, `deskripsi`, `tanggal`) VALUES
+(1, 'testing', 'loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet ', '2019-08-19');
+
 -- --------------------------------------------------------
 
 --
@@ -131,8 +190,20 @@ CREATE TABLE `tb_user` (
   `id` varchar(20) NOT NULL,
   `email` varchar(150) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `tanggal_reg` date NOT NULL
+  `tanggal_reg` date NOT NULL,
+  `step_selesai` int(2) NOT NULL,
+  `code` varchar(20) NOT NULL,
+  `status` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tb_user`
+--
+
+INSERT INTO `tb_user` (`id`, `email`, `password`, `tanggal_reg`, `step_selesai`, `code`, `status`) VALUES
+('U-20190824173049', 'dwichan@outlook.com', '$2a$08$OZM8jYmdROWfmiHcy1myWuJPmMmeucN7cNHtkFynGdUT0QmY2BexW', '2019-08-24', 0, '', ''),
+('U-20190826081108', 'zaenur.rochman98@outlook.com', '$2a$08$Ci8hiMZYr6pxen4Apq9C9utuBk4z2CUkVnwiGR0I7uL9L7P7N/s5q', '2019-08-26', 0, 'ur7gtlPXVLvh', 'true'),
+('U-20190826093701', 'zaenur.rochman98@gmail.com', '$2a$08$wpx962qPEinrcR.B.DRVxOLrGTIf.Y8SED3ZzIIoU5rxSm8VV9/2y', '2019-08-26', 0, '4kKif8quaAQp', 'true');
 
 --
 -- Indexes for dumped tables
@@ -151,6 +222,12 @@ ALTER TABLE `tb_admin`
 ALTER TABLE `tb_anggota`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_anggota_daftar` (`id_pendaftaran`);
+
+--
+-- Indexes for table `tb_juara`
+--
+ALTER TABLE `tb_juara`
+  ADD KEY `fk_juara_lomba` (`id_lomba`);
 
 --
 -- Indexes for table `tb_kategori`
@@ -202,12 +279,12 @@ ALTER TABLE `tb_user`
 -- AUTO_INCREMENT for table `tb_kategori`
 --
 ALTER TABLE `tb_kategori`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `tb_pengumuman`
 --
 ALTER TABLE `tb_pengumuman`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
@@ -217,6 +294,12 @@ ALTER TABLE `tb_pengumuman`
 --
 ALTER TABLE `tb_anggota`
   ADD CONSTRAINT `fk_anggota_daftar` FOREIGN KEY (`id_pendaftaran`) REFERENCES `tb_pendaftaran` (`id`);
+
+--
+-- Ketidakleluasaan untuk tabel `tb_juara`
+--
+ALTER TABLE `tb_juara`
+  ADD CONSTRAINT `fk_juara_lomba` FOREIGN KEY (`id_lomba`) REFERENCES `tb_lomba` (`id`);
 
 --
 -- Ketidakleluasaan untuk tabel `tb_koor`

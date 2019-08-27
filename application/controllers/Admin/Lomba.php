@@ -206,7 +206,7 @@ class Lomba extends MY_Controller
     private function _uploadFile($name)
     {
         $config['upload_path'] = 'assets/Guide_book/';
-        $config['allowed_types'] = 'pdf';
+        $config['allowed_types'] = 'zip|rar';
         $config['file_name'] = $name;
         $config['overwrite'] = true;
         $this->upload->initialize($config);

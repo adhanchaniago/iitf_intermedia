@@ -16,10 +16,10 @@
                         <!-- Landing page Title -->
                         <div class="column is-6 landing-caption">
                             <h1 class="title is-3 is-semibold is-spaced main-title has-text-centered">Buat Akun IITF</h1>
-                            <form class="login-form" action="<?= base_url()?>user">
+                            <form class="login-form" action="javascript:tryRegister('<?= base_url(); ?>');">
                                 <!-- Field -->
                                 <div class="control-material is-primary">      
-                                    <input class="material-input" id="u" type="text" required>
+                                    <input class="material-input" id="n" type="text" required>
                                     <span class="material-highlight"></span>
                                     <span class="bar"></span>
                                     <label for="u">Nama</label>
@@ -40,14 +40,14 @@
                                 </div>
                                 <!-- Field -->
                                 <div class="control-material is-primary">      
-                                    <input class="material-input" id="u" type="password" required>
+                                    <input class="material-input" id="p2" type="password" required>
                                     <span class="material-highlight"></span>
                                     <span class="bar"></span>
                                     <label for="u">Ulang Kata Sandi</label>
                                 </div>
 
                                 <!-- Label Login -->
-                                <div id="loginWarnings"></div><br>
+                                <div id="regWarnings"></div><br>
                                 
                                 <!-- Submit -->
                                 <span>
