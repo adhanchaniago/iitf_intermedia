@@ -1,4 +1,4 @@
-<footer class="krypton-footer">
+          <footer class="krypton-footer">
             <div class="container">
                 <!-- Logo -->
                 <div class="footer-logo">
@@ -15,15 +15,15 @@
                         <!-- Links group -->
                         <ul class="footer-links">
                             <li>
-                                <a href="#about">Tentang</a>
+                                <a href="<?= base_url() ?>#about">Tentang</a>
                             </li>
         
                             <li>
-                                <a href="#reward">Lomba</a>
+                                <a href="<?= base_url() ?>#reward">Lomba</a>
                             </li>
         
                             <li>
-                                <a href="#timeline">Timeline</a>
+                                <a href="<?= base_url() ?>#timeline">Timeline</a>
                             </li>
                         </ul>
                     </div>
@@ -42,15 +42,15 @@
                     <div class="column is-4">
                         <ul class="footer-links">
                             <li>
-                                <a href="<?=base_url('user')?>">Daftar</a>
+                                <a href="<?=base_url('register')?>">Daftar</a>
                             </li>
         
                             <li>
-                                <a href="#mediapartner">Media Partner</a>
+                                <a href="<?= base_url() ?>#mediapartner">Media Partner</a>
                             </li>
         
                             <li>
-                                <a href="#">WhatsApp</a>
+                                <a onclick="showWhatsApp();">WhatsApp</a>
                             </li>
                         </ul>
                     </div>

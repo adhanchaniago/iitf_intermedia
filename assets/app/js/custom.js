@@ -18,6 +18,14 @@ function tryLogin(home) {
     });
 }
 
+function showWhatsApp() {
+    $("#whatsapp").addClass("is-active");
+}
+
+function hideWhatsApp() {
+    $("#whatsapp").removeClass("is-active");
+}
+
 function tryRegister(home) {
     var n = $('#n').val();
     var e = $('#u').val();

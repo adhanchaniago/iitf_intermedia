@@ -21,19 +21,19 @@
                                 <div class="navbar-end">
                                     <!-- Menu item -->
                                     <div class="navbar-item is-nav-link">
-                                        <a class="is-centered-responsive is-semibold" href="#about">Tentang</a>
+                                        <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>#about">Tentang</a>
                                     </div>
                                     <!-- Menu item -->
                                     <div class="navbar-item is-nav-link">
-                                        <a class="is-centered-responsive is-semibold"" href="#reward">Lomba</a>
+                                        <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>#reward">Lomba</a>
                                     </div>
                                     <!-- Menu item -->
                                     <div class="navbar-item is-nav-link">
-                                        <a class="is-centered-responsive is-semibold"" href="#timeline">Timeline</a>
+                                        <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>#timeline">Timeline</a>
                                     </div>
                                     <!-- Menu item -->
                                     <div class="navbar-item is-nav-link">
-                                        <a class="is-centered-responsive is-semibold"" href="#" target="_blank">
+                                        <a class="is-centered-responsive is-semibold" onclick="showWhatsApp();">
                                         <i class="fab fa-whatsapp"></i>
                                             WhatsApp
                                         </a>
@@ -77,19 +77,19 @@
                                 <div class="navbar-end">
                                    <!-- Menu item -->
                                    <div class="navbar-item is-nav-link">
-                                        <a style="color:black;" class="is-centered-responsive" href="#about">Tentang</a>
+                                        <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>#about">Tentang</a>
                                     </div>
                                     <!-- Menu item -->
                                     <div class="navbar-item is-nav-link">
-                                        <a class="is-centered-responsive" href="#reward">Lomba</a>
+                                        <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>#reward">Lomba</a>
                                     </div>
                                     <!-- Menu item -->
                                     <div class="navbar-item is-nav-link">
-                                        <a class="is-centered-responsive" href="#timeline">Timeline</a>
+                                        <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>#timeline">Timeline</a>
                                     </div>
                                     <!-- Menu item -->
                                     <div class="navbar-item is-nav-link">
-                                        <a class="is-centered-responsive" href="#" target="_blank">
+                                        <a class="is-centered-responsive is-semibold" onclick="showWhatsApp();">
                                         <i class="fab fa-whatsapp"></i>
                                             WhatsApp
                                         </a>
@@ -134,12 +134,19 @@
                                 <div class="navbar-end">
                                    <!-- Menu item -->
                                    <div class="navbar-item is-nav-link">
-                                        <a class="is-centered-responsive" href="<?= base_url()?>">Tentang</a>
+                                        <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>#about">Tentang</a>
                                     </div>
-                                    
                                     <!-- Menu item -->
                                     <div class="navbar-item is-nav-link">
-                                        <a class="is-centered-responsive" href="#" target="_blank">
+                                        <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>#reward">Lomba</a>
+                                    </div>
+                                    <!-- Menu item -->
+                                    <div class="navbar-item is-nav-link">
+                                        <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>#timeline">Timeline</a>
+                                    </div>
+                                    <!-- Menu item -->
+                                    <div class="navbar-item is-nav-link">
+                                        <a class="is-centered-responsive is-semibold" onclick="showWhatsApp();">
                                         <i class="fab fa-whatsapp"></i>
                                             WhatsApp
                                         </a>
@@ -182,22 +189,29 @@
                                 <div class="navbar-end">
                                    <!-- Menu item -->
                                    <div class="navbar-item is-nav-link">
-                                        <a class="is-centered-responsive" href="<?= base_url()?>">Tentang</a>
+                                        <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>#about">Tentang</a>
                                     </div>
-                                    
                                     <!-- Menu item -->
                                     <div class="navbar-item is-nav-link">
-                                        <a class="is-centered-responsive" href="#" target="_blank">
+                                        <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>#reward">Lomba</a>
+                                    </div>
+                                    <!-- Menu item -->
+                                    <div class="navbar-item is-nav-link">
+                                        <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>#timeline">Timeline</a>
+                                    </div>
+                                    <!-- Menu item -->
+                                    <div class="navbar-item is-nav-link">
+                                        <a class="is-centered-responsive is-semibold" onclick="showWhatsApp();">
                                         <i class="fab fa-whatsapp"></i>
                                             WhatsApp
                                         </a>
                                     </div>
                                     <!-- Sign up -->
                                     <div class="navbar-item is-nav-link">
-                                        <a href="<?= base_url()?>login" class="button k-button k-primary raised has-gradient slanted">
+                                        <a href="<?= base_url((($email == null) || ($email == '') ? 'login' : 'user'))?>" class="button k-button k-primary raised has-gradient slanted">
                                             <span class="text">
                                             <?php if($email == null || $email == ''){
-                                                echo '<i class="far fa-user-circle"></i>Area Peserta';
+                                                echo '<i class="far fa-user-circle"></i> Area Peserta';
                                             }else{
                                                 echo $email;
                                             } ?>
@@ -230,12 +244,19 @@
                                 <div class="navbar-end">
                                    <!-- Menu item -->
                                    <div class="navbar-item is-nav-link">
-                                        <a class="is-centered-responsive" href="<?= base_url()?>">Tentang</a>
+                                        <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>#about">Tentang</a>
                                     </div>
-                                    
                                     <!-- Menu item -->
                                     <div class="navbar-item is-nav-link">
-                                        <a class="is-centered-responsive" href="#" target="_blank">
+                                        <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>#reward">Lomba</a>
+                                    </div>
+                                    <!-- Menu item -->
+                                    <div class="navbar-item is-nav-link">
+                                        <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>#timeline">Timeline</a>
+                                    </div>
+                                    <!-- Menu item -->
+                                    <div class="navbar-item is-nav-link">
+                                        <a class="is-centered-responsive is-semibold" onclick="showWhatsApp();">
                                         <i class="fab fa-whatsapp"></i>
                                             WhatsApp
                                         </a>
@@ -276,12 +297,19 @@
                                 <div class="navbar-end">
                                    <!-- Menu item -->
                                    <div class="navbar-item is-nav-link">
-                                        <a class="is-centered-responsive" href="<?= base_url()?>">Tentang</a>
+                                        <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>#about">Tentang</a>
                                     </div>
-                                    
                                     <!-- Menu item -->
                                     <div class="navbar-item is-nav-link">
-                                        <a class="is-centered-responsive" href="#" target="_blank">
+                                        <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>#reward">Lomba</a>
+                                    </div>
+                                    <!-- Menu item -->
+                                    <div class="navbar-item is-nav-link">
+                                        <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>#timeline">Timeline</a>
+                                    </div>
+                                    <!-- Menu item -->
+                                    <div class="navbar-item is-nav-link">
+                                        <a class="is-centered-responsive is-semibold" onclick="showWhatsApp();">
                                         <i class="fab fa-whatsapp"></i>
                                             WhatsApp
                                         </a>
@@ -321,14 +349,21 @@
                             <!-- Menu -->
                             <div id="navbarMenu" class="navbar-menu light-menu">
                                 <div class="navbar-end">
-                                   <!-- Menu item -->
-                                   <div class="navbar-item is-nav-link">
-                                        <a class="is-centered-responsive" href="<?= base_url()?>">Tentang</a>
+                                  <!-- Menu item -->
+                                  <div class="navbar-item is-nav-link">
+                                        <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>#about">Tentang</a>
                                     </div>
-                                    
                                     <!-- Menu item -->
                                     <div class="navbar-item is-nav-link">
-                                        <a class="is-centered-responsive" href="#" target="_blank">
+                                        <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>#reward">Lomba</a>
+                                    </div>
+                                    <!-- Menu item -->
+                                    <div class="navbar-item is-nav-link">
+                                        <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>#timeline">Timeline</a>
+                                    </div>
+                                    <!-- Menu item -->
+                                    <div class="navbar-item is-nav-link">
+                                        <a class="is-centered-responsive is-semibold" onclick="showWhatsApp();">
                                         <i class="fab fa-whatsapp"></i>
                                             WhatsApp
                                         </a>
@@ -370,12 +405,19 @@
                                 <div class="navbar-end">
                                    <!-- Menu item -->
                                    <div class="navbar-item is-nav-link">
-                                        <a class="is-centered-responsive" href="<?= base_url()?>">Tentang</a>
+                                        <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>#about">Tentang</a>
                                     </div>
-                                    
                                     <!-- Menu item -->
                                     <div class="navbar-item is-nav-link">
-                                        <a class="is-centered-responsive" href="#" target="_blank">
+                                        <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>#reward">Lomba</a>
+                                    </div>
+                                    <!-- Menu item -->
+                                    <div class="navbar-item is-nav-link">
+                                        <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>#timeline">Timeline</a>
+                                    </div>
+                                    <!-- Menu item -->
+                                    <div class="navbar-item is-nav-link">
+                                        <a class="is-centered-responsive is-semibold" onclick="showWhatsApp();">
                                         <i class="fab fa-whatsapp"></i>
                                             WhatsApp
                                         </a>
