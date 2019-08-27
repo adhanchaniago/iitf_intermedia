@@ -63,6 +63,14 @@
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <div class="form-group">
+                                                <label class="form-control-label" for="input-nama">Tema</label>
+                                                <input type="text" name="tema" class="form-control form-control-alternative" placeholder="Masukkan tema perlombaan">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
                                                 <label class="form-control-label" for="input-nama">Deskripsi</label>
                                                 <textarea name="des" rows="5" class="form-control form-control-alternative" placeholder="Masukkan deskripsi perlombaan"></textarea>
                                             </div>
@@ -77,7 +85,7 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label class="form-control-label" for="input-nama">Guide Book</label>
+                                                <label class="form-control-label" for="input-nama">Guide Book (Panduan) :zip/rar</label>
                                                 <input type="file" name="gb" class="form-control form-control-alternative">
                                             </div>
                                         </div>
@@ -123,4 +131,5 @@
         }
     }
 </script>
+
 </html>
