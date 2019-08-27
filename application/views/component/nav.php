@@ -21,19 +21,19 @@
                                 <div class="navbar-end">
                                     <!-- Menu item -->
                                     <div class="navbar-item is-nav-link">
-                                        <a class="is-centered-responsive" href="#about">Tentang</a>
+                                        <a class="is-centered-responsive is-semibold" href="#about">Tentang</a>
                                     </div>
                                     <!-- Menu item -->
                                     <div class="navbar-item is-nav-link">
-                                        <a class="is-centered-responsive" href="#reward">Lomba</a>
+                                        <a class="is-centered-responsive is-semibold"" href="#reward">Lomba</a>
                                     </div>
                                     <!-- Menu item -->
                                     <div class="navbar-item is-nav-link">
-                                        <a class="is-centered-responsive" href="#timeline">Timeline</a>
+                                        <a class="is-centered-responsive is-semibold"" href="#timeline">Timeline</a>
                                     </div>
                                     <!-- Menu item -->
                                     <div class="navbar-item is-nav-link">
-                                        <a class="is-centered-responsive" href="#" target="_blank">
+                                        <a class="is-centered-responsive is-semibold"" href="#" target="_blank">
                                         <i class="fab fa-whatsapp"></i>
                                             WhatsApp
                                         </a>

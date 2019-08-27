@@ -245,14 +245,14 @@
     <!-- /ICO section -->
 
     <!-- Roadmap section -->
-    <section class="section is-medium is-dark" id="timeline">
+    <section class="section is-medium is-light" id="timeline">
         <!-- Container -->
         <div class="container">
             <!-- Divider -->
             <div class="divider is-centered"></div>
             <!-- Title & subtitle -->
-            <h2 class="title is-light is-semibold has-text-centered is-spaced">TIMELINE IITF 2019</h2>
-            <h4 class="subtitle is-6 is-light has-text-centered is-compact">Seluruh rangkaian kegiatan akan diadakan pada bulan september dan oktober.</h4>
+            <h2 class="title is-dark is-semibold has-text-centered is-spaced">TIMELINE IITF 2019</h2>
+            <h4 class="subtitle is-6 is-dark has-text-centered is-compact">Seluruh rangkaian kegiatan akan diadakan pada bulan september dan oktober.</h4>
 
             <!-- Content wrapper -->
             <div class="content-wrapper">
@@ -448,146 +448,145 @@
 
         </div>
         <!-- /Content Media Partner -->
-        <!-- Spaced divider -->
-        <div class="divider is-centered is-spacer"></div>
-        <!-- Title & subtitle -->
-        <h2 class="title is-light is-semibold has-text-centered is-spaced">FAQ</h2>
-        <h4 class="subtitle is-6 is-light has-text-centered is-compact">Beberapa pertanyaan yang mungkin mau kamu tanyakan.</h4>
+        </div>
+    </section>
+<!-- /Company section -->
+<section class="section is-medium ">
+    <!-- Spaced divider -->
+    <div class="divider is-centered is-spacer"></div>
+    <!-- Title & subtitle -->
+    <h2 class="title is-dark is-semibold has-text-centered is-spaced">FAQ</h2>
+    <h4 class="subtitle is-6 is-dark has-text-centered is-compact">Beberapa pertanyaan yang mungkin mau kamu tanyakan.</h4>
 
-        <!-- Content FAQ -->
-        <div class="content-wrapper is-large">
-            <div class="columns">
-                <div class="column is-5 is-offset-1">
+    <!-- Content FAQ -->
+    <div class="content-wrapper is-large">
+        <div class="columns">
+            <div class="column is-5 is-offset-1">
 
-                    <!-- Accordion -->
-                    <div class="accordion">
-                        <!-- Option -->
-                        <div class="accordion-option">
-                            <input type="checkbox" id="toggle1" class="accordion-toggle" />
-                            <label class="accordion-title" for="toggle1">
-                                Bagaimana mendaftar iitf ?
-                            </label>
-                            <div class="accordion-content">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
-                            </div>
-                        </div>
-
-                        <!-- Option -->
-                        <div class="accordion-option">
-                            <input type="checkbox" id="toggle2" class="accordion-toggle" />
-                            <label class="accordion-title" for="toggle2">
-                                Saya tidak punya tim apakah boleh ikut kategori mobile ?
-                            </label>
-                            <div class="accordion-content">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
-                            </div>
-                        </div>
-
-                        <!-- Option -->
-                        <div class="accordion-option">
-                            <input type="checkbox" id="toggle3" class="accordion-toggle" />
-                            <label class="accordion-title" for="toggle3">
-                                Batas Maksimal pedaftaran kapan ?
-                            </label>
-                            <div class="accordion-content">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
-                            </div>
-                        </div>
-
-                        <!-- Option -->
-                        <div class="accordion-option">
-                            <input type="checkbox" id="toggle4" class="accordion-toggle" />
-                            <label class="accordion-title" for="toggle4">
-                                Mau daftar tapi bingung caranya ?
-                            </label>
-                            <div class="accordion-content">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
-                            </div>
-                        </div>
-
-                        <!-- Option -->
-                        <div class="accordion-option">
-                            <input type="checkbox" id="toggle5" class="accordion-toggle" />
-                            <label class="accordion-title" for="toggle5">
-                                Tim saya berbeda sekolah/instansi apakah boleh ?
-                            </label>
-                            <div class="accordion-content">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
-                            </div>
+                <!-- Accordion -->
+                <div class="accordion">
+                    <!-- Option -->
+                    <div class="accordion-option">
+                        <input type="checkbox" id="toggle1" class="accordion-toggle" />
+                        <label class="accordion-title" for="toggle1">
+                            Bagaimana mendaftar iitf ?
+                        </label>
+                        <div class="accordion-content">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
                         </div>
                     </div>
-                    <!-- /Accordion -->
-                </div>
 
-
-                <div class="column is-5">
-
-                    <!-- Accordion -->
-                    <div class="accordion">
-                        <!-- Option -->
-                        <div class="accordion-option">
-                            <input type="checkbox" id="toggle6" class="accordion-toggle" />
-                            <label class="accordion-title" for="toggle6">
-                                Batas akhir pendaftaran ?
-                            </label>
-                            <div class="accordion-content">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
-                            </div>
-                        </div>
-
-                        <!-- Option -->
-                        <div class="accordion-option">
-                            <input type="checkbox" id="toggle7" class="accordion-toggle" />
-                            <label class="accordion-title" for="toggle7">
-                                Apakah boleh ngutang ?
-                            </label>
-                            <div class="accordion-content">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
-                            </div>
-                        </div>
-
-                        <!-- Option -->
-                        <div class="accordion-option">
-                            <input type="checkbox" id="toggle8" class="accordion-toggle" />
-                            <label class="accordion-title" for="toggle8">
-                                Satu tim maksimal berapa orang ?
-                            </label>
-                            <div class="accordion-content">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
-                            </div>
-                        </div>
-
-                        <!-- Option -->
-                        <div class="accordion-option">
-                            <input type="checkbox" id="toggle9" class="accordion-toggle" />
-                            <label class="accordion-title" for="toggle9">
-                                Saya dapet apa aja kalo ikut ?
-                            </label>
-                            <div class="accordion-content">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
-                            </div>
-                        </div>
-
-                        <!-- Option -->
-                        <div class="accordion-option">
-                            <input type="checkbox" id="toggle10" class="accordion-toggle" />
-                            <label class="accordion-title" for="toggle10">
-                                Berapa hadiahnya ?
-                            </label>
-                            <div class="accordion-content">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
-                            </div>
+                    <!-- Option -->
+                    <div class="accordion-option">
+                        <input type="checkbox" id="toggle2" class="accordion-toggle" />
+                        <label class="accordion-title" for="toggle2">
+                            Saya tidak punya tim apakah boleh ikut kategori mobile ?
+                        </label>
+                        <div class="accordion-content">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
                         </div>
                     </div>
-                    <!-- /Accordion -->
+
+                    <!-- Option -->
+                    <div class="accordion-option">
+                        <input type="checkbox" id="toggle3" class="accordion-toggle" />
+                        <label class="accordion-title" for="toggle3">
+                            Batas Maksimal pedaftaran kapan ?
+                        </label>
+                        <div class="accordion-content">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                        </div>
+                    </div>
+
+                    <!-- Option -->
+                    <div class="accordion-option">
+                        <input type="checkbox" id="toggle4" class="accordion-toggle" />
+                        <label class="accordion-title" for="toggle4">
+                            Mau daftar tapi bingung caranya ?
+                        </label>
+                        <div class="accordion-content">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                        </div>
+                    </div>
+
+                    <!-- Option -->
+                    <div class="accordion-option">
+                        <input type="checkbox" id="toggle5" class="accordion-toggle" />
+                        <label class="accordion-title" for="toggle5">
+                            Tim saya berbeda sekolah/instansi apakah boleh ?
+                        </label>
+                        <div class="accordion-content">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                        </div>
+                    </div>
                 </div>
+                <!-- /Accordion -->
+            </div>
+
+
+            <div class="column is-5">
+
+                <!-- Accordion -->
+                <div class="accordion">
+                    <!-- Option -->
+                    <div class="accordion-option">
+                        <input type="checkbox" id="toggle6" class="accordion-toggle" />
+                        <label class="accordion-title" for="toggle6">
+                            Batas akhir pendaftaran ?
+                        </label>
+                        <div class="accordion-content">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                        </div>
+                    </div>
+
+                    <!-- Option -->
+                    <div class="accordion-option">
+                        <input type="checkbox" id="toggle7" class="accordion-toggle" />
+                        <label class="accordion-title" for="toggle7">
+                            Apakah boleh ngutang ?
+                        </label>
+                        <div class="accordion-content">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                        </div>
+                    </div>
+
+                    <!-- Option -->
+                    <div class="accordion-option">
+                        <input type="checkbox" id="toggle8" class="accordion-toggle" />
+                        <label class="accordion-title" for="toggle8">
+                            Satu tim maksimal berapa orang ?
+                        </label>
+                        <div class="accordion-content">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                        </div>
+                    </div>
+
+                    <!-- Option -->
+                    <div class="accordion-option">
+                        <input type="checkbox" id="toggle9" class="accordion-toggle" />
+                        <label class="accordion-title" for="toggle9">
+                            Saya dapet apa aja kalo ikut ?
+                        </label>
+                        <div class="accordion-content">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                        </div>
+                    </div>
+
+                    <!-- Option -->
+                    <div class="accordion-option">
+                        <input type="checkbox" id="toggle10" class="accordion-toggle" />
+                        <label class="accordion-title" for="toggle10">
+                            Berapa hadiahnya ?
+                        </label>
+                        <div class="accordion-content">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Accordion -->
             </div>
         </div>
-        <!-- /Content FAQ -->
-
-</div>
+    </div>
+    <!-- /Content FAQ -->
 </section>
-<!-- /Company section -->
-
-
 </div>

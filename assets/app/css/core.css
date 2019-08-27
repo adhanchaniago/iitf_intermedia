@@ -1771,19 +1771,24 @@ ul#countdown li .label{
     z-index:1;
     width:100%;
     left:0;
-    top:0;
+    top:20px;
     max-width:700px;
     margin:0 auto;
     -webkit-transform:translateX(-100%);
     transform:translateX(-100%);
     padding:40px;
-    background:rgba(39,0,104,0.4);
+    background:#17141d;
     border-radius:4px;
-    color:#fff;opacity:0;
+    color:#fff;
+    opacity:0;
     -webkit-animation-duration:0.4s;
     animation-duration:0.4s;
     -webkit-animation-timing-function:ease-in-out;
-    animation-timing-function:ease-in-out
+    animation-timing-function:ease-in-out;
+
+    -webkit-box-shadow: -5px 5px 29px -1px rgba(184,184,184,1);
+    -moz-box-shadow: -5px 5px 29px -1px rgba(184,184,184,1);
+    box-shadow: -5px 5px 29px -1px rgba(184,184,184,1);
 }
 .events-content li.selected{
     position:relative;z-index:2;
@@ -1834,7 +1839,7 @@ ul#countdown li .label{
 }
 .events-content li p{
     font-size:.9rem;
-    color:rgba(94,147,255,0.9)
+    color:#fff;
 }
 .timeline-navigation a{
     position:absolute;
@@ -2041,9 +2046,14 @@ ul#countdown li .label{
 .accordion .accordion-option{
     position:relative;
     margin-bottom:1em;
-    background:rgba(17,149,247,0.08);
-    border:1px solid rgba(0,83,251,0.5);
-    box-shadow:0 2px 3px 0 rgba(0,0,0,0.5),0 0 25px 0 rgba(18,60,255,0.16)
+    background:#fff;
+    border-radius: 6px;
+    /* border:1px solid rgba(0,83,251,0.5); */
+    /* box-shadow:0 2px 3px 0 rgba(0,0,0,0.5),0 0 25px 0 rgba(18,60,255,0.16) */
+
+    -webkit-box-shadow: -5px 5px 29px -1px rgba(184,184,184,1);
+    -moz-box-shadow: -5px 5px 29px -1px rgba(184,184,184,1);
+    box-shadow: -5px 5px 29px -1px rgba(184,184,184,1);
 }
 .accordion .accordion-option .accordion-title,.accordion .accordion-option .accordion-content{
     -webkit-backface-visibility:hidden;
@@ -2055,7 +2065,7 @@ ul#countdown li .label{
 .accordion .accordion-option .accordion-title{
     padding:1em;
     display:block;
-    color:#fff;
+    /* color:rgb(14, 13, 13); */
     font-family:'Cabin', sans-serif;
     font-weight:500;font-size:.9rem;
     cursor:pointer
@@ -2082,7 +2092,7 @@ ul#countdown li .label{
     padding:0.5em 1em 1em;
     font-size:0.9em;
     line-height:1.5;
-    color:rgba(94,147,255,0.9)
+    /* color:rgba(94,147,255,0.9) */
 }
 .accordion .accordion-option .accordion-toggle:checked+.accordion-title+.accordion-content{
     max-height:500px
