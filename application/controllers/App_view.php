@@ -55,7 +55,6 @@ class App_view extends CI_Controller{
         $this->load->view('component/ground');
     }
 
-<<<<<<< HEAD
     public function detailLomba(){
         $judul = $this->input->get('lomba');
 
@@ -75,8 +74,6 @@ class App_view extends CI_Controller{
         $this->load->view('src/iitf_detail_lomba');
         $this->load->view('component/ground');
     }
-=======
->>>>>>> parent of 419479d... tambahan front end
     public function loginProcess()
     {
         $user = $this->input->post('e');
@@ -314,33 +311,12 @@ class App_view extends CI_Controller{
         $payload['link'] = ($this->session->userdata('email') == "" ? base_url('login') : base_url('user'));
         $payload['email'] = ($this->session->userdata('email') == "" ? "" : $this->session->userdata('email'));
         $payload['page'] = "steps";
-<<<<<<< Updated upstream
         $payload['nama'] = $koor->nama;
         $payload['nohp'] = $koor->no_hp;
         $payload['inst'] = $koor->institusi;
-=======
-<<<<<<< HEAD
-        $payload['nama'] = 'trian';//$koor->nama;
-        $payload['nohp'] = '5467';//$koor->no_hp;
-        $payload['inst'] = 'amikom';//$koor->institusi;
->>>>>>> Stashed changes
-        
         $payload['step'] = $userdata->step_selesai;
 
-<<<<<<< Updated upstream
         if($payload['step'] == 0){
-=======
-=======
-        $payload['nama'] = $koor->nama;
-        $payload['nohp'] = $koor->no_hp;
-        $payload['inst'] = $koor->institusi;
-        $this->load->view('component/header',$payload);
-        $this->load->view('pages/user/user_step');
-        $this->load->view('component/ground');
-        $payload['step'] = $userdata->step_selesai;
->>>>>>> parent of 419479d... tambahan front end
-        if($payload['step'] == 1){
->>>>>>> Stashed changes
             // step koor
             $this->load->view('component/header',$payload);
             $this->load->view('pages/user/user_step_koor');
