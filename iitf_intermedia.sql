@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 28 Agu 2019 pada 13.28
+-- Waktu pembuatan: 28 Agu 2019 pada 22.05
 -- Versi server: 10.3.16-MariaDB
 -- Versi PHP: 7.3.7
 
@@ -21,6 +21,22 @@ SET time_zone = "+00:00";
 --
 -- Database: `iitf_intermedia`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in struktur untuk tampilan `listlomba`
+-- (Lihat di bawah untuk tampilan aktual)
+--
+DROP VIEW IF EXISTS `listlomba`;
+CREATE TABLE `listlomba` (
+`id` varchar(20)
+,`namalomba` varchar(50)
+,`kategori` varchar(20)
+,`deskripsi` text
+,`tema` varchar(50)
+,`harga` float
+);
 
 -- --------------------------------------------------------
 
@@ -76,7 +92,9 @@ CREATE TABLE `tb_juara` (
 
 INSERT INTO `tb_juara` (`id_lomba`, `nama`, `nominal`) VALUES
 ('L-19081954', 'Juara 1', 1500000),
-('L-19081954', 'Juara 2', 750000);
+('L-19081954', 'Juara 2', 750000),
+('L-20194859', 'Juara 1', 5000000),
+('L-20194859', 'Juara 2', 2000000);
 
 -- --------------------------------------------------------
 
@@ -147,7 +165,8 @@ CREATE TABLE `tb_lomba` (
 --
 
 INSERT INTO `tb_lomba` (`id`, `id_kategori`, `nama`, `deskripsi`, `guide_book`, `harga`, `tema`) VALUES
-('L-19081954', 1, 'Mobile application', 'loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet ', 'Mobile_applicationIITF2019.pdf', 100000, 'Mobile Application');
+('L-19081954', 1, 'Mobile application', 'loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet ', 'Mobile_applicationIITF2019.pdf', 100000, 'Mobile Application'),
+('L-20194859', 3, 'Poster', 'lalalala', 'ArrayIITF2019.pdf', 200000, 'Poster');
 
 -- --------------------------------------------------------
 
@@ -211,9 +230,18 @@ CREATE TABLE `tb_user` (
 --
 
 INSERT INTO `tb_user` (`id`, `email`, `password`, `tanggal_reg`, `step_selesai`, `code`, `status`) VALUES
-('U-20190824173049', 'dwichan@outlook.com', '$2a$08$OZM8jYmdROWfmiHcy1myWuJPmMmeucN7cNHtkFynGdUT0QmY2BexW', '2019-08-24', 0, '', 'true'),
+('U-20190824173049', 'dwichan@outlook.com', '$2a$08$OZM8jYmdROWfmiHcy1myWuJPmMmeucN7cNHtkFynGdUT0QmY2BexW', '2019-08-24', 4, '', 'true'),
 ('U-20190826081108', 'zaenur.rochman98@outlook.com', '$2a$08$Ci8hiMZYr6pxen4Apq9C9utuBk4z2CUkVnwiGR0I7uL9L7P7N/s5q', '2019-08-26', 0, 'ur7gtlPXVLvh', 'true'),
 ('U-20190826093701', 'zaenur.rochman98@gmail.com', '$2a$08$wpx962qPEinrcR.B.DRVxOLrGTIf.Y8SED3ZzIIoU5rxSm8VV9/2y', '2019-08-26', 0, '4kKif8quaAQp', 'true');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur untuk view `listlomba`
+--
+DROP TABLE IF EXISTS `listlomba`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `listlomba`  AS  select `a`.`id` AS `id`,`a`.`nama` AS `namalomba`,`b`.`nama` AS `kategori`,`a`.`deskripsi` AS `deskripsi`,`a`.`tema` AS `tema`,`a`.`harga` AS `harga` from (`tb_lomba` `a` join `tb_kategori` `b` on(`a`.`id_kategori` = `b`.`id`)) ;
 
 --
 -- Indexes for dumped tables
