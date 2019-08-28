@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: 26 Agu 2019 pada 09.41
--- Versi Server: 10.1.25-MariaDB
--- PHP Version: 7.1.7
+-- Host: localhost
+-- Waktu pembuatan: 28 Agu 2019 pada 13.28
+-- Versi server: 10.3.16-MariaDB
+-- Versi PHP: 7.3.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -28,6 +28,7 @@ SET time_zone = "+00:00";
 -- Struktur dari tabel `tb_admin`
 --
 
+DROP TABLE IF EXISTS `tb_admin`;
 CREATE TABLE `tb_admin` (
   `id` varchar(20) NOT NULL,
   `email` varchar(150) NOT NULL,
@@ -47,6 +48,7 @@ INSERT INTO `tb_admin` (`id`, `email`, `password`) VALUES
 -- Struktur dari tabel `tb_anggota`
 --
 
+DROP TABLE IF EXISTS `tb_anggota`;
 CREATE TABLE `tb_anggota` (
   `id` int(11) NOT NULL,
   `id_pendaftaran` varchar(20) NOT NULL,
@@ -61,6 +63,7 @@ CREATE TABLE `tb_anggota` (
 -- Struktur dari tabel `tb_juara`
 --
 
+DROP TABLE IF EXISTS `tb_juara`;
 CREATE TABLE `tb_juara` (
   `id_lomba` varchar(20) NOT NULL,
   `nama` varchar(30) NOT NULL,
@@ -81,6 +84,7 @@ INSERT INTO `tb_juara` (`id_lomba`, `nama`, `nominal`) VALUES
 -- Struktur dari tabel `tb_kategori`
 --
 
+DROP TABLE IF EXISTS `tb_kategori`;
 CREATE TABLE `tb_kategori` (
   `id` int(11) NOT NULL,
   `nama` varchar(20) NOT NULL,
@@ -101,6 +105,7 @@ INSERT INTO `tb_kategori` (`id`, `nama`, `deskripsi`) VALUES
 -- Struktur dari tabel `tb_koor`
 --
 
+DROP TABLE IF EXISTS `tb_koor`;
 CREATE TABLE `tb_koor` (
   `id` varchar(20) NOT NULL,
   `id_user` varchar(20) NOT NULL,
@@ -116,7 +121,7 @@ CREATE TABLE `tb_koor` (
 --
 
 INSERT INTO `tb_koor` (`id`, `id_user`, `nama`, `email`, `no_hp`, `institusi`, `lampiran_identitas`) VALUES
-('K-20190824173049', 'U-20190824173049', 'Dwi Candra Permana', 'dwichan@outlook.com', '', '', ''),
+('K-20190824173049', 'U-20190824173049', 'Dwi Candra Permana', 'dwichan@outlook.com', '0123', 'aaa', ''),
 ('K-20190826081108', 'U-20190826081108', 'zaenur', 'zaenur.rochman98@outlook.com', '', '', ''),
 ('K-20190826093701', 'U-20190826093701', 'zaenur', 'zaenur.rochman98@gmail.com', '', '', '');
 
@@ -126,21 +131,23 @@ INSERT INTO `tb_koor` (`id`, `id_user`, `nama`, `email`, `no_hp`, `institusi`, `
 -- Struktur dari tabel `tb_lomba`
 --
 
+DROP TABLE IF EXISTS `tb_lomba`;
 CREATE TABLE `tb_lomba` (
   `id` varchar(20) NOT NULL,
   `id_kategori` int(11) NOT NULL,
   `nama` varchar(50) NOT NULL,
   `deskripsi` text NOT NULL,
   `guide_book` varchar(50) NOT NULL,
-  `harga` float NOT NULL
+  `harga` float NOT NULL,
+  `tema` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `tb_lomba`
 --
 
-INSERT INTO `tb_lomba` (`id`, `id_kategori`, `nama`, `deskripsi`, `guide_book`, `harga`) VALUES
-('L-19081954', 1, 'Mobile application', 'loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet ', 'Mobile_applicationIITF2019.pdf', 100000);
+INSERT INTO `tb_lomba` (`id`, `id_kategori`, `nama`, `deskripsi`, `guide_book`, `harga`, `tema`) VALUES
+('L-19081954', 1, 'Mobile application', 'loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet ', 'Mobile_applicationIITF2019.pdf', 100000, 'Mobile Application');
 
 -- --------------------------------------------------------
 
@@ -148,6 +155,7 @@ INSERT INTO `tb_lomba` (`id`, `id_kategori`, `nama`, `deskripsi`, `guide_book`, 
 -- Struktur dari tabel `tb_pendaftaran`
 --
 
+DROP TABLE IF EXISTS `tb_pendaftaran`;
 CREATE TABLE `tb_pendaftaran` (
   `id` varchar(20) NOT NULL,
   `id_koor` varchar(20) NOT NULL,
@@ -166,6 +174,7 @@ CREATE TABLE `tb_pendaftaran` (
 -- Struktur dari tabel `tb_pengumuman`
 --
 
+DROP TABLE IF EXISTS `tb_pengumuman`;
 CREATE TABLE `tb_pengumuman` (
   `id` int(11) NOT NULL,
   `judul` varchar(100) NOT NULL,
@@ -186,6 +195,7 @@ INSERT INTO `tb_pengumuman` (`id`, `judul`, `deskripsi`, `tanggal`) VALUES
 -- Struktur dari tabel `tb_user`
 --
 
+DROP TABLE IF EXISTS `tb_user`;
 CREATE TABLE `tb_user` (
   `id` varchar(20) NOT NULL,
   `email` varchar(150) NOT NULL,
@@ -201,7 +211,7 @@ CREATE TABLE `tb_user` (
 --
 
 INSERT INTO `tb_user` (`id`, `email`, `password`, `tanggal_reg`, `step_selesai`, `code`, `status`) VALUES
-('U-20190824173049', 'dwichan@outlook.com', '$2a$08$OZM8jYmdROWfmiHcy1myWuJPmMmeucN7cNHtkFynGdUT0QmY2BexW', '2019-08-24', 0, '', ''),
+('U-20190824173049', 'dwichan@outlook.com', '$2a$08$OZM8jYmdROWfmiHcy1myWuJPmMmeucN7cNHtkFynGdUT0QmY2BexW', '2019-08-24', 0, '', 'true'),
 ('U-20190826081108', 'zaenur.rochman98@outlook.com', '$2a$08$Ci8hiMZYr6pxen4Apq9C9utuBk4z2CUkVnwiGR0I7uL9L7P7N/s5q', '2019-08-26', 0, 'ur7gtlPXVLvh', 'true'),
 ('U-20190826093701', 'zaenur.rochman98@gmail.com', '$2a$08$wpx962qPEinrcR.B.DRVxOLrGTIf.Y8SED3ZzIIoU5rxSm8VV9/2y', '2019-08-26', 0, '4kKif8quaAQp', 'true');
 
@@ -210,33 +220,33 @@ INSERT INTO `tb_user` (`id`, `email`, `password`, `tanggal_reg`, `step_selesai`,
 --
 
 --
--- Indexes for table `tb_admin`
+-- Indeks untuk tabel `tb_admin`
 --
 ALTER TABLE `tb_admin`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- Indexes for table `tb_anggota`
+-- Indeks untuk tabel `tb_anggota`
 --
 ALTER TABLE `tb_anggota`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_anggota_daftar` (`id_pendaftaran`);
 
 --
--- Indexes for table `tb_juara`
+-- Indeks untuk tabel `tb_juara`
 --
 ALTER TABLE `tb_juara`
   ADD KEY `fk_juara_lomba` (`id_lomba`);
 
 --
--- Indexes for table `tb_kategori`
+-- Indeks untuk tabel `tb_kategori`
 --
 ALTER TABLE `tb_kategori`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tb_koor`
+-- Indeks untuk tabel `tb_koor`
 --
 ALTER TABLE `tb_koor`
   ADD PRIMARY KEY (`id`),
@@ -244,14 +254,14 @@ ALTER TABLE `tb_koor`
   ADD KEY `fk_user_koor` (`id_user`);
 
 --
--- Indexes for table `tb_lomba`
+-- Indeks untuk tabel `tb_lomba`
 --
 ALTER TABLE `tb_lomba`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_lomba_kategori` (`id_kategori`);
 
 --
--- Indexes for table `tb_pendaftaran`
+-- Indeks untuk tabel `tb_pendaftaran`
 --
 ALTER TABLE `tb_pendaftaran`
   ADD PRIMARY KEY (`id`),
@@ -259,32 +269,34 @@ ALTER TABLE `tb_pendaftaran`
   ADD KEY `fk_pendaftaran_koor` (`id_koor`);
 
 --
--- Indexes for table `tb_pengumuman`
+-- Indeks untuk tabel `tb_pengumuman`
 --
 ALTER TABLE `tb_pengumuman`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tb_user`
+-- Indeks untuk tabel `tb_user`
 --
 ALTER TABLE `tb_user`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `tb_kategori`
+-- AUTO_INCREMENT untuk tabel `tb_kategori`
 --
 ALTER TABLE `tb_kategori`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
--- AUTO_INCREMENT for table `tb_pengumuman`
+-- AUTO_INCREMENT untuk tabel `tb_pengumuman`
 --
 ALTER TABLE `tb_pengumuman`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
