@@ -404,33 +404,69 @@ class App_view extends CI_Controller{
         $payload['inst'] = $koor->institusi;
         $payload['step'] = $userdata->step_selesai;
 
-        if($payload['step'] == 0){
-            // step koor
-            $this->load->view('component/header',$payload);
-            $this->load->view('pages/user/user_step_koor');
-            $this->load->view('component/ground');
-        }else if($payload['step'] == 1){
-            //step 2
-            $this->load->view('component/header',$payload);
-            $this->load->view('pages/user/user_step_pilih_lomba');
-            $this->load->view('component/ground');
-        }else if($payload['step'] == 2){
-            //biodata team
-            $this->load->view('component/header',$payload);
-            $this->load->view('pages/user/user_step_team');
-            $this->load->view('component/ground');
-        }else if($payload['step'] == 3){
-            //pembayaran
-            $this->load->view('component/header',$payload);
-            $this->load->view('pages/user/user_step_pembayaran');
-            $this->load->view('component/ground');
-        }else if($payload['step'] == 4){
-            //submisi file
-            $this->load->view('component/header',$payload);
-            $this->load->view('pages/user/user_step_submission');
-            $this->load->view('component/ground');
-        }else{
-            //undefined
+        @$loadstep = $this->input->get('step');
+        if (isset($loadstep)) {
+            if ($loadstep <= $payload['step']) {
+                switch ($this->input->get('step')) {
+                    case 0:
+                        $this->load->view('component/header',$payload);
+                        $this->load->view('pages/user/user_step_koor');
+                        $this->load->view('component/ground');
+                        break;
+                    case 1:
+                        $this->load->view('component/header',$payload);
+                        $this->load->view('pages/user/user_step_pilih_lomba');
+                        $this->load->view('component/ground');
+                        break;
+                    case 2:
+                        $this->load->view('component/header',$payload);
+                        $this->load->view('pages/user/user_step_team');
+                        $this->load->view('component/ground');
+                        break;
+                    case 3:
+                        $this->load->view('component/header',$payload);
+                        $this->load->view('pages/user/user_step_pembayaran');
+                        $this->load->view('component/ground');
+                        break;
+                    case 4:
+                        $this->load->view('component/header',$payload);
+                        $this->load->view('pages/user/user_step_submission');
+                        $this->load->view('component/ground');
+                        break;
+                }
+            } else {
+                redirect(base_url('user'),'refresh');
+            }
+        } else {
+            if($payload['step'] == 0){
+                // step koor
+                $this->load->view('component/header',$payload);
+                $this->load->view('pages/user/user_step_koor');
+                $this->load->view('component/ground');
+            }else if($payload['step'] == 1){
+                //step 2
+    
+                $this->load->view('component/header',$payload);
+                $this->load->view('pages/user/user_step_pilih_lomba');
+                $this->load->view('component/ground');
+            }else if($payload['step'] == 2){
+                //biodata team
+                $this->load->view('component/header',$payload);
+                $this->load->view('pages/user/user_step_team');
+                $this->load->view('component/ground');
+            }else if($payload['step'] == 3){
+                //pembayaran
+                $this->load->view('component/header',$payload);
+                $this->load->view('pages/user/user_step_pembayaran');
+                $this->load->view('component/ground');
+            }else if($payload['step'] == 4){
+                //submisi file
+                $this->load->view('component/header',$payload);
+                $this->load->view('pages/user/user_step_submission');
+                $this->load->view('component/ground');
+            }else{
+                //undefined
+            }
         }
     }
 
