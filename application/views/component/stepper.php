@@ -1,7 +1,7 @@
 <div class="steps column">
         <div class="step minimized">
           <div class="step-header">
-            <a href="<?= base_url('user') ?>?step=0" class="header">Step 1 : Pendaftaraan Koordinator Team</a>
+            <a href="<?= base_url('user') ?>?step=0" class="header">Step 1 : Biodata Koordinator Team</a>
             <div class="subheader">
               Melengkapi biodata diri koordinator team
             </div>

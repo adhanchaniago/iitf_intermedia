@@ -9,6 +9,8 @@
     <!-- START INPUT DATA  -->
     
     <div class="column is-6">
+    <h1 class="title">Anggota Team</h1>
+    <h2 class="subtitle">Silakan tentukan dan tambahkan anggota team Anda disini.</h2>
       <!-- Nama team -->
       <div class="container">
         <div class="columns">

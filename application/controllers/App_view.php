@@ -351,9 +351,9 @@ class App_view extends CI_Controller{
                         $('#warnings').html('Berhasil disimpan, silakan tunggu...');
                         setTimeout(function() {
                             location.reload();
-                        }, 1500);
+                        }, 2500);
                     </script>";
-                    if ($step_skrg < 1) {
+                    if ($step_lalu < 1) {
                         $this->db->update('tb_user', array(
                             'step_selesai' => 1
                         ), array(
@@ -364,7 +364,6 @@ class App_view extends CI_Controller{
                 }else{
                     echo "<script>$('#warnings').addClass('notification is-danger');</script>" . validation_errors();
                 }
-
                 break;
             case 1:
                 break;
@@ -414,6 +413,10 @@ class App_view extends CI_Controller{
                         $this->load->view('component/ground');
                         break;
                     case 1:
+                        $this->db->select('*');
+                        $this->db->from('listlomba');
+                        
+                        $payload['listlomba'] = $this->db->get()->result_array();
                         $this->load->view('component/header',$payload);
                         $this->load->view('pages/user/user_step_pilih_lomba');
                         $this->load->view('component/ground');
@@ -445,7 +448,10 @@ class App_view extends CI_Controller{
                 $this->load->view('component/ground');
             }else if($payload['step'] == 1){
                 //step 2
-    
+                $this->db->select('*');
+                $this->db->from('listlomba');
+                
+                $payload['listlomba'] = $this->db->get()->result_array();
                 $this->load->view('component/header',$payload);
                 $this->load->view('pages/user/user_step_pilih_lomba');
                 $this->load->view('component/ground');

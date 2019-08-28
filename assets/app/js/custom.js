@@ -49,23 +49,31 @@ function tryRegister(home) {
 }
 
 function trySave(home, step) {
-    var n = $('#nama').val();
-    var e = $('#email').val();
-    var h = $('#no_hp').val();
-    var i = $('#instansi').val();
+    switch (step) {
+        case 0:
+            var n = $('#nama').val();
+            var e = $('#email').val();
+            var h = $('#no_hp').val();
+            var i = $('#instansi').val();
+            $("#simpan").addClass("is-loading");
+            $.ajax({
+                url : home + "user/submit?stepnow=" + step,
+                type : "POST",
+                data : "nama=" + n + "&email=" + e + "&no_hp=" + h + "&instansi=" + i,
+                error : function(xhr, ajaxOptions, thrownError){
+                    console.log(xhr.status);
+                    console.log(xhr.responseText);
+                    console.log(thrownError);
+                },
+                success : function(data){
+                    //alert(data);
+                    $('#warnings').html(data);
+                    $("#simpan").removeClass("is-loading");
+                }
+            });
+            break;
+        case 1:
+            break;
+    }
     
-    $.ajax({
-        url : home + "user/submit?stepnow=" + step,
-        type : "POST",
-        data : "nama=" + n + "&email=" + e + "&no_hp=" + h + "&instansi=" + i,
-        error : function(xhr, ajaxOptions, thrownError){
-            console.log(xhr.status);
-            console.log(xhr.responseText);
-            console.log(thrownError);
-        },
-        success : function(data){
-            //alert(data);
-            $('#warnings').html(data);
-        }
-    });
 }

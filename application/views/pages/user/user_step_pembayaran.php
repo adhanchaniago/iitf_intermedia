@@ -6,7 +6,9 @@
       <?php $this->load->view('component/stepper')?>
     </div>
     <!-- pilih lomba -->
-    <div class="column is-6">
+    <div class="column is-8">
+    <h1 class="title">Pembayaran</h1>
+    <h2 class="subtitle">Silakan lakukan pembayaran sesuai dengan data di bawah ini, lalu unggahkan bukti transfernya disini.</h2>
       <div class="field">
         <div class="file is-centered is-boxed is-success has-name">
           <label class="file-label">

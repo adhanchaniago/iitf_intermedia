@@ -8,7 +8,9 @@
 
     
     <!-- Nama -->
-    <div class="column is-6">
+    <div class="column is-8">
+      <h1 class="title">Biodata Koordinator</h1>
+      <h2 class="subtitle">Lengkapilah kolom biodata koordinator di bawah ini.</h2>
       <!-- START INPUT DATA  -->
       <form action="javascript:trySave('<?= base_url(); ?>',0);" method="POST">
       <div id="warnings" class=""></div>
@@ -111,10 +113,7 @@
       <!--GROUP UPLOAD SURAT PERNYATAAAN-->
       <div class="field is-grouped">
         <div class="control">
-          <button class="button is-link" onclick="trySave('<?= base_url(); ?>',0);">Simpan</button>
-        </div>
-        <div class="control">
-          <button class="button is-text">Cancel</button>
+          <button id="simpan" class="button is-link" onclick="trySave('<?= base_url(); ?>',0);">Simpan</button>
         </div>
       </div>
 
