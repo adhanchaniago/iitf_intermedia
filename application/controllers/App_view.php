@@ -9,6 +9,8 @@ class App_view extends CI_Controller{
         parent::__construct();
         $this->load->model('DataModel');
         $this->load->library('bcrypt');
+        $this->load->helper(array('form', 'url'));
+        $this->load->library('form_validation');
     }
 
     //HomePage
@@ -287,6 +289,92 @@ class App_view extends CI_Controller{
         $this->load->view('component/header',$payload);
         $this->load->view('src/iitf_timeline',$payload);
         $this->load->view('component/ground');
+    }
+
+    public function email_check($str)
+    {
+        if ($str == '') {
+            $this->form_validation->set_message('email_check', 'Anda wajib mengisikan {field} Anda.');
+            return FALSE;
+        } else {
+            $this->db->select('a.email, b.email');
+            $this->db->from('tb_user a, tb_admin b');
+            $this->db->where('a.email', $str);
+            $this->db->or_where('b.email', $str);
+            
+            if ($this->db->count_all_results() == 0 || $str == $this->session->userdata('email')) return TRUE;
+            else {
+                $this->form_validation->set_message('email_check', '{field} "' . $str . '" sudah pernah didaftarkan sebelumnya.');
+                return FALSE;
+            }
+        }
+    }
+
+    public function stepSave()
+    {
+        $step_skrg = $this->input->post('stepnow');
+        $step_simpan = $this->db->get_where('tb_user', array(
+            'id' => $this->session->userdata('id')
+        ))->row();
+        $step_lalu = $step_simpan->step_selesai;
+
+        switch ($step_skrg) {
+            case 0:
+                $this->form_validation->set_rules('nama', 'Nama Lengkap', 'required');
+                $this->form_validation->set_rules('no_hp', 'Nomor Telepon/WA', 'required');
+                $this->form_validation->set_rules('email', 'E-Mail', 'valid_email|callback_email_check');
+                $this->form_validation->set_rules('instansi', 'Asal Instansi', 'required');
+
+                if($this->form_validation->run() != false){
+                    $nama = $this->input->post('nama');
+                    $email = $this->input->post('email');
+                    $nohp = $this->input->post('no_hp');
+                    $instansi = $this->input->post('instansi');
+
+                    $this->db->update('tb_user', array(
+                        'email' => $email
+                    ), array(
+                        'id' => $this->session->userdata('id')
+                    ));
+                    
+                    $this->db->update('tb_koor', array(
+                        'nama' => $nama,
+                        'email' => $email,
+                        'no_hp' => $nohp,
+                        'institusi' => $instansi
+                    ), array(
+                        'id_user' => $this->session->userdata('id')
+                    ));
+                    
+                    echo "<script>
+                        $('#warnings').addClass('notification is-primary');
+                        $('#warnings').html('Berhasil disimpan, silakan tunggu...');
+                        setTimeout(function() {
+                            location.reload();
+                        }, 1500);
+                    </script>";
+                    if ($step_skrg < 1) {
+                        $this->db->update('tb_user', array(
+                            'step_selesai' => 1
+                        ), array(
+                            'id' => $this->session->userdata('id')
+                        ));
+                        
+                    }
+                }else{
+                    echo "<script>$('#warnings').addClass('notification is-danger');</script>" . validation_errors();
+                }
+
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+        }
     }
 
     public function step(){

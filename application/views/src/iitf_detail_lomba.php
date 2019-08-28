@@ -13,7 +13,7 @@
                     <!-- Brand -->
                     <div class="navbar-brand">
                         <a href="<?= base_url() ?>" class="navbar-item">
-                            <img class="" src="<?= base_url() ?>assets/app/images/logo/logo_iitf.png" alt="">
+                            <img class="" src="<?= base_url() ?>assets/app/images/logo/logo.png" alt="">
                             <span class="brand-name">IITF 2019</span>
                         </a>
                         <!-- Responsive toggle -->
@@ -27,17 +27,21 @@
                     <div id="cloneNavbarMenu" class="navbar-menu">
                         <div class="navbar-end">
                             <!-- Menu item -->
+                            <div class="navbar-item is-nav-link">
+                                <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>#about">Tentang</a>
+                            </div>
                             <!-- Menu item -->
                             <div class="navbar-item is-nav-link">
-                                <a class="is-centered-responsive" href="<?=base_url()?>">
-                                    <!-- <i class="fab fa-whatsapp"></i> -->
-                                    Tentang
-                                </a>
+                                <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>#reward">Lomba</a>
                             </div>
-
+                            <!-- Menu item -->
                             <div class="navbar-item is-nav-link">
-                                <a class="is-centered-responsive" href="#" target="_blank">
-                                    <i class="fab fa-whatsapp"></i>
+                                <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>#timeline">Timeline</a>
+                            </div>
+                            <!-- Menu item -->
+                            <div class="navbar-item is-nav-link">
+                                <a class="is-centered-responsive is-semibold" onclick="showWhatsApp();">
+                                <i class="fab fa-whatsapp"></i>
                                     Hubungi Kami
                                 </a>
                             </div>
@@ -65,7 +69,7 @@
                     <!-- Brand -->
                     <div class="navbar-brand">
                         <a href="<?= base_url() ?>" class="navbar-item">
-                            <img class="" src="<?= base_url() ?>assets/app/images/logo/logo_iitf.png" alt="">
+                            <img class="" src="<?= base_url() ?>assets/app/images/logo/logo.png" alt="">
                             <span class="brand-name" style="color:white">IITF 2019</span>
                         </a>
                         <!-- Responsive toggle -->
@@ -79,16 +83,21 @@
                     <div id="navbarMenu" class="navbar-menu light-menu">
                         <div class="navbar-end">
                             <!-- Menu item -->
+                            <div class="navbar-item is-nav-link">
+                                <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>#about">Tentang</a>
+                            </div>
                             <!-- Menu item -->
                             <div class="navbar-item is-nav-link">
-                                <a class="is-centered-responsive" href="<?=base_url()?>">
-                                    <!-- <i class="fab fa-whatsapp"></i> -->
-                                    Tentang
-                                </a>
+                                <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>#reward">Lomba</a>
                             </div>
+                            <!-- Menu item -->
                             <div class="navbar-item is-nav-link">
-                                <a class="is-centered-responsive" href="#" target="_blank">
-                                    <i class="fab fa-whatsapp"></i>
+                                <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>#timeline">Timeline</a>
+                            </div>
+                            <!-- Menu item -->
+                            <div class="navbar-item is-nav-link">
+                                <a class="is-centered-responsive is-semibold" onclick="showWhatsApp();">
+                                <i class="fab fa-whatsapp"></i>
                                     Hubungi Kami
                                 </a>
                             </div>

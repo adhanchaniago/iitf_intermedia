@@ -18,11 +18,11 @@
             <div class="container">
                 <div class="column is-6 is-offset-3">
                     <div class="roadmap-image">
-                        <img style="width:80%;  margin-top: 50px;" src="<?= base_url() ?>assets/app/images/logo/iitf_new.png" alt="banner">
+                        <img style="width:80%;  margin-top: 50px;" src="<?= base_url() ?>assets/app/images/logo/banner.png" alt="banner">
                     </div>
                     <!-- <h1 class="title is-2  is-semibold is-spaced main-title">IITF 2019</h1> -->
                     <h2 class="subtitle is-4  is-thin" style="margin-top: 30px;font-style: oblique">
-                         "Jadikan Teknologi Sebagai Ruang Kreatifitas"
+                         "Jadikan Teknologi Sebagai Ruang Kreativitas"
                     </h2>
                     <!-- Play video button -->
                     <!-- <div class="cta-wrapper has-text-centered">
