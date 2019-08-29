@@ -73,7 +73,7 @@ class Dropbox
             json_encode(
                 array(
                     "path"=> $foldertarget . basename($filename),
-                    "mode" => "add",
+                    "mode" => "overwrite",
                     "autorename" => true,
                     "mute" => false
                 )
@@ -122,7 +122,7 @@ class Dropbox
             json_encode(
                 array(
                     "path"=> $foldertarget . $filename_uploaded,
-                    "mode" => "add",
+                    "mode" => "overwrite",
                     "autorename" => true,
                     "mute" => false
                 )

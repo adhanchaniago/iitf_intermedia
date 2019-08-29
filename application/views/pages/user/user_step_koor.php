@@ -104,7 +104,7 @@
                 </span>
               </span>
               <span class="file-name" id="filename">
-                Pilih berkas terlebih dahulu
+                <?= $lampiran; ?>
               </span>
             </label>
           </div>

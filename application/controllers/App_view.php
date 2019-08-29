@@ -11,6 +11,9 @@ class App_view extends CI_Controller{
         $this->load->library('bcrypt');
         $this->load->helper(array('form', 'url'));
         $this->load->library('form_validation');
+        $this->load->library('upload');
+        $this->load->library('dropbox');
+        $this->load->helper("file");
     }
 
     //HomePage
@@ -403,39 +406,107 @@ class App_view extends CI_Controller{
             $nohp = $this->input->post('no_hp');
             $instansi = $this->input->post('instansi');
 
-            $this->db->update('tb_user', array(
-                'email' => $email
-            ), array(
-                'id' => $this->session->userdata('id')
-            ));
-            
-            $this->db->update('tb_koor', array(
-                'nama' => $nama,
-                'email' => $email,
-                'no_hp' => $nohp,
-                'institusi' => $instansi
-            ), array(
-                'id_user' => $this->session->userdata('id')
-            ));
-
             if (!empty($_FILES['resume']['name'])) {
+                $path = $_FILES['resume']['name'];
+                $ext = pathinfo($path, PATHINFO_EXTENSION);
+                $filename = "Foto_Koor-" . $this->session->userdata('id') . "." . $ext;
+                //echo "<script>console.log('" . $filename . "');</script>";
 
-            }
-            
-            echo "<script>
-                $('#warnings').addClass('notification is-primary');
-                $('#warnings').html('Berhasil disimpan, silakan tunggu...');
-                setTimeout(function() {
-                    location.reload();
-                }, 2500);
-            </script>";
-            if ($step_lalu < 1) {
+                $this->_uploadFile($filename);
+                if (!$this->upload->do_upload('resume')) {
+                    echo "<script>
+                            $('#warnings').addClass('notification is-primary');
+                            $('#warnings').html('Gagal mengunggah foto: " . $this->upload->display_errors() . "<br>Data tidak dapat disimpan.');
+                            setTimeout(function() {
+                                location.reload();
+                            }, 2500);
+                        </script>";
+                } else {
+                    $koorq = $this->db->get_where('tb_koor', array(
+                        'id_user' => $this->session->userdata('id')
+                    ));
+                    $koor = $koorq->row();
+                    $userfile = 'assets/dump/' . $this->session->userdata('id') . "/" . $filename;
+                    $response = json_decode($this->dropbox->uploadNewFile("/" . $koor->id . "/", $userfile));
+
+                    if ($response->http_code == 200) {
+                        // berhasil upload ke Dropbox
+                        $this->db->update('tb_user', array(
+                            'email' => $email
+                        ), array(
+                            'id' => $this->session->userdata('id')
+                        ));
+                        
+                        $this->db->update('tb_koor', array(
+                            'nama' => $nama,
+                            'email' => $email,
+                            'no_hp' => $nohp,
+                            'institusi' => $instansi,
+                            'lampiran_identitas' => $path
+                        ), array(
+                            'id_user' => $this->session->userdata('id')
+                        ));
+
+                        echo "<script>
+                                $('#warnings').addClass('notification is-primary');
+                                $('#warnings').html('Berhasil disimpan dan berhasil mengunggah foto. Silakan tunggu...');
+                                setTimeout(function() {
+                                    location.reload();
+                                }, 2500);
+                            </script>";
+                        
+                        // bebersih data
+                        //delete_files($userfile);
+                        if ($step_lalu < 1) {
+                            $this->db->update('tb_user', array(
+                                'step_selesai' => 1
+                            ), array(
+                                'id' => $this->session->userdata('id')
+                            ));
+                        }
+                        $this->load->helper("file");
+                        delete_files($path);
+                    } else {
+                        echo "<script>
+                                $('#warnings').addClass('notification is-primary');
+                                $('#warnings').html('Gagal mengunggah foto: DropboxUploadFileException(" . $response->http_code . ")<br>Data tidak dapat disimpan.');
+                                setTimeout(function() {
+                                    location.reload();
+                                }, 2500);
+                            </script>";
+                    }
+                    
+                }
+            } else {
                 $this->db->update('tb_user', array(
-                    'step_selesai' => 1
+                    'email' => $email
                 ), array(
                     'id' => $this->session->userdata('id')
                 ));
                 
+                $this->db->update('tb_koor', array(
+                    'nama' => $nama,
+                    'email' => $email,
+                    'no_hp' => $nohp,
+                    'institusi' => $instansi
+                ), array(
+                    'id_user' => $this->session->userdata('id')
+                ));
+                echo "<script>
+                        $('#warnings').addClass('notification is-primary');
+                        $('#warnings').html('Berhasil disimpan. Silakan tunggu...');
+                        setTimeout(function() {
+                            location.reload();
+                        }, 2500);
+                    </script>";
+                if ($step_lalu < 1) {
+                    $this->db->update('tb_user', array(
+                        'step_selesai' => 1
+                    ), array(
+                        'id' => $this->session->userdata('id')
+                    ));
+                    
+                }
             }
         }else{
             echo "<script>$('#warnings').addClass('notification is-danger');</script>" . validation_errors();
@@ -467,6 +538,7 @@ class App_view extends CI_Controller{
         $payload['nama'] = $koor->nama;
         $payload['nohp'] = $koor->no_hp;
         $payload['inst'] = $koor->institusi;
+        $payload['lampiran'] = ($koor->lampiran_identitas == "" ? "Pilih berkas foto terlebih dahulu" : $koor->lampiran_identitas);
         $payload['step'] = $userdata->step_selesai;
 
         @$loadstep = $this->input->get('step');
