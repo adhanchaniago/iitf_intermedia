@@ -13,7 +13,6 @@ class App_view extends CI_Controller{
         $this->load->library('form_validation');
         $this->load->library('upload');
         $this->load->library('dropbox');
-        $this->load->helper("file");
     }
 
     //HomePage
@@ -456,7 +455,8 @@ class App_view extends CI_Controller{
                             </script>";
                         
                         // bebersih data
-                        //delete_files($userfile);
+                        unlink($userfile); 
+
                         if ($step_lalu < 1) {
                             $this->db->update('tb_user', array(
                                 'step_selesai' => 1
@@ -478,34 +478,30 @@ class App_view extends CI_Controller{
                     
                 }
             } else {
-                $this->db->update('tb_user', array(
-                    'email' => $email
-                ), array(
-                    'id' => $this->session->userdata('id')
-                ));
-                
-                $this->db->update('tb_koor', array(
-                    'nama' => $nama,
-                    'email' => $email,
-                    'no_hp' => $nohp,
-                    'institusi' => $instansi
-                ), array(
-                    'id_user' => $this->session->userdata('id')
-                ));
-                echo "<script>
-                        $('#warnings').addClass('notification is-primary');
-                        $('#warnings').html('Berhasil disimpan. Silakan tunggu...');
-                        setTimeout(function() {
-                            location.reload();
-                        }, 2500);
-                    </script>";
                 if ($step_lalu < 1) {
+                    echo "<script>$('#warnings').addClass('notification is-danger');</script>Anda wajib mengunggah foto Anda.";
+                } else {
                     $this->db->update('tb_user', array(
-                        'step_selesai' => 1
+                        'email' => $email
                     ), array(
                         'id' => $this->session->userdata('id')
                     ));
                     
+                    $this->db->update('tb_koor', array(
+                        'nama' => $nama,
+                        'email' => $email,
+                        'no_hp' => $nohp,
+                        'institusi' => $instansi
+                    ), array(
+                        'id_user' => $this->session->userdata('id')
+                    ));
+                    echo "<script>
+                            $('#warnings').addClass('notification is-primary');
+                            $('#warnings').html('Berhasil disimpan. Silakan tunggu...');
+                            setTimeout(function() {
+                                location.reload();
+                            }, 2500);
+                        </script>";
                 }
             }
         }else{

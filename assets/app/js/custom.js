@@ -78,7 +78,7 @@ function trySelect(home, id, koors) {
 }
 
 function trySaveKoor(home) {
-    $("#progress").html("<progress></progress>");
+    $("#progress").html("Proses unggah data: <progress></progress><br>");
     /*var n = $('#nama').val();
     var e = $('#email').val();
     var h = $('#no_hp').val();
