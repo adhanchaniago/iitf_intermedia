@@ -12,7 +12,7 @@
       <h1 class="title">Biodata Koordinator</h1>
       <h2 class="subtitle">Lengkapilah kolom biodata koordinator di bawah ini.</h2>
       <!-- START INPUT DATA  -->
-      <form action="javascript:trySave('<?= base_url(); ?>',0);" method="POST">
+      <form id="formkoor" action="javascript:trySaveKoor('<?= base_url(); ?>');" method="POST">
       <div id="warnings" class=""></div>
       <div class="field">
         <label class="label">Nama Lengkap</label>
@@ -90,11 +90,11 @@
 
       <!-- foto koor -->
       <div class="field">
-        <label class="label">Foto Koor</label>
+        <label class="label">Foto Koor (ekstensi diterima: JPG, JPEG, PNG, SVG, BMP)</label>
         <div class="control">
           <div class="file is-info has-name">
             <label class="file-label">
-              <input class="file-input" type="file" name="resume" />
+              <input class="file-input" type="file" name="resume" id="resume" />
               <span class="file-cta">
                 <span class="file-icon">
                   <i class="fas fa-upload"></i>
@@ -103,17 +103,18 @@
                   Pilih Berkas
                 </span>
               </span>
-              <span class="file-name">
-                Screen Shot 2017-07-29 at 15.54.25.png
+              <span class="file-name" id="filename">
+                Pilih berkas terlebih dahulu
               </span>
             </label>
           </div>
         </div>
       </div>
+      <div id="progress"></div>
       <!--GROUP UPLOAD SURAT PERNYATAAAN-->
       <div class="field is-grouped">
         <div class="control">
-          <button id="simpan" class="button is-link" onclick="trySave('<?= base_url(); ?>',0);">Simpan</button>
+          <button id="simpan" class="button is-link" onclick="trySaveKoor('<?= base_url(); ?>');">Simpan</button>
         </div>
       </div>
 

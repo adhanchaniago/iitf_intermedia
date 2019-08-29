@@ -9,13 +9,17 @@
     <div class="column is-8 containerr">
     <h1 class="title">Kategori Lomba</h1>
     <h2 class="subtitle">Silakan pilih kategori lomba mana yang ingin Anda ikuti.</h2>
+    <?php if ($lombaterpilih != null) { ?>
+      <div class="notification is-link">Lomba yang Anda pilih sebelumnya: <?= $lombaterpilih; ?></div>
+    <?php } ?>
     <div id="warnings" class=""></div>
     <div class="columns">
      
          <!-- Feature -->
+         
          <?php foreach ($listlomba as $u) { ?>
             <div class="column is-4">
-                <a href="<?= base_url()?>user/pilihlomba?l=<?= $u['id'] ?>">
+                <a onclick="trySelect('<?= base_url(); ?>','<?= $u['id'] ?>','<?= $id_koor ?>');">
                     <div class="pilih">
                         <img src="<?= base_url()?>assets/app/images/logo/Mobile_App.png" alt="" data-aos="fade-up" data-aos-delay="300" data-aos-offset="200" data-aos-easing="ease-out-quart">
                         <h4 class="title is-6 is-tight "><?= $u['namalomba']; ?></h4>

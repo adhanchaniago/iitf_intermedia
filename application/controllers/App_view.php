@@ -310,69 +310,135 @@ class App_view extends CI_Controller{
         }
     }
 
-    public function stepSave()
+    public function pilihlomba()
     {
-        $step_skrg = $this->input->post('stepnow');
+        $koorq = $this->db->get_where('tb_koor', array(
+            'id_user' => $this->session->userdata('id')
+        ));
+        $koor = $koorq->row();
         $step_simpan = $this->db->get_where('tb_user', array(
             'id' => $this->session->userdata('id')
         ))->row();
         $step_lalu = $step_simpan->step_selesai;
 
-        switch ($step_skrg) {
-            case 0:
-                $this->form_validation->set_rules('nama', 'Nama Lengkap', 'required');
-                $this->form_validation->set_rules('no_hp', 'Nomor Telepon/WA', 'required');
-                $this->form_validation->set_rules('email', 'E-Mail', 'valid_email|callback_email_check');
-                $this->form_validation->set_rules('instansi', 'Asal Instansi', 'required');
+        $idlomba = $this->input->post('lomba');
 
-                if($this->form_validation->run() != false){
-                    $nama = $this->input->post('nama');
-                    $email = $this->input->post('email');
-                    $nohp = $this->input->post('no_hp');
-                    $instansi = $this->input->post('instansi');
+        $query = $this->db->query('SELECT b.id, b.id_koor, a.namalomba FROM listlomba a INNER JOIN tb_pendaftaran b ON a.id = b.id_lomba WHERE b.id_koor = "' . $koor->id . '"');
+        $getnumrow = $query->num_rows();
+        
+        if ($getnumrow != 0) {
+            $result = $query->result_array();
+            
+            $this->db->update('tb_pendaftaran', array(
+                'id_lomba' => $idlomba
+            ), array('id_koor' => $koor->id));
+            
+            echo "<script>
+                $('#warnings').addClass('notification is-primary');
+                $('#warnings').html('Berhasil menyimpan perubahan, silakan tunggu...');
+                setTimeout(function() {
+                    location.reload();
+                }, 2500);
+            </script>";
+        } else {
+            $prefix = "P-";
+            $randID = date("YmdHis");
+            $idl = $prefix . $randID;
 
-                    $this->db->update('tb_user', array(
-                        'email' => $email
-                    ), array(
-                        'id' => $this->session->userdata('id')
-                    ));
-                    
-                    $this->db->update('tb_koor', array(
-                        'nama' => $nama,
-                        'email' => $email,
-                        'no_hp' => $nohp,
-                        'institusi' => $instansi
-                    ), array(
-                        'id_user' => $this->session->userdata('id')
-                    ));
-                    
-                    echo "<script>
-                        $('#warnings').addClass('notification is-primary');
-                        $('#warnings').html('Berhasil disimpan, silakan tunggu...');
-                        setTimeout(function() {
-                            location.reload();
-                        }, 2500);
-                    </script>";
-                    if ($step_lalu < 1) {
-                        $this->db->update('tb_user', array(
-                            'step_selesai' => 1
-                        ), array(
-                            'id' => $this->session->userdata('id')
-                        ));
-                        
-                    }
-                }else{
-                    echo "<script>$('#warnings').addClass('notification is-danger');</script>" . validation_errors();
-                }
-                break;
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
+            $gets = $this->input->post('id_koor');
+
+            $this->db->insert('tb_pendaftaran', array(
+                'id' => $idl,
+                'id_koor' => $gets,
+                'id_lomba' => $idlomba,
+                'status' => 'unactive',
+                'tanggal_daftar' => date('Y-m-d')
+            ));
+
+            echo "<script>
+                $('#warnings').addClass('notification is-primary');
+                $('#warnings').html('Berhasil disimpan, silakan tunggu...');
+                setTimeout(function() {
+                    location.reload();
+                }, 2500);
+            </script>";
+        }
+        if ($step_lalu < 2) {
+            $this->db->update('tb_user', array(
+                'step_selesai' => 2
+            ), array(
+                'id' => $this->session->userdata('id')
+            ));
+            
+        }
+    }
+
+    private function _uploadFile($name)
+    {
+        if (!file_exists('assets/dump/' . $this->session->userdata('id'))) {
+            mkdir('assets/dump/' . $this->session->userdata('id'), 0777, true);
+        }
+        $config['upload_path'] = 'assets/dump/' . $this->session->userdata('id');
+        $config['allowed_types'] = 'jpg|png|jpeg|svg|bmp';
+        $config['file_name'] = $name;
+        $config['overwrite'] = true;
+        $this->upload->initialize($config);
+    }
+
+    public function saveKoor()
+    {
+        $step_simpan = $this->db->get_where('tb_user', array(
+            'id' => $this->session->userdata('id')
+        ))->row();
+        $step_lalu = $step_simpan->step_selesai;
+
+        $this->form_validation->set_rules('nama', 'Nama Lengkap', 'required');
+        $this->form_validation->set_rules('no_hp', 'Nomor Telepon/WA', 'required');
+        $this->form_validation->set_rules('email', 'E-Mail', 'valid_email|callback_email_check');
+        $this->form_validation->set_rules('instansi', 'Asal Instansi', 'required');
+
+        if($this->form_validation->run() != false){
+            $nama = $this->input->post('nama');
+            $email = $this->input->post('email');
+            $nohp = $this->input->post('no_hp');
+            $instansi = $this->input->post('instansi');
+
+            $this->db->update('tb_user', array(
+                'email' => $email
+            ), array(
+                'id' => $this->session->userdata('id')
+            ));
+            
+            $this->db->update('tb_koor', array(
+                'nama' => $nama,
+                'email' => $email,
+                'no_hp' => $nohp,
+                'institusi' => $instansi
+            ), array(
+                'id_user' => $this->session->userdata('id')
+            ));
+
+            if (!empty($_FILES['resume']['name'])) {
+
+            }
+            
+            echo "<script>
+                $('#warnings').addClass('notification is-primary');
+                $('#warnings').html('Berhasil disimpan, silakan tunggu...');
+                setTimeout(function() {
+                    location.reload();
+                }, 2500);
+            </script>";
+            if ($step_lalu < 1) {
+                $this->db->update('tb_user', array(
+                    'step_selesai' => 1
+                ), array(
+                    'id' => $this->session->userdata('id')
+                ));
+                
+            }
+        }else{
+            echo "<script>$('#warnings').addClass('notification is-danger');</script>" . validation_errors();
         }
     }
 
@@ -413,10 +479,19 @@ class App_view extends CI_Controller{
                         $this->load->view('component/ground');
                         break;
                     case 1:
+                        $payload['id_koor'] = $koor->id;
                         $this->db->select('*');
                         $this->db->from('listlomba');
-                        
-                        $payload['listlomba'] = $this->db->get()->result_array();
+                        $listlomba = $this->db->get()->result_array();
+                        $payload['listlomba'] = $listlomba;
+
+                        $query = $this->db->query('SELECT b.id_koor, a.namalomba FROM listlomba a INNER JOIN tb_pendaftaran b ON a.id = b.id_lomba WHERE b.id_koor = "' . $koor->id . '"');
+                        $getnumrow = $query->num_rows();
+                        $payload['lombaterpilih'] = FALSE;
+                        if ($getnumrow > 0) {
+                            $payload['lombaterpilih'] = $query->row()->namalomba;
+                        } 
+
                         $this->load->view('component/header',$payload);
                         $this->load->view('pages/user/user_step_pilih_lomba',$payload);
                         $this->load->view('component/ground');
@@ -448,12 +523,21 @@ class App_view extends CI_Controller{
                 $this->load->view('component/ground');
             }else if($payload['step'] == 1){
                 //step 2
+                $payload['id_koor'] = $koor->id;
                 $this->db->select('*');
                 $this->db->from('listlomba');
-                
-                $payload['listlomba'] = $this->db->get()->result_array();
+                $listlomba = $this->db->get()->result_array();
+                $payload['listlomba'] = $listlomba;
+
+                $query = $this->db->query('SELECT b.id_koor, a.namalomba FROM listlomba a INNER JOIN tb_pendaftaran b ON a.id = b.id_lomba WHERE b.id_koor = "' . $koor->id . '"');
+                $getnumrow = $query->num_rows();
+                $payload['lombaterpilih'] = FALSE;
+                if ($getnumrow > 0) {
+                    $payload['lombaterpilih'] = $query->row()->namalomba;
+                } 
+
                 $this->load->view('component/header',$payload);
-                $this->load->view('pages/user/user_step_pilih_lomba');
+                $this->load->view('pages/user/user_step_pilih_lomba',$payload);
                 $this->load->view('component/ground');
             }else if($payload['step'] == 2){
                 //biodata team
