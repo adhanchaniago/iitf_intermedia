@@ -7,7 +7,7 @@
         <meta http-equiv="x-ua-compatible" content="ie=edge">
 
         <title> IITF :: <?= $judul; ?></title>
-        <link rel="icon" type="image/png" href="<?= base_url()?>assets/app/images/logo/logo_iitf.png" />
+        <link rel="icon" type="image/png" href="<?= base_url()?>assets/app/images/logo/logo.png" />
         
         <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">

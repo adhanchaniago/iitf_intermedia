@@ -147,7 +147,8 @@
             Ikuti langkah-langkah berikut ini untuk mendaftarkan diri sebagai
             peserta
             <a href="#">#panduan pendaftaran</a>
-            <br />
+            <br /><br>
+            <p align="right">
             <button
               id="btn-mengerti"
               class="button k-button k-primary raised has-gradient slanted"
@@ -157,8 +158,7 @@
               </span>
               <span class="front-gradient"></span>
             </button>
-            <br />
-            <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+            </p>
           </div>
         </div>
       </div>

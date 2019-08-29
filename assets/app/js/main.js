@@ -228,7 +228,7 @@ $(document).ready(function() {
 						nb_sides: 4
 					},
 					image: {
-						src: "assets/app/images/particle/photoshop.svg",
+						src: "assets/app/images/particle/photoshop.png",
 						width: 1,
 						height: 1
 					}
@@ -339,7 +339,7 @@ $(document).ready(function() {
 						nb_sides: 4
 					},
 					image: {
-						src: "assets/app/images/particle/IITF_monochrome.png",
+						src: "assets/app/images/particle/iitf_monochrome.png",
 						width: 1,
 						height: 1
 					}
@@ -450,7 +450,7 @@ $(document).ready(function() {
 						nb_sides: 4
 					},
 					image: {
-						src: "assets/app/images/particle/visual-studio.svg",
+						src: "assets/app/images/particle/android.png",
 						width: 1,
 						height: 1
 					}
