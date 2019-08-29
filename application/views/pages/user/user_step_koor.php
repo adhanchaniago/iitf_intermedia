@@ -8,7 +8,7 @@
 
     
     <!-- Nama -->
-    <div class="column is-8">
+    <div class="column is-8 containerr">
       <h1 class="title">Biodata Koordinator</h1>
       <h2 class="subtitle">Lengkapilah kolom biodata koordinator di bawah ini.</h2>
       <!-- START INPUT DATA  -->

@@ -409,7 +409,7 @@ class App_view extends CI_Controller{
                 switch ($this->input->get('step')) {
                     case 0:
                         $this->load->view('component/header',$payload);
-                        $this->load->view('pages/user/user_step_koor');
+                        $this->load->view('pages/user/user_step_koor',$payload);
                         $this->load->view('component/ground');
                         break;
                     case 1:
@@ -418,22 +418,22 @@ class App_view extends CI_Controller{
                         
                         $payload['listlomba'] = $this->db->get()->result_array();
                         $this->load->view('component/header',$payload);
-                        $this->load->view('pages/user/user_step_pilih_lomba');
+                        $this->load->view('pages/user/user_step_pilih_lomba',$payload);
                         $this->load->view('component/ground');
                         break;
                     case 2:
                         $this->load->view('component/header',$payload);
-                        $this->load->view('pages/user/user_step_team');
+                        $this->load->view('pages/user/user_step_team',$payload);
                         $this->load->view('component/ground');
                         break;
                     case 3:
                         $this->load->view('component/header',$payload);
-                        $this->load->view('pages/user/user_step_pembayaran');
+                        $this->load->view('pages/user/user_step_pembayaran',$payload);
                         $this->load->view('component/ground');
                         break;
                     case 4:
                         $this->load->view('component/header',$payload);
-                        $this->load->view('pages/user/user_step_submission');
+                        $this->load->view('pages/user/user_step_submission',$payload);
                         $this->load->view('component/ground');
                         break;
                 }

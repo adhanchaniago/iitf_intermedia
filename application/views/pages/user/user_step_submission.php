@@ -6,7 +6,7 @@
       <?php $this->load->view('component/stepper')?>
     </div>
     <!-- pilih lomba -->
-    <div class="column is-6">
+    <div class="column is-6 containerr">
       <div class="field">
         <div class="file is-centered is-boxed is-success has-name">
           <label class="file-label">

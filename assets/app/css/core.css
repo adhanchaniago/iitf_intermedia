@@ -82,6 +82,36 @@
 .hadiah-box .sertif {
       font-weight: bold; 
 }
+/* 
+box step pilih lomba
+*/
+.pilih{
+    text-align:center;
+    padding-top : 10px;
+}
+.pilih:hover{
+    transform: scale(1.1);
+    transition: 0.3s; 
+    -webkit-box-shadow: 2px 2px 15px 2px rgba(199,197,199,1);
+    -moz-box-shadow: 2px 2px 15px 2px rgba(199,197,199,1);
+    box-shadow: 2px 2px 15px 2px rgba(199,197,199,1);
+}
+.pilih img{
+    display:block;
+    margin:0 auto;
+    max-height:110px;
+    max-width:90px;
+}
+.pilih h4{
+    margin-top:10px;
+    font-family:'Cabin', sans-serif
+}
+.pilih p{
+    font-family:'Open Sans', sans-serif;
+    font-size:.9rem;
+    opacity:0.8
+}
+
 
 /*! core.scss | Krypton | Kit 1 | CSS Ninja *//*! _theme-default.scss | Cryptos | Kit1 | CSS Ninja */
 
@@ -205,11 +235,11 @@ body{
 .hero .navbar .navbar-brand:hover .navbar-item{
     background:transparent !important
 }
+
 .hero .navbar .navbar-item a.button{
     font-family:'Cabin', sans-serif;
     font-weight: 300;
-    text-transform:uppercase;
-    
+    text-transform:uppercase;   
 }
 .hero .navbar .navbar-item a.button.hover{
     font-size:.75rem !important;
@@ -1194,6 +1224,7 @@ body{
 .feature{
     text-align:center
 }
+
 .feature img{
     display:block;
     margin:0 auto;

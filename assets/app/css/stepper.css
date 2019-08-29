@@ -1,6 +1,8 @@
 :root {
   --background-color: #ffffff;
   --primary-color: #e66a53;
+  --success-color: rgb(29, 175, 54);
+  --progress: rgb(235, 181, 32);
 }
 
 * {
@@ -31,7 +33,7 @@ body {
   top: 0;
   height: 24px;
   width: 1px;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgb(198, 198, 198);
   left: calc(50px / 2);
   z-index: 1;
 }
@@ -41,7 +43,40 @@ body {
   position: absolute;
   height: 13px;
   width: 13px;
-  background-color: var(--primary-color);
+  background-color: rgb(198, 198, 198);
+  /* box-shadow: 0px 0px 5px 0px var(--primary-color); */
+  border-radius: 15px;
+  left: calc(50px / 2);
+  bottom: 24px;
+  transform: translateX(-45%);
+  z-index: 2;
+}
+/* step berhasil line sebelumnya */
+.steps-success {
+  /* width: auto; */
+  /* box-shadow: 0px 10px 15px -5px rgba(0, 0, 0, 0.3); */
+  /* background-color: rgb(17, 211, 98); */
+  padding: 24px 0;
+  position: relative;
+  margin: auto;
+}
+.steps-success::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  height: 24px;
+  width: 1px;
+  background-color: var(--success-color);
+  left: calc(50px / 2);
+  z-index: 1;
+}
+
+.steps-success::after {
+  content: "";
+  position: absolute;
+  height: 13px;
+  width: 13px;
+  background-color: var(--progress);
   /* box-shadow: 0px 0px 5px 0px var(--primary-color); */
   border-radius: 15px;
   left: calc(50px / 2);
@@ -63,6 +98,7 @@ body {
   height: 13px;
   width: 13px;
   background-color: rgb(198, 198, 198);
+
   border-radius: 15px;
   left: calc(50px / 2);
   transform: translateX(-45%);
@@ -75,6 +111,37 @@ body {
   height: 100%;
   width: 1px;
   background-color: rgb(198, 198, 198);
+
+  left: calc(50px / 2);
+  top: 0;
+  z-index: 1;
+}
+.step-success {
+  padding: 0 20px 24px 50px;
+  position: relative;
+  transition: all 0.4s ease-in-out;
+  background-color: #fff;
+}
+.step-success::before {
+  content: "";
+  position: absolute;
+  height: 13px;
+  width: 13px;
+  /* background-color: rgb(198, 198, 198); */
+  background-color: var(--success-color);
+  border-radius: 15px;
+  left: calc(50px / 2);
+  transform: translateX(-45%);
+  z-index: 2;
+}
+
+.step-success::after {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 1px;
+  /* background-color: rgb(198, 198, 198); */
+  background-color: var(--success-color);
   left: calc(50px / 2);
   top: 0;
   z-index: 1;
@@ -183,5 +250,8 @@ body {
   background-color: rgba(0, 0, 0, 0.06);
 }
 
+.containerr {
+  margin: 10px 10px 10px !important;
+}
 /*
   */

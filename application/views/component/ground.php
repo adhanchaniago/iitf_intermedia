@@ -43,11 +43,9 @@
         
         <script src="<?= base_url()?>assets/app/js/app.js"></script>
         <script type="text/javascript">
-            $("#btn-mengerti").click(()=>{
-                console.log('diklik');
-                $("#modal").removeClass("is-active");
-            });
+            var step = "<?= $step; ?>";
         </script>
+        <script src="<?= base_url()?>assets/app/js/step.js"></script>
         <!--script src="assets/js/particlesjs/particles.min.js"></script-->
         <script src="<?= base_url()?>assets/app/js/aos/aos.js"></script>
         <script src="<?= base_url()?>assets/app/js/timer.js"></script>
