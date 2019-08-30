@@ -882,7 +882,10 @@ class App_view extends CI_Controller{
                 $this->load->view('component/header', $payload);
                 $this->load->view('pages/user/user_step_team');
                 $this->load->view('component/ground');
-            }else if($payload['step'] == 3){
+            } else if ($payload['step'] == 3) {
+                $query = $this->db->query('SELECT b.id_koor, a.harga FROM listlomba a INNER JOIN tb_pendaftaran b ON a.id = b.id_lomba WHERE b.id_koor = "' . $koor->id . '"');
+
+                $payload['lomba'] = $query->row();
                 //pembayaran
                 $this->load->view('component/header',$payload);
                 $this->load->view('pages/user/user_step_pembayaran');
