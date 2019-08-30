@@ -1,140 +1,191 @@
-<?php $this->load->view('component/nav')?>
-<link rel="stylesheet" href="<?= base_url()?>assets/app/css/stepper.css" />
+<?php $this->load->view('component/nav') ?>
+<link rel="stylesheet" href="<?= base_url() ?>assets/app/css/stepper.css" />
 <div class="container">
   <div class="columns">
     <div class="column is-4">
-      <?php $this->load->view('component/stepper')?>
+      <?php $this->load->view('component/stepper') ?>
     </div>
 
     <!-- START INPUT DATA  -->
-    
-    <div class="column is-6 containerr">
-    <h1 class="title">Anggota Team</h1>
-    <h2 class="subtitle">Silakan tentukan dan tambahkan anggota team Anda disini.</h2>
-      <!-- Nama team -->
-      <div class="container">
-        <div class="columns">
-          <div class="column is-6">
-              <div class="field">
-                  <label class="label">Nama Team</label>
-                  <div class="control">
-                    <input
-                      name="nama"
-                      class="input"
-                      type="text"
-                      placeholder="tukiem"
-                      value="<?= $nama ?>"
-                    />
-                  </div>
-                </div>
-          </div>
-          <!-- <div class="column is-2">
-              <div class="field">
-                  <label class="label">Jumlah anggota</label>
-                  <div class="control">
-                          <div class="select is-primary">
-                            <select >
-                              <option>Pilih jumlah anggota</option>
-                              <option value="1">1</option>
-                              <option value="2">2</option>
-                              <option value="3">3</option>
-                            </select>
-                          </div>
-                  </div>
-                </div>
-          </div> -->
-        </div>
-      </div>
 
- 
-  <!--GROUP UPLOAD SURAT PERNYATAAAN-->
-  <br>
-  <div class="field is-grouped">
-      <div class="control">
-          <a class="button is-success" onclick="setForm()">
+    <div class="column is-6 containerr">
+      <h1 class="title">Pendaftaran Team</h1>
+      <h2 class="subtitle">Silakan isi nama team dan tambahkan anggota team Anda disini.</h2>
+      <!-- Nama team -->
+      <form action="<?= base_url() ?>user/team" method="POST" enctype="multipart/form-data">
+        <div class="container">
+          <div class="columns">
+            <div class="column is-6">
+              <div class="field">
+                <label class="label">Nama Team</label>
+                <div class="control">
+                  <input name="nama_team" class="input" type="text" placeholder="Contoh: iWD(intermedia Web Design)" value="<?= $pendaftaran->nama_team ?>" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--GROUP UPLOAD SURAT PERNYATAAAN-->
+        <br>
+        <div class="field is-grouped">
+          <div class="control">
+            <a class="button is-success" id="btnTambah" onclick="setForm()">
               <span class="icon is-small">
-                <i class="fas fa-check"></i>
+                <i class="fas fa-plus"></i>
               </span>
               <span>Tambah anggota</span>
             </a>
-      </div>
-      
-    </div>
-    <div id="form">
-
-      </div>
-    <br>
+          </div>
+        </div>
+        <div id="form"></div>
+        <!-- </div> -->
+        <br>
         <!--GROUP UPLOAD SURAT PERNYATAAAN-->
         <div class="field is-grouped">
           <div class="control">
-            <button class="button is-link">Simpan</button>
+            <input type="submit" name="kirim" value="Simpan" class="button is-link">
           </div>
           <div class="control">
-            <button class="button is-text">Batal</button>
+            <button class="button is-reset">Batal</button>
           </div>
         </div>
+      </form>
+      <!--GROUP SUBMIT BUTTON-->
+      <script>
+        var wadah = document.getElementById("form");
+        var currentForm = 0;
+        var btn = document.getElementById("btnTambah");
+        if (<?=count($anggota)?> != 0) {
+          if (<?= count($langgota) ?> >= <?= $anggota->jumlah_anggota ?>) {
+            btn.style.visibility = "hidden";
+          } else {
+            btn.style.visibility = "visible";
+          }
+          <?php foreach ($langgota as $key => $val) { ?>
+          // curform++;
+          currentForm++;
+          var data = '<div id="form' + currentForm + '" class="column box">' +
+            '<div class="columns"><div class="column is-8"><h3>Anggota ' + currentForm + '</h3></div><div class="column is-4"><div class="control" style="float:right"><a onclick="removeForm(' + currentForm + ')" href="<?= base_url() ?>user/delAnggota/<?= $val['id'] ?>" class="button is-danger is-outlined"><span>Hapus</span><span class="icon is-small"><i class="fas fa-times"></i></span></a></div></div></div>' +
+            '<div class="field">' +
+            '<label class="label">Nama Lengkap</label>' +
+            '<div class="control has-icons-left">' +
+            '<input name="nama[]" class="input" type="text" placeholder="Masukkan nama anggota" value="<?= $val['nama'] ?>"/>' +
+            '<span class="icon is-small is-left">' +
+            '<i class="fas fa-user"></i>' +
+            '</span>' +
+            '</div>' +
+            '</div>' +
+            '<div class="field">' +
+            '<label class="label">No Telpon/WA</label>' +
+            '<div class="control has-icons-left">' +
+            '<input name="no_hp[]" class="input" type="text" placeholder="contoh : 08xxxx" value="<?= $val['no_hp'] ?>"/>' +
+            '<span class="icon is-small is-left">' +
+            '<i class="fas fa-phone"></i>' +
+            '</span>'
+            // +'<span class="icon is-small is-right">'
+            //   +'<i class="fas fa-check"></i>'
+            // +'</span>'
+            +
+            '</div>'
+            // +'<p class="help is-success">Kalo sukses</p>'
+            +
+            '</div>' +
+            '<div class="field">' +
+            '<label class="label">Identitas diri (ekstensi diterima: JPG, JPEG, PNG, SVG, BMP)</label>' +
+            '<div class="control">' +
+            '<div class="file is-info has-name">' +
+            '<label class="file-label">' +
+            '<input type="hidden" name="id_anggota[]" value="<?=$val['id']?>">' +
+            '<input class="file-input" type="file" name="identitas'+currentForm+'" required />' +
+            '<span class="file-cta">' +
+            '<span class="file-icon">' +
+            '<i class="fas fa-upload"></i>' +
+            '</span>' +
+            '<span class="file-label">' +
+            'Pilih Berkas' +
+            '</span>' +
+            '</span>' +
+            '<span class="file-name">' +
+            'Pilih Berkas Terlebih dahulu' +
+            '</span>' +
+            '</label>' +
+            '</div>' +
+            '</div>' +
+            '</div></div>';
+          wadah.innerHTML += data;
+          <?php } ?>
+        }
 
-        <!--GROUP SUBMIT BUTTON-->
-        <script>
-            var wadah = document.getElementById("form");
-            var currentForm = 0;
-            
-            function setForm(){
-               // alert('g');
-              currentForm++;
-                var data = '<div id="form'+currentForm+'" class="column box">'
-                  +'<div class="columns"><div class="column is-8"><h3>Anggota '+currentForm+'</h3></div><div class="column is-4"><div class="control"><a onclick="removeForm('+currentForm+')" class="button is-danger is-outlined"><span>Hapus</span><span class="icon is-small"><i class="fas fa-times"></i></span></a></div></div></div>' 
-                  +'<div class="field">'
-                  +'<label class="label">Nama Lengkap</label>'
-                  +'<div class="control">'
-                  +'<input name="nama" class="input" type="text" placeholder="tukiem" value="<?= $nama ?>"/>'
-                  +'</div>'
-                  +'</div>'
-                  +'<div class="field">'
-                  +'<label class="label">No Telpon/WA</label>'
-                  +'<div class="control has-icons-left has-icons-right">'
-                    +'<input name="no_hp" class="input is-success" type="text" placeholder="contoh : 08xxxx" value="<?= $nohp ?>"/>'
-                    +'<span class="icon is-small is-left">'
-                      +'<i class="fas fa-user"></i>'
-                    +'</span>'
-                    +'<span class="icon is-small is-right">'
-                      +'<i class="fas fa-check"></i>'
-                    +'</span>'
-                  +'</div>'
-                  +'<p class="help is-success">Kalo sukses</p>'
-                +'</div>'
-                +'<div class="field">'
-                  +'<label class="label">Identitas diri</label>'
-                  +'<div class="control">'
-                    +'<div class="file is-info has-name">'
-                      +'<label class="file-label">'
-                      +'<input class="file-input" type="file" name="resume" />'
-                        +'<span class="file-cta">'
-                          +'<span class="file-icon">'
-                            +'<i class="fas fa-upload"></i>'
-                          +'</span>'
-                          +'<span class="file-label">'
-                            +'Pilih Berkas'
-                          +'</span>'
-                        +'</span>'
-                        +'<span class="file-name">'
-                          +'Screen Shot 2017-07-29 at 15.54.25.png'
-                        +'</span>'
-                      +'</label>'
-                    +'</div>'
-                  +'</div>'
-                +'</div></div>';
-              wadah.innerHTML += data;
-         
-            } 
-            function removeForm(val){
-              confirm("yakin mau menghapus form anggota "+val);
-              currentForm--;
-              var el = document.getElementById("form"+val);
-              el.remove();
-            }
-          </script>
-      </div>
+        function setForm() {
+          // alert('g');
+          currentForm++;
+          var data = '<div id="form' + currentForm + '" class="column box">' +
+            '<div class="columns"><div class="column is-8"><h3>Anggota ' + currentForm + '</h3></div><div class="column is-4"><div class="control" style="float:right"><a onclick="removeForm(' + currentForm + ')" class="button is-danger is-outlined"><span>Hapus</span><span class="icon is-small"><i class="fas fa-times"></i></span></a></div></div></div>' +
+            '<div class="field">' +
+            '<label class="label">Nama Lengkap</label>' +
+            '<div class="control has-icons-left">' +
+            '<input name="nama[]" class="input" type="text" placeholder="Masukkan nama anggota" value=""/>' +
+            '<span class="icon is-small is-left">' +
+            '<i class="fas fa-user"></i>' +
+            '</span>' +
+            '</div>' +
+            '</div>' +
+            '<div class="field">' +
+            '<label class="label">No Telpon/WA</label>' +
+            '<div class="control has-icons-left">' +
+            '<input name="no_hp[]" class="input" type="text" placeholder="contoh : 08xxxx" value=""/>' +
+            '<span class="icon is-small is-left">' +
+            '<i class="fas fa-phone"></i>' +
+            '</span>'
+            // +'<span class="icon is-small is-right">'
+            //   +'<i class="fas fa-check"></i>'
+            // +'</span>'
+            +
+            '</div>'
+            // +'<p class="help is-success">Kalo sukses</p>'
+            +
+            '</div>' +
+            '<div class="field">' +
+            '<label class="label">Identitas diri (ekstensi diterima: JPG, JPEG, PNG, SVG, BMP)</label>' +
+            '<div class="control">' +
+            '<div class="file is-info has-name">' +
+            '<label class="file-label">' +
+            '<input class="file-input" type="file" name="identitas'+currentForm+'" />' +
+            '<span class="file-cta">' +
+            '<span class="file-icon">' +
+            '<i class="fas fa-upload"></i>' +
+            '</span>' +
+            '<span class="file-label">' +
+            'Pilih Berkas' +
+            '</span>' +
+            '</span>' +
+            '<span class="file-name">' +
+            'Pilih Berkas Terlebih dahulu' +
+            '</span>' +
+            '</label>' +
+            '</div>' +
+            '</div>' +
+            '</div></div>';
+          wadah.innerHTML += data;
+
+          console.log(currentForm);
+          if (currentForm >= <?= $anggota->jumlah_anggota ?>) {
+            btn.style.visibility = "hidden";
+          }
+
+        }
+
+        function removeForm(val) {
+          confirm("yakin mau menghapus anggota " + val);
+          currentForm--;
+          var el = document.getElementById("form" + val);
+          el.remove();
+          if (currentForm < <?= $anggota->jumlah_anggota ?> || <?= count($langgota) ?> < currentForm) {
+            btn.style.visibility = "visible";
+          }
+        }
+      </script>
     </div>
   </div>
+</div>
 </div>

@@ -9,10 +9,10 @@
     
     <!-- Nama -->
     <div class="column is-8 containerr">
-      <h1 class="title">Biodata Koordinator</h1>
-      <h2 class="subtitle">Lengkapilah kolom biodata koordinator di bawah ini.</h2>
+      <h1 class="title">Biodata Peserta Lomba</h1>
+      <h2 class="subtitle">Lengkapilah kolom biodata di bawah ini.</h2>
       <!-- START INPUT DATA  -->
-      <form id="formkoor" action="javascript:trySaveKoor('<?= base_url(); ?>');" method="POST">
+      <form action="javascript:trySave('<?= base_url(); ?>',0);" method="POST">
       <div id="warnings" class=""></div>
       <div class="field">
         <label class="label">Nama Lengkap</label>

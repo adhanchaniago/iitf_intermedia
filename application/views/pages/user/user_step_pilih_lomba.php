@@ -25,7 +25,6 @@
                         <h4 class="title is-6 is-tight "><?= $u['namalomba']; ?></h4>
                         <h6 class="subtitle is-6 "><br>Kategori: <?= $u['kategori']; ?></h6>
                         <h6 class="subtitle is-6 ">Rp<?= number_format($u['harga'], 0, ',', '.'); ?>,-</h6>
-                        
                     </div>
                 </a>
             </div>

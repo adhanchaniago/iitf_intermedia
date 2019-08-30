@@ -325,16 +325,16 @@ class App_view extends CI_Controller{
 
         $idlomba = $this->input->post('lomba');
 
-        $query = $this->db->query('SELECT b.id, b.id_koor, a.namalomba FROM listlomba a INNER JOIN tb_pendaftaran b ON a.id = b.id_lomba WHERE b.id_koor = "' . $koor->id . '"');
+        $query = $this->db->query('SELECT b.id, b.id_koor, a.namalomba, a.keterangan FROM listlomba a INNER JOIN tb_pendaftaran b ON a.id = b.id_lomba WHERE b.id_koor = "' . $koor->id . '"');
         $getnumrow = $query->num_rows();
-        
+
         if ($getnumrow != 0) {
             $result = $query->result_array();
-            
+
             $this->db->update('tb_pendaftaran', array(
                 'id_lomba' => $idlomba
             ), array('id_koor' => $koor->id));
-            
+
             echo "<script>
                 $('#warnings').addClass('notification is-primary');
                 $('#warnings').html('Berhasil menyimpan perubahan, silakan tunggu...');
@@ -366,12 +366,39 @@ class App_view extends CI_Controller{
             </script>";
         }
         if ($step_lalu < 2) {
-            $this->db->update('tb_user', array(
-                'step_selesai' => 2
-            ), array(
-                'id' => $this->session->userdata('id')
-            ));
-            
+            $cek = $this->DataModel->getWhere('id', $idlomba);
+            $cek = $this->DataModel->getData('tb_lomba')->row();
+            // echo $cek;
+            if ($cek->keterangan == "individu") {
+                $this->db->update('tb_user', array(
+                    'step_selesai' => 3
+                ), array(
+                    'id' => $this->session->userdata('id')
+                ));
+            } else {
+                $this->db->update('tb_user', array(
+                    'step_selesai' => 2
+                ), array(
+                    'id' => $this->session->userdata('id')
+                ));
+            }
+        } else {
+            $cek = $this->DataModel->getWhere('id', $idlomba);
+            $cek = $this->DataModel->getData('tb_lomba')->row();
+            // echo $cek;
+            if ($cek->keterangan == "individu") {
+                $this->db->update('tb_user', array(
+                    'step_selesai' => 3
+                ), array(
+                    'id' => $this->session->userdata('id')
+                ));
+            } else {
+                $this->db->update('tb_user', array(
+                    'step_selesai' => 2
+                ), array(
+                    'id' => $this->session->userdata('id')
+                ));
+            }
         }
     }
 
@@ -382,6 +409,18 @@ class App_view extends CI_Controller{
         }
         $config['upload_path'] = 'assets/dump/' . $this->session->userdata('id');
         $config['allowed_types'] = 'pdf|doc|docx';
+        $config['file_name'] = $name;
+        $config['overwrite'] = true;
+        $this->upload->initialize($config);
+    }
+
+    private function _uploadLomba($name)
+    {
+        if (!file_exists('assets/dump/' . $this->session->userdata('id'))) {
+            mkdir('assets/dump/' . $this->session->userdata('id'), 0777, true);
+        }
+        $config['upload_path'] = 'assets/dump/' . $this->session->userdata('id');
+        $config['allowed_types'] = 'zip';
         $config['file_name'] = $name;
         $config['overwrite'] = true;
         $this->upload->initialize($config);
@@ -399,7 +438,7 @@ class App_view extends CI_Controller{
         $this->form_validation->set_rules('email', 'E-Mail', 'valid_email|callback_email_check');
         $this->form_validation->set_rules('instansi', 'Asal Instansi', 'required');
 
-        if($this->form_validation->run() != false){
+        if ($this->form_validation->run() != false) {
             $nama = $this->input->post('nama');
             $email = $this->input->post('email');
             $nohp = $this->input->post('no_hp');
@@ -408,14 +447,14 @@ class App_view extends CI_Controller{
             if (!empty($_FILES['resume']['name'])) {
                 $path = $_FILES['resume']['name'];
                 $ext = pathinfo($path, PATHINFO_EXTENSION);
-                $filename = "ID_Koor-" . $this->session->userdata('id') . "." . $ext;
+                $filename = "Foto_Koor-" . $this->session->userdata('id') . "." . $ext;
                 //echo "<script>console.log('" . $filename . "');</script>";
 
                 $this->_uploadFile($filename);
                 if (!$this->upload->do_upload('resume')) {
                     echo "<script>
                             $('#warnings').addClass('notification is-primary');
-                            $('#warnings').html('Gagal mengunggah identitas: " . $this->upload->display_errors() . "<br>Data tidak dapat disimpan.');
+                            $('#warnings').html('Gagal mengunggah foto: " . $this->upload->display_errors() . "<br>Data tidak dapat disimpan.');
                             setTimeout(function() {
                                 location.reload();
                             }, 2500);
@@ -448,7 +487,7 @@ class App_view extends CI_Controller{
 
                         echo "<script>
                                 $('#warnings').addClass('notification is-primary');
-                                $('#warnings').html('Berhasil disimpan dan berhasil mengunggah identitas. Silakan tunggu...');
+                                $('#warnings').html('Berhasil disimpan dan berhasil mengunggah foto. Silakan tunggu...');
                                 setTimeout(function() {
                                     location.reload();
                                 }, 2500);
@@ -475,11 +514,10 @@ class App_view extends CI_Controller{
                                 }, 2500);
                             </script>";
                     }
-                    
                 }
             } else {
                 if ($step_lalu < 1) {
-                    echo "<script>$('#warnings').addClass('notification is-danger');</script>Anda wajib mengunggah identitas Anda.";
+                    echo "<script>$('#warnings').addClass('notification is-danger');</script>Anda wajib mengunggah foto Anda.";
                 } else {
                     $this->db->update('tb_user', array(
                         'email' => $email
@@ -504,12 +542,214 @@ class App_view extends CI_Controller{
                         </script>";
                 }
             }
-        }else{
+        } else {
             echo "<script>$('#warnings').addClass('notification is-danger');</script>" . validation_errors();
         }
     }
 
-    public function step(){
+    public function saveTeam()
+    {
+        $step_simpan = $this->db->get_where('tb_user', array(
+            'id' => $this->session->userdata('id')
+        ))->row();
+        $step_lalu = $step_simpan->step_selesai;
+
+        $this->form_validation->set_rules('nama[]', 'Nama Lengkap', 'required');
+        $this->form_validation->set_rules('no_hp[]', 'Nomor Telepon/WA', 'required');
+
+        if ($this->form_validation->run() != false) {
+            $nama_team = $this->input->post('nama_team');
+            $id = $this->input->post('id_anggota');
+            $nama = $this->input->post('nama');
+            $nohp = $this->input->post('no_hp');
+            $koor = $this->DataModel->getWhere('id_user', $this->session->userdata('id'));
+            $koor = $this->DataModel->getData('tb_koor')->row();
+            $pendaftaran = $this->DataModel->getWhere('id_koor', $koor->id);
+            $pendaftaran = $this->DataModel->getData('tb_pendaftaran')->row();
+            // die(json_encode($id));
+            $data = array(
+                "nama_team" => $nama_team,
+            );
+            $this->DataModel->getWhere('id', $pendaftaran->id);
+            $this->DataModel->update('tb_pendaftaran', $data);
+            $i = 0;
+            $n = 1;
+            $dataa = array();
+            // die(json_encode($_FILES));
+            foreach ($nama as $key => $val) {
+                if (!empty($_FILES['identitas' . $n]['name'])) {
+                    $path = $_FILES['identitas' . $n]['name'];
+                    $ext = pathinfo($path, PATHINFO_EXTENSION);
+                    $filename = "A-" . $pendaftaran->id . "_" . $i . "." . $ext;
+
+                    $this->_uploadFile($filename);
+
+                    // var_dump($this->upload->do_upload('identitas[]'));
+                    if (!$this->upload->do_upload('identitas' . $n)) {
+                        echo "error: " . $this->upload->display_errors() . "<br>";
+                    } else {
+                        $userfile = 'assets/dump/' . $this->session->userdata('id') . "/" . $filename;
+                        $response = json_decode($this->dropbox->uploadNewFile("/" . $koor->id . "/", $userfile));
+                        // bebersih data
+                        unlink($userfile);
+                        $dataa = array(
+                            "id_pendaftaran" => $pendaftaran->id,
+                            "nama" => $val,
+                            "no_hp" => $nohp[$i],
+                            "lampiran_identitas" => $filename
+                        );
+                        if (isset($id[$i])) {
+                            // echo "update";
+                            $this->DataModel->getWhere('id', $id[$i]);
+                            $this->DataModel->update('tb_anggota', $dataa);
+                        } else {
+                            // echo "insert";
+                            $this->DataModel->insert('tb_anggota', $dataa);
+                        }
+                        unset($dataa);
+                    }
+                    $i++;
+                    $n++;
+                } else {
+                    echo "<script>$('#warnings').addClass('notification is-danger');</script>Anda wajib mengunggah identitas anggota anda.";
+                }
+            }
+            // die(json_encode($dataa));
+            if ($step_lalu < 3) {
+                $this->db->update('tb_user', array(
+                    'step_selesai' => 3
+                ), array(
+                    'id' => $this->session->userdata('id')
+                ));
+                redirect('user', 'refresh');
+            }
+            // die();
+            redirect('user', 'refresh');
+        } else {
+            echo "<script>$('#warnings').addClass('notification is-danger');</script>" . validation_errors();
+        }
+    }
+
+    public function delTeam($id)
+    {
+        $query = $this->DataModel->delete('id', $id, 'tb_anggota');
+        redirect('user?step=2');
+    }
+
+    public function pembayaran()
+    {
+        $step_simpan = $this->db->get_where('tb_user', array(
+            'id' => $this->session->userdata('id')
+        ))->row();
+        $step_lalu = $step_simpan->step_selesai;
+
+        $koor = $this->DataModel->getWhere('id_user', $this->session->userdata('id'));
+        $koor = $this->DataModel->getData('tb_koor')->row();
+        $pendaftaran = $this->DataModel->getWhere('id_koor', $koor->id);
+        $pendaftaran = $this->DataModel->getData('tb_pendaftaran')->row();
+
+        if (!empty($_FILES['bukti']['name'])) {
+            $path = $_FILES['bukti']['name'];
+            $ext = pathinfo($path, PATHINFO_EXTENSION);
+            $filename = "Bukti_pembayaran-" . $pendaftaran->id . "." . $ext;
+
+            $this->_uploadFile($filename);
+            if (!$this->upload->do_upload('bukti')) {
+                echo "error: " . $this->upload->display_errors() . "<br>";
+            } else {
+                $userfile = 'assets/dump/' . $this->session->userdata('id') . "/" . $filename;
+                $response = json_decode($this->dropbox->uploadNewFile("/" . $koor->id . "/", $userfile));
+                // bebersih data
+                unlink($userfile);
+                $dataa = array(
+                    "bukti_bayar" => $filename
+                );
+                // echo "update";
+                $this->DataModel->getWhere('id', $pendaftaran->id);
+                $this->DataModel->update('tb_pendaftaran', $dataa);
+                if ($step_lalu < 4) {
+                    $this->db->update('tb_user', array(
+                        'step_selesai' => 4
+                    ), array(
+                        'id' => $this->session->userdata('id')
+                    ));
+                    redirect('user', 'refresh');
+                }
+                // die();
+                redirect('user', 'refresh');
+                // unset($data);
+            }
+        } else {
+            echo "<script>$('#warnings').addClass('notification is-danger');</script>Anda belum mengunggah bukti pembayaran.";
+        }
+    }
+
+    public function submission()
+    {
+        $step_simpan = $this->db->get_where('tb_user', array(
+            'id' => $this->session->userdata('id')
+        ))->row();
+        $step_lalu = $step_simpan->step_selesai;
+
+        $koor = $this->DataModel->getWhere('id_user', $this->session->userdata('id'));
+        $koor = $this->DataModel->getData('tb_koor')->row();
+        $pendaftaran = $this->DataModel->getWhere('id_koor', $koor->id);
+        $pendaftaran = $this->DataModel->getData('tb_pendaftaran')->row();
+
+        if (!empty($_FILES['perlombaan']['name'])) {
+            if (!empty($_FILES['surat']['name'])) {
+                $pathP = $_FILES['perlombaan']['name'];
+                $extP = pathinfo($pathP, PATHINFO_EXTENSION);
+                $filenameP = "File-" . $pendaftaran->id . "." . $extP;
+                $this->_uploadLomba($filenameP);
+                if (!$this->upload->do_upload('perlombaan')) {
+                    echo "error: " . $this->upload->display_errors() . "<br>";
+                } else {
+                    $pathS = $_FILES['surat']['name'];
+                    $ext = pathinfo($pathS, PATHINFO_EXTENSION);
+                    $filenameS = "Surat-" . $pendaftaran->id . "." . $ext;
+                    $this->_uploadFile($filenameS);
+                    $userfile = 'assets/dump/' . $this->session->userdata('id') . "/" . $filenameP;
+                    $responseP = json_decode($this->dropbox->uploadNewFile("/" . $koor->id . "/", $userfile));
+                    // bebersih data
+                    // die(json_encode($responseP));
+                    unlink($userfile);
+                    if (!$this->upload->do_upload('surat')) {
+                        echo "error: " . $this->upload->display_errors() . "<br>";
+                    } else {
+                        $userfile = 'assets/dump/' . $this->session->userdata('id') . "/" . $filenameS;
+                        $response = json_decode($this->dropbox->uploadNewFile("/" . $koor->id . "/", $userfile));
+                        // bebersih data
+                        unlink($userfile);
+                        $dataa = array(
+                            "lampiran_file" => $filenameP,
+                            "lampiran_surat" => $filenameS
+                        );
+                        // echo "update";
+                        $this->DataModel->getWhere('id', $pendaftaran->id);
+                        $this->DataModel->update('tb_pendaftaran', $dataa);
+                        if ($step_lalu < 4) {
+                            $this->db->update('tb_user', array(
+                                'step_selesai' => 4
+                            ), array(
+                                'id' => $this->session->userdata('id')
+                            ));
+                            redirect('user', 'refresh');
+                        }
+                        // die();
+                        redirect('user', 'refresh');
+                    }
+                }
+            } else {
+                echo "<script>$('#warnings').addClass('notification is-danger');</script>Anda belum mengunggah surat pernyataan anda.";
+            }
+        } else {
+            echo "<script>$('#warnings').addClass('notification is-danger');</script>Anda belum mengunggah file perlombaan anda.";
+        }
+    }
+
+    public function step()
+    {
         $check = $this->db->get_where('tb_user', array(
             'id' => $this->session->userdata('id'),
             'email' => $this->session->userdata('email'),
@@ -526,8 +766,14 @@ class App_view extends CI_Controller{
             ));
             $koor = $koorq->row();
         }
+        $ket = $this->db->query('SELECT a.keterangan FROM listlomba a INNER JOIN tb_pendaftaran b ON a.id = b.id_lomba WHERE b.id_koor = "' . $koor->id . '"')->row();
+        if ($ket != null) {
+            $ket = $ket->keterangan;
+        } else {
+            $ket == null;
+        }
 
-        $payload['judul'] = "TIMELINE";
+        $payload['judul'] = "PENDAFTARAN LOMBA";
         $payload['link'] = ($this->session->userdata('email') == "" ? base_url('login') : base_url('user'));
         $payload['email'] = ($this->session->userdata('email') == "" ? "" : $this->session->userdata('email'));
         $payload['page'] = "steps";
@@ -536,6 +782,7 @@ class App_view extends CI_Controller{
         $payload['inst'] = $koor->institusi;
         $payload['lampiran'] = ($koor->lampiran_identitas == "" ? "Pilih berkas foto terlebih dahulu" : $koor->lampiran_identitas);
         $payload['step'] = $userdata->step_selesai;
+        $payload['keterangan'] = $ket;
 
         @$loadstep = $this->input->get('step');
         if (isset($loadstep)) {
@@ -558,20 +805,33 @@ class App_view extends CI_Controller{
                         $payload['lombaterpilih'] = FALSE;
                         if ($getnumrow > 0) {
                             $payload['lombaterpilih'] = $query->row()->namalomba;
-                        } 
+                        }
 
-                        $this->load->view('component/header',$payload);
-                        $this->load->view('pages/user/user_step_pilih_lomba',$payload);
+                        $this->load->view('component/header', $payload);
+                        $this->load->view('pages/user/user_step_pilih_lomba', $payload);
                         $this->load->view('component/ground');
                         break;
                     case 2:
-                        $this->load->view('component/header',$payload);
-                        $this->load->view('pages/user/user_step_team',$payload);
+                        $pendaftaran = $this->DataModel->getWhere('id_koor', $koor->id);
+                        $pendaftaran = $this->DataModel->getData('tb_pendaftaran')->row();
+                        $query = $this->db->query('SELECT b.id_koor, a.jumlah_anggota FROM listlomba a INNER JOIN tb_pendaftaran b ON a.id = b.id_lomba WHERE b.id_koor = "' . $koor->id . '"');
+                        $payload['anggota'] = $query->row();
+                        $anggota = $this->DataModel->getWhere('id_pendaftaran', $pendaftaran->id);
+                        $anggota = $this->DataModel->getData('tb_anggota')->result_array();
+                        $payload['langgota'] = $anggota;
+                        $payload['pendaftaran'] = $pendaftaran;
+                        // die(json_encode($payload));
+                        $this->load->view('component/header', $payload);
+                        $this->load->view('pages/user/user_step_team', $payload);
                         $this->load->view('component/ground');
                         break;
                     case 3:
-                        $this->load->view('component/header',$payload);
-                        $this->load->view('pages/user/user_step_pembayaran',$payload);
+                        $query = $this->db->query('SELECT b.id_koor, a.harga FROM listlomba a INNER JOIN tb_pendaftaran b ON a.id = b.id_lomba WHERE b.id_koor = "' . $koor->id . '"');
+
+                        $payload['lomba'] = $query->row();
+                        // die(json_encode($payload));
+                        $this->load->view('component/header', $payload);
+                        $this->load->view('pages/user/user_step_pembayaran', $payload);
                         $this->load->view('component/ground');
                         break;
                     case 4:
@@ -597,19 +857,28 @@ class App_view extends CI_Controller{
                 $listlomba = $this->db->get()->result_array();
                 $payload['listlomba'] = $listlomba;
 
-                $query = $this->db->query('SELECT b.id_koor, a.namalomba FROM listlomba a INNER JOIN tb_pendaftaran b ON a.id = b.id_lomba WHERE b.id_koor = "' . $koor->id . '"');
+                $query = $this->db->query('SELECT b.id_koor, a.namalomba,a.keterangan FROM listlomba a INNER JOIN tb_pendaftaran b ON a.id = b.id_lomba WHERE b.id_koor = "' . $koor->id . '"');
                 $getnumrow = $query->num_rows();
                 $payload['lombaterpilih'] = FALSE;
                 if ($getnumrow > 0) {
                     $payload['lombaterpilih'] = $query->row()->namalomba;
-                } 
+                }
 
-                $this->load->view('component/header',$payload);
-                $this->load->view('pages/user/user_step_pilih_lomba',$payload);
+                $this->load->view('component/header', $payload);
+                $this->load->view('pages/user/user_step_pilih_lomba', $payload);
                 $this->load->view('component/ground');
-            }else if($payload['step'] == 2){
+            } else if ($payload['step'] == 2) {
                 //biodata team
-                $this->load->view('component/header',$payload);
+                $pendaftaran = $this->DataModel->getWhere('id_koor', $koor->id);
+                $pendaftaran = $this->DataModel->getData('tb_pendaftaran')->row();
+                $query = $this->db->query('SELECT b.id_koor, a.jumlah_anggota FROM listlomba a INNER JOIN tb_pendaftaran b ON a.id = b.id_lomba WHERE b.id_koor = "' . $koor->id . '"');
+                $payload['anggota'] = $query->row();
+                $anggota = $this->DataModel->getWhere('id_pendaftaran', $pendaftaran->id);
+                $anggota = $this->DataModel->getData('tb_anggota')->result_array();
+                $payload['langgota'] = $anggota;
+                $payload['pendaftaran'] = $pendaftaran;
+                // die(json_encode($payload));
+                $this->load->view('component/header', $payload);
                 $this->load->view('pages/user/user_step_team');
                 $this->load->view('component/ground');
             }else if($payload['step'] == 3){
@@ -658,7 +927,8 @@ class App_view extends CI_Controller{
         $this->load->view('component/ground');
     }
 
-    public function lupaPasswordProcess(){
+    public function lupaPasswordProcess()
+    {
         $id = $this->input->get('id');
         $token = $this->input->get('token');
 
