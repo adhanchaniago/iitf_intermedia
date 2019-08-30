@@ -759,6 +759,7 @@ class App_view extends CI_Controller{
         $koor = null;
         $userdata = $check->row();
         if ($check->num_rows() == 0) {
+            $this->session->sess_destroy(); // fix ERROR 400: BAD REQUEST
             redirect('login');
         } else {
             $koorq = $this->db->get_where('tb_koor', array(
