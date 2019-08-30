@@ -8,7 +8,36 @@
     <!-- pilih lomba -->
     <div class="column is-8 containerr">
       <h1 class="title">Pembayaran</h1>
-      <h2 class="subtitle">Silakan lakukan pembayaran sesuai dengan data di bawah ini, lalu unggahkan bukti transfernya disini. Untuk pembayaran dapat transfer melalui rekening <b>BRI</b> a/n <b>Rahmat Hidayat Fitrianto</b> 0xxxxxxxxx sebesar <b>Rp<?= number_format($lomba->harga)?></b></h2>
+      <h2 class="subtitle">Silakan lakukan pembayaran sesuai dengan data di bawah ini, lalu unggahkan bukti transfernya disini.</b></h2>
+      
+      <table class="table is-stripped">
+        <tr>
+          <th colspan="2">Rincian Pembayaran</th>
+        </tr>
+        <tr>
+          <td>ID Daftar</td>
+          <td><?= $pendaftaran->id ?></td>
+        </tr>
+        <?php //if ($perlombaan->jumlah_anggota > 0) {?>
+        <tr>
+          <td>Nama Team/Koordinator</td>
+          <td>aaa</td>
+        </tr>
+        <?php //} ?>
+        <tr>
+          <td>Tanggal Daftar</td>
+          <td>aaa</td>
+        </tr>
+        <tr>
+          <td>Kategori Lomba</td>
+          <td>aaa</td>
+        </tr>
+        <tr>
+          <td>Biaya Pendaftaran</td>
+          <td>Rp<?= number_format($lomba->harga, 0, ",", ".")?>,-</td>
+        </tr>
+      </table>
+      
       <div class="field">
         <form action="<?= base_url() ?>user/bayar" method="POST" enctype="multipart/form-data">
           <div class="field is-grouped">

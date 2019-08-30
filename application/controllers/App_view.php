@@ -827,9 +827,11 @@ class App_view extends CI_Controller{
                         $this->load->view('component/ground');
                         break;
                     case 3:
-                        $query = $this->db->query('SELECT b.id_koor, a.harga FROM listlomba a INNER JOIN tb_pendaftaran b ON a.id = b.id_lomba WHERE b.id_koor = "' . $koor->id . '"');
+                        $query = $this->db->query('SELECT b.id, a.harga, a.jumlah_anggota, b.id_koor, a.namalomba, a.keterangan FROM listlomba a INNER JOIN tb_pendaftaran b ON a.id = b.id_lomba WHERE b.id_koor = "' . $koor->id . '"');
+                        //$query = $this->db->query('SELECT b.id_koor, a.harga FROM listlomba a INNER JOIN tb_pendaftaran b ON a.id = b.id_lomba WHERE b.id_koor = "' . $koor->id . '"');
 
                         $payload['lomba'] = $query->row();
+                        $payload['pendaftaran'] = $query->row();
                         // die(json_encode($payload));
                         $this->load->view('component/header', $payload);
                         $this->load->view('pages/user/user_step_pembayaran', $payload);
@@ -858,7 +860,7 @@ class App_view extends CI_Controller{
                 $listlomba = $this->db->get()->result_array();
                 $payload['listlomba'] = $listlomba;
 
-                $query = $this->db->query('SELECT b.id_koor, a.namalomba,a.keterangan FROM listlomba a INNER JOIN tb_pendaftaran b ON a.id = b.id_lomba WHERE b.id_koor = "' . $koor->id . '"');
+                $query = $this->db->query('SELECT b.id_koor, a.namalomba, a.keterangan FROM listlomba a INNER JOIN tb_pendaftaran b ON a.id = b.id_lomba WHERE b.id_koor = "' . $koor->id . '"');
                 $getnumrow = $query->num_rows();
                 $payload['lombaterpilih'] = FALSE;
                 if ($getnumrow > 0) {
@@ -884,8 +886,11 @@ class App_view extends CI_Controller{
                 $this->load->view('component/ground');
             }else if($payload['step'] == 3){
                 //pembayaran
+                $query = $this->db->query('SELECT b.id_koor, a.jumlah_anggota, a.harga, a.namalomba, b.id FROM listlomba a INNER JOIN tb_pendaftaran b ON a.id = b.id_lomba WHERE b.id_koor = "' . $koor->id . '"');
+                $payload['pendaftaran'] = $query->row();
+                $payload['lomba'] = $query->row();
                 $this->load->view('component/header',$payload);
-                $this->load->view('pages/user/user_step_pembayaran');
+                $this->load->view('pages/user/user_step_pembayaran', $payload);
                 $this->load->view('component/ground');
             }else if($payload['step'] == 4){
                 //submisi file

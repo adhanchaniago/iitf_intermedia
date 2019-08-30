@@ -45,9 +45,7 @@
           <div class="control">
             <input type="submit" name="kirim" value="Simpan" class="button is-link">
           </div>
-          <div class="control">
-            <button class="button is-reset">Batal</button>
-          </div>
+          <!-- Tombol Batal saya hapus, little buggy... -->
         </div>
       </form>
       <!--GROUP SUBMIT BUTTON-->
@@ -55,7 +53,7 @@
         var wadah = document.getElementById("form");
         var currentForm = 0;
         var btn = document.getElementById("btnTambah");
-        if (<?=count($anggota)?> != 0) {
+        if (<?=$anggota->jumlah_anggota?> != 0) {
           if (<?= count($langgota) ?> >= <?= $anggota->jumlah_anggota ?>) {
             btn.style.visibility = "hidden";
           } else {
