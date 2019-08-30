@@ -381,7 +381,7 @@ class App_view extends CI_Controller{
             mkdir('assets/dump/' . $this->session->userdata('id'), 0777, true);
         }
         $config['upload_path'] = 'assets/dump/' . $this->session->userdata('id');
-        $config['allowed_types'] = 'jpg|png|jpeg|svg|bmp';
+        $config['allowed_types'] = 'pdf|doc|docx';
         $config['file_name'] = $name;
         $config['overwrite'] = true;
         $this->upload->initialize($config);
@@ -408,14 +408,14 @@ class App_view extends CI_Controller{
             if (!empty($_FILES['resume']['name'])) {
                 $path = $_FILES['resume']['name'];
                 $ext = pathinfo($path, PATHINFO_EXTENSION);
-                $filename = "Foto_Koor-" . $this->session->userdata('id') . "." . $ext;
+                $filename = "ID_Koor-" . $this->session->userdata('id') . "." . $ext;
                 //echo "<script>console.log('" . $filename . "');</script>";
 
                 $this->_uploadFile($filename);
                 if (!$this->upload->do_upload('resume')) {
                     echo "<script>
                             $('#warnings').addClass('notification is-primary');
-                            $('#warnings').html('Gagal mengunggah foto: " . $this->upload->display_errors() . "<br>Data tidak dapat disimpan.');
+                            $('#warnings').html('Gagal mengunggah identitas: " . $this->upload->display_errors() . "<br>Data tidak dapat disimpan.');
                             setTimeout(function() {
                                 location.reload();
                             }, 2500);
@@ -448,7 +448,7 @@ class App_view extends CI_Controller{
 
                         echo "<script>
                                 $('#warnings').addClass('notification is-primary');
-                                $('#warnings').html('Berhasil disimpan dan berhasil mengunggah foto. Silakan tunggu...');
+                                $('#warnings').html('Berhasil disimpan dan berhasil mengunggah identitas. Silakan tunggu...');
                                 setTimeout(function() {
                                     location.reload();
                                 }, 2500);
@@ -479,7 +479,7 @@ class App_view extends CI_Controller{
                 }
             } else {
                 if ($step_lalu < 1) {
-                    echo "<script>$('#warnings').addClass('notification is-danger');</script>Anda wajib mengunggah foto Anda.";
+                    echo "<script>$('#warnings').addClass('notification is-danger');</script>Anda wajib mengunggah identitas Anda.";
                 } else {
                     $this->db->update('tb_user', array(
                         'email' => $email

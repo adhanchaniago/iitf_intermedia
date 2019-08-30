@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $("#resume").change(function (e) {
-        var fileExtension = ['jpeg', 'jpg', 'png', 'svg', 'bmp'];
+        var fileExtension = ['pdf', 'doc', 'docx'];
         if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
             alert("Hanya format file berikut yang dapat diterima : "+fileExtension.join(', '));
         } else {
