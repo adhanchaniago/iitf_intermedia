@@ -42,6 +42,7 @@
                                         <th scope="col">Nama Lomba</th>
                                         <th scope="col">Status</th>
                                         <th scope="col">Bukti Bayar</th>
+                                        <th scope="col">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -63,6 +64,11 @@
                                         </td>
                                         <td>
                                             <?=$val['bukti_bayar']?>
+                                        </td>
+                                        <td>
+                                            <?php if($val['status'] == "active"){echo "Terkonfirmasi"; }else{ ?>
+                                            <a href="<?=base_url()?>admin/pendaftaran/konfirmasi?id=<?=$val['id_pendaftaran']?>" class="btn btn-md btn-primary"></i>Konfirmasi</a>
+                                            <?php } ?>
                                         </td>
                                     </tr>
                                     <?php } ?>
