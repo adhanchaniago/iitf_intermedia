@@ -414,6 +414,18 @@ class App_view extends CI_Controller{
         $this->upload->initialize($config);
     }
 
+    private function _uploadBukti($name)
+    {
+        if (!file_exists('assets/dump/' . $this->session->userdata('id'))) {
+            mkdir('assets/dump/' . $this->session->userdata('id'), 0777, true);
+        }
+        $config['upload_path'] = 'assets/dump/' . $this->session->userdata('id');
+        $config['allowed_types'] = 'jpg|jpeg|png';
+        $config['file_name'] = $name;
+        $config['overwrite'] = true;
+        $this->upload->initialize($config);
+    }
+
     private function _uploadLomba($name)
     {
         if (!file_exists('assets/dump/' . $this->session->userdata('id'))) {
@@ -455,9 +467,6 @@ class App_view extends CI_Controller{
                     echo "<script>
                             $('#warnings').addClass('notification is-primary');
                             $('#warnings').html('Gagal mengunggah foto: " . $this->upload->display_errors() . "<br>Data tidak dapat disimpan.');
-                            setTimeout(function() {
-                                location.reload();
-                            }, 2500);
                         </script>";
                 } else {
                     $koorq = $this->db->get_where('tb_koor', array(
@@ -509,9 +518,6 @@ class App_view extends CI_Controller{
                         echo "<script>
                                 $('#warnings').addClass('notification is-primary');
                                 $('#warnings').html('Gagal mengunggah foto: DropboxUploadFileException(" . $response->http_code . ")<br>Data tidak dapat disimpan.');
-                                setTimeout(function() {
-                                    location.reload();
-                                }, 2500);
                             </script>";
                     }
                 }
@@ -653,9 +659,9 @@ class App_view extends CI_Controller{
             $ext = pathinfo($path, PATHINFO_EXTENSION);
             $filename = "Bukti_pembayaran-" . $pendaftaran->id . "." . $ext;
 
-            $this->_uploadFile($filename);
+            $this->_uploadBukti($filename);
             if (!$this->upload->do_upload('bukti')) {
-                echo "error: " . $this->upload->display_errors() . "<br>";
+                echo "<script>$('#warnings').addClass('notification is-danger');</script>Error: " . $this->upload->display_errors() . "<br>";
             } else {
                 $userfile = 'assets/dump/' . $this->session->userdata('id') . "/" . $filename;
                 $response = json_decode($this->dropbox->uploadNewFile("/" . $koor->id . "/", $userfile));
@@ -676,11 +682,18 @@ class App_view extends CI_Controller{
                     redirect('user', 'refresh');
                 }
                 // die();
-                redirect('user', 'refresh');
+                echo "<script>
+                        $('#warning').addClass('notification is-primary');
+                        $('#warning').html('Berhasil mengunggah bukti pembayaran. Silakan tunggu...');
+                        setTimeout(function() {
+                            location.reload();
+                        }, 2500);
+                    </script>";
+                //redirect('user', 'refresh');
                 // unset($data);
             }
         } else {
-            echo "<script>$('#warnings').addClass('notification is-danger');</script>Anda belum mengunggah bukti pembayaran.";
+            echo "<script>$('#warning').addClass('notification is-danger');</script>Anda belum mengunggah bukti pembayaran.";
         }
     }
 
@@ -827,7 +840,7 @@ class App_view extends CI_Controller{
                         $this->load->view('component/ground');
                         break;
                     case 3:
-                        $query = $this->db->query('SELECT b.id, a.harga, a.jumlah_anggota, b.id_koor, a.namalomba, a.keterangan FROM listlomba a INNER JOIN tb_pendaftaran b ON a.id = b.id_lomba WHERE b.id_koor = "' . $koor->id . '"');
+                        $query = $this->db->query('SELECT b.id, b.tanggal_daftar, b.bukti_bayar, a.harga, b.nama_team, a.jumlah_anggota, b.id_koor, a.namalomba, a.keterangan FROM listlomba a INNER JOIN tb_pendaftaran b ON a.id = b.id_lomba WHERE b.id_koor = "' . $koor->id . '"');
                         //$query = $this->db->query('SELECT b.id_koor, a.harga FROM listlomba a INNER JOIN tb_pendaftaran b ON a.id = b.id_lomba WHERE b.id_koor = "' . $koor->id . '"');
 
                         $payload['lomba'] = $query->row();
@@ -885,11 +898,8 @@ class App_view extends CI_Controller{
                 $this->load->view('pages/user/user_step_team');
                 $this->load->view('component/ground');
             } else if ($payload['step'] == 3) {
-                $query = $this->db->query('SELECT b.id_koor, a.harga FROM listlomba a INNER JOIN tb_pendaftaran b ON a.id = b.id_lomba WHERE b.id_koor = "' . $koor->id . '"');
-
-                $payload['lomba'] = $query->row();
                 //pembayaran
-                $query = $this->db->query('SELECT b.id_koor, a.jumlah_anggota, a.harga, a.namalomba, b.id FROM listlomba a INNER JOIN tb_pendaftaran b ON a.id = b.id_lomba WHERE b.id_koor = "' . $koor->id . '"');
+                $query = $this->db->query('SELECT b.id_koor, b.tanggal_daftar, b.bukti_bayar, b.nama_team, a.jumlah_anggota, a.harga, a.namalomba, b.id FROM listlomba a INNER JOIN tb_pendaftaran b ON a.id = b.id_lomba WHERE b.id_koor = "' . $koor->id . '"');
                 $payload['pendaftaran'] = $query->row();
                 $payload['lomba'] = $query->row();
                 $this->load->view('component/header',$payload);

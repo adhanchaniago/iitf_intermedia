@@ -9,7 +9,7 @@
     <div class="column is-8 containerr">
       <h1 class="title">Pembayaran</h1>
       <h2 class="subtitle">Silakan lakukan pembayaran sesuai dengan data di bawah ini, lalu unggahkan bukti transfernya disini.</b></h2>
-      
+      <div id="warning" class=""></div>
       <table class="table is-stripped">
         <tr>
           <th colspan="2">Rincian Pembayaran</th>
@@ -18,32 +18,52 @@
           <td>ID Daftar</td>
           <td><?= $pendaftaran->id ?></td>
         </tr>
-        <?php //if ($perlombaan->jumlah_anggota > 0) {?>
-        <tr>
-          <td>Nama Team/Koordinator</td>
-          <td>aaa</td>
-        </tr>
-        <?php //} ?>
+        <?php if ($pendaftaran->jumlah_anggota > 0) {?>
+          <tr>
+            <td>Nama Team</td>
+            <td><?= $pendaftaran->nama_team; ?></td>
+          </tr>
+        <?php } ?>
         <tr>
           <td>Tanggal Daftar</td>
-          <td>aaa</td>
+          <td><?= date("d/m/Y", strtotime($pendaftaran->tanggal_daftar)) ?></td>
         </tr>
         <tr>
           <td>Kategori Lomba</td>
-          <td>aaa</td>
+          <td><?= $pendaftaran->namalomba; ?></td>
         </tr>
         <tr>
           <td>Biaya Pendaftaran</td>
           <td>Rp<?= number_format($lomba->harga, 0, ",", ".")?>,-</td>
         </tr>
       </table>
-      
+      <table class="table is-bordered">
+          <tr>
+            <td colspan="2">Transfer ke:</td>
+          </tr>
+          <tr>
+            <th>Nama Bank</th>
+            <td>002 - Bank Rakyat Indonesia (BRI)</td>
+          </tr>
+          <tr>
+            <th>Atas Nama Rekening</th>
+            <td>Rahmat Hidayat Fitrianto</td>
+          </tr>
+          <tr>
+            <th>Nomor Rekening Tujuan</th>
+            <td>0077 - 01 - 100172 - 50 - 8</td>
+          </tr>
+      </table>
+
+      <div id="progress"></div>
+
       <div class="field">
-        <form action="<?= base_url() ?>user/bayar" method="POST" enctype="multipart/form-data">
+        <label class="label">Bukti Transfer (ekstensi diterima: JPG, JPEG, PNG)</label>
+        <form action="javascript:trySaveBayar('<?= base_url(); ?>');" method="POST" enctype="multipart/form-data">
           <div class="field is-grouped">
             <div class="file is-boxed is-success has-name">
               <label class="file-label">
-                <input class="file-input" type="file" name="bukti" />
+                <input class="file-input" type="file" name="bukti" id="bukti"/>
                 <span class="file-cta">
                   <span class="file-icon">
                     <i class="fas fa-upload"></i>
@@ -52,15 +72,15 @@
                     Upload Foto
                   </span>
                 </span>
-                <span class="file-name">
-                  Nama File
+                <span id="filename" class="file-name">
+                  <?= ($pendaftaran->bukti_bayar == "" ? "Pilih berkas foto terlebih dahulu" : $pendaftaran->bukti_bayar); ?>
                 </span>
               </label>
             </div>
           </div>
           <div class="field is-grouped">
             <div class="control">
-              <input type="submit" name="kirim" value="Simpan" class="button is-link">
+              <input onclick="trySaveBayar('<?= base_url(); ?>');" type="submit" id="simpan" name="kirim" value="Simpan" class="button is-link">
             </div>
           </div>
         </form>
