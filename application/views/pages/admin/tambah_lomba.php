@@ -69,6 +69,24 @@
                                         </div>
                                     </div>
                                     <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="input-nama">Keterangan</label>
+                                                <select name="keterangan" class="form-control form-control-alternative">
+                                                    <option value="">Pilih Keterangan Lomba</option>
+                                                    <option value="individu">Individu</option>
+                                                    <option value="kelompok">Kelompok</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="input-nama">Jumlah Anggota</label>
+                                                <input type="number" name="jumlah" class="form-control form-control-alternative" placeholder="Dihitung anggota saja (koor tidak masuk)">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
                                         <div class="col-lg-12">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-nama">Deskripsi</label>

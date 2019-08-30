@@ -66,7 +66,25 @@
                                         <div class="col-lg-12">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-nama">Tema</label>
-                                                <input type="text" name="tema" class="form-control form-control-alternative" placeholder="Masukkan tema perlombaan">
+                                                <input type="text" name="tema" class="form-control form-control-alternative" placeholder="Masukkan tema perlombaan" value="<?=$lomba[0]['tema']?>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="input-nama">Keterangan</label>
+                                                <select name="keterangan" class="form-control form-control-alternative">
+                                                    <option value="">Pilih Keterangan Lomba</option>
+                                                    <option value="individu" <?php if($lomba[0]['keterangan'] == "individu"){ echo "selected"; } ?>>Individu</option>
+                                                    <option value="kelompok" <?php if($lomba[0]['keterangan'] == "kelompok"){ echo "selected"; } ?>>Kelompok</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="input-nama">Jumlah Anggota</label>
+                                                <input type="number" name="jumlah" class="form-control form-control-alternative" value="<?=$lomba[0]['jumlah_anggota']?>" placeholder="Dihitung anggota saja (koor tidak masuk)">
                                             </div>
                                         </div>
                                     </div>
