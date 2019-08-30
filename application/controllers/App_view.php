@@ -414,6 +414,18 @@ class App_view extends CI_Controller{
         $this->upload->initialize($config);
     }
 
+    private function _uploadSurat($name)
+    {
+        if (!file_exists('assets/dump/' . $this->session->userdata('id'))) {
+            mkdir('assets/dump/' . $this->session->userdata('id'), 0777, true);
+        }
+        $config['upload_path'] = 'assets/dump/' . $this->session->userdata('id');
+        $config['allowed_types'] = 'pdf';
+        $config['file_name'] = $name;
+        $config['overwrite'] = true;
+        $this->upload->initialize($config);
+    }
+
     private function _uploadBukti($name)
     {
         if (!file_exists('assets/dump/' . $this->session->userdata('id'))) {
@@ -432,7 +444,7 @@ class App_view extends CI_Controller{
             mkdir('assets/dump/' . $this->session->userdata('id'), 0777, true);
         }
         $config['upload_path'] = 'assets/dump/' . $this->session->userdata('id');
-        $config['allowed_types'] = 'zip';
+        $config['allowed_types'] = 'zip|rar';
         $config['file_name'] = $name;
         $config['overwrite'] = true;
         $this->upload->initialize($config);
@@ -716,19 +728,19 @@ class App_view extends CI_Controller{
                 $filenameP = "File-" . $pendaftaran->id . "." . $extP;
                 $this->_uploadLomba($filenameP);
                 if (!$this->upload->do_upload('perlombaan')) {
-                    echo "error: " . $this->upload->display_errors() . "<br>";
+                    echo "<script>$('#warnings').addClass('notification is-danger');</script>Error: " . $this->upload->display_errors() . "<br>";
                 } else {
                     $pathS = $_FILES['surat']['name'];
                     $ext = pathinfo($pathS, PATHINFO_EXTENSION);
                     $filenameS = "Surat-" . $pendaftaran->id . "." . $ext;
-                    $this->_uploadFile($filenameS);
+                    $this->_uploadSurat($filenameS);
                     $userfile = 'assets/dump/' . $this->session->userdata('id') . "/" . $filenameP;
                     $responseP = json_decode($this->dropbox->uploadNewFile("/" . $koor->id . "/", $userfile));
                     // bebersih data
                     // die(json_encode($responseP));
                     unlink($userfile);
                     if (!$this->upload->do_upload('surat')) {
-                        echo "error: " . $this->upload->display_errors() . "<br>";
+                        echo "<script>$('#warnings').addClass('notification is-danger');</script>Error: " . $this->upload->display_errors() . "<br>";
                     } else {
                         $userfile = 'assets/dump/' . $this->session->userdata('id') . "/" . $filenameS;
                         $response = json_decode($this->dropbox->uploadNewFile("/" . $koor->id . "/", $userfile));
@@ -747,10 +759,16 @@ class App_view extends CI_Controller{
                             ), array(
                                 'id' => $this->session->userdata('id')
                             ));
-                            redirect('user', 'refresh');
+                            //redirect('user', 'refresh');
                         }
                         // die();
-                        redirect('user', 'refresh');
+                        echo "<script>
+                            $('#warnings').addClass('notification is-primary');
+                            $('#warnings').html('Berhasil mengunggah semua berkas. Silakan tunggu...');
+                            setTimeout(function() {
+                                location.reload();
+                            }, 2500);
+                        </script>";
                     }
                 }
             } else {
@@ -851,9 +869,15 @@ class App_view extends CI_Controller{
                         $this->load->view('component/ground');
                         break;
                     case 4:
-                        $this->load->view('component/header',$payload);
-                        $this->load->view('pages/user/user_step_submission',$payload);
-                        $this->load->view('component/ground');
+                    $getinfo = $this->db->select('*')
+                                        ->from('tb_pendaftaran')
+                                        ->where('id_koor', $koor->id)
+                                        ->get()
+                                        ->row();
+                    $payload['submit'] = $getinfo;
+                    $this->load->view('component/header',$payload);
+                    $this->load->view('pages/user/user_step_submission', $payload);
+                    $this->load->view('component/ground');
                         break;
                 }
             } else {
@@ -907,8 +931,14 @@ class App_view extends CI_Controller{
                 $this->load->view('component/ground');
             }else if($payload['step'] == 4){
                 //submisi file
+                $getinfo = $this->db->select('*')
+                                    ->from('tb_pendaftaran')
+                                    ->where('id_koor', $koor->id)
+                                    ->get()
+                                    ->row();
+                $payload['submit'] = $getinfo;
                 $this->load->view('component/header',$payload);
-                $this->load->view('pages/user/user_step_submission');
+                $this->load->view('pages/user/user_step_submission', $payload);
                 $this->load->view('component/ground');
             }else{
                 //undefined

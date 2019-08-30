@@ -46,6 +46,7 @@
             var step = "<?= @$step; ?>";
             var ket  = "<?= @$keterangan; ?>"
         </script>
+        <script src="<?= base_url()?>assets/app/js/warning.js"></script>
         <script src="<?= base_url()?>assets/app/js/step.js"></script>
         <!--script src="assets/js/particlesjs/particles.min.js"></script-->
         <script src="<?= base_url()?>assets/app/js/aos/aos.js"></script>

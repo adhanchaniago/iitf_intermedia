@@ -90,7 +90,7 @@
 
       <!-- foto koor -->
       <div class="field">
-        <label class="label">Kartu Identitas (KTP/SIM/Kartu Pelajar) (ekstensi diterima: PDF, DOC, DOCX)</label>
+        <label class="label">Kartu Identitas (KTP/SIM/Kartu Pelajar) (ekstensi diterima: PDF, DOC, DOCX; Batas maksimum: 10 MB)</label>
         <div class="control">
           <div class="file is-info has-name">
             <label class="file-label">

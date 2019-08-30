@@ -5,7 +5,12 @@ $(document).ready(function () {
             alert("Hanya format file berikut yang dapat diterima : "+fileExtension.join(', '));
         } else {
             var namafile = e.target.files[0].name;
-            $("#filename").html(namafile);
+            var ukurfile = e.target.files[0].size;
+            if (ukurfile <= (10 * Math.pow(2, 20))) {
+                $("#filename").html(namafile);
+            } else {
+                alert("Ukuran file tersebut terlalu besar. Batas maksimum ukuran file adalah 10 MB");
+            }
         }
     });
 
@@ -15,7 +20,42 @@ $(document).ready(function () {
             alert("Hanya format file berikut yang dapat diterima : "+fileExtension.join(', '));
         } else {
             var namafile = e.target.files[0].name;
-            $("#filename").html(namafile);
+            var ukurfile = e.target.files[0].size;
+            if (ukurfile <= (10 * Math.pow(2, 20))) {
+                $("#filename").html(namafile);
+            } else {
+                alert("Ukuran file tersebut terlalu besar. Batas maksimum ukuran file adalah 10 MB");
+            }
+        }
+    });
+
+    $("#perlombaan").change(function (e) {
+        var fileExtension = ['zip', 'rar'];
+        if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+            alert("Hanya format file berikut yang dapat diterima : "+fileExtension.join(', '));
+        } else {
+            var namafile = e.target.files[0].name;
+            var ukurfile = e.target.files[0].size;
+            if (ukurfile <= (50 * Math.pow(2, 20))) {
+                $("#filename1").html(namafile);
+            } else {
+                alert("Ukuran file tersebut terlalu besar. Batas maksimum ukuran file adalah 50 MB");
+            }
+        }
+    });
+
+    $("#surat").change(function (e) {
+        var fileExtension = ['pdf'];
+        if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+            alert("Hanya format file berikut yang dapat diterima : "+fileExtension.join(', '));
+        } else {
+            var namafile = e.target.files[0].name;
+            var ukurfile = e.target.files[0].size;
+            if (ukurfile <= (10 * Math.pow(2, 20))) {
+                $("#filename2").html(namafile);
+            } else {
+                alert("Ukuran file tersebut terlalu besar. Batas maksimum ukuran file adalah 10 MB");
+            }
         }
     });
 });
@@ -87,6 +127,49 @@ function trySelect(home, id, koors) {
     });
 }
 
+function submission(home) {
+    $("#progress").html("Proses unggah data: <progress></progress><br>");
+    $("#simpan").addClass("is-loading");
+    $.ajax({
+        url : home + "user/submission",
+        type : "POST",
+        data : new FormData($("form")[0]),
+        cache: false,
+        contentType: false,
+        processData: false,
+
+        // Custom XMLHttpRequest
+        xhr: function () {
+        var myXhr = $.ajaxSettings.xhr();
+            if (myXhr.upload) {
+                // For handling the progress of the upload
+                myXhr.upload.addEventListener('progress', function (e) {
+                if (e.lengthComputable) {
+                    $('progress').attr({
+                    value: e.loaded,
+                    max: e.total,
+                    });
+                }
+                }, false);
+            }
+            return myXhr;
+        },
+        error : function(xhr, ajaxOptions, thrownError){
+            console.log(xhr.status);
+            console.log(xhr.responseText);
+            console.log(thrownError);
+        },
+        success : function(data){
+            //alert(data);
+            $('#warnings').html(data);
+        },
+        complete : function (data) {
+            $("#progress").html("");
+            $("#simpan").removeClass("is-loading");
+        }
+    });
+}
+
 function trySaveBayar(home) {
     $("#progress").html("Proses unggah data: <progress></progress><br>");
     $("#simpan").addClass("is-loading");
@@ -122,10 +205,12 @@ function trySaveBayar(home) {
         success : function(data){
             //alert(data);
             $('#warning').html(data);
+        },
+        complete : function (data) {
+            $("#progress").html("");
             $("#simpan").removeClass("is-loading");
         }
     });
-    
 }
 
 function trySaveKoor(home) {
@@ -163,6 +248,9 @@ function trySaveKoor(home) {
         success : function(data){
             //alert(data);
             $('#warnings').html(data);
+        },
+        complete : function (data) {
+            $("#progress").html("");
             $("#simpan").removeClass("is-loading");
         }
     });

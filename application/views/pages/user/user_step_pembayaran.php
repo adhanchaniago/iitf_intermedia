@@ -58,7 +58,7 @@
       <div id="progress"></div>
 
       <div class="field">
-        <label class="label">Bukti Transfer (ekstensi diterima: JPG, JPEG, PNG)</label>
+        <label class="label">Bukti Transfer (ekstensi diterima: JPG, JPEG, PNG; Batas maksimum: 10 MB)</label>
         <form action="javascript:trySaveBayar('<?= base_url(); ?>');" method="POST" enctype="multipart/form-data">
           <div class="field is-grouped">
             <div class="file is-boxed is-success has-name">
