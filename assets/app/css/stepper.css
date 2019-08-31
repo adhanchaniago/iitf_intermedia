@@ -60,7 +60,7 @@ body {
   position: relative;
   margin: auto;
 }
-.steps-success::before {
+/* .steps-success::before {
   content: "";
   position: absolute;
   top: 0;
@@ -69,7 +69,7 @@ body {
   background-color: var(--success-color);
   left: calc(50px / 2);
   z-index: 1;
-}
+} */
 
 .steps-success::after {
   content: "";
