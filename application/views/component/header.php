@@ -15,7 +15,7 @@
         <!--Core CSS -->
         <link rel="stylesheet" href="<?= base_url()?>assets/app/css/bulma.css">
         <link rel="stylesheet" href="<?= base_url()?>assets/app/css/core.css">
-        <!--Libraries-->
+		 <!--Libraries-->
         <link rel="stylesheet" href="<?= base_url()?>assets/app/fonts/cryptofont/css/cryptofont.min.css">
         <link rel="stylesheet" href="<?= base_url()?>assets/app/js/modalvideo/modal-video.min.css">
         <link rel="stylesheet" href="<?= base_url()?>assets/app/js/aos/aos.css">
@@ -23,6 +23,11 @@
 
         <script type="text/javascript" src="<?= base_url()?>assets/app/parallax.js">
         </script>
-
+		<?php if( $page == "dashboard"){?>
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+			<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.1.0/css/bulma.min.css">
+		 
+		  <link rel="stylesheet" type="text/css" href="<?= base_url()?>assets/app/css/user.css">
+		<?php }?>
     </head>
     <body>

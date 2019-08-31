@@ -15,6 +15,16 @@ class App_view extends CI_Controller{
         $this->load->library('dropbox');
     }
 
+	public function dash(){
+		$payload['judul'] = "HOME";
+        $payload['link'] = ($this->session->userdata('email') == "" ? base_url('login') : base_url('user'));
+        $payload['email'] = ($this->session->userdata('email') == "" ? "" : "LANJUTKAN DAFTAR: " . $this->session->userdata('email'));
+        $payload['page'] = "dashboard";
+        $lomba = $this->DataModel->getData('tb_lomba')->result_array();
+		$this->load->view('component/header',$payload);
+		$this->load->view('pages/user/user_dashboard');
+		$this->load->view('component/ground');
+	}
     //HomePage
     public function index()
     {
@@ -72,10 +82,10 @@ class App_view extends CI_Controller{
         $payload['judul'] = "HOME";
         $payload['link'] = ($this->session->userdata('email') == "" ? base_url('login') : base_url('user'));
         $payload['email'] = ($this->session->userdata('email') == "" ? "" : "LANJUTKAN DAFTAR: " . $this->session->userdata('email'));
-        $payload['page'] = "home";
+        $payload['page'] = "kosong";
         $payload['lomba'] = $lomba;
         $this->load->view('component/header',$payload);
-        $this->load->view('src/iitf_detail_lomba');
+        $this->load->view('src/iitf_detail_lomba',$payload);
         $this->load->view('component/ground');
     }
     public function loginProcess()
@@ -808,7 +818,7 @@ class App_view extends CI_Controller{
         $payload['judul'] = "PENDAFTARAN LOMBA";
         $payload['link'] = ($this->session->userdata('email') == "" ? base_url('login') : base_url('user'));
         $payload['email'] = ($this->session->userdata('email') == "" ? "" : $this->session->userdata('email'));
-        $payload['page'] = "steps";
+        $payload['page'] = "step";
         $payload['nama'] = $koor->nama;
         $payload['nohp'] = $koor->no_hp;
         $payload['inst'] = $koor->institusi;
