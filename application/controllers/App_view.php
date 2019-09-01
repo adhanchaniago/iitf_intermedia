@@ -2,7 +2,8 @@
 defined('BASEPATH') OR exit ('No direct script access allowed');
 
 
-class App_view extends CI_Controller{
+class App_view extends CI_Controller
+{
 
     public function __construct()
     {
@@ -15,11 +16,42 @@ class App_view extends CI_Controller{
         $this->load->library('dropbox');
     }
 
-	public function dash(){
-		$payload['judul'] = "HOME";
+    public function dash()
+    {
+        $check = $this->db->get_where('tb_user', array(
+            'id' => $this->session->userdata('id'),
+            'email' => $this->session->userdata('email'),
+            'status' => 'true'
+        ));
+
+        $koor = null;
+        $userdata = $check->row();
+        if ($check->num_rows() == 0) {
+            $this->session->sess_destroy(); // fix ERROR 400: BAD REQUEST
+            redirect('login');
+        } else {
+            $koorq = $this->db->get_where('tb_koor', array(
+                'id_user' => $this->session->userdata('id')
+            ));
+            $koor = $koorq->row();
+        }
+
+        $pengumuman = $this->DataModel->order_by('tanggal','desc');
+        $pengumuman = $this->DataModel->getData('tb_pengumuman')->result_array();
+        $ket = $this->db->query('SELECT * FROM listlomba a INNER JOIN tb_pendaftaran b ON a.id = b.id_lomba WHERE b.id_koor = "' . $koor->id . '"')->row();
+        $pendaftaran = $this->DataModel->getWhere('id_koor',$koor->id);
+        $pendaftaran = $this->DataModel->getData('tb_pendaftaran')->row();
+        $jml = $this->DataModel->getWhere('id_pendaftaran',$pendaftaran->id);
+        $jml = $this->DataModel->getData('tb_anggota')->result_array();
+        $payload['judul'] = "HOME";
         $payload['link'] = ($this->session->userdata('email') == "" ? base_url('login') : base_url('user'));
         $payload['email'] = ($this->session->userdata('email') == "" ? "" : "LANJUTKAN DAFTAR: " . $this->session->userdata('email'));
         $payload['page'] = "dashboard";
+        $payload['koor'] = $koor;
+        $payload['lomba'] = $ket;
+        $payload['anggota'] = $jml;
+        $payload['pendaftaran'] = $pendaftaran;
+        $payload['pengumuman'] = $pengumuman;
         $lomba = $this->DataModel->getData('tb_lomba')->result_array();
 		$this->load->view('component/header',$payload);
 		$this->load->view('pages/user/user_dashboard');
@@ -51,7 +83,8 @@ class App_view extends CI_Controller{
         $this->load->view('component/ground');
     }
 
-    public function login(){
+    public function login()
+    {
         $check = $this->db->get_where('tb_user', array(
             'id' => $this->session->userdata('id'),
             'email' => $this->session->userdata('email')
@@ -69,13 +102,14 @@ class App_view extends CI_Controller{
         $this->load->view('component/ground');
     }
 
-    public function detailLomba(){
+    public function detailLomba()
+    {
         $judul = $this->input->get('lomba');
 
-        $lomba = $this->DataModel->select('tb_lomba.nama,tb_lomba.deskripsi,tb_lomba.harga,tb_lomba.guide_book,tb_lomba.tema,tb_juara.nominal as juara,tb_kategori.nama as kategori');
-        $lomba = $this->DataModel->getWhere('tb_lomba.nama',$judul);
-        $lomba = $this->DataModel->getJoin('tb_juara','tb_juara.id_lomba = tb_lomba.id','inner');
-        $lomba = $this->DataModel->getJoin('tb_kategori','tb_kategori.id = tb_lomba.id_kategori','inner');
+        $lomba = $this->DataModel->select('tb_lomba.nama,tb_lomba.deskripsi,tb_lomba.harga,tb_lomba.guide_book,tb_lomba.tema,tb_juara.nominal as juara,tb_kategori.nama as kategori,tb_lomba.file_gambar');
+        $lomba = $this->DataModel->getWhere('tb_lomba.nama', $judul);
+        $lomba = $this->DataModel->getJoin('tb_juara', 'tb_juara.id_lomba = tb_lomba.id', 'inner');
+        $lomba = $this->DataModel->getJoin('tb_kategori', 'tb_kategori.id = tb_lomba.id_kategori', 'inner');
         $lomba = $this->DataModel->getData('tb_lomba')->result_array();
         
         // die(json_encode($lomba));
@@ -264,11 +298,10 @@ class App_view extends CI_Controller{
     {
         $id = $this->input->get('id');
         $code = $this->input->get('code');
-
         $cek = $this->DataModel->select('email,code');
         $cek = $this->DataModel->getWhere('id', base64_decode($id));
         $cek = $this->DataModel->getData('tb_user')->row();
-        // die(json_encode($cek));
+        // die(json_encode(base64_decode($id)));
         // die(json_encode($cek->code == base64_decode($code)));
         if ($cek->code == base64_decode($code)) {
             $data = array(
@@ -392,23 +425,6 @@ class App_view extends CI_Controller{
                     'id' => $this->session->userdata('id')
                 ));
             }
-        } else {
-            $cek = $this->DataModel->getWhere('id', $idlomba);
-            $cek = $this->DataModel->getData('tb_lomba')->row();
-            // echo $cek;
-            if ($cek->keterangan == "individu") {
-                $this->db->update('tb_user', array(
-                    'step_selesai' => 3
-                ), array(
-                    'id' => $this->session->userdata('id')
-                ));
-            } else {
-                $this->db->update('tb_user', array(
-                    'step_selesai' => 2
-                ), array(
-                    'id' => $this->session->userdata('id')
-                ));
-            }
         }
     }
 
@@ -421,6 +437,7 @@ class App_view extends CI_Controller{
         $config['allowed_types'] = 'pdf|doc|docx';
         $config['file_name'] = $name;
         $config['overwrite'] = true;
+        $config['max_size'] = 1024;
         $this->upload->initialize($config);
     }
 
@@ -433,6 +450,7 @@ class App_view extends CI_Controller{
         $config['allowed_types'] = 'pdf';
         $config['file_name'] = $name;
         $config['overwrite'] = true;
+        $config['max_size'] = 2048;
         $this->upload->initialize($config);
     }
 
@@ -445,6 +463,7 @@ class App_view extends CI_Controller{
         $config['allowed_types'] = 'jpg|jpeg|png';
         $config['file_name'] = $name;
         $config['overwrite'] = true;
+        $config['max_size'] = 1024;
         $this->upload->initialize($config);
     }
 
@@ -457,6 +476,7 @@ class App_view extends CI_Controller{
         $config['allowed_types'] = 'zip|rar';
         $config['file_name'] = $name;
         $config['overwrite'] = true;
+        $config['max_size'] = 10000;
         $this->upload->initialize($config);
     }
 
@@ -469,7 +489,7 @@ class App_view extends CI_Controller{
 
         $this->form_validation->set_rules('nama', 'Nama Lengkap', 'required');
         $this->form_validation->set_rules('no_hp', 'Nomor Telepon/WA', 'required');
-        $this->form_validation->set_rules('email', 'E-Mail', 'valid_email|callback_email_check');
+        // $this->form_validation->set_rules('email', 'E-Mail', 'valid_email|callback_email_check');
         $this->form_validation->set_rules('instansi', 'Asal Instansi', 'required');
 
         if ($this->form_validation->run() != false) {
@@ -500,15 +520,15 @@ class App_view extends CI_Controller{
 
                     if ($response->http_code == 200) {
                         // berhasil upload ke Dropbox
-                        $this->db->update('tb_user', array(
-                            'email' => $email
-                        ), array(
-                            'id' => $this->session->userdata('id')
-                        ));
-                        
+                        // $this->db->update('tb_user', array(
+                        //     'email' => $email
+                        // ), array(
+                        //     'id' => $this->session->userdata('id')
+                        // ));
+
                         $this->db->update('tb_koor', array(
                             'nama' => $nama,
-                            'email' => $email,
+                            // 'email' => $email,
                             'no_hp' => $nohp,
                             'institusi' => $instansi,
                             'lampiran_identitas' => $path
@@ -547,15 +567,15 @@ class App_view extends CI_Controller{
                 if ($step_lalu < 1) {
                     echo "<script>$('#warnings').addClass('notification is-danger');</script>Anda wajib mengunggah foto Anda.";
                 } else {
-                    $this->db->update('tb_user', array(
-                        'email' => $email
-                    ), array(
-                        'id' => $this->session->userdata('id')
-                    ));
-                    
+                    // $this->db->update('tb_user', array(
+                    //     'email' => $email
+                    // ), array(
+                    //     'id' => $this->session->userdata('id')
+                    // ));
+
                     $this->db->update('tb_koor', array(
                         'nama' => $nama,
-                        'email' => $email,
+                        // 'email' => $email,
                         'no_hp' => $nohp,
                         'institusi' => $instansi
                     ), array(
@@ -636,12 +656,29 @@ class App_view extends CI_Controller{
                         }
                         unset($dataa);
                     }
-                    $i++;
-                    $n++;
                 } else {
-                    echo "<script>$('#warnings').addClass('notification is-danger');</script>Anda wajib mengunggah identitas anggota anda.";
+                    // var_dump($id[$i]);
+                    // die();
+                    if (isset($id[$i])) {
+                        $dataa = array(
+                            "id_pendaftaran" => $pendaftaran->id,
+                            "nama" => $val,
+                            "no_hp" => $nohp[$i],
+                        );
+                        $this->DataModel->getWhere('id', $id[$i]);
+                        $this->DataModel->update('tb_anggota', $dataa);
+                    } else {
+                        $this->session->set_flashdata('pesan', ',<div class="notification is-danger">Anda Belum Mengupload lampiran identitas</div>');
+                        redirect('user?step=2', 'refresh');
+                        die();
+                        // break;
+                        // echo "<script>$('#warnings').addClass('notification is-danger');</script>Anda wajib mengunggah identitas anggota anda.";
+                    }
                 }
+                $i++;
+                $n++;
             }
+            // die();
             // die(json_encode($dataa));
             if ($step_lalu < 3) {
                 $this->db->update('tb_user', array(
@@ -695,14 +732,14 @@ class App_view extends CI_Controller{
                 // echo "update";
                 $this->DataModel->getWhere('id', $pendaftaran->id);
                 $this->DataModel->update('tb_pendaftaran', $dataa);
-                if ($step_lalu < 4) {
-                    $this->db->update('tb_user', array(
-                        'step_selesai' => 4
-                    ), array(
-                        'id' => $this->session->userdata('id')
-                    ));
-                    redirect('user', 'refresh');
-                }
+                // if ($step_lalu < 4) {
+                //     $this->db->update('tb_user', array(
+                //         'step_selesai' => 4
+                //     ), array(
+                //         'id' => $this->session->userdata('id')
+                //     ));
+                //     redirect('user', 'refresh');
+                // }
                 // die();
                 echo "<script>
                         $('#warning').addClass('notification is-primary');
@@ -765,7 +802,7 @@ class App_view extends CI_Controller{
                         $this->DataModel->update('tb_pendaftaran', $dataa);
                         if ($step_lalu < 4) {
                             $this->db->update('tb_user', array(
-                                'step_selesai' => 4
+                                'step_selesai' => 5
                             ), array(
                                 'id' => $this->session->userdata('id')
                             ));
@@ -815,6 +852,17 @@ class App_view extends CI_Controller{
             $ket == null;
         }
 
+        $pendaftaran = $this->DataModel->select('status');
+        $pendaftaran = $this->DataModel->getWhere('id_koor', $koor->id);
+        $pendaftaran = $this->DataModel->getData('tb_pendaftaran')->row();
+        // die(json_encode($pendaftaran));
+
+        if ($pendaftaran != null) {
+            $pendaftaran = $pendaftaran->status;
+        } else {
+            $pendaftaran = "";
+        }
+
         $payload['judul'] = "PENDAFTARAN LOMBA";
         $payload['link'] = ($this->session->userdata('email') == "" ? base_url('login') : base_url('user'));
         $payload['email'] = ($this->session->userdata('email') == "" ? "" : $this->session->userdata('email'));
@@ -825,6 +873,7 @@ class App_view extends CI_Controller{
         $payload['lampiran'] = ($koor->lampiran_identitas == "" ? "Pilih berkas foto terlebih dahulu" : $koor->lampiran_identitas);
         $payload['step'] = $userdata->step_selesai;
         $payload['keterangan'] = $ket;
+        $payload['status'] = $pendaftaran;
 
         @$loadstep = $this->input->get('step');
         if (isset($loadstep)) {
@@ -841,14 +890,23 @@ class App_view extends CI_Controller{
                         $this->db->from('listlomba');
                         $listlomba = $this->db->get()->result_array();
                         $payload['listlomba'] = $listlomba;
+                        // $pendaftaran = $this->DataModel->select('bukti_bayar');
+                        $pendaftaran = $this->DataModel->getWhere('id_koor', $koor->id);
+                        $pendaftaran = $this->DataModel->getData('tb_pendaftaran')->row();
+                        if ($pendaftaran == null) {
+                            $pendaftaran = "";
+                        } else {
+                            $pendaftaran = $pendaftaran->bukti_bayar;
+                        }
 
+                        $payload['bukti'] = $pendaftaran;
                         $query = $this->db->query('SELECT b.id_koor, a.namalomba FROM listlomba a INNER JOIN tb_pendaftaran b ON a.id = b.id_lomba WHERE b.id_koor = "' . $koor->id . '"');
                         $getnumrow = $query->num_rows();
                         $payload['lombaterpilih'] = FALSE;
                         if ($getnumrow > 0) {
                             $payload['lombaterpilih'] = $query->row()->namalomba;
                         }
-
+                        // die(json_encode($payload));
                         $this->load->view('component/header', $payload);
                         $this->load->view('pages/user/user_step_pilih_lomba', $payload);
                         $this->load->view('component/ground');
@@ -862,13 +920,13 @@ class App_view extends CI_Controller{
                         $anggota = $this->DataModel->getData('tb_anggota')->result_array();
                         $payload['langgota'] = $anggota;
                         $payload['pendaftaran'] = $pendaftaran;
-                        // die(json_encode($payload));
+
                         $this->load->view('component/header', $payload);
                         $this->load->view('pages/user/user_step_team', $payload);
                         $this->load->view('component/ground');
                         break;
                     case 3:
-                        $query = $this->db->query('SELECT b.id, b.tanggal_daftar, b.bukti_bayar, a.harga, b.nama_team, a.jumlah_anggota, b.id_koor, a.namalomba, a.keterangan FROM listlomba a INNER JOIN tb_pendaftaran b ON a.id = b.id_lomba WHERE b.id_koor = "' . $koor->id . '"');
+                        $query = $this->db->query('SELECT b.id, b.tanggal_daftar, b.bukti_bayar,b.status, a.harga, b.nama_team, a.jumlah_anggota, b.id_koor, a.namalomba, a.keterangan FROM listlomba a INNER JOIN tb_pendaftaran b ON a.id = b.id_lomba WHERE b.id_koor = "' . $koor->id . '"');
                         //$query = $this->db->query('SELECT b.id_koor, a.harga FROM listlomba a INNER JOIN tb_pendaftaran b ON a.id = b.id_lomba WHERE b.id_koor = "' . $koor->id . '"');
 
                         $payload['lomba'] = $query->row();
@@ -889,6 +947,9 @@ class App_view extends CI_Controller{
                     $this->load->view('pages/user/user_step_submission', $payload);
                     $this->load->view('component/ground');
                         break;
+                    case 5:
+                        redirect('user/dashboard');
+                        break;
                 }
             } else {
                 redirect(base_url('user'),'refresh');
@@ -906,8 +967,19 @@ class App_view extends CI_Controller{
                 $this->db->from('listlomba');
                 $listlomba = $this->db->get()->result_array();
                 $payload['listlomba'] = $listlomba;
+                // $pendaftaran = $this->DataModel->select('bukti_bayar');
+                $pendaftaran = $this->DataModel->getWhere('id_koor', $koor->id);
+                $pendaftaran = $this->DataModel->getData('tb_pendaftaran')->row();
+                // die(json_encode($pendaftaran));
 
-                $query = $this->db->query('SELECT b.id_koor, a.namalomba, a.keterangan FROM listlomba a INNER JOIN tb_pendaftaran b ON a.id = b.id_lomba WHERE b.id_koor = "' . $koor->id . '"');
+                if ($pendaftaran == null) {
+                    $pendaftaran = "";
+                } else {
+                    $pendaftaran = $pendaftaran->bukti_bayar;
+                }
+
+                $payload['bukti'] = $pendaftaran;
+                $query = $this->db->query('SELECT b.id_koor, a.namalomba,a.keterangan FROM listlomba a INNER JOIN tb_pendaftaran b ON a.id = b.id_lomba WHERE b.id_koor = "' . $koor->id . '"');
                 $getnumrow = $query->num_rows();
                 $payload['lombaterpilih'] = FALSE;
                 if ($getnumrow > 0) {
@@ -933,7 +1005,7 @@ class App_view extends CI_Controller{
                 $this->load->view('component/ground');
             } else if ($payload['step'] == 3) {
                 //pembayaran
-                $query = $this->db->query('SELECT b.id_koor, b.tanggal_daftar, b.bukti_bayar, b.nama_team, a.jumlah_anggota, a.harga, a.namalomba, b.id FROM listlomba a INNER JOIN tb_pendaftaran b ON a.id = b.id_lomba WHERE b.id_koor = "' . $koor->id . '"');
+                $query = $this->db->query('SELECT b.id_koor,b.status, b.tanggal_daftar, b.bukti_bayar, b.nama_team, a.jumlah_anggota, a.harga, a.namalomba, b.id FROM listlomba a INNER JOIN tb_pendaftaran b ON a.id = b.id_lomba WHERE b.id_koor = "' . $koor->id . '"');
                 $payload['pendaftaran'] = $query->row();
                 $payload['lomba'] = $query->row();
                 $this->load->view('component/header',$payload);
@@ -950,7 +1022,8 @@ class App_view extends CI_Controller{
                 $this->load->view('component/header',$payload);
                 $this->load->view('pages/user/user_step_submission', $payload);
                 $this->load->view('component/ground');
-            }else{
+            } else {
+                redirect('user/dashboard');
                 //undefined
             }
         }

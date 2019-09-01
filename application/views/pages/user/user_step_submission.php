@@ -15,7 +15,7 @@
       <div id="warnings" class=""></div>
       <form action="javascript:submission('<?= base_url(); ?>');" method="POST" enctype="multipart/form-data">
         <div class="field">
-          <label class="label">File Perlombaan (ekstensi diterima: ZIP, RAR; Batas Maksimum: 50 MB)</label>
+          <label class="label">File Perlombaan (ekstensi diterima: ZIP, RAR; Batas Maksimum: 10 MB)</label>
           <div class="control">
             <div class="file is-info has-name">
               <label class="file-label">
@@ -36,7 +36,7 @@
           </div>
         </div>
         <div class="field">
-          <label class="label">Surat Pernyataan Keaslian Produk (ekstensi diterima: PDF; Batas maksimum: 10 MB)</label>
+          <label class="label">Surat Pernyataan Keaslian Produk (ekstensi diterima: PDF; Batas maksimum: 2 MB)</label>
           <div class="control">
             <div class="file is-info has-name">
               <label class="file-label">

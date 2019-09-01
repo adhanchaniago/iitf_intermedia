@@ -4,9 +4,7 @@
   <div class="columns">
     <div class="column is-4">
       <?php $this->load->view('component/stepper')?>
-    </div>
-
-    
+    </div>  
     <!-- Nama -->
     <div class="column is-8 containerr">
       <h1 class="title">Biodata Peserta Lomba</h1>
@@ -56,6 +54,7 @@
         <div class="control has-icons-left has-icons-right">
           <input
             id="email"
+            disabled
             name="email"
             class="input"
             type="email"
@@ -90,7 +89,7 @@
 
       <!-- foto koor -->
       <div class="field">
-        <label class="label">Kartu Identitas (KTP/SIM/Kartu Pelajar) (ekstensi diterima: PDF, DOC, DOCX; Batas maksimum: 10 MB)</label>
+        <label class="label">Kartu Identitas (KTP/SIM/Kartu Pelajar) (ekstensi diterima: PDF, DOC, DOCX; Batas maksimum: 1 MB)</label>
         <div class="control">
           <div class="file is-info has-name">
             <label class="file-label">

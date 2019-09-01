@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 30 Agu 2019 pada 16.20
+-- Generation Time: 01 Sep 2019 pada 05.41
 -- Versi Server: 10.1.25-MariaDB
 -- PHP Version: 7.1.7
 
@@ -37,6 +37,7 @@ CREATE TABLE `listlomba` (
 ,`harga` float
 ,`keterangan` varchar(20)
 ,`jumlah_anggota` int(11)
+,`file_gambar` varchar(30)
 );
 
 -- --------------------------------------------------------
@@ -78,7 +79,10 @@ CREATE TABLE `tb_anggota` (
 
 INSERT INTO `tb_anggota` (`id`, `id_pendaftaran`, `nama`, `no_hp`, `lampiran_identitas`) VALUES
 (28, 'P-20190830072532', 'zaenurrochman', '08121323123', 'A-P-20190830072532_0.pdf'),
-(29, 'P-20190830072532', 'Juara 2', '08121323123', 'A-P-20190830072532_1.docx');
+(29, 'P-20190830072532', 'Juara 2', '08121323123', 'A-P-20190830072532_1.docx'),
+(34, 'P-20190831124314', 'jumadi', '081236790744', 'A-P-20190831124314_0.pdf'),
+(35, 'P-20190831101815', 'zaenurrochman', '098654564333', 'A-P-20190831101815_0.pdf'),
+(36, 'P-20190831101815', 'Kamto', '081578178182', 'A-P-20190831101815_1.pdf');
 
 -- --------------------------------------------------------
 
@@ -100,7 +104,11 @@ INSERT INTO `tb_juara` (`id_lomba`, `nama`, `nominal`) VALUES
 ('L-19081954', 'Juara 1', 1500000),
 ('L-19081954', 'Juara 2', 750000),
 ('L-27081903', 'Juara 1', 750000),
-('L-27081903', 'Juara 2', 500000);
+('L-27081903', 'Juara 2', 500000),
+('L-30081957', 'Juara 1', 750000),
+('L-30081957', 'Juara 2', 500000),
+('L-31081901', 'Juara 1', 10000000),
+('L-31081901', 'Juara 2', 5000000);
 
 -- --------------------------------------------------------
 
@@ -145,8 +153,10 @@ CREATE TABLE `tb_koor` (
 
 INSERT INTO `tb_koor` (`id`, `id_user`, `nama`, `email`, `no_hp`, `institusi`, `lampiran_identitas`) VALUES
 ('K-20190824173049', 'U-20190824173049', 'Dwi Candra Permana', 'dwichan@outlook.com', '', '', ''),
-('K-20190826081108', 'U-20190826081108', 'zaenur', 'zaenur.rochman98@outlook.com', '081578988248', 'amikom', ''),
-('K-20190827214106', 'U-20190827214106', 'zaenur', 'zaenur.rochman98@gmail.com', '081578988248', 'amikom', 'E_learning_16.11.0068_Metopel.pdf');
+('K-20190826081108', 'U-20190826081108', 'zaenur', 'zaenur.rochman98@outlook.com', '081578988248', 'amikomasdadasd', 'E_learning_16.11.0068_Metopel.pdf'),
+('K-20190827214106', 'U-20190827214106', 'zaenur', 'zaenur.rochman98@gmail.com', '081578988248', 'amikom', 'E_learning_16.11.0068_Metopel.pdf'),
+('K-20190831065005', 'U-20190831065005', 'Ammar Aryanto', '', '085312313313', 'UNWIKU', 'Metopel_Zaenurrochman.docx'),
+('K-20190831123503', 'U-20190831123503', 'Rahmat', 'rahmathidayatf@gmail.com', '081578178181', 'Universitas Amikom Purwokerto', 'Nilai_04-Maret-2019_14_01_55.pdf');
 
 -- --------------------------------------------------------
 
@@ -163,16 +173,19 @@ CREATE TABLE `tb_lomba` (
   `guide_book` varchar(50) NOT NULL,
   `harga` float NOT NULL,
   `keterangan` varchar(20) NOT NULL,
-  `jumlah_anggota` int(11) NOT NULL
+  `jumlah_anggota` int(11) NOT NULL,
+  `file_gambar` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `tb_lomba`
 --
 
-INSERT INTO `tb_lomba` (`id`, `id_kategori`, `nama`, `tema`, `deskripsi`, `guide_book`, `harga`, `keterangan`, `jumlah_anggota`) VALUES
-('L-19081954', 1, 'MOBILE APP', 'Industri 4.0', 'loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet ', 'Mobile_applicationIITF2019.pdf', 100000, 'kelompok', 2),
-('L-27081903', 4, 'DESIGN POSTER', 'Literasi Digital', 'loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet ', 'DESIGN_POSTERIITF2019.rar', 50000, 'individu', 0);
+INSERT INTO `tb_lomba` (`id`, `id_kategori`, `nama`, `tema`, `deskripsi`, `guide_book`, `harga`, `keterangan`, `jumlah_anggota`, `file_gambar`) VALUES
+('L-19081954', 1, 'MOBILE APP', 'Industri 4.0', 'loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet ', 'Mobile_applicationIITF2019.pdf', 100000, 'kelompok', 2, 'G-L-19081954.png'),
+('L-27081903', 4, 'DESIGN POSTER', 'Literasi Digital', 'loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet ', 'DESIGN_POSTERIITF2019.rar', 50000, 'individu', 0, 'G-L-27081903.png'),
+('L-30081957', 3, 'MOTION GRAPHIC', 'Edukasi Narkoba', 'loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet ', 'MOTION_GRAPHICIITF2019.zip', 75000, 'kelompok', 1, 'G-L-30081957.png'),
+('L-31081901', 3, 'WEB DESIGN', 'Industri 4.0', 'loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet ', 'TestingIITF2019.zip', 1000000000, 'individu', 0, 'G-L-31081901.png');
 
 -- --------------------------------------------------------
 
@@ -197,8 +210,10 @@ CREATE TABLE `tb_pendaftaran` (
 --
 
 INSERT INTO `tb_pendaftaran` (`id`, `id_koor`, `id_lomba`, `nama_team`, `bukti_bayar`, `status`, `lampiran_file`, `lampiran_surat`, `tanggal_daftar`) VALUES
-('P-20190829180544', 'K-20190826081108', 'L-27081903', '', '', 'unactive', '', '', '2019-08-29'),
-('P-20190830072532', 'K-20190827214106', 'L-19081954', 'intermedia', 'Bukti_pembayaran-P-20190830072532.pdf', 'unactive', 'File-P-20190830072532.zip', 'Surat-P-20190830072532.pdf', '2019-08-30');
+('P-20190830072532', 'K-20190827214106', 'L-19081954', 'intermedia', 'Bukti_pembayaran-P-20190830072532.pdf', 'active', 'File-P-20190830072532.zip', 'Surat-P-20190830072532.pdf', '2019-08-30'),
+('P-20190831065254', 'K-20190831065005', 'L-30081957', 'Mantu Idaman', 'Bukti_pembayaran-P-20190831065254.png', 'unactive', 'File-P-20190831065254.zip', 'Surat-P-20190831065254.pdf', '2019-08-31'),
+('P-20190831101815', 'K-20190826081108', 'L-19081954', 'Intermedia', '', 'unactive', '', '', '2019-08-31'),
+('P-20190831124314', 'K-20190831123503', 'L-19081954', 'BulakRanger', 'Bukti_pembayaran-P-20190831124314.png', 'active', '', '', '2019-08-31');
 
 -- --------------------------------------------------------
 
@@ -244,7 +259,9 @@ CREATE TABLE `tb_user` (
 INSERT INTO `tb_user` (`id`, `email`, `password`, `tanggal_reg`, `step_selesai`, `code`, `status`, `token`) VALUES
 ('U-20190824173049', 'dwichan@outlook.com', '$2a$08$OZM8jYmdROWfmiHcy1myWuJPmMmeucN7cNHtkFynGdUT0QmY2BexW', '2019-08-24', 0, '', '', ''),
 ('U-20190826081108', 'zaenur.rochman98@outlook.com', '$2a$08$Ci8hiMZYr6pxen4Apq9C9utuBk4z2CUkVnwiGR0I7uL9L7P7N/s5q', '2019-08-26', 3, 'ur7gtlPXVLvh', 'true', ''),
-('U-20190827214106', 'zaenur.rochman98@gmail.com', '$2a$08$dZKcxRokzG3/0myUcYBgju3RAtFEqFyPa7SJQIwFhj9JQYLMhwsrS', '2019-08-27', 4, 'CvqnYuIaE5dj', 'true', 'ceb2fef7b799c70189a4e00901ec34');
+('U-20190827214106', 'zaenur.rochman98@gmail.com', '$2a$08$dZKcxRokzG3/0myUcYBgju3RAtFEqFyPa7SJQIwFhj9JQYLMhwsrS', '2019-08-27', 5, 'CvqnYuIaE5dj', 'true', 'ceb2fef7b799c70189a4e00901ec34'),
+('U-20190831065005', '', '$2a$08$7sU0hvhBA1qaosg5z38yLu5qPrwTKKxnorRroXl6ZDwNxr1scvfDO', '2019-08-31', 4, 'T8q5OoRDlZ9K', 'true', ''),
+('U-20190831123503', 'rahmathidayatf@gmail.com', '$2a$08$4CC5iviHxg5D/iMZGHiLFO2qlDeI7SFnmHw6OFb6JhU2G46NIxVeq', '2019-08-31', 4, '6PRcKzTLUp4H', 'true', '');
 
 -- --------------------------------------------------------
 
@@ -253,7 +270,7 @@ INSERT INTO `tb_user` (`id`, `email`, `password`, `tanggal_reg`, `step_selesai`,
 --
 DROP TABLE IF EXISTS `listlomba`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `listlomba`  AS  select `a`.`id` AS `id`,`a`.`nama` AS `namalomba`,`b`.`nama` AS `kategori`,`a`.`deskripsi` AS `deskripsi`,`a`.`tema` AS `tema`,`a`.`harga` AS `harga`,`a`.`keterangan` AS `keterangan`,`a`.`jumlah_anggota` AS `jumlah_anggota` from (`tb_lomba` `a` join `tb_kategori` `b` on((`a`.`id_kategori` = `b`.`id`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `listlomba`  AS  select `a`.`id` AS `id`,`a`.`nama` AS `namalomba`,`b`.`nama` AS `kategori`,`a`.`deskripsi` AS `deskripsi`,`a`.`tema` AS `tema`,`a`.`harga` AS `harga`,`a`.`keterangan` AS `keterangan`,`a`.`jumlah_anggota` AS `jumlah_anggota`,`a`.`file_gambar` AS `file_gambar` from (`tb_lomba` `a` join `tb_kategori` `b` on((`a`.`id_kategori` = `b`.`id`))) ;
 
 --
 -- Indexes for dumped tables
@@ -329,7 +346,7 @@ ALTER TABLE `tb_user`
 -- AUTO_INCREMENT for table `tb_anggota`
 --
 ALTER TABLE `tb_anggota`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 --
 -- AUTO_INCREMENT for table `tb_kategori`
 --
