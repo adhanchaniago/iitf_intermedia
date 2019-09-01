@@ -244,13 +244,20 @@ class App_view extends CI_Controller
                                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                             </div>');
                     $uri = base_url('user');
-                    // die(json_encode($this->session->flashdata('pesan')));
-                    echo "<script>window.alert(\"Selamat $nama, Anda berhasil mendaftarkan diri ke Perlombaan IITF 2019!\\nKlik OK untuk mulai dialihkan ke halaman selanjutnya.\");window.location.href = \"" . $uri . "\";</script>";
+                    echo json_encode(
+						array(
+						"success" => true
+					));
+                    //echo "<script>window.alert(\"Selamat $nama, Anda berhasil mendaftarkan diri ke Perlombaan IITF 2019!\\nKlik OK untuk mulai dialihkan ke halaman selanjutnya.\");window.location.href = \"" . $uri . "\";</script>";
                     // return;
                 } else {
-                    echo $this->email->print_debugger();
+                    //echo $this->email->print_debugger();
                     // echo "<script>console.log($this->send_verification(base64_encode($idUser),$mail,base64_decode($code)))</script>";
-                    echo "<script>window.alert(\"Gagal mengirimkan verifikasi email error: \")</script>";
+					//echo "<script>window.alert(\"Gagal mengirimkan verifikasi email error: \")</script>";
+					echo json_encode(
+						array(
+						"success" => false
+					));
                 }
             }
         }

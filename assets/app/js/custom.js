@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 $(document).ready(function() {
   $("#resume").change(function(e) {
     var fileExtension = ["pdf", "doc", "docx"];
@@ -57,58 +56,102 @@ $(document).ready(function() {
       }
     }
   });
-=======
-$(document).ready(function () {
-    $("#resume").change(function (e) {
-        var fileExtension = ['pdf', 'doc', 'docx'];
-        if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
-            alert("Hanya format file berikut yang dapat diterima : "+fileExtension.join(', '));
-        } else {
-            var namafile = e.target.files[0].name;
-            var ukurfile = e.target.files[0].size;
-            if (ukurfile <= (10 * Math.pow(2, 20))) {
-                $("#filename").html(namafile);
-            } else {
-                alert("Ukuran file tersebut terlalu besar. Batas maksimum ukuran file adalah 1 MB");
-            }
-        }
-    });
-    // var x;
-    var i;
-    $(document).on('change','#identitas1, #identitas2, #identitas3, #identitas4',function (e) {
-        var fileExtension = ['pdf', 'doc', 'docx'];
-        if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
-            alert("Hanya format file berikut yang dapat diterima : " + fileExtension.join(', '));
-        } else {
-            var namafile = e.target.files[0].name;
-            var ukurfile = e.target.files[0].size;
-            i = this.id.slice(9);
-            console.log(i);
-            if (ukurfile <= (10 * Math.pow(2, 20))) {
-                $("#filename"+i).html(namafile);
-            } else {
-                alert("Ukuran file tersebut terlalu besar. Batas maksimum ukuran file adalah 1 MB");
-            }
-        }
-    });
 
-    // }
-
-    $("#bukti").change(function (e) {
-        var fileExtension = ['jpg', 'jpeg', 'png'];
-        if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
-            alert("Hanya format file berikut yang dapat diterima : "+fileExtension.join(', '));
+  $("#resume").change(function(e) {
+    var fileExtension = ["pdf", "doc", "docx"];
+    if (
+      $.inArray(
+        $(this)
+          .val()
+          .split(".")
+          .pop()
+          .toLowerCase(),
+        fileExtension
+      ) == -1
+    ) {
+      alert(
+        "Hanya format file berikut yang dapat diterima : " +
+          fileExtension.join(", ")
+      );
+    } else {
+      var namafile = e.target.files[0].name;
+      var ukurfile = e.target.files[0].size;
+      if (ukurfile <= 10 * Math.pow(2, 20)) {
+        $("#filename").html(namafile);
+      } else {
+        alert(
+          "Ukuran file tersebut terlalu besar. Batas maksimum ukuran file adalah 1 MB"
+        );
+      }
+    }
+  });
+  // var x;
+  var i;
+  $(document).on(
+    "change",
+    "#identitas1, #identitas2, #identitas3, #identitas4",
+    function(e) {
+      var fileExtension = ["pdf", "doc", "docx"];
+      if (
+        $.inArray(
+          $(this)
+            .val()
+            .split(".")
+            .pop()
+            .toLowerCase(),
+          fileExtension
+        ) == -1
+      ) {
+        alert(
+          "Hanya format file berikut yang dapat diterima : " +
+            fileExtension.join(", ")
+        );
+      } else {
+        var namafile = e.target.files[0].name;
+        var ukurfile = e.target.files[0].size;
+        i = this.id.slice(9);
+        console.log(i);
+        if (ukurfile <= 10 * Math.pow(2, 20)) {
+          $("#filename" + i).html(namafile);
         } else {
-            var namafile = e.target.files[0].name;
-            var ukurfile = e.target.files[0].size;
-            if (ukurfile <= (10 * Math.pow(2, 20))) {
-                $("#filename").html(namafile);
-            } else {
-                alert("Ukuran file tersebut terlalu besar. Batas maksimum ukuran file adalah 10 MB");
-            }
+          alert(
+            "Ukuran file tersebut terlalu besar. Batas maksimum ukuran file adalah 1 MB"
+          );
         }
-    });
->>>>>>> 62e6df881bbf9a227dd70f0f4a47389841c4bf03
+      }
+    }
+  );
+
+  // }
+
+  $("#bukti").change(function(e) {
+    var fileExtension = ["jpg", "jpeg", "png"];
+    if (
+      $.inArray(
+        $(this)
+          .val()
+          .split(".")
+          .pop()
+          .toLowerCase(),
+        fileExtension
+      ) == -1
+    ) {
+      alert(
+        "Hanya format file berikut yang dapat diterima : " +
+          fileExtension.join(", ")
+      );
+    } else {
+      var namafile = e.target.files[0].name;
+      var ukurfile = e.target.files[0].size;
+      if (ukurfile <= 10 * Math.pow(2, 20)) {
+        $("#filename").html(namafile);
+      } else {
+        alert(
+          "Ukuran file tersebut terlalu besar. Batas maksimum ukuran file adalah 10 MB"
+        );
+      }
+    }
+  });
 
   $("#perlombaan").change(function(e) {
     var fileExtension = ["zip", "rar"];
@@ -203,28 +246,99 @@ function tryRegister(home) {
   var p = $("#p").val();
   var p2 = $("#p2").val();
 
-  $("#modal-register").addClass("is-active");
-  $("#modal-sukses").hide();
-  $("#modal-loading").show();
+  // $("#modal-register").addClass("is-active");
+  // $("#modal-sukses").hide();
+  // $("#modal-loading").show();
 
-  $.ajax({
-    url: home + "register/registerprocess",
-    type: "POST",
-    data: "n=" + n + "&e=" + e + "&p=" + p + "&p2=" + p2,
-    error: function(xhr, ajaxOptions, thrownError) {
-      console.log(xhr.status);
-      console.log(xhr.responseText);
-      console.log(thrownError);
-    },
-    success: function(data) {
-      //alert(data);
-      // $("#regWarnings").html(data);
+  swal({
+    text: "Lanjutkan Mendaftar ?",
+    buttons: {
+      //here is the magic
+      confirm: {
+        text: "Oke",
+        className: "sweet-warning",
+        closeModal: false
+      }
+      // cancel: "Belum"
+    }
+  }).then(confirmed => {
+    if (confirmed) {
+      var update = $.ajax({
+        url: home + "register/registerprocess",
+        type: "POST",
+        data: "n=" + n + "&e=" + e + "&p=" + p + "&p2=" + p2,
+        error: function(xhr, ajaxOptions, thrownError) {
+          console.log(xhr.status);
+          console.log(xhr.responseText);
+          console.log(thrownError);
+        },
+        success: function(data) {}
+      });
 
-      $("#model-loading").hide();
-      $("#modal-sukses").show();
-      $("#modal-register").removeClass("is-active");
+      update.done(function(json) {
+        var data = JSON.parse(json);
+
+        if (data.success == "Internal Server Error") {
+          swal.stopLoading();
+          swal.close();
+          swal("gagal", "Email anda udah terdaftar", "danger").then(ok => {
+            //do anything
+          });
+        } else if (data.success == true) {
+          swal.stopLoading();
+          swal.close();
+          swal(
+            "Berhasil",
+            "Anda sudah terdaftar silahkan cek email untuk aktivasi akun",
+            "success"
+          ).then(ok => {
+            //do anything
+          });
+        } else if (data.success == false) {
+          swal.stopLoading();
+          swal.close();
+          swal("Gagal", "Anda gagal mendaftar", "danger").then(ok => {
+            //do anything
+          });
+        }
+      });
     }
   });
+
+  // swal(
+  //   {
+  //     text: "Lanjutkan Mendaftar",
+
+  //     button: {
+  //       text: "Oke",
+  //       closeModal: false
+  //     }
+  //   },
+  //   $.ajax({
+  //     url: home + "register/registerprocess",
+  //     type: "POST",
+  //     data: "n=" + n + "&e=" + e + "&p=" + p + "&p2=" + p2,
+  //     error: function(xhr, ajaxOptions, thrownError) {
+  //       console.log(xhr.status);
+  //       console.log(xhr.responseText);
+  //       console.log(thrownError);
+  //       if (xhr.status == 500 || xhr.status == "500") {
+  //       }
+  //     },
+  //     success: function(data) {
+  //       swal(
+  //         "Berhasil !",
+  //         "Akun anda sudah terdaftar silahkan cek email anda",
+  //         "success"
+  //       );
+  //       // alert(data);
+  //       // $("#regWarnings").html(data);
+  //       // $("#model-loading").hide();
+  //       // $("#modal-sukses").show();
+  //       // $("#modal-register").removeClass("is-active");
+  //     }
+  //   })
+  // );
 }
 
 function trySelect(home, id, koors) {

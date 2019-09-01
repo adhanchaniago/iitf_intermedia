@@ -63,6 +63,7 @@
             </div>
             
             <!-- Absolute image -->
-            <img class="solar-system" src="<?= base_url()?>assets/app/images/bg/solar.svg" alt="">
+			<img class="solar-system" src="<?= base_url()?>assets/app/images/bg/solar.svg" alt="">
+			
         </footer>        <!-- Core js -->
        

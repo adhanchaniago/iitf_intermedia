@@ -1,8 +1,8 @@
- <style>
-	 .spinner {
+ <style type="text/css">
+
+.spinner {
   width: 40px;
   height: 40px;
-
   position: relative;
   margin: 100px auto;
 }
@@ -16,7 +16,6 @@
   position: absolute;
   top: 0;
   left: 0;
-  
   -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
   animation: sk-bounce 2.0s infinite ease-in-out;
 }
@@ -51,77 +50,10 @@
          <!-- /Static navbar -->
          <?php $this->load->view('component/nav'); ?>
      </div>
+<!-- Label Login -->
+<div id="regWarnings"></div><br>
 
-                                <!-- Label Login -->
-                                <div id="regWarnings"></div><br>
-                                <progress class="progress is-small is-primary" max="100">15%</progress>
-                                <!-- Submit -->
-                                <span>
-                                    <button type="submit"  class="button is-button k-button k-primary raised has-gradient is-bold">
-                                        <span class="text">Daftar</span>
-                                        <span class="front-gradient"></span>
-                                    </button>
-                                </span>
-                                 
-                            </form>
-        
-                        </div>
-                        <!-- Hero image -->
-                        <div class="column is-6 ico-countdown">
-                            <div class="ico-card animated preFadeInUp fadeInUp">
-                                <!-- Countdown -->
-                                <div class="buy-title is-centered">
-                                    Pendaftaran akan berakhir pada
-                                </div>
-                                <ul id="countdown" class="is-ico">
-                                    <li id="days">
-                                        <div class="timer-number">00</div>
-                                        <div class="label">Days</div>
-                                    </li>
-                                    <li id="hours">
-                                        <div class="timer-number">00</div>
-                                        <div class="label">Hours</div>
-                                    </li>
-                                    <li id="minutes">
-                                        <div class="timer-number">00</div>
-                                        <div class="label">Minutes</div>
-                                    </li>
-                                    <li id="seconds">
-                                        <div class="timer-number">00</div>
-                                        <div class="label">Seconds</div>
-                                    </li>
-                                </ul>
-                                <!-- Progress bar -->
-                                <div class="progress-block">
-                                    <!-- Tags -->
-                                    <div class="progress-tags">
-                                        <div>Pendaftaran</div>
-                                        <div>Administrasi</div>
-                                        <div>Pengumuman</div>
-                                    </div>
-                                    <progress class="progress ico-progress" value="30" max="100">30%</progress>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        
-            <!-- Hero footer -->
-            <div class="hero-foot">
-                <div class="container">
-                    <div class="tabs is-centered">
-                        <!-- Client / partner list -->
-                        <ul>
-                            <li><a><img class="hero-logo" src="<?= base_url()?>assets/app/images/clients/cryptomarket.svg" alt=""></a></li>
-                            <li><a><img class="hero-logo" src="<?= base_url()?>assets/app/images/clients/bitit.svg" alt=""></a></li>
-                            <li><a><img class="hero-logo" src="<?= base_url()?>assets/app/images/clients/coin.svg" alt=""></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- /Landing page Hero -->
+
         <!-- Core js -->
 	<div id="modal-register" class="modal">
     <div class="modal-background">
@@ -156,7 +88,7 @@
     </div>
     <!-- <button class="modal-close is-large" aria-label="close"></button> -->
   </div>
-=======
+
      <!-- Hero Image and Title -->
      <div class="hero-body">
          <div class="container">
@@ -280,4 +212,4 @@
  </section>
  <!-- /Landing page Hero -->
  <!-- Core js -->
->>>>>>> 62e6df881bbf9a227dd70f0f4a47389841c4bf03
+
