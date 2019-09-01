@@ -99,7 +99,8 @@ class App_view extends CI_Controller
         $payload['page'] = "login";
         $this->load->view('component/header',$payload);
         $this->load->view('src/iitf_login',$payload);
-        $this->load->view('component/ground');
+		$this->load->view('component/ground');
+		$this->load->view('component/footer');
     }
 
     public function detailLomba()

@@ -34,3 +34,36 @@
     </div>
   </div>
 </div>
+<footer class="footer" style="padding-bottom:3rem !important;">
+  <div class="content has-text-centered">
+		<div class="containerr">
+		<div class="columns">
+			<div class="column is-4"></div>
+				<div class="columns">
+					<div class="column">
+						<br>
+						<a href="#" >
+						<i class="fab fa-whatsapp" style="color:black"></i>
+						<p style="color:black">WhatsApp</p>
+						</a>
+					</div>
+					<div class="column is-4">
+						<a href="#">
+						<img style="width:30%;" src="<?= base_url() ?>assets/app/images/logo/logo.png" alt="">
+						<p style="color:black">IITF 2019</p>
+						</a>
+					</div>
+					<div class="column">
+						<br>
+						<a href="#">
+						<i class="fab fa-instagram" style="color:black"></i>
+						<p style="color:black">Instagram</p>
+						</a>
+					</div>
+				</div>
+				<div class="column is-4">
+				</div>
+		</div>
+		</div>
+  </div>
+</footer>
