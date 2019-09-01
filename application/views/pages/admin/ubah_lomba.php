@@ -54,9 +54,9 @@
                                                 <select name="id_k" class="form-control form-control-alternative">
                                                     <option value="">Pilih Kategori Lomba</option>
                                                     <?php foreach ($kategori as $key => $val) { ?>
-                                                    <option value="<?= $val['id'] ?>" <?php if ($lomba[0]['id_kategori'] == $val['id']) {
-                                                                                                echo "selected";
-                                                                                            } ?>><?= $val['nama'] ?></option>
+                                                        <option value="<?= $val['id'] ?>" <?php if ($lomba[0]['id_kategori'] == $val['id']) {
+                                                                                                    echo "selected";
+                                                                                                } ?>><?= $val['nama'] ?></option>
                                                     <?php } ?>
                                                 </select>
                                             </div>
@@ -113,12 +113,20 @@
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <?php foreach ($lomba as $key => $val) { ?>
-                                            <div class="row form-group">
-                                                <div class="col-lg-5"><input class="form-control" type="text" name="nama_lomba[]" value="<?= $val['nama_lomba'] ?>" placeholder="Ex : Juara 1"></div>
-                                                <div class="col-lg-5"><input class="form-control" type="number" name="nominal[]" value="<?= $val['nominal'] ?>" placeholder="Nominal (1000000)"></div>
-                                                <div class="col-lg-2"><button onclick="btn_remove(this)" type="button" class="btn btn-md btn-danger"><i class="fa fa-trash"></i> Hapus</button></div>
-                                            </div>
+                                                <div class="row form-group">
+                                                    <div class="col-lg-5"><input class="form-control" type="text" name="nama_lomba[]" value="<?= $val['nama_lomba'] ?>" placeholder="Ex : Juara 1"></div>
+                                                    <div class="col-lg-5"><input class="form-control" type="number" name="nominal[]" value="<?= $val['nominal'] ?>" placeholder="Nominal (1000000)"></div>
+                                                    <div class="col-lg-2"><button onclick="btn_remove(this)" type="button" class="btn btn-md btn-danger"><i class="fa fa-trash"></i> Hapus</button></div>
+                                                </div>
                                             <?php } ?>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                            <label class="form-control-label" for="input-nama">Gambar</label>
+                                                <input type="file" class="form-control form-control-alternative" name="gambar">
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row">

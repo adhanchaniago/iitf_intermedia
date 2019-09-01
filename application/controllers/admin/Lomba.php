@@ -58,38 +58,60 @@ class Lomba extends MY_Controller
                         $this->load->view('pages/admin/tambah_lomba', $data);
                         // var_dump($this->upload->display_errors());
                     } else {
-                        $eks = substr(strrchr($_FILES['gb']['name'], '.'), 1);
-                        $data = array(
-                            "id" => $id,
-                            "id_kategori" => $id_k,
-                            "nama" => $nama,
-                            "tema" => $tema,
-                            "keterangan" => $ket,
-                            "jumlah_anggota" => $jml,
-                            "deskripsi" => $desk,
-                            "guide_book" => $n_gb . "." . $eks,
-                            "harga" => $harga
-                        );
-                        $this->DataModel->insert('tb_lomba', $data);
-                        $a = 0;
-                        // die(json_encode($nom));
-                        foreach($nl as $key => $val){
-                            // echo $val . "  ". $nom[$a] . "<br>";
-                            $dataa = array(
-                                "id_lomba" => $id,
-                                "nama" => $val,
-                                "nominal" => $nom[$a]
-                            );
-                            $this->DataModel->insert('tb_juara',$dataa);
-                            $a++;
-                        }
-                        // die();
-                        $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissable fade show" role="alert">
+                        if (!empty($_FILES['gambar']['name'])) {
+                            $this->_uploadFile($n_g, "JPG|jpg|png");
+                            if (!$this->upload->do_upload('gambar')) {
+                                $data = array(
+                                    "kategori" => $this->DataModel->getData('tb_kategori')->result_array()
+                                );
+                                $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dismissable">
+                                                <span class="alert-inner--icon"><i class="ni ni-bulb-61"></i></span>
+                                                <span class="alert-inner--text"> ' . $this->upload->display_errors() . '</span>
+                                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                                </div>');
+                                $this->load->view('pages/admin/tambah_lomba', $data);
+                            } else {
+                                $eks = substr(strrchr($_FILES['gb']['name'], '.'), 1);
+                                $eksG = substr(strrchr($_FILES['gambar']['name'], '.'), 1);
+                                $data = array(
+                                    "id" => $id,
+                                    "id_kategori" => $id_k,
+                                    "nama" => $nama,
+                                    "tema" => $tema,
+                                    "keterangan" => $ket,
+                                    "jumlah_anggota" => $jml,
+                                    "deskripsi" => $desk,
+                                    "guide_book" => $n_gb . "." . $eks,
+                                    "file_gambar" => $n_g . "." . $eksG,
+                                    "harga" => $harga
+                                );
+                                $this->DataModel->insert('tb_lomba', $data);
+                                $a = 0;
+                                // die(json_encode($nom));
+                                foreach ($nl as $key => $val) {
+                                    // echo $val . "  ". $nom[$a] . "<br>";
+                                    $dataa = array(
+                                        "id_lomba" => $id,
+                                        "nama" => $val,
+                                        "nominal" => $nom[$a]
+                                    );
+                                    $this->DataModel->insert('tb_juara', $dataa);
+                                    $a++;
+                                }
+                                // die();
+                                $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissable fade show" role="alert">
                                                         <span class="alert-inner--icon"><i class="ni ni-bulb-61"></i></span>
                                                         <span class="alert-inner--text"> Tambah Data Berhasil </span>
                                                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                                     </div>');
-                        redirect('admin/lomba');
+                                redirect('admin/lomba');
+                            }
+                        } else {
+                            $data = array(
+                                "kategori" => $this->DataModel->getData('tb_kategori')->result_array()
+                            );
+                            $this->load->view('pages/admin/tambah_lomba', $data);
+                        }
                     }
                 }
             } else {
@@ -108,7 +130,7 @@ class Lomba extends MY_Controller
         if ($this->IsLoggedIn()) {
             $lomba = $this->DataModel->select('tb_lomba.nama,tb_lomba.deskripsi,tb_lomba.harga,tb_lomba.id_kategori,tb_juara.nama as nama_lomba,tb_juara.nominal, tb_lomba.tema,tb_lomba.keterangan,tb_lomba.jumlah_anggota');
             $lomba = $this->DataModel->getWhere('id', $id);
-            $lomba = $this->DataModel->getJoin('tb_juara','tb_juara.id_lomba = tb_lomba.id','inner');
+            $lomba = $this->DataModel->getJoin('tb_juara', 'tb_juara.id_lomba = tb_lomba.id', 'inner');
             $lomba = $this->DataModel->getData('tb_lomba')->result_array();
             // die(json_encode($lomba));
             if ($this->input->post('kirim')) {
@@ -121,14 +143,14 @@ class Lomba extends MY_Controller
                 $harga = $this->input->post('harga');
                 $nl = $this->input->post('nama_lomba');
                 $nom = $this->input->post('nominal');
-                if($ket == "individu"){
+                if ($ket == "individu") {
                     $jml = 0;
                 }
                 if (!empty($_FILES['gb']['name'])) {
                     $n_gb = str_replace(' ', '_', $nama) . "IITF2019";
                     $path = "assets/Guide_book/" . $lomba->guide_book;
                     unlink(FCPATH . $path);
-                    $this->_uploadFile($n_gb);
+                    $this->_uploadFile($n_gb, "zip|rar");
                     if (!$this->upload->do_upload('gb')) {
                         $data = array(
                             "lomba" => $lomba,
@@ -139,7 +161,7 @@ class Lomba extends MY_Controller
                                         <span class="alert-inner--text"> ' . $this->upload->display_errors() . '</span>
                                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                         </div>');
-                        $this->load->view('pages/admin/tambah_lomba', $data);
+                        $this->load->view('pages/admin/ubah_lomba', $data);
                     } else {
                         $eks = substr(strrchr($_FILES['gb']['name'], '.'), 1);
                         $data = array(
@@ -164,10 +186,43 @@ class Lomba extends MY_Controller
                         //     $this->DataModel->update('tb_juara', $data);
                         //     $a++;
                         // }
+                    }
+                } else if (!empty($_FILES['gambar']['name'])) {
+                    $n_g =  "G-" . $id;
+                    $path = "assets/Guide_book/" . $lomba->file_gambar;
+                    if (file_exists($path)) {
+                        unlink(FCPATH . $path);
+                    }
+                    $this->_uploadFile($n_g, "JPG|jpg|png");
+                    if (!$this->upload->do_upload('gambar')) {
+                        $data = array(
+                            "lomba" => $lomba,
+                            "kategori" => $this->DataModel->getData('tb_kategori')->result_array()
+                        );
+                        $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dismissable">
+                                        <span class="alert-inner--icon"><i class="ni ni-bulb-61"></i></span>
+                                        <span class="alert-inner--text"> ' . $this->upload->display_errors() . '</span>
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                        </div>');
+                        $this->load->view('pages/admin/ubah_lomba', $data);
+                    } else {
+                        $eksG = substr(strrchr($_FILES['gambar']['name'], '.'), 1);
+                        $data = array(
+                            "id_kategori" => $id_k,
+                            "nama" => $nama,
+                            "tema" => $tema,
+                            "deskripsi" => $desk,
+                            "keterangan" => $ket,
+                            "jumlah_anggota" => $jml,
+                            "file_gambar" => $n_g . "." . $eksG,
+                            "harga" => $harga
+                        );
+                        $this->DataModel->getWhere('id', $id);
+                        $this->DataModel->update('tb_lomba', $data);
                         $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissable fade show" role="alert">
-                                                        <span class="alert-inner--icon"><i class="ni ni-bulb-61"></i></span>
-                                                        <span class="alert-inner--text"> Tambah Data Berhasil </span>
-                                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                                    <span class="alert-inner--icon"><i class="ni ni-bulb-61"></i></span>
+                                                    <span class="alert-inner--text"> Tambah Data Berhasil </span>
+                                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                                     </div>');
                         redirect('admin/lomba');
                     }
@@ -204,15 +259,15 @@ class Lomba extends MY_Controller
 
     public function hapus()
     {
-        if($this->IsLoggedIn()){
+        if ($this->IsLoggedIn()) {
             $id = $this->input->post('id');
             $gb = $this->input->post('gb');
             $path = "assets/Guide_book/" . $gb;
             unlink(FCPATH . $path);
 
-            $q = $this->DataModel->delete('id_lomba',$id,'tb_juara');
-            $q = $this->DataModel->delete('id',$id,'tb_lomba');
-            if($q){
+            $q = $this->DataModel->delete('id_lomba', $id, 'tb_juara');
+            $q = $this->DataModel->delete('id', $id, 'tb_lomba');
+            if ($q) {
                 $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissable fade show" role="alert">
                 <span class="alert-inner--icon"><i class="ni ni-bulb-61"></i></span>
                 <span class="alert-inner--text"> Hapus Data Berhasil </span>
@@ -220,15 +275,15 @@ class Lomba extends MY_Controller
                 </div>');
                 redirect('admin/lomba');
             }
-        }else{
+        } else {
             redirect('admin/home/login');
         }
     }
 
-    private function _uploadFile($name)
+    private function _uploadFile($name, $eks)
     {
         $config['upload_path'] = 'assets/Guide_book/';
-        $config['allowed_types'] = 'zip|rar';
+        $config['allowed_types'] = $eks;
         $config['file_name'] = $name;
         $config['overwrite'] = true;
         $this->upload->initialize($config);

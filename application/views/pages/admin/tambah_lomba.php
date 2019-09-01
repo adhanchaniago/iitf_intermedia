@@ -119,6 +119,14 @@
                                         <div class="col-lg-12" id="sub_form"></div>
                                     </div>
                                     <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                            <label class="form-control-label" for="input-nama">Gambar</label>
+                                                <input type="file" class="form-control form-control-alternative" name="gambar">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group focused">
                                                 <input type="submit" value="simpan" name="kirim" class="btn btn-primary">

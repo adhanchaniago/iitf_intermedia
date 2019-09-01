@@ -32,6 +32,22 @@ class Pendaftaran extends MY_Controller
             $this->DataModel->getWhere('id',$id);
             $this->DataModel->update('tb_pendaftaran',$data);
 
+            $p = $this->DataModel->getWhere('id',$id);
+            $p = $this->DataModel->getData('tb_pendaftaran')->row();
+
+            $step = $this->DataModel->select('tb_user.id');
+            $step = $this->DataModel->getWhere('tb_koor.id',$p->id_koor);
+            $step = $this->DataModel->getJoin('tb_user','tb_user.id = tb_koor.id_user','inner');
+            $step = $this->DataModel->getData('tb_koor')->row();
+            // die(json_encode($step));
+
+            $data = array(
+                "step_selesai" => "4"
+            );
+
+            $this->DataModel->getWhere('id',$step->id);
+            $this->DataModel->update('tb_user',$data);
+
             redirect('admin/pendaftaran');
 
         }else{
