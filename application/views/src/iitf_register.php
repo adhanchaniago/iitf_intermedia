@@ -1,3 +1,47 @@
+ <style>
+	 .spinner {
+  width: 40px;
+  height: 40px;
+
+  position: relative;
+  margin: 100px auto;
+}
+
+.double-bounce1, .double-bounce2 {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #333;
+  opacity: 0.6;
+  position: absolute;
+  top: 0;
+  left: 0;
+  
+  -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+  animation: sk-bounce 2.0s infinite ease-in-out;
+}
+
+.double-bounce2 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+
+@-webkit-keyframes sk-bounce {
+  0%, 100% { -webkit-transform: scale(0.0) }
+  50% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bounce {
+  0%, 100% { 
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 50% { 
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+  }
+}
+ </style>
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
  <!-- Pageloader -->
  <div class="pageloader is-theme"></div>
         <div class="infraloader is-active"></div>        
@@ -48,7 +92,7 @@
 
                                 <!-- Label Login -->
                                 <div id="regWarnings"></div><br>
-                                
+                                <progress class="progress is-small is-primary" max="100">15%</progress>
                                 <!-- Submit -->
                                 <span>
                                     <button type="submit"  class="button is-button k-button k-primary raised has-gradient is-bold">
@@ -117,3 +161,36 @@
         </section>
         <!-- /Landing page Hero -->
         <!-- Core js -->
+	<div id="modal-register" class="modal">
+    <div class="modal-background">
+
+	</div>
+    <div class="modal-content">
+      <!-- Any other Bulma elements you want -->
+      <div class="card">
+        	<div id="modal-loading" class="card-content">
+				<div class="spinner">
+  					<div class="double-bounce1"></div>
+  					<div class="double-bounce2"></div>
+				</div>
+				<center class="title"><h3>Tunggu ya..</h3></center>
+			</div>
+			<div id="modal-sukses" class="card-content">
+				<p>Selamat Kun anda sudah terdaftar</p>
+				<p>Cek kotak masuk email anda untuk mengaktivasi akun</p>
+				<p align="right">
+            	<button
+              		id="btn-oke"
+              		class="button k-button k-primary raised has-gradient slanted"
+            	>
+              	<span class="text">
+                	Saya Mengerti dan Lanjutkan
+              	</span>
+              	<span class="front-gradient"></span>
+            	</button>
+            	</p>
+          </div>
+      </div>
+    </div>
+    <!-- <button class="modal-close is-large" aria-label="close"></button> -->
+  </div>

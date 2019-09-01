@@ -1,6 +1,6 @@
-$(document).ready(function () {
-    // Warning apabila membuka JavScript Console
-    console.log(`
+$(document).ready(function() {
+  // Warning apabila membuka JavScript Console
+  console.log(`
     .d8888b.  888                       888    
    d88P  Y88b 888                       888    Ini adalah fitur browser yang ditujukan 
    Y88b.      888                       888    untuk pengembang. Jika seseorang meminta 
