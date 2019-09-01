@@ -44,7 +44,7 @@
         <script src="<?= base_url()?>assets/app/js/app.js"></script>
         <script type="text/javascript">
             var step = "<?= @$step; ?>";
-            var ket  = "<?= @$keterangan; ?>"
+            var ket  = "<?= @$keterangan; ?>";
         </script>
         <script src="<?= base_url()?>assets/app/js/warning.js"></script>
         <script src="<?= base_url()?>assets/app/js/step.js"></script>
