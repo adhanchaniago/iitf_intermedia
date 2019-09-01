@@ -58,5 +58,9 @@
 		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 		<script src="<?= base_url()?>assets/app/js/custom.js"></script>
 		<script src="<?= base_url()?>assets/app/js/dashboard.js"></script>
-    </body>  
+		<?= $this->session->flashdata('pesan')
+						
+					  ?>
+	</body>  
+	
 </html>

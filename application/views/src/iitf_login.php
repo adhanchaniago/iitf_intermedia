@@ -14,7 +14,7 @@
                  <!-- Landing page Title -->
                  <div class="column is-half-desktop is-full-mobile landing-caption">
                      <h1 class="title is-3 is-semibold is-spaced main-title has-text-centered">Masuk ke IITF</h1>
-                     <?= $this->session->flashdata('pesan'); ?>
+                     
                      <form class="login-form" action="javascript:tryLogin('<?= base_url(); ?>');">
                          <!-- Field -->
                          <div class="column">

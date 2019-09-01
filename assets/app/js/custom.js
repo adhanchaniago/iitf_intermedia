@@ -216,18 +216,51 @@ function tryLogin(home) {
   var e = $("#u").val();
   var p = $("#p").val();
 
-  $.ajax({
-    url: home + "login/loginprocess",
-    type: "POST",
-    data: "e=" + e + "&p=" + p,
-    error: function(xhr, ajaxOptions, thrownError) {
-      console.log(xhr.status);
-      console.log(xhr.responseText);
-      console.log(thrownError);
-    },
-    success: function(data) {
-      //alert(data);
-      $("#loginWarnings").html(data);
+  swal({
+    text: "Lanjutkan Login ?",
+    buttons: {
+      //here is the magic
+      confirm: {
+        text: "Oke",
+        className: "sweet-warning",
+        closeModal: false
+      }
+      // cancel: "Belum"
+    }
+  }).then(confirmed => {
+    if (confirmed) {
+      var update = $.ajax({
+        url: home + "login/loginprocess",
+        type: "POST",
+        data: "e=" + e + "&p=" + p,
+        error: function(xhr, ajaxOptions, thrownError) {
+          console.log(xhr.status);
+          console.log(xhr.responseText);
+          console.log(thrownError);
+        },
+        success: function(data) {}
+      });
+
+      update.done(function(json) {
+        var data = JSON.parse(json);
+
+        if (data.success == false) {
+          swal.stopLoading();
+          swal.close();
+          swal("Gagal", data.msg, "danger").then(ok => {});
+        } else if (data.success == true) {
+          swal.stopLoading();
+          swal.close();
+          swal("Login sukses", {
+            buttons: false,
+            timer: 600
+          });
+          setTimeout(function() {
+            window.location.replace(home + "login");
+          }, 600);
+        } else {
+        }
+      });
     }
   });
 }
@@ -245,10 +278,6 @@ function tryRegister(home) {
   var e = $("#u").val();
   var p = $("#p").val();
   var p2 = $("#p2").val();
-
-  // $("#modal-register").addClass("is-active");
-  // $("#modal-sukses").hide();
-  // $("#modal-loading").show();
 
   swal({
     text: "Lanjutkan Mendaftar ?",
@@ -292,7 +321,7 @@ function tryRegister(home) {
             "Anda sudah terdaftar silahkan cek email untuk aktivasi akun",
             "success"
           ).then(ok => {
-            //do anything
+            window.location.replace(home + "login");
           });
         } else if (data.success == false) {
           swal.stopLoading();
@@ -304,41 +333,6 @@ function tryRegister(home) {
       });
     }
   });
-
-  // swal(
-  //   {
-  //     text: "Lanjutkan Mendaftar",
-
-  //     button: {
-  //       text: "Oke",
-  //       closeModal: false
-  //     }
-  //   },
-  //   $.ajax({
-  //     url: home + "register/registerprocess",
-  //     type: "POST",
-  //     data: "n=" + n + "&e=" + e + "&p=" + p + "&p2=" + p2,
-  //     error: function(xhr, ajaxOptions, thrownError) {
-  //       console.log(xhr.status);
-  //       console.log(xhr.responseText);
-  //       console.log(thrownError);
-  //       if (xhr.status == 500 || xhr.status == "500") {
-  //       }
-  //     },
-  //     success: function(data) {
-  //       swal(
-  //         "Berhasil !",
-  //         "Akun anda sudah terdaftar silahkan cek email anda",
-  //         "success"
-  //       );
-  //       // alert(data);
-  //       // $("#regWarnings").html(data);
-  //       // $("#model-loading").hide();
-  //       // $("#modal-sukses").show();
-  //       // $("#modal-register").removeClass("is-active");
-  //     }
-  //   })
-  // );
 }
 
 function trySelect(home, id, koors) {

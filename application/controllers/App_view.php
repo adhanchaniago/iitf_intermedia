@@ -134,7 +134,10 @@ class App_view extends CI_Controller
         if ($query->num_rows() !== 0) {
             $result = $query->row();
             if ($result->status != "true") {
-                echo "<script>window.alert(\"Akun anda belum terverifikasi, Silahkan cek email anda  \");</script>";
+                echo  json_encode(array(
+					"success" => false,
+					"msg"=>"sesuatu terjadi"
+				));
             } else {
                 if ($this->bcrypt->check_password($pass, $result->password)) {
                     # sukses login
@@ -146,15 +149,24 @@ class App_view extends CI_Controller
 
                     $this->session->set_userdata($array);
 
-                    echo "<script>location.href = '" . base_url() . "user';</script>";
+                    echo json_encode(array(
+						"success" => true,
+						"msg"=>"sukses"
+					));
                 } else {
                     # password salah
-                    echo "<font color=\"red\">Password yang Anda masukkan salah!</font>";
+                    echo json_encode(array(
+						"success" => false,
+						"msg"=>"gagal login"
+					));
                 }
             }
         } else {
             # username salah
-            echo "<font color=\"red\">Email '" . $user . "' belum terdaftar!</font>";
+            echo json_encode(array(
+				"success" => false,
+				"msg"=>"email belum ada"
+			));
         }
     }
 
@@ -237,12 +249,13 @@ class App_view extends CI_Controller
                         'no_hp' => '',
                         'institusi' => '',
                         'lampiran_identitas' => ''
-                    ));
-                    $this->session->set_flashdata('pesan', '<div class="alert alert-warning alert-dismissable fade show" role="alert">
-                                            <span class="alert-inner--icon"><i class="ni ni-bulb-61"></i></span>
-                                            <span class="alert-inner--text"> Akun anda belum diverifikasi, Silahkan cek email untuk memverifikasi akun anda. </span>
-                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                            </div>');
+					));
+					$this->session->set_flashdata('pesan','<script type="text/javascript">swal ( "Info" ,  "Akun anda belum diverifikasi, Silahkan cek email untuk memverifikasi akun anda." ,  "warning" )</script>');
+                    // $this->session->set_flashdata('pesan', '<div class="alert alert-warning alert-dismissable fade show" role="alert">
+                    //                         <span class="alert-inner--icon"><i class="ni ni-bulb-61"></i></span>
+                    //                         <span class="alert-inner--text"> Akun anda belum diverifikasi, Silahkan cek email untuk memverifikasi akun anda. </span>
+                    //                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    //                         </div>');
                     $uri = base_url('user');
                     echo json_encode(
 						array(
