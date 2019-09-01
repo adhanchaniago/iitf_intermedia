@@ -37,14 +37,15 @@ class Lomba extends MY_Controller
                 $ket = $this->input->post('keterangan');
                 $jml = $this->input->post('jumlah');
                 $n_gb = str_replace(' ', '_', $nama) . "IITF2019";
+                $n_g =  "G-" . $id;
                 $harga = $this->input->post('harga');
                 $nl = $this->input->post('nama_lomba');
                 $nom = $this->input->post('nominal');
-                if($ket == "individu"){
+                if ($ket == "individu") {
                     $jml = 0;
                 }
                 if (!empty($_FILES['gb']['name'])) {
-                    $this->_uploadFile($n_gb);
+                    $this->_uploadFile($n_gb, "zip|rar");
                     if (!$this->upload->do_upload('gb')) {
                         $data = array(
                             "kategori" => $this->DataModel->getData('tb_kategori')->result_array()

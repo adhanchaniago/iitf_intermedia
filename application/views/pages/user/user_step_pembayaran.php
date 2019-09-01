@@ -8,62 +8,91 @@
     <!-- pilih lomba -->
     <div class="column is-8 containerr">
       <h1 class="title">Pembayaran</h1>
-      <h2 class="subtitle">Silakan lakukan pembayaran sesuai dengan data di bawah ini, lalu unggahkan bukti transfernya disini.</b></h2>
+      <h2 class="subtitle">
+        <p>Silakan lakukan pembayaran sesuai dengan data di bawah ini, lalu unggahlah bukti transfernya disini. 
+          Tunggu 1 * 24 Jam untuk konfirmasi aktif dari admin. Apabila sudah aktif maka anda dapat lanjut step selanjutnya.</p>
+      </h2>
+      <!-- <div class="column"> -->
+      <div class="notification">
+        <article class="media">
+          <div class="media-left">
+            <p>Status Peserta : <p>
+          </div>
+          <div class="media-content">
+            <div class="content">
+              <?php if ($pendaftaran->status == "unactive") {
+                echo "<p class='has-text-danger'>Tidak Aktif</p>";
+              } else {
+                echo "<p class='has-text-success'>Aktif</p>";
+              } ?>
+            </div>
+          </div>
+        </article>
+      </div>
+      <!-- </div> -->
       <div id="warning" class=""></div>
-      <table class="table is-stripped">
-        <tr>
-          <th colspan="2">Rincian Pembayaran</th>
-        </tr>
-        <tr>
-          <td>ID Daftar</td>
-          <td><?= $pendaftaran->id ?></td>
-        </tr>
-        <?php if ($pendaftaran->jumlah_anggota > 0) {?>
-          <tr>
-            <td>Nama Team</td>
-            <td><?= $pendaftaran->nama_team; ?></td>
-          </tr>
-        <?php } ?>
-        <tr>
-          <td>Tanggal Daftar</td>
-          <td><?= date("d/m/Y", strtotime($pendaftaran->tanggal_daftar)) ?></td>
-        </tr>
-        <tr>
-          <td>Kategori Lomba</td>
-          <td><?= $pendaftaran->namalomba; ?></td>
-        </tr>
-        <tr>
-          <td>Biaya Pendaftaran</td>
-          <td>Rp<?= number_format($lomba->harga, 0, ",", ".")?>,-</td>
-        </tr>
-      </table>
-      <table class="table is-bordered">
-          <tr>
-            <td colspan="2">Transfer ke:</td>
-          </tr>
-          <tr>
-            <th>Nama Bank</th>
-            <td>002 - Bank Rakyat Indonesia (BRI)</td>
-          </tr>
-          <tr>
-            <th>Atas Nama Rekening</th>
-            <td>Rahmat Hidayat Fitrianto</td>
-          </tr>
-          <tr>
-            <th>Nomor Rekening Tujuan</th>
-            <td>0077 - 01 - 100172 - 50 - 8</td>
-          </tr>
-      </table>
-
+      <div class="columns is-12">
+        <div class="column is-6">
+          <table class="table is-stripped">
+            <tr>
+              <th colspan="2">Rincian Pembayaran</th>
+            </tr>
+            <tr>
+              <td>ID Daftar</td>
+              <td><?= $pendaftaran->id ?></td>
+            </tr>
+            <?php if ($pendaftaran->jumlah_anggota > 0) { ?>
+              <tr>
+                <td>Nama Team</td>
+                <td><?= $pendaftaran->nama_team; ?></td>
+              </tr>
+            <?php } ?>
+            <tr>
+              <td>Tanggal Daftar</td>
+              <td><?= date("d/m/Y", strtotime($pendaftaran->tanggal_daftar)) ?></td>
+            </tr>
+            <tr>
+              <td>Kategori Lomba</td>
+              <td><?= $pendaftaran->namalomba; ?></td>
+            </tr>
+            <tr>
+              <td>Biaya Pendaftaran</td>
+              <td>Rp<?= number_format($lomba->harga, 0, ",", ".") ?>,-</td>
+            </tr>
+          </table>
+        </div>
+        <div class="column is-6">
+          <table class="table is-stripped">
+            <tr>
+              <th colspan="2">Transfer ke:</td>
+            </tr>
+            <tr>
+              <td>Nama Bank</th>
+              <td>002 - Bank Rakyat Indonesia (BRI)</td>
+            </tr>
+            <tr>
+              <td>Atas Nama</th>
+              <td>Rahmat Hidayat Fitrianto</td>
+            </tr>
+            <tr>
+              <td>Nomor Rekening</th>
+              <td>0077 - 01 - 100172 - 50 - 8</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+            </tr>
+          </table>
+        </div>
+      </div>
       <div id="progress"></div>
-
       <div class="field">
-        <label class="label">Bukti Transfer (ekstensi diterima: JPG, JPEG, PNG; Batas maksimum: 10 MB)</label>
+        <label class="label">Bukti Transfer (ekstensi diterima: JPG, JPEG, PNG; Batas maksimum: 1 MB)</label>
         <form action="javascript:trySaveBayar('<?= base_url(); ?>');" method="POST" enctype="multipart/form-data">
           <div class="field is-grouped">
             <div class="file is-boxed is-success has-name">
               <label class="file-label">
-                <input class="file-input" type="file" name="bukti" id="bukti"/>
+                <input class="file-input" type="file" name="bukti" id="bukti" />
                 <span class="file-cta">
                   <span class="file-icon">
                     <i class="fas fa-upload"></i>

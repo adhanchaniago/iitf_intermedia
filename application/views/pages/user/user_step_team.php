@@ -5,13 +5,12 @@
     <div class="column is-4">
       <?php $this->load->view('component/stepper') ?>
     </div>
-
     <!-- START INPUT DATA  -->
-
     <div class="column is-6 containerr">
       <h1 class="title">Pendaftaran Team</h1>
       <h2 class="subtitle">Silakan isi nama team dan tambahkan anggota team Anda disini.</h2>
       <!-- Nama team -->
+      <?=$this->session->flashdata('pesan')?>
       <form action="<?= base_url() ?>user/team" method="POST" enctype="multipart/form-data">
         <div class="container">
           <div class="columns">
@@ -53,7 +52,7 @@
         var wadah = document.getElementById("form");
         var currentForm = 0;
         var btn = document.getElementById("btnTambah");
-        if (<?=$anggota->jumlah_anggota?> != 0) {
+        if (<?=count($anggota)?> != 0) {
           if (<?= count($langgota) ?> >= <?= $anggota->jumlah_anggota ?>) {
             btn.style.visibility = "hidden";
           } else {
@@ -89,12 +88,12 @@
             +
             '</div>' +
             '<div class="field">' +
-            '<label class="label">Identitas diri (ekstensi diterima: JPG, JPEG, PNG, SVG, BMP)</label>' +
+            '<label class="label">Identitas diri (ekstensi diterima: PDF, DOC, DOCX) maksimal 1 MB</label>' +
             '<div class="control">' +
             '<div class="file is-info has-name">' +
             '<label class="file-label">' +
             '<input type="hidden" name="id_anggota[]" value="<?=$val['id']?>">' +
-            '<input class="file-input" type="file" name="identitas'+currentForm+'" required />' +
+            '<input class="file-input" type="file" name="identitas'+currentForm+'" id="identitas'+currentForm+'"/>' +
             '<span class="file-cta">' +
             '<span class="file-icon">' +
             '<i class="fas fa-upload"></i>' +
@@ -103,8 +102,8 @@
             'Pilih Berkas' +
             '</span>' +
             '</span>' +
-            '<span class="file-name">' +
-            'Pilih Berkas Terlebih dahulu' +
+            '<span class="file-name" id="filename'+currentForm+'">' +
+            '<?=$val['lampiran_identitas']?>' +
             '</span>' +
             '</label>' +
             '</div>' +
@@ -144,11 +143,11 @@
             +
             '</div>' +
             '<div class="field">' +
-            '<label class="label">Identitas diri (ekstensi diterima: JPG, JPEG, PNG, SVG, BMP)</label>' +
+            '<label class="label">Identitas diri (ekstensi diterima: PDF, DOC, DOCX) maksimal 1 MB</label>' +
             '<div class="control">' +
             '<div class="file is-info has-name">' +
             '<label class="file-label">' +
-            '<input class="file-input" type="file" name="identitas'+currentForm+'" />' +
+            '<input class="file-input" type="file" name="identitas'+currentForm+'" id="identitas'+currentForm+'" />' +
             '<span class="file-cta">' +
             '<span class="file-icon">' +
             '<i class="fas fa-upload"></i>' +
@@ -157,8 +156,8 @@
             'Pilih Berkas' +
             '</span>' +
             '</span>' +
-            '<span class="file-name">' +
-            'Pilih Berkas Terlebih dahulu' +
+            '<span class="file-name" id="filename'+currentForm+'">' +
+            'Pilih Dokumen Identitas' +
             '</span>' +
             '</label>' +
             '</div>' +

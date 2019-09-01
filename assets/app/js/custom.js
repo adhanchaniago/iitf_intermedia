@@ -9,10 +9,30 @@ $(document).ready(function () {
             if (ukurfile <= (10 * Math.pow(2, 20))) {
                 $("#filename").html(namafile);
             } else {
-                alert("Ukuran file tersebut terlalu besar. Batas maksimum ukuran file adalah 10 MB");
+                alert("Ukuran file tersebut terlalu besar. Batas maksimum ukuran file adalah 1 MB");
             }
         }
     });
+    // var x;
+    var i;
+    $(document).on('change','#identitas1, #identitas2, #identitas3, #identitas4',function (e) {
+        var fileExtension = ['pdf', 'doc', 'docx'];
+        if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+            alert("Hanya format file berikut yang dapat diterima : " + fileExtension.join(', '));
+        } else {
+            var namafile = e.target.files[0].name;
+            var ukurfile = e.target.files[0].size;
+            i = this.id.slice(9);
+            console.log(i);
+            if (ukurfile <= (10 * Math.pow(2, 20))) {
+                $("#filename"+i).html(namafile);
+            } else {
+                alert("Ukuran file tersebut terlalu besar. Batas maksimum ukuran file adalah 1 MB");
+            }
+        }
+    });
+
+    // }
 
     $("#bukti").change(function (e) {
         var fileExtension = ['jpg', 'jpeg', 'png'];

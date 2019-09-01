@@ -6,7 +6,7 @@
     <section class="hero">
         <div class="hero-head">
             <?php $this->load->view("component/nav"); ?>
-   
+
         </div>
         <!-- Hero Image and Title -->
         <div class="hero-body">
@@ -29,7 +29,7 @@
                     <!-- Hero image -->
                     <div class="column is-5">
                         <figure class="image">
-                            <img class="blog-featured" src="assets/app/images/media/post3.svg" alt="">
+                            <img class="blog-featured" src="assets/Guide_book/<?= $lomba[0]['file_gambar'] ?>" alt="">
                         </figure>
                     </div>
                 </div>
@@ -39,8 +39,7 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-
-                <div class="column is-9">
+                <div class="column is-12">
                     <!-- Content wrapper -->
                     <div class="post-body">
                         <!-- <p class="intro">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p> -->
@@ -55,17 +54,21 @@
 
                         <h2>Cara mendaftar</h2>
 
-                        <p>Ini Gimana yah gaes? langkah langkah? apa gambar ? apa video? apa apa?.</p>
-
+                        <p>Tata Cara Pendaftaran lengkap dapat dilihat pada guide book yang terdapat pada panduan di akhir halaman ini,
+                            atau bisa langsung klik Tombol daftar dibawah ini.</p>
+                        <a href="<?= base_url() ?>daftar" target="_blank" class="button k-button k-primary raised has-gradient is-fat is-bold">
+                            <span class="text">Daftar</span>
+                            <span class="front-gradient"></span>
+                        </a>
                         <h2>Hadiah yang di dapat</h2>
 
                         <ol style="color: white; margin-left:20px">
                             <?php
                             $no = 1;
                             foreach ($lomba as $key => $val) { ?>
-                            <li>
-                                Juara <?= $no++; ?> : Uang Pembinaan + Sertifikat + Trophi
-                            </li>
+                                <li>
+                                    Juara <?= $no++; ?> : Uang Pembinaan + Sertifikat + Trophi
+                                </li>
                             <?php } ?>
                         </ol>
                         <h2>Harga Pendaftaran</h2>
