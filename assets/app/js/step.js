@@ -49,6 +49,16 @@ $(document).ready(function() {
     $("#step4").addClass("step-success");
     $("#step5").removeClass("step");
     $("#step5").addClass("step-success");
-  } else {
+  } else if(step === "5") {
+    $("#step1").removeClass("step");
+    $("#step1").addClass("step-success");
+    $("#step2").removeClass("step");
+    $("#step2").addClass("step-success");
+    $("#step3").removeClass("step");
+    $("#step3").addClass("step-success");
+    $("#step4").removeClass("step");
+    $("#step4").addClass("step-success");
+    $("#step5").removeClass("step");
+    $("#step5").addClass("step-success");
   }
 });

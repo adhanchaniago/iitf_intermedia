@@ -800,7 +800,7 @@ class App_view extends CI_Controller
                         // echo "update";
                         $this->DataModel->getWhere('id', $pendaftaran->id);
                         $this->DataModel->update('tb_pendaftaran', $dataa);
-                        if ($step_lalu < 4) {
+                        if ($step_lalu <= 4) {
                             $this->db->update('tb_user', array(
                                 'step_selesai' => 5
                             ), array(
@@ -866,7 +866,7 @@ class App_view extends CI_Controller
         $payload['judul'] = "PENDAFTARAN LOMBA";
         $payload['link'] = ($this->session->userdata('email') == "" ? base_url('login') : base_url('user'));
         $payload['email'] = ($this->session->userdata('email') == "" ? "" : $this->session->userdata('email'));
-        $payload['page'] = "step";
+        $payload['page'] = "steps";
         $payload['nama'] = $koor->nama;
         $payload['nohp'] = $koor->no_hp;
         $payload['inst'] = $koor->institusi;
@@ -1022,7 +1022,8 @@ class App_view extends CI_Controller
                 $this->load->view('component/header',$payload);
                 $this->load->view('pages/user/user_step_submission', $payload);
                 $this->load->view('component/ground');
-            } else {
+            } else if($payload['step'] == 5){
+                
                 redirect('user/dashboard');
                 //undefined
             }

@@ -31,7 +31,8 @@
                 <div class="col-xl-12 order-xl-1">
                     <div class="card shadow">
                         <div class="card-header border-0">
-                            <h3 class="mb-0">Data Pendaftar Lomba IITF</h3>
+                        <a style="float:right" href="<?=base_url()?>admin/pendaftaran/export" class="btn btn-success">Export Excel</a>
+                        <h3 class="mb-0">Data Pendaftar Lomba IITF</h3>
                         </div>
                         <div class="table-responsive">
                             <table class="table align-items-center table-flush">
