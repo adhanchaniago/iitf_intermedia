@@ -9,8 +9,8 @@
     <div class="column is-8 containerr">
       <h1 class="title">Submission</h1>
       <h2 class="subtitle">Silahkan upload file yang diperlukan sesuai dengan keterangan Guide Book perlombaan, disatukan dalam satu file dengan ekstensi *.zip dan upload surat pernyataan dengan ekstensi PDF.</h2>
-      <?php if (($submit->lampiran_file != "") && ($submit->lampiran_surat != "")) { ?>
-        <div class="notification is-info">Selamat, Anda telah berhasil terdaftar sebagai peserta lomba IITF 2019!</div>
+      <?php if (($submit->lampiran_file != "") || ($submit->lampiran_surat != "")) { ?>
+        <div class="notification is-link">Selamat, Anda telah berhasil terdaftar sebagai peserta lomba IITF 2019!<br>Untuk langsung membuka dashboard peserta lomba, <a href="<?= base_url('user/dashboard'); ?>" class="button is-success">Klik disini</a></div>
       <?php } ?>
       <div id="warnings" class=""></div>
       <form action="javascript:submission('<?= base_url(); ?>');" method="POST" enctype="multipart/form-data">

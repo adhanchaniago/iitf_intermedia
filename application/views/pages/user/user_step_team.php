@@ -10,8 +10,9 @@
       <h1 class="title">Pendaftaran Team</h1>
       <h2 class="subtitle">Silakan isi nama team dan tambahkan anggota team Anda disini.</h2>
       <!-- Nama team -->
-      <?=$this->session->flashdata('pesan')?>
-      <form action="<?= base_url() ?>user/team" method="POST" enctype="multipart/form-data">
+      <div id="warnings" class=""></div>
+      <?php //$this->session->flashdata('pesan') ?>
+      <form id="forms" action="javascript:trySaveTeams('<?= base_url() ?>');" method="POST" enctype="multipart/form-data">
         <div class="container">
           <div class="columns">
             <div class="column is-6">
@@ -39,10 +40,12 @@
         <div id="form"></div>
         <!-- </div> -->
         <br>
+        <div id="progress"></div>
+        <br>
         <!--GROUP UPLOAD SURAT PERNYATAAAN-->
         <div class="field is-grouped">
           <div class="control">
-            <input type="submit" name="kirim" value="Simpan" class="button is-link">
+            <input id="simpan" type="submit" name="kirim" value="Simpan" class="button is-link">
           </div>
           <!-- Tombol Batal saya hapus, little buggy... -->
         </div>
@@ -66,7 +69,7 @@
             '<div class="field">' +
             '<label class="label">Nama Lengkap</label>' +
             '<div class="control has-icons-left">' +
-            '<input name="nama[]" class="input" type="text" placeholder="Masukkan nama anggota" value="<?= $val['nama'] ?>"/>' +
+            '<input id="nama" name="nama[]" class="input" type="text" placeholder="Masukkan nama anggota" value="<?= $val['nama'] ?>"/>' +
             '<span class="icon is-small is-left">' +
             '<i class="fas fa-user"></i>' +
             '</span>' +
@@ -75,7 +78,7 @@
             '<div class="field">' +
             '<label class="label">No Telpon/WA</label>' +
             '<div class="control has-icons-left">' +
-            '<input name="no_hp[]" class="input" type="text" placeholder="contoh : 08xxxx" value="<?= $val['no_hp'] ?>"/>' +
+            '<input id="no_hp" name="no_hp[]" class="input" type="text" placeholder="contoh : 08xxxx" value="<?= $val['no_hp'] ?>"/>' +
             '<span class="icon is-small is-left">' +
             '<i class="fas fa-phone"></i>' +
             '</span>'
@@ -121,7 +124,7 @@
             '<div class="field">' +
             '<label class="label">Nama Lengkap</label>' +
             '<div class="control has-icons-left">' +
-            '<input name="nama[]" class="input" type="text" placeholder="Masukkan nama anggota" value=""/>' +
+            '<input id="nama" name="nama[]" class="input" type="text" placeholder="Masukkan nama anggota" value=""/>' +
             '<span class="icon is-small is-left">' +
             '<i class="fas fa-user"></i>' +
             '</span>' +
@@ -130,7 +133,7 @@
             '<div class="field">' +
             '<label class="label">No Telpon/WA</label>' +
             '<div class="control has-icons-left">' +
-            '<input name="no_hp[]" class="input" type="text" placeholder="contoh : 08xxxx" value=""/>' +
+            '<input id="no_hp" name="no_hp[]" class="input" type="text" placeholder="contoh : 08xxxx" value=""/>' +
             '<span class="icon is-small is-left">' +
             '<i class="fas fa-phone"></i>' +
             '</span>'
@@ -147,7 +150,7 @@
             '<div class="control">' +
             '<div class="file is-info has-name">' +
             '<label class="file-label">' +
-            '<input class="file-input" type="file" name="identitas'+currentForm+'" id="identitas'+currentForm+'" />' +
+            '<input id="fileup" class="file-input" type="file" name="identitas'+currentForm+'" id="identitas'+currentForm+'" />' +
             '<span class="file-cta">' +
             '<span class="file-icon">' +
             '<i class="fas fa-upload"></i>' +
@@ -165,7 +168,53 @@
             '</div></div>';
           wadah.innerHTML += data;
 
-          console.log(currentForm);
+          // Form Filtration
+          $('#nama').on('keypress', function (event) {
+            var regex = new RegExp("^[a-zA-Z\\s']+$");
+            var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+            if (!regex.test(key)) {
+              event.preventDefault();
+              return false;
+            }
+          });
+          $('#no_hp').on('keypress', function (event) {
+            var regex = new RegExp("^[0-9]+$");
+            var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+            if (!regex.test(key)) {
+              event.preventDefault();
+              return false;
+            }
+          });
+          $("input[type=file]").change(function(e) {
+            var fileExtension = ["pdf", "doc", "docx"];
+            if (
+              $.inArray(
+                $(this)
+                  .val()
+                  .split(".")
+                  .pop()
+                  .toLowerCase(),
+                fileExtension
+              ) == -1
+            ) {
+              alert(
+                "Hanya format file berikut yang dapat diterima : " +
+                  fileExtension.join(", ")
+              );
+            } else {
+              var namafile = e.target.files[0].name;
+              var ukurfile = e.target.files[0].size;
+              if (ukurfile <= 1 * Math.pow(2, 20)) { // Ukuran (satuan MB) dikali 2 pangkat 20 = Ukuran MB
+                $("#filename" + currentForm).html(namafile);
+              } else {
+                alert(
+                  "Ukuran file tersebut terlalu besar. Batas maksimum ukuran file adalah 1 MB"
+                );
+              }
+            }
+          });
+
+          //console.log(currentForm);
           if (currentForm >= <?= $anggota->jumlah_anggota ?>) {
             btn.style.visibility = "hidden";
           }

@@ -1,4 +1,22 @@
 $(document).ready(function() {
+  // Form Filtration
+  $('#nama').on('keypress', function (event) {
+    var regex = new RegExp("^[a-zA-Z\\s']+$");
+    var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+    if (!regex.test(key)) {
+      event.preventDefault();
+      return false;
+    }
+  });
+  $('#no_hp').on('keypress', function (event) {
+    var regex = new RegExp("^[0-9]+$");
+    var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+    if (!regex.test(key)) {
+      event.preventDefault();
+      return false;
+    }
+  });
+
   $("#resume").change(function(e) {
     var fileExtension = ["pdf", "doc", "docx"];
     if (
@@ -18,11 +36,11 @@ $(document).ready(function() {
     } else {
       var namafile = e.target.files[0].name;
       var ukurfile = e.target.files[0].size;
-      if (ukurfile <= 10 * Math.pow(2, 20)) {
+      if (ukurfile <= 2 * Math.pow(2, 20)) { // Ukuran (satuan MB) dikali 2 pangkat 20 = Ukuran MB
         $("#filename").html(namafile);
       } else {
         alert(
-          "Ukuran file tersebut terlalu besar. Batas maksimum ukuran file adalah 10 MB"
+          "Ukuran file tersebut terlalu besar. Batas maksimum ukuran file adalah 2 MB"
         );
       }
     }
@@ -47,36 +65,7 @@ $(document).ready(function() {
     } else {
       var namafile = e.target.files[0].name;
       var ukurfile = e.target.files[0].size;
-      if (ukurfile <= 10 * Math.pow(2, 20)) {
-        $("#filename").html(namafile);
-      } else {
-        alert(
-          "Ukuran file tersebut terlalu besar. Batas maksimum ukuran file adalah 10 MB"
-        );
-      }
-    }
-  });
-
-  $("#resume").change(function(e) {
-    var fileExtension = ["pdf", "doc", "docx"];
-    if (
-      $.inArray(
-        $(this)
-          .val()
-          .split(".")
-          .pop()
-          .toLowerCase(),
-        fileExtension
-      ) == -1
-    ) {
-      alert(
-        "Hanya format file berikut yang dapat diterima : " +
-          fileExtension.join(", ")
-      );
-    } else {
-      var namafile = e.target.files[0].name;
-      var ukurfile = e.target.files[0].size;
-      if (ukurfile <= 10 * Math.pow(2, 20)) {
+      if (ukurfile <= 1 * Math.pow(2, 20)) {
         $("#filename").html(namafile);
       } else {
         alert(
@@ -87,7 +76,8 @@ $(document).ready(function() {
   });
   // var x;
   var i;
-  $(document).on(
+  // sudah disisipkan di user_step_team.php, jadi proses ini saya disable
+  /* $(document).on(
     "change",
     "#identitas1, #identitas2, #identitas3, #identitas4",
     function(e) {
@@ -120,38 +110,7 @@ $(document).ready(function() {
         }
       }
     }
-  );
-
-  // }
-
-  $("#bukti").change(function(e) {
-    var fileExtension = ["jpg", "jpeg", "png"];
-    if (
-      $.inArray(
-        $(this)
-          .val()
-          .split(".")
-          .pop()
-          .toLowerCase(),
-        fileExtension
-      ) == -1
-    ) {
-      alert(
-        "Hanya format file berikut yang dapat diterima : " +
-          fileExtension.join(", ")
-      );
-    } else {
-      var namafile = e.target.files[0].name;
-      var ukurfile = e.target.files[0].size;
-      if (ukurfile <= 10 * Math.pow(2, 20)) {
-        $("#filename").html(namafile);
-      } else {
-        alert(
-          "Ukuran file tersebut terlalu besar. Batas maksimum ukuran file adalah 10 MB"
-        );
-      }
-    }
-  });
+  ); */
 
   $("#perlombaan").change(function(e) {
     var fileExtension = ["zip", "rar"];
@@ -201,11 +160,11 @@ $(document).ready(function() {
     } else {
       var namafile = e.target.files[0].name;
       var ukurfile = e.target.files[0].size;
-      if (ukurfile <= 10 * Math.pow(2, 20)) {
+      if (ukurfile <= 2 * Math.pow(2, 20)) {
         $("#filename2").html(namafile);
       } else {
         alert(
-          "Ukuran file tersebut terlalu besar. Batas maksimum ukuran file adalah 10 MB"
+          "Ukuran file tersebut terlalu besar. Batas maksimum ukuran file adalah 2 MB"
         );
       }
     }
@@ -272,6 +231,53 @@ function showWhatsApp() {
 
 function hideWhatsApp() {
   $("#whatsapp").removeClass("is-active");
+}
+
+function trySaveTeams(home) {
+  $("#progress").html("Proses unggah data: <progress></progress><br>");
+  $("#simpan").addClass("is-loading");
+  $.ajax({
+    url: home + "user/team",
+    type: "POST",
+    data: new FormData($("form")[0]),
+    cache: false,
+    contentType: false,
+    processData: false,
+
+    // Custom XMLHttpRequest
+    xhr: function() {
+      var myXhr = $.ajaxSettings.xhr();
+      if (myXhr.upload) {
+        // For handling the progress of the upload
+        myXhr.upload.addEventListener(
+          "progress",
+          function(e) {
+            if (e.lengthComputable) {
+              $("progress").attr({
+                value: e.loaded,
+                max: e.total
+              });
+            }
+          },
+          false
+        );
+      }
+      return myXhr;
+    },
+    error: function(xhr, ajaxOptions, thrownError) {
+      console.log(xhr.status);
+      console.log(xhr.responseText);
+      console.log(thrownError);
+    },
+    success: function(data) {
+      //alert(data);
+      $("#warnings").html(data);
+    },
+    complete: function(data) {
+      $("#progress").html("");
+      $("#simpan").removeClass("is-loading");
+    }
+  });
 }
 
 function tryRegister(home) {

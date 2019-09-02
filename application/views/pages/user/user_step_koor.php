@@ -59,7 +59,7 @@
             class="input"
             type="email"
             placeholder="contoh@contoh.com"
-            value="<?= $email ?>"
+            value="<?= $emailUser ?>"
           />
           <span class="icon is-small is-left">
             <i class="fas fa-envelope"></i>
@@ -89,7 +89,7 @@
 
       <!-- foto koor -->
       <div class="field">
-        <label class="label">Kartu Identitas (KTP/SIM/Kartu Pelajar) (ekstensi diterima: PDF, DOC, DOCX; Batas maksimum: 1 MB)</label>
+        <label class="label">Kartu Identitas (KTP/SIM/Kartu Pelajar) (ekstensi diterima: PDF, DOC, DOCX; Batas maksimum: 2 MB)</label>
         <div class="control">
           <div class="file is-info has-name">
             <label class="file-label">
