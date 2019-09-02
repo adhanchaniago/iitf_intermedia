@@ -529,7 +529,7 @@ class App_view extends CI_Controller
         $config['allowed_types'] = 'zip|rar';
         $config['file_name'] = $name;
         $config['overwrite'] = true;
-        $config['max_size'] = 1048;
+        $config['max_size'] = 10480;
         $this->upload->initialize($config);
     }
 
