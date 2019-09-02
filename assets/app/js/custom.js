@@ -247,12 +247,13 @@ function tryLogin(home) {
         if (data.success == false) {
           swal.stopLoading();
           swal.close();
-          swal("Gagal", data.msg, "danger").then(ok => {});
+          swal("Gagal", data.msg, {icon:"error"}).then(ok => {});
         } else if (data.success == true) {
           swal.stopLoading();
           swal.close();
           swal("Login sukses", {
             buttons: false,
+            icon: "success",
             timer: 600
           });
           setTimeout(function() {

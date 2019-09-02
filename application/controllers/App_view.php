@@ -159,7 +159,7 @@ class App_view extends CI_Controller
             if ($result->status != "true") {
                 echo  json_encode(array(
                     "success" => false,
-                    "msg" => "sesuatu terjadi"
+                    "msg" => "Anda belum memverifikasi akun, Silahkan cek email anda."
                 ));
             } else {
                 if ($this->bcrypt->check_password($pass, $result->password)) {
@@ -180,7 +180,7 @@ class App_view extends CI_Controller
                     # password salah
                     echo json_encode(array(
                         "success" => false,
-                        "msg" => "gagal login"
+                        "msg" => "Password yang anda masukkan salah"
                     ));
                 }
             }
@@ -823,56 +823,57 @@ class App_view extends CI_Controller
         $pendaftaran = $this->DataModel->getData('tb_pendaftaran')->row();
         $filenameP = "";
         $filenameS = "";
-        if (!empty($_FILES['surat']['name'])) {
-            if (!empty($_FILES['perlombaan']['name'])) {
-                $pathP = $_FILES['perlombaan']['name'];
-                $extP = pathinfo($pathP, PATHINFO_EXTENSION);
-                $filenameP = "File-" . $pendaftaran->id . "." . $extP;
-                $this->_uploadLomba($filenameP);
-                if (!$this->upload->do_upload('perlombaan')) {
-                    echo "<script>$('#warnings').addClass('notification is-danger');</script>Error: " . $this->upload->display_errors() . "<br>";
-                }
+        if (!empty($_FILES['perlombaan']['name'])) {
+            $pathP = $_FILES['perlombaan']['name'];
+            $extP = pathinfo($pathP, PATHINFO_EXTENSION);
+            $filenameP = "File-" . $pendaftaran->id . "." . $extP;
+            $this->_uploadLomba($filenameP);
+            if (!$this->upload->do_upload('perlombaan')) {
+                echo "<script>$('#warnings').addClass('notification is-danger');</script>Error: " . $this->upload->display_errors() . "<br>";
             } else {
-                $pathS = $_FILES['surat']['name'];
-                $ext = pathinfo($pathS, PATHINFO_EXTENSION);
-                $filenameS = "Surat-" . $pendaftaran->id . "." . $ext;
-                $this->_uploadSurat($filenameS);
                 $userfile = 'assets/dump/' . $this->session->userdata('id') . "/" . $filenameP;
                 $responseP = json_decode($this->dropbox->uploadNewFile("/" . $koor->id . "/", $userfile));
-                // bebersih data
                 // die(json_encode($responseP));
                 unlink($userfile);
-                if (!$this->upload->do_upload('surat')) {
-                    echo "<script>$('#warnings').addClass('notification is-danger');</script>Error: " . $this->upload->display_errors() . "<br>";
-                } else {
-                    $userfile = 'assets/dump/' . $this->session->userdata('id') . "/" . $filenameS;
-                    $response = json_decode($this->dropbox->uploadNewFile("/" . $koor->id . "/", $userfile));
-                    // bebersih data
-                    unlink($userfile);
-                    $dataa = array(
-                        "lampiran_file" => $filenameP,
-                        "lampiran_surat" => $filenameS
-                    );
-                    // echo "update";
-                    $this->DataModel->getWhere('id', $pendaftaran->id);
-                    $this->DataModel->update('tb_pendaftaran', $dataa);
-                    if ($step_lalu <= 4) {
-                        $this->db->update('tb_user', array(
-                            'step_selesai' => 5
-                        ), array(
-                            'id' => $this->session->userdata('id')
-                        ));
-                        //redirect('user', 'refresh');
-                    }
-                    // die();
-                    echo "<script>
+            }
+        }
+        if (!empty($_FILES['surat']['name'])) {
+            $pathS = $_FILES['surat']['name'];
+            $ext = pathinfo($pathS, PATHINFO_EXTENSION);
+            $filenameS = "Surat-" . $pendaftaran->id . "." . $ext;
+            $this->_uploadSurat($filenameS);
+            // bebersih data
+            // die(json_encode($responseP));
+            if (!$this->upload->do_upload('surat')) {
+                echo "<script>$('#warnings').addClass('notification is-danger');</script>Error: " . $this->upload->display_errors() . "<br>";
+            } else {
+                $userfile = 'assets/dump/' . $this->session->userdata('id') . "/" . $filenameS;
+                $response = json_decode($this->dropbox->uploadNewFile("/" . $koor->id . "/", $userfile));
+                // bebersih data
+                unlink($userfile);
+                $dataa = array(
+                    "lampiran_file" => $filenameP,
+                    "lampiran_surat" => $filenameS
+                );
+                // echo "update";
+                $this->DataModel->getWhere('id', $pendaftaran->id);
+                $this->DataModel->update('tb_pendaftaran', $dataa);
+                if ($step_lalu <= 4) {
+                    $this->db->update('tb_user', array(
+                        'step_selesai' => 5
+                    ), array(
+                        'id' => $this->session->userdata('id')
+                    ));
+                    //redirect('user', 'refresh');
+                }
+                // die();
+                echo "<script>
                             $('#warnings').addClass('notification is-primary');
                             $('#warnings').html('Berhasil mengunggah semua berkas. Silakan tunggu...');
                             setTimeout(function() {
                                 location.reload();
                             }, 2500);
                         </script>";
-                }
             }
         } else {
             echo "<script>$('#warnings').addClass('notification is-danger');</script>Anda belum mengunggah surat pernyataan anda.";
