@@ -294,12 +294,12 @@ function tryRegister(home) {
         text: "Oke",
         className: "sweet-warning",
         closeModal: false
-      }
-      // cancel: "Belum"
+      },
+      cancel: "Batal"
     }
   }).then(confirmed => {
     if (confirmed) {
-      var update = $.ajax({
+      $.ajax({
         url: home + "register/registerprocess",
         type: "POST",
         data: "n=" + n + "&e=" + e + "&p=" + p + "&p2=" + p2,
@@ -308,34 +308,8 @@ function tryRegister(home) {
           console.log(xhr.responseText);
           console.log(thrownError);
         },
-        success: function(data) {}
-      });
-
-      update.done(function(json) {
-        var data = JSON.parse(json);
-
-        if (data.success == "Internal Server Error") {
-          swal.stopLoading();
-          swal.close();
-          swal("gagal", "Email anda udah terdaftar", "danger").then(ok => {
-            //do anything
-          });
-        } else if (data.success == true) {
-          swal.stopLoading();
-          swal.close();
-          swal(
-            "Berhasil",
-            "Anda sudah terdaftar silahkan cek email untuk aktivasi akun",
-            "success"
-          ).then(ok => {
-            window.location.replace(home + "login");
-          });
-        } else if (data.success == false) {
-          swal.stopLoading();
-          swal.close();
-          swal("Gagal", "Anda gagal mendaftar", "danger").then(ok => {
-            //do anything
-          });
+        success: function(data) {
+          $("#regWarnings").html(data);
         }
       });
     }

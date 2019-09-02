@@ -229,22 +229,98 @@ class App_view extends CI_Controller
         // die(json_encode(base64_encode($code)));
         // Verify
         if ($nama === "") {
-            echo "<font color=\"red\">Anda wajib memasukkan Nama Pendaftar!</font>";
+            echo "<script>
+                swal.stopLoading();
+                swal.close();
+                swal(\"Gagal\", \"Anda wajib memasukkan Nama Lengkap Anda!\", \"danger\").then(ok => {
+                //do anything
+                });
+            </script>";
             return;
         } else if ($mail === "") {
-            echo "<font color=\"red\">Anda wajib memasukkan Alamat E-Mail!</font>";
+            echo "<script>
+                swal.stopLoading();
+                swal.close();
+                swal(\"Gagal\", \"Anda wajib memasukkan Alamat E-Mail Anda!\", \"danger\").then(ok => {
+                //do anything
+                });
+            </script>";
             return;
         } else if ($pass === "") {
-            echo "<font color=\"red\">Anda wajib memasukkan Kata Sandi!</font>";
+            echo "<script>
+                swal.stopLoading();
+                swal.close();
+                swal(\"Gagal\", \"Anda wajib memasukkan Kata Sandi Anda!\", \"danger\").then(ok => {
+                //do anything
+                });
+            </script>";
             return;
         } else if ($pass2 === "") {
-            echo "<font color=\"red\">Anda wajib memasukkan ulang Kata Sandinya!</font>";
+            echo "<script>
+                swal.stopLoading();
+                swal.close();
+                swal(\"Gagal\", \"Anda wajib memasukkan ulang Kata Sandinya!\", \"danger\").then(ok => {
+                //do anything
+                });
+            </script>";
+            return;
+        } else if (empty(trim($nama))) {
+            echo "<script>
+                swal.stopLoading();
+                swal.close();
+                swal(\"Gagal\", \"Anda wajib memasukkan Nama Lengkap Anda!\", \"danger\").then(ok => {
+                //do anything
+                });
+            </script>";
+            return;
+        } else if (empty(trim($pass))) {
+            echo "<script>
+                swal.stopLoading();
+                swal.close();
+                swal(\"Gagal\", \"Anda wajib memasukkan Kata Sandi Anda!\", \"danger\").then(ok => {
+                //do anything
+                });
+            </script>";
+            return;
+        } else if (strlen($pass) < 6) {
+            echo "<script>
+                swal.stopLoading();
+                swal.close();
+                swal(\"Gagal\", \"Anda wajib memasukkan Kata Sandi minimal 6 karakter!\", \"danger\").then(ok => {
+                //do anything
+                });
+            </script>";
             return;
         } else {
             if ($pass != $pass2) {
-                echo "<font color=\"red\">Kata Sandi yang Anda masukkan tidak sama, periksa kembali!</font>";
+                echo "<script>
+                    swal.stopLoading();
+                    swal.close();
+                    swal(\"Gagal\", \"Kata Sandi yang Anda masukkan tidak sama, periksa kembali!\", \"danger\").then(ok => {
+                    //do anything
+                    });
+                </script>";
                 return;
             } else {
+                $cekemail = $this->db->select('email')
+                                    ->from('tb_user')
+                                    ->where('email', $mail)
+                                    ->get();
+                $cekemail2 = $this->db->select('email')
+                                    ->from('tb_admin')
+                                    ->where('email', $mail)
+                                    ->get();
+                if (($cekemail->num_rows() != 0) || ($cekemail2->num_rows() != 0)) {
+                    echo "<script>
+                        swal.stopLoading();
+                        swal.close();
+                        swal(\"Gagal\", \"Email $mail sudah pernah didaftarkan!\", \"danger\").then(ok => {
+                        //do anything
+                        });
+                    </script>";
+                    return;
+                }
+                
                 $prefixUser = "U-";
                 $prefixKoor = "K-";
                 $randID = date("YmdHis");
@@ -273,29 +349,42 @@ class App_view extends CI_Controller
                         'institusi' => '',
                         'lampiran_identitas' => ''
                     ));
-                    $this->session->set_flashdata('pesan', '<script type="text/javascript">swal ( "Info" ,  "Akun anda belum diverifikasi, Silahkan cek email untuk memverifikasi akun anda." ,  "warning" )</script>');
+                    //$this->session->set_flashdata('pesan', '<script type="text/javascript">swal ( "Info" ,  "Akun anda belum diverifikasi, Silahkan cek email untuk memverifikasi akun anda." ,  "warning" )</script>');
                     // $this->session->set_flashdata('pesan', '<div class="alert alert-warning alert-dismissable fade show" role="alert">
                     //                         <span class="alert-inner--icon"><i class="ni ni-bulb-61"></i></span>
                     //                         <span class="alert-inner--text"> Akun anda belum diverifikasi, Silahkan cek email untuk memverifikasi akun anda. </span>
                     //                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                     //                         </div>');
                     $uri = base_url('user');
-                    echo json_encode(
-                        array(
-                            "success" => true
-                        )
-                    );
+                    echo "<script>
+                        swal.stopLoading();
+                        swal.close();
+                        swal(
+                        \"Berhasil\",
+                        \"Selamat $nama, Anda berhasil mendaftarkan diri ke Perlombaan IITF 2019! Silahkan cek email untuk aktivasi akun\",
+                        \"success\"
+                        ).then(ok => {
+                        window.location.replace(\"$uri\");
+                        });
+                    </script>";
                     //echo "<script>window.alert(\"Selamat $nama, Anda berhasil mendaftarkan diri ke Perlombaan IITF 2019!\\nKlik OK untuk mulai dialihkan ke halaman selanjutnya.\");window.location.href = \"" . $uri . "\";</script>";
-                    // return;
+                    return;
                 } else {
                     //echo $this->email->print_debugger();
                     // echo "<script>console.log($this->send_verification(base64_encode($idUser),$mail,base64_decode($code)))</script>";
                     //echo "<script>window.alert(\"Gagal mengirimkan verifikasi email error: \")</script>";
-                    echo json_encode(
-                        array(
-                            "success" => false
-                        )
-                    );
+                    echo "<script>
+                        swal.stopLoading();
+                        swal.close();
+                        swal(
+                        \"Gagal\",
+                        \"Ada masalah saat mencoba mengirimkan email verifikasi. Coba lagi nanti.\",
+                        \"success\"
+                        ).then(ok => {
+                        
+                        });
+                    </script>";
+                    return;
                 }
             }
         }
