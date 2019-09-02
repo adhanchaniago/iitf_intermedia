@@ -122,10 +122,20 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-lg-12">
+                                        <div class="col-lg-6">
                                             <div class="form-group">
                                             <label class="form-control-label" for="input-nama">Gambar</label>
                                                 <input type="file" class="form-control form-control-alternative" name="gambar">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="input-nama">Lampiran File</label>
+                                                <select name="lampiran" class="form-control form-control-alternative">
+                                                    <option value="">Pilih Status Lampiran File</option>
+                                                    <option value="true" <?php if($lomba[0]['lampiran'] == "true"){echo "selected"; } ?> >Dibutuhkan</option>
+                                                    <option value="false" <?php if($lomba[0]['lampiran'] == "false"){echo "selected"; } ?>>Tidak Dibutuhkan</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>

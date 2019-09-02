@@ -97,5 +97,5 @@
         </div>
     </div>
 </body>
-
+<?php $this->load->view('assets/admin/javascript')?>
 </html>

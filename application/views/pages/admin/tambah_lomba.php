@@ -54,7 +54,7 @@
                                                 <select name="id_k" class="form-control form-control-alternative">
                                                     <option value="">Pilih Kategori Lomba</option>
                                                     <?php foreach ($kategori as $key => $val) { ?>
-                                                    <option value="<?= $val['id'] ?>"><?= $val['nama'] ?></option>
+                                                        <option value="<?= $val['id'] ?>"><?= $val['nama'] ?></option>
                                                     <?php } ?>
                                                 </select>
                                             </div>
@@ -119,10 +119,20 @@
                                         <div class="col-lg-12" id="sub_form"></div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-lg-12">
+                                        <div class="col-lg-6">
                                             <div class="form-group">
-                                            <label class="form-control-label" for="input-nama">Gambar</label>
+                                                <label class="form-control-label" for="input-nama">Gambar</label>
                                                 <input type="file" class="form-control form-control-alternative" name="gambar">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="input-nama">Lampiran File</label>
+                                                <select name="lampiran" class="form-control form-control-alternative">
+                                                    <option value="">Pilih Status Lampiran File</option>
+                                                    <option value="true">Dibutuhkan</option>
+                                                    <option value="false">Tidak Dibutuhkan</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>

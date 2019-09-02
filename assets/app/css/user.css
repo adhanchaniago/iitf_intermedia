@@ -6,7 +6,7 @@ body {
   background-color: #f5f8fa;
 }
 .card-header {
-  background-image: url("http://placehold.it/600x200");
+  background-image: url("../../app/images/logo/banner_header.png");
   background-position: 0 50%;
   background-size: 100% auto;
   border-bottom: 1px solid #e1e8ed;

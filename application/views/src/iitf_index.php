@@ -22,7 +22,7 @@
                     </div>
                     <!-- <h1 class="title is-2  is-semibold is-spaced main-title">IITF 2019</h1> -->
                     <h2 class="subtitle is-4  is-thin" style="margin-top: 30px;font-style: oblique">
-                         "Jadikan Teknologi Sebagai Ruang Kreativitas"
+                        "Jadikan Teknologi Sebagai Ruang Kreativitas"
                     </h2>
                     <!-- Play video button -->
                     <!-- <div class="cta-wrapper has-text-centered">
@@ -47,7 +47,14 @@
                         <!-- Divider -->
                         <div class="divider"></div>
                         <h3 class="subtitle is-7 is-thin" style="font-size:1rem;">
-                        IITF  (Intermedia  Information  Technology  Festival) merupakan salah  satu  kegiatan yang diadakan oleh UKM INTERMEDIA UNIVERSITAS AMIKOM Purwokerto. Beberapa kegiatan diantaranya  terdiri  dari  Roadshow, Lomba-Lomba, dan Festival.  
+                            IITF (Intermedia Information Technology Festival) 2019 salah satu kegiatan
+                            yang diadakan oleh UKM INTERMEDIA UNIVERSITAS AMIKOM Purwokerto. IITF 2019
+                            ini berupa rangkaian kegiatan yang dimulai dari Pre-Event berupa Roadshow
+                            siswa/siswi SMK di Kabupaten Banjarnegara, Purbalinggga, Banyumas, Cilacap,
+                            dan Kebumen., serta adanya perlombaan untuk siswa/siswi SMK dan umum.
+                            Kemudian pada hari utamanya ada pameran IT, seminar, donor darah, hiburan,
+                            bazar makanan yang tersedia melalui stand yang diisi oleh para sponsor, dan
+                            terakhir ada penganugrahan untuk para pemenang lomba
                         </h3>
                         <!-- CTA -->
                         <!-- <p>
@@ -109,31 +116,31 @@
                     <!-- Feature -->
                     <div class="column is-4">
                         <!-- <a href="#"> -->
-                            <div class="feature">
-                                <img src="assets/app/images/rangkaian-kegiatan/roadshow.svg" alt="" data-aos="fade-up" data-aos-delay="100" data-aos-offset="200" data-aos-easing="ease-out-quart">
-                                <h4 class="title is-6 is-tight ">Roadshow</h4>
-                                <p>Roadshow merupakan  kegiatan berbagi ilmu kepada siswa / siswi  SMK .  Dengan  tujuan  membagi  ilmu  di  bidang  Pemrograman  dan  Multimedia  serta menumbuhkan minat dan bakat para peserta.</p>
-                            </div>
+                        <div class="feature">
+                            <img src="assets/app/images/rangkaian-kegiatan/roadshow.svg" alt="" data-aos="fade-up" data-aos-delay="100" data-aos-offset="200" data-aos-easing="ease-out-quart">
+                            <h4 class="title is-6 is-tight ">Roadshow</h4>
+                            <p>Roadshow merupakan kegiatan berbagi ilmu kepada siswa / siswi SMK . Dengan tujuan membagi ilmu di bidang Pemrograman dan Multimedia serta menumbuhkan minat dan bakat para peserta.</p>
+                        </div>
                         <!-- </a> -->
                     </div>
                     <!-- Feature -->
                     <div class="column is-4">
                         <!-- <a href="<?= base_url() ?>detail"> -->
-                            <div class="feature">
-                                <img src="assets/app/images/rangkaian-kegiatan/lomba.svg" alt="" data-aos="fade-up" data-aos-delay="300" data-aos-offset="200" data-aos-easing="ease-out-quart">
-                                <h4 class="title is-6 is-tight ">Lomba IT</h4>
-                                <p>Lomba IT merupakan kegiatan kompetisi dalam bidang IT dengan tujuan untuk memfasilitasi para penggiat IT mulai dari kalangan pelajar, mahasiswa dan masyarakat umum untuk saling berkompetisi.</p>
-                            </div>
+                        <div class="feature">
+                            <img src="assets/app/images/rangkaian-kegiatan/lomba.svg" alt="" data-aos="fade-up" data-aos-delay="300" data-aos-offset="200" data-aos-easing="ease-out-quart">
+                            <h4 class="title is-6 is-tight ">Lomba IT</h4>
+                            <p>Lomba IT merupakan kegiatan kompetisi dalam bidang IT dengan tujuan untuk memfasilitasi para penggiat IT mulai dari kalangan pelajar, mahasiswa dan masyarakat umum untuk saling berkompetisi.</p>
+                        </div>
                         <!-- </a> -->
                     </div>
                     <!-- Feature -->
                     <div class="column is-4">
                         <!-- <a href="<?= base_url() ?>detail"> -->
-                            <div class="feature">
-                                <img src="assets/app/images/rangkaian-kegiatan/festival.svg" alt="" data-aos="fade-up" data-aos-delay="500" data-aos-offset="200" data-aos-easing="ease-out-quart">
-                                <h4 class="title is-6 is-tight ">Festival</h4>
-                                <p>Festival merupakan puncak acara dari IITF dengan beragam acara didalamnya mulai dari Expo Product IT , Seminar , sampai penganugerahan untuk yang menjuarai lomba IT.</p>
-                            </div>
+                        <div class="feature">
+                            <img src="assets/app/images/rangkaian-kegiatan/festival.svg" alt="" data-aos="fade-up" data-aos-delay="500" data-aos-offset="200" data-aos-easing="ease-out-quart">
+                            <h4 class="title is-6 is-tight ">Festival</h4>
+                            <p>Festival merupakan puncak acara dari IITF dengan beragam acara didalamnya mulai dari Expo Product IT , Seminar , sampai penganugerahan untuk yang menjuarai lomba IT.</p>
+                        </div>
                         <!-- </a> -->
                     </div>
                 </div>
@@ -181,9 +188,9 @@
                             <?php
                             $i = 1;
                             foreach ($lomba as $key => $val) { ?>
-                            <div class="flying-child tab-<?= $i ?> <?php if ($i == 1) {
-                                                                            echo "is-active";
-                                                                        } ?>" data-tab="tab-<?= $i ?>"><a href="javascript:void(0);"><?= $val['nama'] ?></a></div>
+                                <div class="flying-child tab-<?= $i ?> <?php if ($i == 1) {
+                                                                                echo "is-active";
+                                                                            } ?>" data-tab="tab-<?= $i ?>"><a href="javascript:void(0);"><?= $val['nama'] ?></a></div>
                             <?php
                                 $i++;
                             } ?>
@@ -198,37 +205,37 @@
                         $j = 1;
                         $k = 0;
                         foreach ($lomba as $key => $value) { ?>
-                        <div id="tab-<?= $j ?>" class="tab-content <?php if ($j == 1) {
-                                                                            echo "is-active";
-                                                                        } ?>">
-                            <div class="columns is-vcentered ">
-                                <div class="column">
-                                    <div class="container">
-                                        <div class="hadiah-box animated preFadeInUp fadeInUp">
-                                            <?php
-                                                $a = 1;
-                                                foreach ($value['juara'] as $keya => $val) { ?>
-                                            <div class="box-hadiah box-hadiah--<?= $a ?>">
-                                                <img class="hadiah-trophy" src="assets/app/images/hadiah/juara_<?= $a ?>.png" alt="juara <?= $a ?>">
-                                                <p class="juara"><?= $val['nama'] ?></p>
-                                                <!-- <p class="nominal">Rp <?= number_format($val['nominal']) ?></p> -->
-                                                <p class="sertif">Sertifikat dan piala</p>
+                            <div id="tab-<?= $j ?>" class="tab-content <?php if ($j == 1) {
+                                                                                echo "is-active";
+                                                                            } ?>">
+                                <div class="columns is-vcentered ">
+                                    <div class="column">
+                                        <div class="container">
+                                            <div class="hadiah-box animated preFadeInUp fadeInUp">
+                                                <?php
+                                                    $a = 1;
+                                                    foreach ($value['juara'] as $keya => $val) { ?>
+                                                    <div class="box-hadiah box-hadiah--<?= $a ?>">
+                                                        <img class="hadiah-trophy" src="assets/app/images/hadiah/juara_<?= $a ?>.png" alt="juara <?= $a ?>">
+                                                        <p class="juara"><?= $val['nama'] ?></p>
+                                                        <!-- <p class="nominal">Rp <?= number_format($val['nominal']) ?></p> -->
+                                                        <p class="sertif">Sertifikat dan piala</p>
+                                                    </div>
+                                                <?php
+                                                        $a++;
+                                                        // $k++;
+                                                    } ?>
                                             </div>
-                                            <?php
-                                                    $a++;
-                                                    // $k++;
-                                                } ?>
-                                        </div>
-                                        <div class="cta-wrapper has-text-centered animated preFadeInUp fadeInUp">
-                                            <a href="<?= base_url() ?>detail?lomba=<?= $value['nama'] ?>" class="button k-button k-primary raised has-gradient is-fat is-bold">
-                                                <span class="text">Detail Lomba</span>
-                                                <span class="front-gradient"></span>
-                                            </a>
+                                            <div class="cta-wrapper has-text-centered animated preFadeInUp fadeInUp">
+                                                <a href="<?= base_url() ?>detail?lomba=<?= $value['nama'] ?>" class="button k-button k-primary raised has-gradient is-fat is-bold">
+                                                    <span class="text">Detail Lomba</span>
+                                                    <span class="front-gradient"></span>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         <?php
                             $j++;
                             $k++;
@@ -469,10 +476,10 @@
                     <div class="accordion-option">
                         <input type="checkbox" id="toggle1" class="accordion-toggle" />
                         <label class="accordion-title" for="toggle1">
-                            Bagaimana mendaftar iitf ?
+                            Bagaimana cara mendaftar lomba IITF ?
                         </label>
                         <div class="accordion-content">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                            <p>Anda dapat mendaftar secara online dengan membuat akun pada “Area Peserta” (tekan tombol “AREA PESERTA” yang terdapat pada navbar website) dan mengikuti step –step yang sudah ada atau daftar secara offline dengan cara datang langsung ke stand pendaftaran IITF di Universitas Amikom Purwokerto. </p>
                         </div>
                     </div>
 
@@ -480,10 +487,10 @@
                     <div class="accordion-option">
                         <input type="checkbox" id="toggle2" class="accordion-toggle" />
                         <label class="accordion-title" for="toggle2">
-                            Saya tidak punya tim apakah boleh ikut kategori mobile ?
+                            Bagaimana cara download Guide Book lomba ?
                         </label>
                         <div class="accordion-content">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                            <p>Silahkan menuju tab Lomba, pilih kategori lomba yang diinginkan, lalu klik "detail lomba". Anda akan diarahakan pada halaman detail lomba yang anda pilih. Pada bagian detail lomba anda dapat mendownload guide book sesuai kategori lomba yang anda pilih </p>
                         </div>
                     </div>
 
@@ -491,10 +498,10 @@
                     <div class="accordion-option">
                         <input type="checkbox" id="toggle3" class="accordion-toggle" />
                         <label class="accordion-title" for="toggle3">
-                            Batas Maksimal pedaftaran kapan ?
+                            Kapan batas akhir pendaftaran lomba ?
                         </label>
                         <div class="accordion-content">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                            <p>Pendaftaran dan submisi file akan ditutup pada 29 September 2019 pukul 23.59 </p>
                         </div>
                     </div>
 
@@ -502,28 +509,22 @@
                     <div class="accordion-option">
                         <input type="checkbox" id="toggle4" class="accordion-toggle" />
                         <label class="accordion-title" for="toggle4">
-                            Mau daftar tapi bingung caranya ?
+                            Apa saja tema perlombaannya ?
                         </label>
                         <div class="accordion-content">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                            <p>
+                                Mobile App = Menumbuhkan Industri Indonesia dengan Teknologi <br>
+                                Poster = Literasi Digital <br>
+                                Web Design = StartUp <br>
+                                Motion Graphic = Edukasi Narkoba <br>
+                                Untuk ketentuan lebih lengkap silahkan Download Guide Book pada masing - masing lomba</p>
                         </div>
                     </div>
 
                     <!-- Option -->
-                    <div class="accordion-option">
-                        <input type="checkbox" id="toggle5" class="accordion-toggle" />
-                        <label class="accordion-title" for="toggle5">
-                            Tim saya berbeda sekolah/instansi apakah boleh ?
-                        </label>
-                        <div class="accordion-content">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
-                        </div>
-                    </div>
                 </div>
                 <!-- /Accordion -->
             </div>
-
-
             <div class="column is-5">
 
                 <!-- Accordion -->
@@ -532,10 +533,10 @@
                     <div class="accordion-option">
                         <input type="checkbox" id="toggle6" class="accordion-toggle" />
                         <label class="accordion-title" for="toggle6">
-                            Batas akhir pendaftaran ?
+                            Anggota team saya berbeda sekolah/instansi apakah bisa mendaftar ?
                         </label>
                         <div class="accordion-content">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                            <p>Untuk kategori lomba Web Design, dan Motion Graphic tiap personil masing – masing team harus berasal dari sekolah/instansi yang sama. Namun, untuk kategori Mobile App personil masing – masing team boleh dari sekolah/instansi yang berbeda </p>
                         </div>
                     </div>
 
@@ -543,32 +544,10 @@
                     <div class="accordion-option">
                         <input type="checkbox" id="toggle7" class="accordion-toggle" />
                         <label class="accordion-title" for="toggle7">
-                            Apakah boleh ngutang ?
+                            Bagaimana cara membayar biaya pendaftarannya ?
                         </label>
                         <div class="accordion-content">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
-                        </div>
-                    </div>
-
-                    <!-- Option -->
-                    <div class="accordion-option">
-                        <input type="checkbox" id="toggle8" class="accordion-toggle" />
-                        <label class="accordion-title" for="toggle8">
-                            Satu tim maksimal berapa orang ?
-                        </label>
-                        <div class="accordion-content">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
-                        </div>
-                    </div>
-
-                    <!-- Option -->
-                    <div class="accordion-option">
-                        <input type="checkbox" id="toggle9" class="accordion-toggle" />
-                        <label class="accordion-title" for="toggle9">
-                            Saya dapet apa aja kalo ikut ?
-                        </label>
-                        <div class="accordion-content">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                            <p>Pembayaran dapat dilakukan via transfer ke rekening BRI 0077-01-100172-50-8 a.n Rahmat Hidayat Fitrianto atau langsung membayar melalui stand pendaftaran di depan front office Universitas AMIKOM Purwokerto </p>
                         </div>
                     </div>
 
@@ -576,16 +555,32 @@
                     <div class="accordion-option">
                         <input type="checkbox" id="toggle10" class="accordion-toggle" />
                         <label class="accordion-title" for="toggle10">
-                            Berapa hadiahnya ?
+                            Dimana alamat Univertas Amikom Purwokerto ?
                         </label>
                         <div class="accordion-content">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                            <p>Universitas Amikom Purwokerto beralamat di Jl. Letjend Pol. Soemarto, Karangjambu, Purwanegara, Kec. Purwokerto Utara, Kabupaten Banyumas, Jawa Tengah 53127 (Sekolah Polisi Negara Purwokerto) </p>
                         </div>
                     </div>
+
+
+                    <!-- Option -->
+                    <div class="accordion-option">
+                        <input type="checkbox" id="toggle9" class="accordion-toggle" />
+                        <label class="accordion-title" for="toggle9">
+                            Saya dari luar kota Purwokerto, Apakah saya dapat ikut mendaftar perlombaan ?
+                        </label>
+                        <div class="accordion-content">
+                            <p>Peserta dapat berasal dari manapun di seluruh Indonesia, asalkan memenuhi seluruh ketentuan persyaratan yang ada pada GuideBook masing – masing kategori lomba </p>
+                        </div>
+                    </div>
+
+                    <!-- Option -->
+
                 </div>
-                <!-- /Accordion -->
             </div>
+            <!-- /Accordion -->
         </div>
+    </div>
     </div>
     <!-- /Content FAQ -->
 </section>

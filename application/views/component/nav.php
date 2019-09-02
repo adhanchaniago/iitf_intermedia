@@ -174,7 +174,7 @@
             <!-- Brand -->
             <div class="navbar-brand">
                 <a href="<?= base_url() ?>" class="navbar-item">
-                    <img src="<?= base_url() ?>assets/app/images/logo/logo.png" alt="">
+                    <img src="<?= base_url() ?>assets/app/images/logo/logo_iitf.png" alt="">
                     <span class="brand-name">IITF 2019</span>
                 </a>
                 <!-- Responsive toggle -->
@@ -229,6 +229,59 @@
             <!-- Brand -->
             <div class="navbar-brand">
                 <a href="<?= base_url() ?>" class="navbar-item">
+                    <img src="<?= base_url() ?>assets/app/images/logo/logo_iitf.png" alt="">
+                    <span class="brand-name">IITF 2019</span>
+                </a>
+                <!-- Responsive toggle -->
+                <span class="navbar-burger burger" data-target="navbarMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+            </div>
+            <!-- Menu -->
+            <div id="navbarMenu" class="navbar-menu light-menu">
+                <div class="navbar-end">
+                    <!-- Menu item -->
+                    <div class="navbar-item is-nav-link">
+                        <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>#about">Tentang</a>
+                    </div>
+                    <!-- Menu item -->
+                    <div class="navbar-item is-nav-link">
+                        <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>#reward">Lomba</a>
+                    </div>
+                    <!-- Menu item -->
+                    <div class="navbar-item is-nav-link">
+                        <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>#timeline">Timeline</a>
+                    </div>
+                    <!-- Menu item -->
+                    <div class="navbar-item is-nav-link">
+                        <a class="is-centered-responsive is-semibold" onclick="showWhatsApp();">
+                            <i class="fab fa-whatsapp"></i>
+                            Hubungi Kami
+                        </a>
+                    </div>
+                    <!-- Sign up -->
+                    <div class="navbar-item is-nav-link">
+                        <a href="<?= base_url() ?>login" class="button k-button k-primary raised has-gradient slanted">
+                            <span class="text">
+
+                                <!-- <i class="far fa-user-circle"></i>-->Login
+
+                            </span>
+                            <span class="front-gradient"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- /Static navbar -->
+    <nav id="navbar-clone" class="navbar is-fixed">
+        <div class="container">
+            <!-- Brand -->
+            <div class="navbar-brand">
+                <a href="<?= base_url() ?>" class="navbar-item">
                     <img src="<?= base_url() ?>assets/app/images/logo/logo.png" alt="">
                     <span class="brand-name">IITF 2019</span>
                 </a>
@@ -258,60 +311,7 @@
                     <div class="navbar-item is-nav-link">
                         <a class="is-centered-responsive is-semibold" onclick="showWhatsApp();">
                             <i class="fab fa-whatsapp"></i>
-                            WhatsApp
-                        </a>
-                    </div>
-                    <!-- Sign up -->
-                    <div class="navbar-item is-nav-link">
-                        <a href="<?= base_url() ?>login" class="button k-button k-primary raised has-gradient slanted">
-                            <span class="text">
-
-                                <!-- <i class="far fa-user-circle"></i>-->Login
-
-                            </span>
-                            <span class="front-gradient"></span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
-    <!-- /Static navbar -->
-    <nav id="navbar-clone" class="navbar is-fixed">
-        <div class="container">
-            <!-- Brand -->
-            <div class="navbar-brand">
-                <a href="<?= base_url() ?>" class="navbar-item">
-                    <img  src="<?= base_url() ?>assets/app/images/logo/logo.png" alt="">
-                    <span class="brand-name">IITF 2019</span>
-                </a>
-                <!-- Responsive toggle -->
-                <span class="navbar-burger burger" data-target="navbarMenu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </span>
-            </div>
-            <!-- Menu -->
-            <div id="navbarMenu" class="navbar-menu light-menu">
-                <div class="navbar-end">
-                    <!-- Menu item -->
-                    <div class="navbar-item is-nav-link">
-                        <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>#about">Tentang</a>
-                    </div>
-                    <!-- Menu item -->
-                    <div class="navbar-item is-nav-link">
-                        <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>#reward">Lomba</a>
-                    </div>
-                    <!-- Menu item -->
-                    <div class="navbar-item is-nav-link">
-                        <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>#timeline">Timeline</a>
-                    </div>
-                    <!-- Menu item -->
-                    <div class="navbar-item is-nav-link">
-                        <a class="is-centered-responsive is-semibold" onclick="showWhatsApp();">
-                            <i class="fab fa-whatsapp"></i>
-                            WhatsApp
+                            Hubungi Kami
                         </a>
                     </div>
                     <!-- Sign up -->
@@ -336,7 +336,7 @@
             <!-- Brand -->
             <div class="navbar-brand">
                 <a href="<?= base_url() ?>" class="navbar-item">
-                    <img  src="<?= base_url() ?>assets/app/images/logo/logo.png" alt="">
+                    <img src="<?= base_url() ?>assets/app/images/logo/logo.png" alt="">
                     <span class="brand-name">IITF 2019</span>
                 </a>
                 <!-- Responsive toggle -->
@@ -365,7 +365,7 @@
                     <div class="navbar-item is-nav-link">
                         <a class="is-centered-responsive is-semibold" onclick="showWhatsApp();">
                             <i class="fab fa-whatsapp"></i>
-                            WhatsApp
+                            Hubungi Kami
                         </a>
                     </div>
                     <!-- Sign up -->
@@ -383,13 +383,13 @@
             </div>
         </div>
     </nav>
-	<!-- /Static navbar -->
-	<nav id="navbar-clone" class="navbar is-fixed">
+    <!-- /Static navbar -->
+    <nav id="navbar-clone" class="navbar is-fixed">
         <div class="container">
             <!-- Brand -->
             <div class="navbar-brand">
                 <a href="<?= base_url() ?>" class="navbar-item">
-                    <img  src="<?= base_url() ?>assets/app/images/logo/logo.png" alt="">
+                    <img src="<?= base_url() ?>assets/app/images/logo/logo.png" alt="">
                     <span class="brand-name">IITF 2019</span>
                 </a>
                 <!-- Responsive toggle -->
@@ -418,7 +418,7 @@
                     <div class="navbar-item is-nav-link">
                         <a class="is-centered-responsive is-semibold" onclick="showWhatsApp();">
                             <i class="fab fa-whatsapp"></i>
-                            WhatsApp
+                            Hubungi Kami
                         </a>
                     </div>
                     <!-- Sign up -->
@@ -442,7 +442,7 @@
     <nav class="nav has-shadow">
         <div class="container">
             <div class="nav-left">
-                <a href="<?= base_url() ?>" class="nav-item is-tab is-active"><i class="fa fa-home"></i> &nbsp; Home</a>
+                <a href="<?= base_url() ?>" class="nav-item is-tab"><i class="fa fa-home"></i> &nbsp; Home</a>
                 <a href="<?= base_url() ?>user?step=4" class="nav-item is-tab"><i class="fa fa-bolt"></i> &nbsp; Detail Pendaftaran</a>
             </div>
 
@@ -462,7 +462,7 @@
 
             <div class="nav-right nav-menu">
                 <span class="nav-item">
-                    <a class="button" href="<?= base_url()?>logout">
+                    <a class="button" href="<?= base_url() ?>logout">
                         <span class="icon">
                             <i class="fa fa-twitter"></i>
                         </span>
@@ -491,24 +491,21 @@
             <!-- Menu -->
             <div id="navbarMenu" class="navbar-menu light-menu">
                 <div class="navbar-end">
-					
-				<!-- Menu item -->
-				<div class="navbar-item is-nav-link">
+                    <!-- Menu item -->
+                    <div class="navbar-item is-nav-link">
                         <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>">Home</a>
                     </div>
-					<!-- Menu item -->
+                    <!-- Menu item -->
                     <div class="navbar-item is-nav-link">
-                        <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>user/dashboard">dashboard</a>
+                        <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>user/dashboard">Dashboard</a>
                     </div>
-				<!-- Menu item -->
+                    <!-- Menu item -->
                     <div class="navbar-item is-nav-link">
                         <a class="is-centered-responsive is-semibold" onclick="showWhatsApp();">
                             <i class="fab fa-whatsapp"></i>
-                            WhatsApp
+                            Hubungi Kami
                         </a>
-					</div>
-					
-
+                    </div>
                     <!-- Sign up -->
                     <div class="navbar-item is-nav-link">
                         <a href="<?= base_url((($email == null) || ($email == '') ? 'login' : 'logout')) ?>" class="button k-button k-primary raised has-gradient slanted">
@@ -562,7 +559,7 @@
                     <div class="navbar-item is-nav-link">
                         <a class="is-centered-responsive is-semibold" onclick="showWhatsApp();">
                             <i class="fab fa-whatsapp"></i>
-                            WhatsApp
+                            Hubungi Kami
                         </a>
                     </div>
 
@@ -618,7 +615,7 @@
                     <div class="navbar-item is-nav-link">
                         <a class="is-centered-responsive is-semibold" onclick="showWhatsApp();">
                             <i class="fab fa-whatsapp"></i>
-                            WhatsApp
+                            Hubungi Kami
                         </a>
                     </div>
 

@@ -36,6 +36,7 @@ class Lomba extends MY_Controller
                 $tema = $this->input->post('tema');
                 $ket = $this->input->post('keterangan');
                 $jml = $this->input->post('jumlah');
+                $lam = $this->input->post('lampiran');
                 $n_gb = str_replace(' ', '_', $nama) . "IITF2019";
                 $n_g =  "G-" . $id;
                 $harga = $this->input->post('harga');
@@ -81,6 +82,7 @@ class Lomba extends MY_Controller
                                     "keterangan" => $ket,
                                     "jumlah_anggota" => $jml,
                                     "deskripsi" => $desk,
+                                    "lampiran" => $lam,
                                     "guide_book" => $n_gb . "." . $eks,
                                     "file_gambar" => $n_g . "." . $eksG,
                                     "harga" => $harga
@@ -128,7 +130,7 @@ class Lomba extends MY_Controller
     public function ubah($id)
     {
         if ($this->IsLoggedIn()) {
-            $lomba = $this->DataModel->select('tb_lomba.nama,tb_lomba.deskripsi,tb_lomba.harga,tb_lomba.id_kategori,tb_juara.nama as nama_lomba,tb_juara.nominal, tb_lomba.tema,tb_lomba.keterangan,tb_lomba.jumlah_anggota');
+            $lomba = $this->DataModel->select('tb_lomba.nama,tb_lomba.deskripsi,tb_lomba.harga,tb_lomba.id_kategori,tb_juara.nama as nama_lomba,tb_juara.nominal, tb_lomba.tema,tb_lomba.keterangan,tb_lomba.jumlah_anggota,tb_lomba.lampiran');
             $lomba = $this->DataModel->getWhere('id', $id);
             $lomba = $this->DataModel->getJoin('tb_juara', 'tb_juara.id_lomba = tb_lomba.id', 'inner');
             $lomba = $this->DataModel->getData('tb_lomba')->result_array();
@@ -140,6 +142,7 @@ class Lomba extends MY_Controller
                 $tema = $this->input->post('tema');
                 $ket = $this->input->post('keterangan');
                 $jml = $this->input->post('jumlah');
+                $lam = $this->input->post('lampiran');
                 $harga = $this->input->post('harga');
                 $nl = $this->input->post('nama_lomba');
                 $nom = $this->input->post('nominal');
@@ -169,6 +172,7 @@ class Lomba extends MY_Controller
                             "nama" => $nama,
                             "tema" => $tema,
                             "deskripsi" => $desk,
+                            "lampiran" => $lam,
                             "keterangan" => $ket,
                             "jumlah_anggota" => $jml,
                             "guide_book" => $n_gb . "." . $eks,
@@ -212,6 +216,7 @@ class Lomba extends MY_Controller
                             "nama" => $nama,
                             "tema" => $tema,
                             "deskripsi" => $desk,
+                            "lampiran" => $lam,
                             "keterangan" => $ket,
                             "jumlah_anggota" => $jml,
                             "file_gambar" => $n_g . "." . $eksG,
@@ -231,6 +236,7 @@ class Lomba extends MY_Controller
                         "id_kategori" => $id_k,
                         "nama" => $nama,
                         "tema" => $tema,
+                        "lampiran" => $lam,
                         "keterangan" => $ket,
                         "jumlah_anggota" => $jml,
                         "deskripsi" => $desk,
@@ -279,6 +285,7 @@ class Lomba extends MY_Controller
             redirect('admin/home/login');
         }
     }
+    
 
     private function _uploadFile($name, $eks)
     {
