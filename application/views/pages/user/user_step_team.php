@@ -120,53 +120,74 @@
         function setForm() {
           // alert('g');
           currentForm++;
-          var data = '<div id="form' + currentForm + '" class="column box">' +
-            '<div class="columns"><div class="column is-8"><h3>Anggota ' + currentForm + '</h3></div><div class="column is-4"><div class="control" style="float:right"><a onclick="removeForm(' + currentForm + ')" class="button is-danger is-outlined"><span>Hapus</span><span class="icon is-small"><i class="fas fa-times"></i></span></a></div></div></div>' +
+          var data = 
+						'<div id="form' + currentForm + '" class="column box">' +
+            	'<div class="columns">'+
+								'<div class="column is-8">'+
+									'<h3>Anggota ' + currentForm + '</h3>'+
+									'</div>'+
+								'<div class="column is-4">'+
+								'<div class="control" style="float:right">'+
+									'<a onclick="removeForm(' + currentForm + ')" class="button is-danger is-outlined">'+
+									'<span>Hapus</span>'+
+									'<span class="icon is-small">'+
+										'<i class="fas fa-times"></i>'+
+									'</span>'+
+									'</a>'+
+								'</div>'+
+							'</div>'+
+						'</div>' +
             '<div class="field">' +
-            '<label class="label">Nama Lengkap</label>' +
-            '<div class="control has-icons-left">' +
-            '<input id="nama' + currentForm + '" name="nama[]" class="input" type="text" placeholder="Masukkan nama anggota" value=""/>' +
-            '<span class="icon is-small is-left">' +
-            '<i class="fas fa-user"></i>' +
-            '</span>' +
-            '</div>' +
+            	'<label class="label">Nama Lengkap</label>' +
+            	'<div class="control has-icons-left">' +
+            		'<input id="nama' + currentForm + '" name="nama[]" class="input" type="text" placeholder="Masukkan nama anggota" value=""/>' +
+            			'<span class="icon is-small is-left">' +
+            				'<i class="fas fa-user"></i>' +
+            			'</span>' +
+            	'</div>' +
             '</div>' +
             '<div class="field">' +
-            '<label class="label">No Telpon/WA</label>' +
-            '<div class="control has-icons-left">' +
-            '<input id="no_hp'+currentForm+'" name="no_hp[]" class="input" type="text" placeholder="contoh : 08xxxx" value=""/>' +
-            '<span class="icon is-small is-left">' +
-            '<i class="fas fa-phone"></i>' +
-            '</span>'
+            	'<label class="label">No Telpon/WA</label>' +
+            		'<div class="control has-icons-left">' +
+            			'<input id="no_hp'+currentForm+'" name="no_hp[]" class="input" type="text" placeholder="contoh : 08xxxx" value=""/>' +
+            				'<span class="icon is-small is-left">' +
+            					'<i class="fas fa-phone"></i>' +
+            					'</span>'
             // +'<span class="icon is-small is-right">'
             //   +'<i class="fas fa-check"></i>'
             // +'</span>'
             +
-            '</div>'
+            		'</div>'
             // +'<p class="help is-success">Kalo sukses</p>'
             +
             '</div>' +
             '<div class="field">' +
-            '<label class="label">Identitas diri (ekstensi diterima: PDF, DOC, DOCX) maksimal 1 MB</label>' +
-            '<div class="control">' +
-            '<div class="file is-info has-name">' +
-            '<label class="file-label">' +
-            '<input id="fileup" class="file-input" type="file" name="identitas' + currentForm + '" id="identitas' + currentForm + '" />' +
-            '<span class="file-cta">' +
-            '<span class="file-icon">' +
-            '<i class="fas fa-upload"></i>' +
-            '</span>' +
-            '<span class="file-label">' +
-            'Pilih Berkas' +
-            '</span>' +
-            '</span>' +
-            '<span class="file-name" id="filename' + currentForm + '">' +
-            'Pilih Dokumen Identitas' +
-            '</span>' +
-            '</label>' +
-            '</div>' +
-            '</div>' +
-            '</div></div>';
+            	'<label class="label">Identitas diri (ekstensi diterima: PDF, DOC, DOCX) maksimal 1 MB</label>' +
+            		'<div class="control">' +
+            			'<div class="file is-info has-name">' +
+            				'<label class="file-label">' +
+            				'<input id="fileup" class="file-input" type="file" name="identitas' + currentForm + '" id="identitas' + currentForm + '" />' +
+            				'<span class="file-cta">' +
+            					'<span class="file-icon">' +
+            						'<i class="fas fa-upload"></i>' +
+            					'</span>' +
+            					'<span class="file-label">' +
+            						'Pilih Berkas' +
+            					'</span>' +
+            				'</span>' +
+            				'<span class="file-name" id="filename' + currentForm + '">' +
+            					'Pilih Dokumen Identitas' +
+           					'</span>' +
+            				'</label>' +
+            			'</div>' +
+									'<div class="control">'+
+            				'<input  type="submit" name="kirim" value="Download" class="button is-link">'+
+          			'</div>'+
+            		'</div>' +
+								
+            '</div>'+
+						
+					'</div>';
           wadah.innerHTML += data;
 
           // Form Filtration
