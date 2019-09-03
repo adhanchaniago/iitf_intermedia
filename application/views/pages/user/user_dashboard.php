@@ -67,16 +67,28 @@
                   : <?= $lomba->keterangan ?>
                 </div>
               </div>
-              <div class="columns">
-                <div class="column">
-                  <p>
-                    Nama Team
-                  </p>
+              <?php if ($lomba->keterangan == 'kelompok') { ?>
+                <div class="columns">
+                  <div class="column">
+                    <p>
+                      Nama Team
+                    </p>
+                  </div>
+                  <div class="column is-6">
+                    : <?= $pendaftaran->nama_team ?>
+                  </div>
                 </div>
-                <div class="column is-6">
-                  : <?= $pendaftaran->nama_team ?>
+                <div class="columns">
+                  <div class="column">
+                    <p>
+                      Jumlah Anggota
+                    </p>
+                  </div>
+                  <div class="column is-6">
+                    : <?= count($anggota) ?>
+                  </div>
                 </div>
-              </div>
+              <?php } ?>
               <div class="columns">
                 <div class="column">
                   <p>
@@ -89,16 +101,6 @@
                     } else {
                       echo "Tidak Aktif";
                     } ?>
-                </div>
-              </div>
-              <div class="columns">
-                <div class="column">
-                  <p>
-                    Jumlah Anggota
-                  </p>
-                </div>
-                <div class="column is-6">
-                  : <?= count($anggota) ?>
                 </div>
               </div>
             </div>

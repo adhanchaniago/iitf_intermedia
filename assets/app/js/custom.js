@@ -1,6 +1,29 @@
-$(document).ready(function() {
+$(document).ready(function () {
   // Form Filtration
-  $('#nama').on('keypress', function (event) {
+  // console.log(currentForm);
+  if (typeof currentForm !== 'undefined') {
+    var i;
+    for (i = 1; i <= currentForm; i++) {
+      $('#nama' + i).on('keypress', function (event) {
+        var regex = new RegExp("^[a-zA-Z\\s']+$");
+        var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+        if (!regex.test(key)) {
+          event.preventDefault();
+          return false;
+        }
+      });
+      $('#no_hp' + i).on('keypress', function (event) {
+        var regex = new RegExp("^[0-9]+$");
+        var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+        if (!regex.test(key)) {
+          event.preventDefault();
+          return false;
+        }
+      });
+    }
+  }
+
+  $('#n').on('keypress', function (event) {
     var regex = new RegExp("^[a-zA-Z\\s']+$");
     var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
     if (!regex.test(key)) {
@@ -8,16 +31,17 @@ $(document).ready(function() {
       return false;
     }
   });
-  $('#no_hp').on('keypress', function (event) {
-    var regex = new RegExp("^[0-9]+$");
-    var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
-    if (!regex.test(key)) {
-      event.preventDefault();
-      return false;
-    }
-  });
 
-  $("#resume").change(function(e) {
+   $('#no_hp').on('keypress', function (event) {
+     var regex = new RegExp("^[0-9]+$");
+     var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+     if (!regex.test(key)) {
+       event.preventDefault();
+       return false;
+     }
+   });
+
+  $("#resume").change(function (e) {
     var fileExtension = ["pdf", "doc", "docx"];
     if (
       $.inArray(
@@ -31,7 +55,7 @@ $(document).ready(function() {
     ) {
       alert(
         "Hanya format file berikut yang dapat diterima : " +
-          fileExtension.join(", ")
+        fileExtension.join(", ")
       );
     } else {
       var namafile = e.target.files[0].name;
@@ -46,7 +70,7 @@ $(document).ready(function() {
     }
   });
 
-  $("#bukti").change(function(e) {
+  $("#bukti").change(function (e) {
     var fileExtension = ["jpg", "jpeg", "png"];
     if (
       $.inArray(
@@ -60,7 +84,7 @@ $(document).ready(function() {
     ) {
       alert(
         "Hanya format file berikut yang dapat diterima : " +
-          fileExtension.join(", ")
+        fileExtension.join(", ")
       );
     } else {
       var namafile = e.target.files[0].name;
@@ -77,10 +101,10 @@ $(document).ready(function() {
   // var x;
   var i;
   // sudah disisipkan di user_step_team.php, jadi proses ini saya disable
-  /* $(document).on(
+  $(document).on(
     "change",
     "#identitas1, #identitas2, #identitas3, #identitas4",
-    function(e) {
+    function (e) {
       var fileExtension = ["pdf", "doc", "docx"];
       if (
         $.inArray(
@@ -94,14 +118,14 @@ $(document).ready(function() {
       ) {
         alert(
           "Hanya format file berikut yang dapat diterima : " +
-            fileExtension.join(", ")
+          fileExtension.join(", ")
         );
       } else {
         var namafile = e.target.files[0].name;
         var ukurfile = e.target.files[0].size;
         i = this.id.slice(9);
         console.log(i);
-        if (ukurfile <= 10 * Math.pow(2, 20)) {
+        if (ukurfile <= 1 * Math.pow(2, 20)) {
           $("#filename" + i).html(namafile);
         } else {
           alert(
@@ -110,7 +134,7 @@ $(document).ready(function() {
         }
       }
     }
-  ); */
+  );
 
   $("#perlombaan").change(function(e) {
     var fileExtension = ["zip", "rar"];

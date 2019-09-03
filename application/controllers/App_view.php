@@ -524,7 +524,7 @@ class App_view extends CI_Controller
                 $('#warnings').addClass('notification is-primary');
                 $('#warnings').html('Berhasil menyimpan perubahan, silakan tunggu...');
                 setTimeout(function() {
-                    location.reload();
+                    window.location.href = '".base_url('user')."';
                 }, 2500);
             </script>";
         } else {
@@ -546,11 +546,11 @@ class App_view extends CI_Controller
                 $('#warnings').addClass('notification is-primary');
                 $('#warnings').html('Berhasil disimpan, silakan tunggu...');
                 setTimeout(function() {
-                    location.reload();
+                    window.location.href = '".base_url('user')."';
                 }, 2500);
             </script>";
         }
-        if ($step_lalu < 2) {
+        // if ($step_lalu < 2) {
             $cek = $this->DataModel->getWhere('id', $idlomba);
             $cek = $this->DataModel->getData('tb_lomba')->row();
             // echo $cek;
@@ -567,7 +567,7 @@ class App_view extends CI_Controller
                     'id' => $this->session->userdata('id')
                 ));
             }
-        }
+        // }
     }
 
     private function _uploadFile($name)
@@ -699,7 +699,7 @@ class App_view extends CI_Controller
                                     $('#warnings').addClass('notification is-primary');
                                     $('#warnings').html('Berhasil disimpan dan berhasil mengunggah foto. Silakan tunggu...');
                                     setTimeout(function() {
-                                        location.reload();
+                                        window.location.href = '".base_url('user')."';
                                     }, 2500);
                                 </script>";
     
@@ -744,7 +744,7 @@ class App_view extends CI_Controller
                                 $('#warnings').addClass('notification is-primary');
                                 $('#warnings').html('Berhasil disimpan. Silakan tunggu...');
                                 setTimeout(function() {
-                                    location.reload();
+                                    window.location.href = '".base_url('user')."';
                                 }, 2500);
                             </script>";
                     }
@@ -817,7 +817,7 @@ class App_view extends CI_Controller
                         unset($dataa);
                         echo "<script>$('#warnings').addClass('notification is-success');
                         setTimeout(function(){
-                            location.reload();
+                            window.location.href = '".base_url('user')."';
                         }, 2500);
                         </script>Berhasil mengunggah data, silakan tunggu...";
                     }
@@ -911,7 +911,7 @@ class App_view extends CI_Controller
                         $('#warning').addClass('notification is-primary');
                         $('#warning').html('Berhasil mengunggah bukti pembayaran. Silakan tunggu...');
                         setTimeout(function() {
-                            location.reload();
+                            window.location.href = '".base_url('user')."';
                         }, 2500);
                     </script>";
                 //redirect('user', 'refresh');
@@ -970,20 +970,20 @@ class App_view extends CI_Controller
                 // echo "update";
                 $this->DataModel->getWhere('id', $pendaftaran->id);
                 $this->DataModel->update('tb_pendaftaran', $dataa);
-                if ($step_lalu <= 4) {
+                // if ($step_lalu <= 4) {
                     $this->db->update('tb_user', array(
                         'step_selesai' => 5
                     ), array(
                         'id' => $this->session->userdata('id')
                     ));
                     //redirect('user', 'refresh');
-                }
+                // }
                 // die();
                 echo "<script>
                             $('#warnings').addClass('notification is-primary');
                             $('#warnings').html('Berhasil mengunggah semua berkas. Silakan tunggu...');
                             setTimeout(function() {
-                                location.reload();
+                                window.location.href = '".base_url('user')."';
                             }, 2500);
                         </script>";
             }
