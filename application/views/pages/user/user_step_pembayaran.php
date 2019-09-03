@@ -16,14 +16,14 @@
       <div class="notification">
         <article class="media">
           <div class="media-left">
-            <p>Status Peserta : <p>
+            <p style="font-weight: bold;">Status Peserta : <p>
           </div>
           <div class="media-content">
             <div class="content">
               <?php if ($pendaftaran->status == "unactive") {
-                echo "<p class='has-text-danger'>Tidak Aktif</p>";
+                echo '<p style="font-weight: bold;" class="has-text-danger">Tidak Aktif</p>';
               } else {
-                echo "<p class='has-text-success'>Aktif</p>";
+                echo '<p style="font-weight: bold;" class="has-text-success">Aktif</p>';
               } ?>
             </div>
           </div>
@@ -111,6 +111,9 @@
             <div class="control">
               <input onclick="trySaveBayar('<?= base_url(); ?>');" type="submit" id="simpan" name="kirim" value="Simpan" class="button is-link">
             </div>
+						<div class="control">
+            <input onclick="submission('<?= base_url(); ?>');" type="submit" name="kirim" value="Download" class="button is-info">
+          </div>
           </div>
         </form>
       </div>

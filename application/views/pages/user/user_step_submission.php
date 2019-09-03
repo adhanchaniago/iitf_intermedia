@@ -55,6 +55,11 @@
                   <?= $submit->lampiran_surat; ?>
                 </span>
               </label>
+							<div class="field is-grouped">
+          <div class="control">
+            <input onclick="submission('<?= base_url(); ?>');" type="button" name="kirim" value="Download" class="button is-info">
+          </div>
+        </div>
             </div>
           </div>
         </div>

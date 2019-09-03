@@ -49,7 +49,7 @@ class App_view extends CI_Controller
         $pendaftaran = $this->DataModel->getData('tb_pendaftaran')->row();
         $jml = $this->DataModel->getWhere('id_pendaftaran', $pendaftaran->id);
         $jml = $this->DataModel->getData('tb_anggota')->result_array();
-        $payload['judul'] = "HOME";
+        $payload['judul'] = "DASHBOARD";
         $payload['link'] = ($this->session->userdata('email') == "" ? base_url('login') : base_url('user'));
         $payload['email'] = $email;
         $payload['page'] = "dashboard";
@@ -136,7 +136,7 @@ class App_view extends CI_Controller
         $lomba = $this->DataModel->getData('tb_lomba')->result_array();
 
         // die(json_encode($lomba));
-        $payload['judul'] = "HOME";
+        $payload['judul'] = "DETAIL LOMBA";
         $payload['link'] = ($this->session->userdata('email') == "" ? base_url('login') : base_url('user'));
         $payload['email'] = $email;
         $payload['page'] = "kosong";
@@ -1211,7 +1211,7 @@ class App_view extends CI_Controller
 
     public function lupaPassword()
     {
-        $payload['judul'] = "TIMELINE";
+        $payload['judul'] = "LUPA PASSWORD";
         $payload['link'] = ($this->session->userdata('email') == "" ? base_url('login') : base_url('user'));
         $payload['email'] = ($this->session->userdata('email') == "" ? "" : "LANJUTKAN DAFTAR: " . $this->session->userdata('email'));
         $payload['page'] = "timeline";
