@@ -33,6 +33,10 @@
                     </div>
                     <!-- Menu item -->
                     <div class="navbar-item is-nav-link">
+                        <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>seminar/register">Ikuti Seminar UI/UX</a>
+                    </div>
+                    <!-- Menu item -->
+                    <div class="navbar-item is-nav-link">
                         <a class="is-centered-responsive is-semibold" onclick="showWhatsApp();">
                             <i class="fab fa-whatsapp"></i>
                             Hubungi Kami
@@ -86,6 +90,10 @@
                     <!-- Menu item -->
                     <div class="navbar-item is-nav-link">
                         <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>#timeline">Timeline</a>
+                    </div>
+                    <!-- Menu item -->
+                    <div class="navbar-item is-nav-link">
+                        <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>seminar/register">Ikuti Seminar UI/UX</a>
                     </div>
                     <!-- Menu item -->
                     <div class="navbar-item is-nav-link">
@@ -146,6 +154,10 @@
                     </div>
                     <!-- Menu item -->
                     <div class="navbar-item is-nav-link">
+                        <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>seminar/register">Ikuti Seminar UI/UX</a>
+                    </div>
+                    <!-- Menu item -->
+                    <div class="navbar-item is-nav-link">
                         <a class="is-centered-responsive is-semibold" onclick="showWhatsApp();">
                             <i class="fab fa-whatsapp"></i>
                             Hubungi Kami
@@ -198,6 +210,10 @@
                     <!-- Menu item -->
                     <div class="navbar-item is-nav-link">
                         <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>#timeline">Timeline</a>
+                    </div>
+                    <!-- Menu item -->
+                    <div class="navbar-item is-nav-link">
+                        <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>seminar/register">Ikuti Seminar UI/UX</a>
                     </div>
                     <!-- Menu item -->
                     <div class="navbar-item is-nav-link">
@@ -256,6 +272,10 @@
                     </div>
                     <!-- Menu item -->
                     <div class="navbar-item is-nav-link">
+                        <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>seminar/register">Ikuti Seminar UI/UX</a>
+                    </div>
+                    <!-- Menu item -->
+                    <div class="navbar-item is-nav-link">
                         <a class="is-centered-responsive is-semibold" onclick="showWhatsApp();">
                             <i class="fab fa-whatsapp"></i>
                             Hubungi Kami
@@ -306,6 +326,10 @@
                     <!-- Menu item -->
                     <div class="navbar-item is-nav-link">
                         <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>#timeline">Timeline</a>
+                    </div>
+                    <!-- Menu item -->
+                    <div class="navbar-item is-nav-link">
+                        <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>seminar/register">Ikuti Seminar UI/UX</a>
                     </div>
                     <!-- Menu item -->
                     <div class="navbar-item is-nav-link">
@@ -363,6 +387,10 @@
                     </div>
                     <!-- Menu item -->
                     <div class="navbar-item is-nav-link">
+                        <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>seminar/register">Ikuti Seminar UI/UX</a>
+                    </div>
+                    <!-- Menu item -->
+                    <div class="navbar-item is-nav-link">
                         <a class="is-centered-responsive is-semibold" onclick="showWhatsApp();">
                             <i class="fab fa-whatsapp"></i>
                             Hubungi Kami
@@ -413,6 +441,10 @@
                     <!-- Menu item -->
                     <div class="navbar-item is-nav-link">
                         <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>#timeline">Timeline</a>
+                    </div>
+                    <!-- Menu item -->
+                    <div class="navbar-item is-nav-link">
+                        <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>seminar/register">Ikuti Seminar UI/UX</a>
                     </div>
                     <!-- Menu item -->
                     <div class="navbar-item is-nav-link">
@@ -557,6 +589,10 @@
                     </div>
                     <!-- Menu item -->
                     <div class="navbar-item is-nav-link">
+                        <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>seminar/register">Ikuti Seminar UI/UX</a>
+                    </div>
+                    <!-- Menu item -->
+                    <div class="navbar-item is-nav-link">
                         <a class="is-centered-responsive is-semibold" onclick="showWhatsApp();">
                             <i class="fab fa-whatsapp"></i>
                             Hubungi Kami
@@ -610,6 +646,10 @@
                     <!-- Menu item -->
                     <div class="navbar-item is-nav-link">
                         <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>#timeline">Timeline</a>
+                    </div>
+                    <!-- Menu item -->
+                    <div class="navbar-item is-nav-link">
+                        <a class="is-centered-responsive is-semibold" href="<?= base_url() ?>seminar/register">Ikuti Seminar UI/UX</a>
                     </div>
                     <!-- Menu item -->
                     <div class="navbar-item is-nav-link">
