@@ -118,6 +118,223 @@ class App_view extends CI_Controller
         $this->load->view('component/footer');
     }
 
+    public function regnow_seminar()
+    {
+        $htm = $this->DataModel->getHTS();
+        if ($htm == "presale") {
+            $this->db->select('*');
+            $this->db->from('tb_seminar');
+            $this->db->where('htm_status', $htm);
+            $query = $this->db->get();
+            $num = $query->num_rows();
+            if ($num < 30) {
+                $code = $this->DataModel->noDaf();
+
+                $nama = $this->input->post('nama');
+                $email = $this->input->post('email');
+                $alamat = $this->input->post('alamat');
+                $nohp = $this->input->post('notelp');
+                $asal = $this->input->post('asal');
+
+                // Verify
+                if (!preg_match("/^[a-zA-Z\s']+$/", $nama)) {
+                    echo "Kolom Nama Lengkap mengandung karakter yang tidak diizinkan!";
+                    return;
+                }
+                
+                if (!preg_match("/^[0-9]+$/", $nohp)) {
+                    echo "Kolom Nomor HP/WA mengandung karakter yang tidak diizinkan!";
+                    return;
+                }
+
+                if (!preg_match("/^[a-zA-Z\s'.0-9\/]+$/", $alamat)) {
+                    echo "Kolom Alamat mengandung karakter yang tidak diizinkan!";
+                    return;
+                }
+
+                if ($asal != "") {
+                    if (!preg_match("/^[a-zA-Z\s'.0-9\/]+$/", $asal)) {
+                        echo "Kolom Asal Sekolah/Institusi mengandung karakter yang tidak diizinkan!";
+                        return;
+                    }
+                }
+                
+                $this->form_validation->set_rules('nama', 'Nama Lengkap', 'trim|required|min_length[5]|max_length[50]');
+                $this->form_validation->set_rules('email', 'Email', 'valid_email|required|min_length[5]|max_length[50]');
+                $this->form_validation->set_rules('alamat', 'Alamat', 'trim|required|min_length[5]');
+                $this->form_validation->set_rules('notelp', 'Nomor HP/WA', 'trim|required|min_length[5]|max_length[13]');
+                
+                if ($this->form_validation->run() == TRUE) {
+                    $eCheck = $this->db->select('email')
+                                        ->from("tb_seminar")
+                                        ->where("email", $email)
+                                        ->get();
+                    if ($eCheck->num_rows() == 0) {
+                        $this->db->insert('tb_seminar', array(
+                            "id_daf" => $code,
+                            "nama" => $nama,
+                            "alamat" => $alamat,
+                            "email" => $email,
+                            "notelp" => $nohp,
+                            "institusi" => $asal,
+                            "status_bayar" => FALSE,
+                            "status_ulang" => FALSE,
+                            "htm_status" => $htm
+                        ));
+                        
+                        $data['htm'] = strtoupper($htm);
+                        $data['code'] = $code;
+                        $data['biaya'] = 30000;
+                        echo $this->load->view('src/iitf_register_seminar_success', $data, TRUE);
+                    } else {
+                        echo "Email '$eCheck' sudah pernah didaftarkan!";
+                    }
+                } else {
+                    echo validation_errors();
+                }
+            } else {
+                $data['htm'] = strtoupper($htm);
+                $data['tanggal'] = date("d/m/Y", $this->DataModel->getSOpen() + 1);
+                echo $this->load->view('src/iitf_register_seminar_full', $data, TRUE);
+                
+            }
+        } else if ($htm == "sale") {
+            $this->db->select('*');
+            $this->db->from('tb_seminar');
+            $this->db->where('htm_status', $htm);
+            $query = $this->db->get();
+            $num = $query->num_rows();
+            if ($num < 15) {
+                $code = $this->DataModel->noDaf();
+
+                $nama = $this->input->post('nama');
+                $email = $this->input->post('email');
+                $alamat = $this->input->post('alamat');
+                $nohp = $this->input->post('notelp');
+                $asal = $this->input->post('asal');
+                
+                $this->form_validation->set_rules('nama', 'Nama Lengkap', 'trim|required|min_length[5]|max_length[50]');
+                $this->form_validation->set_rules('email', 'Email', 'valid_email|required|min_length[5]|max_length[50]');
+                $this->form_validation->set_rules('alamat', 'Alamat', 'trim|required|min_length[5]');
+                $this->form_validation->set_rules('notelp', 'Nomor HP/WA', 'trim|required|min_length[5]|max_length[13]');
+                
+                if ($this->form_validation->run() == TRUE) {
+                    $eCheck = $this->db->select('email')
+                                        ->from("tb_seminar")
+                                        ->where("email", $email)
+                                        ->get();
+                    if ($eCheck->num_rows() == 0) {
+                        $this->db->insert('tb_seminar', array(
+                            "id_daf" => $code,
+                            "nama" => $nama,
+                            "alamat" => $alamat,
+                            "email" => $email,
+                            "notelp" => $nohp,
+                            "institusi" => $asal,
+                            "status_bayar" => FALSE,
+                            "status_ulang" => FALSE,
+                            "htm_status" => $htm
+                        ));
+                        
+                        $data['htm'] = strtoupper($htm);
+                        $data['code'] = $code;
+                        $data['biaya'] = 35000;
+                        echo $this->load->view('src/iitf_register_seminar_success', $data, TRUE);
+                    } else {
+                        echo "Email '$eCheck' sudah pernah didaftarkan!";
+                    }
+                } else {
+                    echo validation_errors();
+                }
+            } else {
+                $data['htm'] = strtoupper($htm);
+                $data['tanggal'] = date("d/m/Y", $this->DataModel->getOTSOpen() + 1);
+                echo $this->load->view('src/iitf_register_seminar_full', $data, TRUE);
+                
+            }
+        } else if ($htm == "ots") {
+            $this->db->select('*');
+            $this->db->from('tb_seminar');
+            $this->db->where('htm_status', $htm);
+            $query = $this->db->get();
+            $num = $query->num_rows();
+            if ($num < 5) {
+                $code = $this->DataModel->noDaf();
+
+                $nama = $this->input->post('nama');
+                $email = $this->input->post('email');
+                $alamat = $this->input->post('alamat');
+                $nohp = $this->input->post('notelp');
+                $asal = $this->input->post('asal');
+                
+                $this->form_validation->set_rules('nama', 'Nama Lengkap', 'trim|required|min_length[5]|max_length[50]');
+                $this->form_validation->set_rules('email', 'Email', 'valid_email|required|min_length[5]|max_length[50]');
+                $this->form_validation->set_rules('alamat', 'Alamat', 'trim|required|min_length[5]');
+                $this->form_validation->set_rules('notelp', 'Nomor HP/WA', 'trim|required|min_length[5]|max_length[13]');
+                
+                if ($this->form_validation->run() == TRUE) {
+                    $eCheck = $this->db->select('email')
+                                        ->from("tb_seminar")
+                                        ->where("email", $email)
+                                        ->get();
+                    if ($eCheck->num_rows() == 0) {
+                        $this->db->insert('tb_seminar', array(
+                            "id_daf" => $code,
+                            "nama" => $nama,
+                            "alamat" => $alamat,
+                            "email" => $email,
+                            "notelp" => $nohp,
+                            "institusi" => $asal,
+                            "status_bayar" => FALSE,
+                            "status_ulang" => FALSE,
+                            "htm_status" => $htm
+                        ));
+                        
+                        $data['htm'] = strtoupper($htm);
+                        $data['code'] = $code;
+                        $data['biaya'] = 40000;
+                        echo $this->load->view('src/iitf_register_seminar_success', $data, TRUE);
+                    } else {
+                        echo "Email '$eCheck' sudah pernah didaftarkan!";
+                    }
+                } else {
+                    echo validation_errors();
+                }
+            } else {
+                $data['htm'] = strtoupper($htm);
+                $data['tanggal'] = "null";
+                echo $this->load->view('src/iitf_register_seminar_full', $data, TRUE);
+            }
+        } else {
+            // teuing kunaon nya euy :(
+        }
+    }
+
+    public function showKode()
+    {
+        echo $this->DataModel->getHTS();
+    }
+
+    public function reg_seminar()
+    {
+        $check = $this->db->get_where('tb_user', array(
+            'id' => $this->session->userdata('id'),
+            'email' => $this->session->userdata('email')
+        ));
+
+        if ($check->num_rows() !== 0) {
+            redirect('user');
+        }
+        $payload['judul'] = "PESERTA SEMINAR";
+        $payload['link'] = ($this->session->userdata('email') == "" ? base_url('login') : base_url('user'));
+        $payload['email'] = ($this->session->userdata('email') == "" ? "" : "LANJUTKAN DAFTAR: " . $this->session->userdata('email'));
+        $payload['page'] = "reg_seminar";
+        $this->load->view('component/header', $payload);
+        $this->load->view('src/iitf_register_seminar', $payload);
+        $this->load->view('component/ground');
+        $this->load->view('component/footer');
+    }
+
     public function detailLomba()
     {
         $userdata = $this->DataModel->getWhere('email',$this->session->userdata('email'));

@@ -23,6 +23,23 @@ $(document).ready(function () {
     }
   }
 
+  $('textarea[name=alamat]').on('keypress', function (event) {
+    var regex = new RegExp("^[a-zA-Z\\s'.0-9/]+$");
+    var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+    if (!regex.test(key)) {
+      event.preventDefault();
+      return false;
+    }
+  });
+  $('input[name=asal]').on('keypress', function (event) {
+    var regex = new RegExp("^[a-zA-Z\\s'.0-9/]+$");
+    var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+    if (!regex.test(key)) {
+      event.preventDefault();
+      return false;
+    }
+  });
+
   $('#n').on('keypress', function (event) {
     var regex = new RegExp("^[a-zA-Z\\s']+$");
     var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
@@ -32,24 +49,24 @@ $(document).ready(function () {
     }
   });
 
-   $('#no_hp').on('keypress', function (event) {
-     var regex = new RegExp("^[0-9]+$");
-     var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
-     if (!regex.test(key)) {
-       event.preventDefault();
-       return false;
-     }
-   });
+  $('#no_hp').on('keypress', function (event) {
+    var regex = new RegExp("^[0-9]+$");
+    var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+    if (!regex.test(key)) {
+      event.preventDefault();
+      return false;
+    }
+  });
 
   $("#resume").change(function (e) {
     var fileExtension = ["pdf", "doc", "docx"];
     if (
       $.inArray(
         $(this)
-          .val()
-          .split(".")
-          .pop()
-          .toLowerCase(),
+        .val()
+        .split(".")
+        .pop()
+        .toLowerCase(),
         fileExtension
       ) == -1
     ) {
@@ -75,10 +92,10 @@ $(document).ready(function () {
     if (
       $.inArray(
         $(this)
-          .val()
-          .split(".")
-          .pop()
-          .toLowerCase(),
+        .val()
+        .split(".")
+        .pop()
+        .toLowerCase(),
         fileExtension
       ) == -1
     ) {
@@ -109,10 +126,10 @@ $(document).ready(function () {
       if (
         $.inArray(
           $(this)
-            .val()
-            .split(".")
-            .pop()
-            .toLowerCase(),
+          .val()
+          .split(".")
+          .pop()
+          .toLowerCase(),
           fileExtension
         ) == -1
       ) {
@@ -136,21 +153,21 @@ $(document).ready(function () {
     }
   );
 
-  $("#perlombaan").change(function(e) {
+  $("#perlombaan").change(function (e) {
     var fileExtension = ["zip", "rar"];
     if (
       $.inArray(
         $(this)
-          .val()
-          .split(".")
-          .pop()
-          .toLowerCase(),
+        .val()
+        .split(".")
+        .pop()
+        .toLowerCase(),
         fileExtension
       ) == -1
     ) {
       alert(
         "Hanya format file berikut yang dapat diterima : " +
-          fileExtension.join(", ")
+        fileExtension.join(", ")
       );
     } else {
       var namafile = e.target.files[0].name;
@@ -165,21 +182,21 @@ $(document).ready(function () {
     }
   });
 
-  $("#surat").change(function(e) {
+  $("#surat").change(function (e) {
     var fileExtension = ["pdf"];
     if (
       $.inArray(
         $(this)
-          .val()
-          .split(".")
-          .pop()
-          .toLowerCase(),
+        .val()
+        .split(".")
+        .pop()
+        .toLowerCase(),
         fileExtension
       ) == -1
     ) {
       alert(
         "Hanya format file berikut yang dapat diterima : " +
-          fileExtension.join(", ")
+        fileExtension.join(", ")
       );
     } else {
       var namafile = e.target.files[0].name;
@@ -194,6 +211,51 @@ $(document).ready(function () {
     }
   });
 });
+
+function daftarulang(home, id) {
+  $("#daful").addClass("is-loading");
+  $.ajax({
+    url: home + "admin/seminar/daftarulang",
+    type: "GET",
+    data: "id=" + id,
+    cache: false,
+    contentType: false,
+    processData: false,
+
+    // Custom XMLHttpRequest
+    xhr: function () {
+      var myXhr = $.ajaxSettings.xhr();
+      if (myXhr.upload) {
+        // For handling the progress of the upload
+        myXhr.upload.addEventListener(
+          "progress",
+          function (e) {
+            if (e.lengthComputable) {
+              $("progress").attr({
+                value: e.loaded,
+                max: e.total
+              });
+            }
+          },
+          false
+        );
+      }
+      return myXhr;
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+      console.log(xhr.status);
+      console.log(xhr.responseText);
+      console.log(thrownError);
+    },
+    success: function (data) {
+      //alert(data);
+      $("#okay").html(data);
+    },
+    complete: function (data) {
+      $("#daful").removeClass("is-loading");
+    }
+  });
+}
 
 function tryLogin(home) {
   var e = $("#u").val();
@@ -216,21 +278,23 @@ function tryLogin(home) {
         url: home + "login/loginprocess",
         type: "POST",
         data: "e=" + e + "&p=" + p,
-        error: function(xhr, ajaxOptions, thrownError) {
+        error: function (xhr, ajaxOptions, thrownError) {
           console.log(xhr.status);
           console.log(xhr.responseText);
           console.log(thrownError);
         },
-        success: function(data) {}
+        success: function (data) {}
       });
 
-      update.done(function(json) {
+      update.done(function (json) {
         var data = JSON.parse(json);
 
         if (data.success == false) {
           swal.stopLoading();
           swal.close();
-          swal("Gagal", data.msg, {icon:"error"}).then(ok => {});
+          swal("Gagal", data.msg, {
+            icon: "error"
+          }).then(ok => {});
         } else if (data.success == true) {
           swal.stopLoading();
           swal.close();
@@ -239,11 +303,10 @@ function tryLogin(home) {
             icon: "success",
             timer: 600
           });
-          setTimeout(function() {
+          setTimeout(function () {
             window.location.replace(home + "login");
           }, 600);
-        } else {
-        }
+        } else {}
       });
     }
   });
@@ -255,6 +318,56 @@ function showWhatsApp() {
 
 function hideWhatsApp() {
   $("#whatsapp").removeClass("is-active");
+}
+
+function hideWarning() {
+  $("#suksesseminar").removeClass("is-active");
+  //$("#suksesseminar").html(""); // lifehack, kwkwkw
+}
+
+function tryRegisterSeminar(home) {
+  $("#simpan").addClass("is-loading");
+  $.ajax({
+    url: home + "seminar/register/send",
+    type: "POST",
+    data: new FormData($("form")[0]),
+    cache: false,
+    contentType: false,
+    processData: false,
+
+    // Custom XMLHttpRequest
+    xhr: function () {
+      var myXhr = $.ajaxSettings.xhr();
+      if (myXhr.upload) {
+        // For handling the progress of the upload
+        myXhr.upload.addEventListener(
+          "progress",
+          function (e) {
+            if (e.lengthComputable) {
+              $("progress").attr({
+                value: e.loaded,
+                max: e.total
+              });
+            }
+          },
+          false
+        );
+      }
+      return myXhr;
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+      console.log(xhr.status);
+      console.log(xhr.responseText);
+      console.log(thrownError);
+    },
+    success: function (data) {
+      //alert(data);
+      $("#warnings").html(data);
+    },
+    complete: function (data) {
+      $("#simpan").removeClass("is-loading");
+    }
+  });
 }
 
 function trySaveTeams(home) {
@@ -269,13 +382,13 @@ function trySaveTeams(home) {
     processData: false,
 
     // Custom XMLHttpRequest
-    xhr: function() {
+    xhr: function () {
       var myXhr = $.ajaxSettings.xhr();
       if (myXhr.upload) {
         // For handling the progress of the upload
         myXhr.upload.addEventListener(
           "progress",
-          function(e) {
+          function (e) {
             if (e.lengthComputable) {
               $("progress").attr({
                 value: e.loaded,
@@ -288,16 +401,16 @@ function trySaveTeams(home) {
       }
       return myXhr;
     },
-    error: function(xhr, ajaxOptions, thrownError) {
+    error: function (xhr, ajaxOptions, thrownError) {
       console.log(xhr.status);
       console.log(xhr.responseText);
       console.log(thrownError);
     },
-    success: function(data) {
+    success: function (data) {
       //alert(data);
       $("#warnings").html(data);
     },
-    complete: function(data) {
+    complete: function (data) {
       $("#progress").html("");
       $("#simpan").removeClass("is-loading");
     }
@@ -327,12 +440,12 @@ function tryRegister(home) {
         url: home + "register/registerprocess",
         type: "POST",
         data: "n=" + n + "&e=" + e + "&p=" + p + "&p2=" + p2,
-        error: function(xhr, ajaxOptions, thrownError) {
+        error: function (xhr, ajaxOptions, thrownError) {
           console.log(xhr.status);
           console.log(xhr.responseText);
           console.log(thrownError);
         },
-        success: function(data) {
+        success: function (data) {
           $("#regWarnings").html(data);
         }
       });
@@ -345,12 +458,12 @@ function trySelect(home, id, koors) {
     url: home + "user/pilihlomba",
     type: "POST",
     data: "lomba=" + id + "&id_koor=" + koors,
-    error: function(xhr, ajaxOptions, thrownError) {
+    error: function (xhr, ajaxOptions, thrownError) {
       console.log(xhr.status);
       console.log(xhr.responseText);
       console.log(thrownError);
     },
-    success: function(data) {
+    success: function (data) {
       //alert(data);
       $("#warnings").html(data);
     }
@@ -369,13 +482,13 @@ function submission(home) {
     processData: false,
 
     // Custom XMLHttpRequest
-    xhr: function() {
+    xhr: function () {
       var myXhr = $.ajaxSettings.xhr();
       if (myXhr.upload) {
         // For handling the progress of the upload
         myXhr.upload.addEventListener(
           "progress",
-          function(e) {
+          function (e) {
             if (e.lengthComputable) {
               $("progress").attr({
                 value: e.loaded,
@@ -388,16 +501,16 @@ function submission(home) {
       }
       return myXhr;
     },
-    error: function(xhr, ajaxOptions, thrownError) {
+    error: function (xhr, ajaxOptions, thrownError) {
       console.log(xhr.status);
       console.log(xhr.responseText);
       console.log(thrownError);
     },
-    success: function(data) {
+    success: function (data) {
       //alert(data);
       $("#warnings").html(data);
     },
-    complete: function(data) {
+    complete: function (data) {
       $("#progress").html("");
       $("#simpan").removeClass("is-loading");
     }
@@ -416,13 +529,13 @@ function trySaveBayar(home) {
     processData: false,
 
     // Custom XMLHttpRequest
-    xhr: function() {
+    xhr: function () {
       var myXhr = $.ajaxSettings.xhr();
       if (myXhr.upload) {
         // For handling the progress of the upload
         myXhr.upload.addEventListener(
           "progress",
-          function(e) {
+          function (e) {
             if (e.lengthComputable) {
               $("progress").attr({
                 value: e.loaded,
@@ -435,16 +548,16 @@ function trySaveBayar(home) {
       }
       return myXhr;
     },
-    error: function(xhr, ajaxOptions, thrownError) {
+    error: function (xhr, ajaxOptions, thrownError) {
       console.log(xhr.status);
       console.log(xhr.responseText);
       console.log(thrownError);
     },
-    success: function(data) {
+    success: function (data) {
       //alert(data);
       $("#warning").html(data);
     },
-    complete: function(data) {
+    complete: function (data) {
       $("#progress").html("");
       $("#simpan").removeClass("is-loading");
     }
@@ -463,13 +576,13 @@ function trySaveKoor(home) {
     processData: false,
 
     // Custom XMLHttpRequest
-    xhr: function() {
+    xhr: function () {
       var myXhr = $.ajaxSettings.xhr();
       if (myXhr.upload) {
         // For handling the progress of the upload
         myXhr.upload.addEventListener(
           "progress",
-          function(e) {
+          function (e) {
             if (e.lengthComputable) {
               $("progress").attr({
                 value: e.loaded,
@@ -482,16 +595,16 @@ function trySaveKoor(home) {
       }
       return myXhr;
     },
-    error: function(xhr, ajaxOptions, thrownError) {
+    error: function (xhr, ajaxOptions, thrownError) {
       console.log(xhr.status);
       console.log(xhr.responseText);
       console.log(thrownError);
     },
-    success: function(data) {
+    success: function (data) {
       //alert(data);
       $("#warnings").html(data);
     },
-    complete: function(data) {
+    complete: function (data) {
       $("#progress").html("");
       $("#simpan").removeClass("is-loading");
     }

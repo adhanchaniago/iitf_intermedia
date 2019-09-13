@@ -55,7 +55,7 @@
             <div class="navbar-collapse-header d-md-none">
                 <div class="row">
                     <div class="col-6 collapse-brand">
-                        <a href="./index.html">
+                        <a href="<?=base_url()?>admin/home">
                             <img src="<?=base_url()?>assets/admin/img/brand/blue.png">
                         </a>
                     </div>
@@ -102,6 +102,11 @@
                 <li class="nav-item">
                     <a class="nav-link " href="<?=base_url()?>admin/user">
                         <i class="ni ni-single-02 text-red"></i> User
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?=base_url()?>admin/seminar">
+                        <i class="ni ni-building text-purple"></i> Peserta Seminar
                     </a>
                 </li>
                 <li class="nav-item">

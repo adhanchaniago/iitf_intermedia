@@ -2,6 +2,105 @@
 
 class DataModel extends CI_Model
 {
+    function noDaf() {
+        $query = $this->db->select('RIGHT(id_daf,3) as kode', FALSE);
+        $query = $this->db->like('id_daf', "SMR");
+        $query = $this->db->order_by('id_daf', 'DESC');
+        $query = $this->db->limit(1);
+        $query = $this->db->get('tb_seminar');
+        if ($query->num_rows() <> 0) {
+            $data = $query->row();
+            $kode = intval($data->kode) + 1;
+        } else {
+            $kode = 1;
+        }
+        $kodemax = str_pad($kode, 4, "0", STR_PAD_LEFT);
+        $kodefix = "SMR" . $kodemax;
+        return $kodefix;
+    }
+
+    // Ada bug, dimana semua jadwal harus dikurangi 1 agar akurat
+    function getPSOpen() {
+        return strtotime("2019-09-12 00:00:00");
+    }
+
+    function getPSClose() {
+        return strtotime("2019-09-21 23:59:59");
+    }
+
+    function getSOpen()
+    {
+        return strtotime("2019-09-22 00:00:00");
+    }
+
+    function getSClose()
+    {
+        return strtotime("2019-10-11 23:59:59");
+    }
+
+    function getOTSOpen()
+    {
+        return strtotime("2019-10-12 00:00:00");
+    }
+    function getOTSClose()
+    {
+        return strtotime("2019-10-12 23:59:59");
+    }
+    // bug over
+
+    function getHTS()
+    {
+        $hts = "";
+        $psaleopen = $this->getPSOpen();
+        $psaleclose = $this->getPSClose();
+        $saleopen = $this->getSOpen();
+        $saleclose = $this->getSClose();
+        $otsopen = $this->getoTSOpen();
+        $otsclose = $this->getoTSClose();
+
+        $getDiffpsopen = ( $psaleopen - strtotime(date("Y/m/d H:i:s")) ) / 60 / 60 / 24;
+        $getDiffpsclose = ( strtotime(date("Y/m/d H:i:s")) - $psaleclose ) / 60 / 60 / 24;
+        //echo $getDiffAwal;
+        if (($getDiffpsopen > 0) && ($getDiffpsclose <= 0)) {
+            $hts = "null";
+        } else if (($getDiffpsopen <= 0) && ($getDiffpsclose <= 0)) {
+            $hts = "presale";
+        } else if ($getDiffpsclose > 0) {
+            $getDiffsopen = ( $saleopen - strtotime(date("Y/m/d H:i:s")) ) / 60 / 60 / 24;
+            $getDiffsclose = ( strtotime(date("Y/m/d H:i:s")) - $saleclose ) / 60 / 60 / 24;
+            //echo $getDiffAwal;
+            if (($getDiffsopen > 0) && ($getDiffsclose <= 0)) {
+                $hts = "sale";
+            } else if (($getDiffsopen <= 0) && ($getDiffsclose <= 0)) {
+                $hts = "sale";
+            } else if ($getDiffsclose > 0) {
+                $getDiffopen = ( $otsopen - strtotime(date("Y/m/d H:i:s")) ) / 60 / 60 / 24;
+                $getDiffclose = ( strtotime(date("Y/m/d H:i:s")) - $otsclose ) / 60 / 60 / 24;
+                //echo $getDiffAwal;
+                if (($getDiffopen > 0) && ($getDiffclose <= 0)) {
+                    $hts = "sale";
+                } else if (($getDiffopen <= 0) && ($getDiffclose <= 0)) {
+                    $hts = "ots";
+                } else if ($getDiffclose > 0) {
+                    //teuing, aing lieur
+                    $hts = "null";
+                }
+            }
+        }
+
+        // if (strtotime(date("Y-m-d H:i:s")) < $psaleopen) {
+        //     $hts = "null";
+        // } else if ((strtotime(date("Y-m-d H:i:s")) >= $psaleopen) && 
+        //             !(strtotime(date("Y-m-d H:i:s")) < $psaleclose)) {
+        //     $hts = "presale";
+        // } else if ( (strtotime(date("Y-m-d H:i:s")) < $psaleclose) && 
+        //             ( (strtotime(date("Y-m-d H:i:s")) > $saleopen) && (strtotime(date("Y-m-d H:i:s")) > $saleclose) ) ) {
+        //     $hts = "sale";
+        // } else {
+        //     $hts = "ots";
+        // }
+        return $hts;
+    }
 
     function custom($q)
     {

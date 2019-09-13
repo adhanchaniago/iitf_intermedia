@@ -153,7 +153,6 @@
                              </div>
                          </div>
                      </form>
-
                  </div>
                  <!-- Hero image -->
                  <div class="column is-half-desktop is-full-mobile ico-countdown">
