@@ -41,7 +41,7 @@
 			<th>ID Pendaftaran</th>
 			<th>Nama Team/Peserta</th>
 			<th>Jumlah Anggota</th>
-			<th>Status</th>
+			<th>Kategori</th>
 		</tr>
 		<?php 
 		$no = 1;
@@ -49,10 +49,10 @@
 		?>
 		<tr>
 			<td><?php echo $no++; ?></td>
-			<td><?php echo $u->id_daf; ?></td>
-			<td><?php echo $u->nama_team; ?></td>
+			<td><?php echo $u->id_pendaftaran; ?></td>
+			<td><?php echo $u->nama_koor; ?></td>
 			<td><?php echo ""; ?></td>
-			<td> <?php echo $u->status; ?> </td>
+			<td> <?php echo $u->nama_lomba; ?> </td>
 		</tr>
 		<?php 
 		}

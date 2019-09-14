@@ -59,8 +59,12 @@ class Pendaftaran extends MY_Controller
     public function export()
     {
         if ($this->IsLoggedIn()) {
-
-            $employee_data = $this->DataModel->getData('tb_pendaftaran')->result();
+            $pendaftar = $this->DataModel->select('tb_lomba.nama as nama_lomba,tb_koor.nama as nama_koor,tb_pendaftaran.status,tb_pendaftaran.bukti_bayar,tb_pendaftaran.id as id_pendaftaran');
+            $pendaftar = $this->DataModel->getJoin('tb_lomba','tb_pendaftaran.id_lomba = tb_lomba.id','inner');
+            $pendaftar = $this->DataModel->getJoin('tb_koor','tb_koor.id = tb_pendaftaran.id_koor','inner');
+            $pendaftar = $this->DataModel->getData('tb_pendaftaran')->result();
+            
+            $employee_data = $pendaftar;
             $data['row'] = $employee_data;
             $this->load->view('pages/admin/excel_pendaftaran', $data, FALSE);
 
