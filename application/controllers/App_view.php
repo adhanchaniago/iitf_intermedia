@@ -138,24 +138,56 @@ class App_view extends CI_Controller
 
                 // Verify
                 if (!preg_match("/^[a-zA-Z\s']+$/", $nama)) {
-                    echo "Kolom Nama Lengkap mengandung karakter yang tidak diizinkan!";
+                    //echo "Kolom Nama Lengkap mengandung karakter yang tidak diizinkan!";
+                    echo "<script>
+                            Swal.fire({
+                                title:\"Oops, ada kesalahan!\",
+                                html: `Kolom Nama Lengkap mengandung karakter yang tidak diizinkan!`, 
+                                type: \"error\"}).then(ok => {
+                            //do anything
+                            });
+                        </script>";
                     return;
                 }
                 
                 if (!preg_match("/^[0-9]+$/", $nohp)) {
-                    echo "Kolom Nomor HP/WA mengandung karakter yang tidak diizinkan!";
+                    //echo "Kolom Nomor HP/WA mengandung karakter yang tidak diizinkan!";
+                    echo "<script>
+                            Swal.fire({
+                                title:\"Oops, ada kesalahan!\",
+                                html: `Kolom Nomor HP/WA mengandung karakter yang tidak diizinkan!`, 
+                                type: \"error\"}).then(ok => {
+                            //do anything
+                            });
+                        </script>";
                     return;
                 }
 
                 if (!preg_match("/^[a-zA-Z\s',.0-9\/]+$/", $alamat)) {
-                    echo "Kolom Alamat mengandung karakter yang tidak diizinkan!";
+                    //echo "Kolom Alamat mengandung karakter yang tidak diizinkan!";
+                    echo "<script>
+                            Swal.fire({
+                                title:\"Oops, ada kesalahan!\",
+                                html: `Kolom Alamat mengandung karakter yang tidak diizinkan!`, 
+                                type: \"error\"}).then(ok => {
+                            //do anything
+                            });
+                        </script>";
                     return;
                 }
 
                 if ($asal != "") {
                     if (!preg_match("/^[a-zA-Z\s'.0-9\/]+$/", $asal)) {
-                        echo "Kolom Asal Sekolah/Institusi mengandung karakter yang tidak diizinkan!";
-                        return;
+                        //echo "Kolom Asal Sekolah/Institusi mengandung karakter yang tidak diizinkan!";
+                        echo "<script>
+                            Swal.fire({
+                                title:\"Oops, ada kesalahan!\",
+                                html: `Kolom Asal Sekolah/Institusi mengandung karakter yang tidak diizinkan!`, 
+                                type: \"error\"}).then(ok => {
+                            //do anything
+                            });
+                        </script>";
+                    return;
                     }
                 }
                 
@@ -195,7 +227,7 @@ class App_view extends CI_Controller
                         $this->email->set_newline("\r\n");
                         $this->email->from($config['smtp_user']);
                         $this->email->to($email);
-                        $this->email->subject('Lakukan Pembayaran agar Anda dapat hadir pada acara Seminar UI/UX IITF 2019');
+                        $this->email->subject('Konfirmasi Pembayaran acara Seminar UI/UX IITF 2019');
                         $this->email->message($message);
                 
                         $this->email->send();
@@ -213,10 +245,27 @@ class App_view extends CI_Controller
 
                         echo $this->load->view('src/iitf_register_seminar_success', $data, TRUE);
                     } else {
-                        echo "Email '$email' sudah pernah didaftarkan!";
+                        //echo "Email '$email' sudah pernah didaftarkan!";
+                        echo "<script>
+                            Swal.fire({
+                                title:\"Oops, ada kesalahan!\",
+                                html: `Email '$email' sudah pernah didaftarkan!`, 
+                                type: \"error\"}).then(ok => {
+                            //do anything
+                            });
+                        </script>";
                     }
                 } else {
-                    echo validation_errors();
+                    //echo validation_errors();
+                    echo "<script>
+                        Swal.fire({
+                            title:\"Oops, ada kesalahan!\",
+                            html: `" . validation_errors() . "`, 
+                            type: \"error\"}).then(ok => {
+                        //do anything
+                        });
+                    </script>";
+                    return;
                 }
             } else {
                 $data['htm'] = strtoupper($htm);
@@ -238,6 +287,61 @@ class App_view extends CI_Controller
                 $alamat = $this->input->post('alamat');
                 $nohp = $this->input->post('notelp');
                 $asal = $this->input->post('asal');
+
+                // Verify
+                if (!preg_match("/^[a-zA-Z\s']+$/", $nama)) {
+                    //echo "Kolom Nama Lengkap mengandung karakter yang tidak diizinkan!";
+                    echo "<script>
+                            Swal.fire({
+                                title:\"Oops, ada kesalahan!\",
+                                html: `Kolom Nama Lengkap mengandung karakter yang tidak diizinkan!`, 
+                                type: \"error\"}).then(ok => {
+                            //do anything
+                            });
+                        </script>";
+                    return;
+                }
+                
+                if (!preg_match("/^[0-9]+$/", $nohp)) {
+                    //echo "Kolom Nomor HP/WA mengandung karakter yang tidak diizinkan!";
+                    echo "<script>
+                            Swal.fire({
+                                title:\"Oops, ada kesalahan!\",
+                                html: `Kolom Nomor HP/WA mengandung karakter yang tidak diizinkan!`, 
+                                type: \"error\"}).then(ok => {
+                            //do anything
+                            });
+                        </script>";
+                    return;
+                }
+
+                if (!preg_match("/^[a-zA-Z\s',.0-9\/]+$/", $alamat)) {
+                    //echo "Kolom Alamat mengandung karakter yang tidak diizinkan!";
+                    echo "<script>
+                            Swal.fire({
+                                title:\"Oops, ada kesalahan!\",
+                                html: `Kolom Alamat mengandung karakter yang tidak diizinkan!`, 
+                                type: \"error\"}).then(ok => {
+                            //do anything
+                            });
+                        </script>";
+                    return;
+                }
+
+                if ($asal != "") {
+                    if (!preg_match("/^[a-zA-Z\s'.0-9\/]+$/", $asal)) {
+                        //echo "Kolom Asal Sekolah/Institusi mengandung karakter yang tidak diizinkan!";
+                        echo "<script>
+                            Swal.fire({
+                                title:\"Oops, ada kesalahan!\",
+                                html: `Kolom Asal Sekolah/Institusi mengandung karakter yang tidak diizinkan!`, 
+                                type: \"error\"}).then(ok => {
+                            //do anything
+                            });
+                        </script>";
+                    return;
+                    }
+                }
                 
                 $this->form_validation->set_rules('nama', 'Nama Lengkap', 'trim|required|min_length[5]|max_length[50]');
                 $this->form_validation->set_rules('email', 'Email', 'valid_email|required|min_length[5]|max_length[50]');
@@ -275,7 +379,7 @@ class App_view extends CI_Controller
                         $this->email->set_newline("\r\n");
                         $this->email->from($config['smtp_user']);
                         $this->email->to($email);
-                        $this->email->subject('Lakukan Pembayaran agar Anda dapat hadir pada acara Seminar UI/UX IITF 2019');
+                        $this->email->subject('Konfirmasi Pembayaran acara Seminar UI/UX IITF 2019');
                         $this->email->message($message);
                 
                         $this->email->send();
@@ -293,10 +397,27 @@ class App_view extends CI_Controller
                         
                         echo $this->load->view('src/iitf_register_seminar_success', $data, TRUE);
                     } else {
-                        echo "Email '$eCheck' sudah pernah didaftarkan!";
+                        //echo "Email '$email' sudah pernah didaftarkan!";
+                        echo "<script>
+                            Swal.fire({
+                                title:\"Oops, ada kesalahan!\",
+                                html: `Email '$email' sudah pernah didaftarkan!`, 
+                                type: \"error\"}).then(ok => {
+                            //do anything
+                            });
+                        </script>";
                     }
                 } else {
-                    echo validation_errors();
+                    //echo validation_errors();
+                    echo "<script>
+                        Swal.fire({
+                            title:\"Oops, ada kesalahan!\",
+                            html: `" . validation_errors() . "`, 
+                            type: \"error\"}).then(ok => {
+                        //do anything
+                        });
+                    </script>";
+                    return;
                 }
             } else {
                 $data['htm'] = strtoupper($htm);
@@ -318,6 +439,61 @@ class App_view extends CI_Controller
                 $alamat = $this->input->post('alamat');
                 $nohp = $this->input->post('notelp');
                 $asal = $this->input->post('asal');
+
+                // Verify
+                if (!preg_match("/^[a-zA-Z\s']+$/", $nama)) {
+                    //echo "Kolom Nama Lengkap mengandung karakter yang tidak diizinkan!";
+                    echo "<script>
+                            Swal.fire({
+                                title:\"Oops, ada kesalahan!\",
+                                html: `Kolom Nama Lengkap mengandung karakter yang tidak diizinkan!`, 
+                                type: \"error\"}).then(ok => {
+                            //do anything
+                            });
+                        </script>";
+                    return;
+                }
+                
+                if (!preg_match("/^[0-9]+$/", $nohp)) {
+                    //echo "Kolom Nomor HP/WA mengandung karakter yang tidak diizinkan!";
+                    echo "<script>
+                            Swal.fire({
+                                title:\"Oops, ada kesalahan!\",
+                                html: `Kolom Nomor HP/WA mengandung karakter yang tidak diizinkan!`, 
+                                type: \"error\"}).then(ok => {
+                            //do anything
+                            });
+                        </script>";
+                    return;
+                }
+
+                if (!preg_match("/^[a-zA-Z\s',.0-9\/]+$/", $alamat)) {
+                    //echo "Kolom Alamat mengandung karakter yang tidak diizinkan!";
+                    echo "<script>
+                            Swal.fire({
+                                title:\"Oops, ada kesalahan!\",
+                                html: `Kolom Alamat mengandung karakter yang tidak diizinkan!`, 
+                                type: \"error\"}).then(ok => {
+                            //do anything
+                            });
+                        </script>";
+                    return;
+                }
+
+                if ($asal != "") {
+                    if (!preg_match("/^[a-zA-Z\s'.0-9\/]+$/", $asal)) {
+                        //echo "Kolom Asal Sekolah/Institusi mengandung karakter yang tidak diizinkan!";
+                        echo "<script>
+                            Swal.fire({
+                                title:\"Oops, ada kesalahan!\",
+                                html: `Kolom Asal Sekolah/Institusi mengandung karakter yang tidak diizinkan!`, 
+                                type: \"error\"}).then(ok => {
+                            //do anything
+                            });
+                        </script>";
+                    return;
+                    }
+                }
                 
                 $this->form_validation->set_rules('nama', 'Nama Lengkap', 'trim|required|min_length[5]|max_length[50]');
                 $this->form_validation->set_rules('email', 'Email', 'valid_email|required|min_length[5]|max_length[50]');
@@ -355,7 +531,7 @@ class App_view extends CI_Controller
                         $this->email->set_newline("\r\n");
                         $this->email->from($config['smtp_user']);
                         $this->email->to($email);
-                        $this->email->subject('Lakukan Pembayaran agar Anda dapat hadir pada acara Seminar UI/UX IITF 2019');
+                        $this->email->subject('Konfirmasi Pembayaran acara Seminar UI/UX IITF 2019');
                         $this->email->message($message);
                 
                         $this->email->send();
@@ -373,10 +549,27 @@ class App_view extends CI_Controller
                         
                         echo $this->load->view('src/iitf_register_seminar_success', $data, TRUE);
                     } else {
-                        echo "Email '$eCheck' sudah pernah didaftarkan!";
+                        //echo "Email '$email' sudah pernah didaftarkan!";
+                        echo "<script>
+                            Swal.fire({
+                                title:\"Oops, ada kesalahan!\",
+                                html: `Email '$email' sudah pernah didaftarkan!`, 
+                                type: \"error\"}).then(ok => {
+                            //do anything
+                            });
+                        </script>";
                     }
                 } else {
-                    echo validation_errors();
+                    //echo validation_errors();
+                    echo "<script>
+                        Swal.fire({
+                            title:\"Oops, ada kesalahan!\",
+                            html: `" . validation_errors() . "`, 
+                            type: \"error\"}).then(ok => {
+                        //do anything
+                        });
+                    </script>";
+                    return;
                 }
             } else {
                 $data['htm'] = strtoupper($htm);
