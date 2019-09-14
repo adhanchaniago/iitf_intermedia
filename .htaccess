@@ -1,7 +1,7 @@
 RewriteEngine on
 
 # prevent directory browsing
-Options All -Indexes
+Options -Indexes
 # prevent folder listing
 IndexIgnore *
 
