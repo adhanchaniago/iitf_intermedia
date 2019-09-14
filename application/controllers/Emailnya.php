@@ -62,6 +62,16 @@ class Emailnya extends CI_Controller {
         $this->load->view('emails/seminar_hadir', $data, FALSE);
     }
 
+    public function lihat_daftar()
+    {
+        $data['id_daf'] = "SMR0020";
+        $data['nama'] = "Rahmawati Mahabibi";
+        $data['htm'] = "presale";
+        $data['biaya'] = 30000;
+
+        $this->load->view('emails/seminar_daftar', $data, FALSE);
+    }
+
 }
 
 /* End of file Emailnya.php */

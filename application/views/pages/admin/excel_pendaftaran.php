@@ -28,22 +28,20 @@
  
 	<?php
 	header("Content-type: application/vnd-ms-excel");
-	header("Content-Disposition: attachment; filename=Peserta_Seminar.xls");
+	header("Content-Disposition: attachment; filename=Peserta_Lomba_IITF.xls");
 	?>
  
 	<center>
-		<h3>DAFTAR PESERTA SEMINAR UI/UX<br/>INTERMEDIA INFORMATION TECHNOLOGY FESTIVAL 2019</h3>
+		<h3>DAFTAR PESERTA LOMBA<br/>INTERMEDIA INFORMATION TECHNOLOGY FESTIVAL 2019</h3>
 	</center>
  
 	<table border="1">
 		<tr>
 			<th>No</th>
-			<th>ID Daftar</th>
-			<th>Nama Lengkap</th>
-			<th>Email</th>
-			<th>Alamat</th>
-			<th>No. Telp</th>
-			<th>Hadir?</th>
+			<th>ID Pendaftaran</th>
+			<th>Nama Team/Peserta</th>
+			<th>Jumlah Anggota</th>
+			<th>Status</th>
 		</tr>
 		<?php 
 		$no = 1;
@@ -52,11 +50,9 @@
 		<tr>
 			<td><?php echo $no++; ?></td>
 			<td><?php echo $u->id_daf; ?></td>
-			<td><?php echo $u->nama; ?></td>
-			<td><?php echo $u->email; ?></td>
-			<td> <?php echo $u->alamat; ?> </td>
-			<td><?php echo $u->notelp; ?></td>
-			<td></td>
+			<td><?php echo $u->nama_team; ?></td>
+			<td><?php echo ""; ?></td>
+			<td> <?php echo $u->status; ?> </td>
 		</tr>
 		<?php 
 		}

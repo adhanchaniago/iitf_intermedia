@@ -87,18 +87,6 @@ class DataModel extends CI_Model
                 }
             }
         }
-
-        // if (strtotime(date("Y-m-d H:i:s")) < $psaleopen) {
-        //     $hts = "null";
-        // } else if ((strtotime(date("Y-m-d H:i:s")) >= $psaleopen) && 
-        //             !(strtotime(date("Y-m-d H:i:s")) < $psaleclose)) {
-        //     $hts = "presale";
-        // } else if ( (strtotime(date("Y-m-d H:i:s")) < $psaleclose) && 
-        //             ( (strtotime(date("Y-m-d H:i:s")) > $saleopen) && (strtotime(date("Y-m-d H:i:s")) > $saleclose) ) ) {
-        //     $hts = "sale";
-        // } else {
-        //     $hts = "ots";
-        // }
         return $hts;
     }
 

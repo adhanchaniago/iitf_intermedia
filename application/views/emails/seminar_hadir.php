@@ -24,6 +24,7 @@
             <td><?= $nohp; ?></td>
         </td>
     </table>
-    <p>Untuk pembagian sertifikatnya, tunggu info selanjutnya dari kami, ya!</p>
+    <p>Untuk pembagian sertifikatnya, tunggu info selanjutnya dari kami, ya!</p><br>
+    Mohon untuk tidak membalas karena email ini dikirimkan secara otomatis oleh sistem.
 </body>
 </html>

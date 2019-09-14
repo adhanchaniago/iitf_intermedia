@@ -59,31 +59,36 @@ class Pendaftaran extends MY_Controller
     public function export()
     {
         if ($this->IsLoggedIn()) {
-            $this->load->library("excel");
-            $object = new PHPExcel();
-            $object->setActiveSheetIndex(0);
-            $table_columns = array("ID Pendaftaran", "Nama Team", "Jumlah Anggota", "L File", "L Surat", "L Bayar", "Status");
-            $column = 0;
-            foreach ($table_columns as $field) {
-                $object->getActiveSheet()->setCellValueByColumnAndRow($column, 1, $field);
-                $column++;
-            }
+
             $employee_data = $this->DataModel->getData('tb_pendaftaran')->result();
-            $excel_row = 2;
-            foreach ($employee_data as $row) {
-                $object->getActiveSheet()->setCellValueByColumnAndRow(0, $excel_row, $row->id);
-                $object->getActiveSheet()->setCellValueByColumnAndRow(1, $excel_row, $row->nama_team);
-                $object->getActiveSheet()->setCellValueByColumnAndRow(2, $excel_row, $row->nama_team);
-                $object->getActiveSheet()->setCellValueByColumnAndRow(3, $excel_row, $row->nama_team);
-                $object->getActiveSheet()->setCellValueByColumnAndRow(4, $excel_row, $row->nama_team);
+            $data['row'] = $employee_data;
+            $this->load->view('pages/admin/excel_pendaftaran', $data, FALSE);
+
+            // $this->load->library("excel");
+            // $object = new PHPExcel();
+            // $object->setActiveSheetIndex(0);
+            // $table_columns = array("ID Pendaftaran", "Nama Team", "Jumlah Anggota", "L File", "L Surat", "L Bayar", "Status");
+            // $column = 0;
+            // foreach ($table_columns as $field) {
+            //     $object->getActiveSheet()->setCellValueByColumnAndRow($column, 1, $field);
+            //     $column++;
+            // }
+            // $employee_data = $this->DataModel->getData('tb_pendaftaran')->result();
+            // $excel_row = 2;
+            // foreach ($employee_data as $row) {
+            //     $object->getActiveSheet()->setCellValueByColumnAndRow(0, $excel_row, $row->id);
+            //     $object->getActiveSheet()->setCellValueByColumnAndRow(1, $excel_row, $row->nama_team);
+            //     $object->getActiveSheet()->setCellValueByColumnAndRow(2, $excel_row, $row->nama_team);
+            //     $object->getActiveSheet()->setCellValueByColumnAndRow(3, $excel_row, $row->nama_team);
+            //     $object->getActiveSheet()->setCellValueByColumnAndRow(4, $excel_row, $row->nama_team);
 
 
-                $excel_row++;
-            }
-            $object_writer = PHPExcel_IOFactory::createWriter($object, 'Excel5');
-            header('Content-Type: application/vnd.ms-excel');
-            header('Content-Disposition: attachment;filename="Employee Data.xls"');
-            $object_writer->save('php://output');
+            //     $excel_row++;
+            // }
+            // $object_writer = PHPExcel_IOFactory::createWriter($object, 'Excel5');
+            // header('Content-Type: application/vnd.ms-excel');
+            // header('Content-Disposition: attachment;filename="Employee Data.xls"');
+            // $object_writer->save('php://output');
         } else {
             redirect('admin/home/login');
         }

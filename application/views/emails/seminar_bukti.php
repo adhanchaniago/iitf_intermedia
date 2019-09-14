@@ -36,6 +36,7 @@
             <td><?= number_format($biaya, 0, ",", ".") ?>,-</td>
         </tr>
     </table>
-    <p>Simpan email ini baik-baik dan tunjukkan email ini pada saat daftar ulang.</p>
+    <p>Simpan email ini baik-baik dan tunjukkan email ini pada saat daftar ulang.</p><br>
+    Mohon untuk tidak membalas karena email ini dikirimkan secara otomatis oleh sistem.
 </body>
 </html>

@@ -34,9 +34,11 @@
                 <div class="col-xl-12 order-xl-1">
                     <div class="card shadow">
                         <div class="card-header border-0">
-                        <a style="float:right" href="<?=base_url()?>admin/seminar/export" class="btn btn-success">Export Excel</a>
+                        <a style="float:right" href="#" class="btn btn-primary btn-md" data-toggle="modal" data-target="#exampleModal">Tambah Peserta</a>
+                        <a style="float:right" href="<?=base_url()?>admin/seminar/export" target="_blank" class="btn btn-success">Export Excel</a>
                         <h3 class="mb-0">Data Peserta Seminar UI/UX</h3>
                         </div>
+                        
                         <div class="table-responsive">
                             <table id="tabel-seminar" class="table align-items-center table-flush">
                                 <thead class="thead-light">
@@ -47,6 +49,7 @@
                                         <th scope="col">Email</th>
                                         <th scope="col">Nomor HP/WA</th>
                                         <th scope="col">Asal Sekolah/Institusi</th>
+                                        <th scope="col">Periode</th>
                                         <th scope="col">Status Bayar</th>
                                         <th scope="col">Daftar Ulang</th>
                                         <th scope="col">Aksi</th>
@@ -76,6 +79,9 @@
                                             <?=$val['institusi']?>
                                         </td>
                                         <td>
+                                            <?=strtoupper($val['htm_status'])?>
+                                        </td>
+                                        <td>
                                             <?php if($val['status_bayar'] == TRUE){echo "Lunas"; }else{ ?>
                                             <a href="<?=base_url()?>admin/seminar/bayar?id=<?=$val['id_daf']?>" class="btn btn-md btn-primary"></i>Bayar</a>
                                             <?php } ?>
@@ -102,12 +108,63 @@
             <?php $this->load->view('master/admin/footer') ?>
         </div>
     </div>
+    <!-- Modal Tambah-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Tambah Peserta Seminar Baru</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                <form name="formTambah" action="javascript:tryRegisterSeminarAdmin('<?= base_url(); ?>');" method="POST">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input type="text" id="n" name="nama" class="form-control" required placeholder="Nama Lengkap *">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <textarea name="alamat" rows=5 placeholder="Alamat *" class="form-control" required></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input type="email" name="email" class="form-control" required placeholder="Email *">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input type="text" name="notelp" id="no_hp" class="form-control" required placeholder="Nomor HP/WA *">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input type="text" name="asal" class="form-control" placeholder="Asal Sekolah/Institusi">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12" id="warnings"></div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        <input id="simpan" type="submit" class="btn btn-primary" name="Kirim" value="Simpan">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <!-- Modal Hapus-->
     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-danger" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Hapus Pengumuman</h4>
+                    <h4 class="modal-title">Hapus Peserta</h4>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">�</span>
                     </button>

@@ -7,6 +7,7 @@ class Seminar extends MY_Controller {
     {
         parent::__construct();
         $this->load->model('DataModel');
+        $this->load->library('form_validation');
     }
 
     public function index()
@@ -26,6 +27,50 @@ class Seminar extends MY_Controller {
     {
         if ($this->IsLoggedIn()) {
             $id = $this->input->get('id');
+            $getInfo = $this->db->select('*')->from("tb_seminar")->where("id_daf", $id)->get()->row();
+            
+            $config = array(
+                'protocol' => 'smtp',
+                'smtp_host' => 'ssl://smtp.googlemail.com',
+                'smtp_port' => '465',
+                'smtp_user' => 'iitfintermedia@gmail.com', // informasi rahasia ini jangan di gunakan sembarangan
+                'smtp_pass' => 'intermediaiitf2019', // informasi rahasia ini jangan di gunakan sembarangan
+                'mailtype' => 'html',
+                'charset' => 'iso-8859-1',
+                'wordwrap' => TRUE
+            );
+            $htm = $getInfo->htm_status;
+            $biaya = 0;
+            switch ($htm) {
+                case "presale":
+                    $biaya = 30000;
+                    break;
+                case "sale":
+                    $biaya = 35000;
+                    break;
+                case "ots":
+                    $biaya = 40000;
+                    break;
+            }
+    
+            $data['id_daf'] = $id;
+            $data['nama'] = $getInfo->nama;
+            $data['alamat'] = $getInfo->alamat;
+            $data['emailnya'] = $getInfo->email;
+            $data['nohp'] = $getInfo->notelp;
+            $data['htm'] = $htm;
+            $data['biaya'] = $biaya;
+    
+            $message = $this->load->view('emails/seminar_bukti', $data, TRUE);
+    
+            $this->load->library('email', $config);
+            $this->email->set_newline("\r\n");
+            $this->email->from($config['smtp_user']);
+            $this->email->to($getInfo->email);
+            $this->email->subject('Selamat, Anda Berhasil Menjadi Peserta Seminar UI/UX!');
+            $this->email->message($message);
+    
+            $this->email->send();
             $this->db->update('tb_seminar', array(
                 "status_bayar" => TRUE
             ), array("id_daf" => $id));
@@ -35,34 +80,212 @@ class Seminar extends MY_Controller {
         }
     }
 
+    public function tambah()
+    {
+        $htm = $this->DataModel->getHTS();
+        if ($htm == "presale") {
+            $this->db->select('*');
+            $this->db->from('tb_seminar');
+            $this->db->where('htm_status', $htm);
+            $query = $this->db->get();
+            $num = $query->num_rows();
+            if ($num < 30) {
+                $code = $this->DataModel->noDaf();
+
+                $nama = $this->input->post('nama');
+                $email = $this->input->post('email');
+                $alamat = $this->input->post('alamat');
+                $nohp = $this->input->post('notelp');
+                $asal = $this->input->post('asal');
+
+                //echo "Nama: " . $nama;
+
+                // Verify
+                if (!preg_match("/^[a-zA-Z\s']+$/", $nama)) {
+                    echo "Kolom Nama Lengkap mengandung karakter yang tidak diizinkan!";
+                    return;
+                }
+                
+                if (!preg_match("/^[0-9]+$/", $nohp)) {
+                    echo "Kolom Nomor HP/WA mengandung karakter yang tidak diizinkan!";
+                    return;
+                }
+
+                if (!preg_match("/^[a-zA-Z\s',.0-9\/]+$/", $alamat)) {
+                    echo "Kolom Alamat mengandung karakter yang tidak diizinkan!";
+                    return;
+                }
+
+                if ($asal != "") {
+                    if (!preg_match("/^[a-zA-Z\s'.0-9\/]+$/", $asal)) {
+                        echo "Kolom Asal Sekolah/Institusi mengandung karakter yang tidak diizinkan!";
+                        return;
+                    }
+                }
+                
+                $this->form_validation->set_rules('nama', 'Nama Lengkap', 'trim|required|min_length[5]|max_length[50]');
+                $this->form_validation->set_rules('email', 'Email', 'valid_email|required|min_length[5]|max_length[50]');
+                $this->form_validation->set_rules('alamat', 'Alamat', 'trim|required|min_length[5]');
+                $this->form_validation->set_rules('notelp', 'Nomor HP/WA', 'trim|required|min_length[5]|max_length[13]');
+                
+                if ($this->form_validation->run() == TRUE) {
+                    $eCheck = $this->db->select('email')
+                                        ->from("tb_seminar")
+                                        ->where("email", $email)
+                                        ->get();
+                    if ($eCheck->num_rows() == 0) {
+                        $this->db->insert('tb_seminar', array(
+                            "id_daf" => $code,
+                            "nama" => $nama,
+                            "alamat" => $alamat,
+                            "email" => $email,
+                            "notelp" => $nohp,
+                            "institusi" => $asal,
+                            "status_bayar" => FALSE,
+                            "status_ulang" => FALSE,
+                            "htm_status" => $htm
+                        ));
+                        
+                        $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissable fade show" role="alert">
+                                                <span class="alert-inner--icon"><i class="ni ni-bulb-61"></i></span>
+                                                <span class="alert-inner--text"> Tambah Data Berhasil </span>
+                                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                                </div>');
+                echo "<script>location.reload();</script>";;
+                    } else {
+                        echo "Email '$eCheck' sudah pernah didaftarkan!";
+                    }
+                } else {
+                    echo validation_errors();
+                }
+            } else {
+                $data['htm'] = strtoupper($htm);
+                $data['tanggal'] = date("d/m/Y", $this->DataModel->getSOpen() + 1);
+                echo $this->load->view('src/iitf_register_seminar_full', $data, TRUE);
+                
+            }
+        } else if ($htm == "sale") {
+            $this->db->select('*');
+            $this->db->from('tb_seminar');
+            $this->db->where('htm_status', $htm);
+            $query = $this->db->get();
+            $num = $query->num_rows();
+            if ($num < 15) {
+                $code = $this->DataModel->noDaf();
+
+                $nama = $this->input->post('nama');
+                $email = $this->input->post('email');
+                $alamat = $this->input->post('alamat');
+                $nohp = $this->input->post('notelp');
+                $asal = $this->input->post('asal');
+                
+                $this->form_validation->set_rules('nama', 'Nama Lengkap', 'trim|required|min_length[5]|max_length[50]');
+                $this->form_validation->set_rules('email', 'Email', 'valid_email|required|min_length[5]|max_length[50]');
+                $this->form_validation->set_rules('alamat', 'Alamat', 'trim|required|min_length[5]');
+                $this->form_validation->set_rules('notelp', 'Nomor HP/WA', 'trim|required|min_length[5]|max_length[13]');
+                
+                if ($this->form_validation->run() == TRUE) {
+                    $eCheck = $this->db->select('email')
+                                        ->from("tb_seminar")
+                                        ->where("email", $email)
+                                        ->get();
+                    if ($eCheck->num_rows() == 0) {
+                        $this->db->insert('tb_seminar', array(
+                            "id_daf" => $code,
+                            "nama" => $nama,
+                            "alamat" => $alamat,
+                            "email" => $email,
+                            "notelp" => $nohp,
+                            "institusi" => $asal,
+                            "status_bayar" => FALSE,
+                            "status_ulang" => FALSE,
+                            "htm_status" => $htm
+                        ));
+                        
+                        $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissable fade show" role="alert">
+                                                <span class="alert-inner--icon"><i class="ni ni-bulb-61"></i></span>
+                                                <span class="alert-inner--text"> Tambah Data Berhasil </span>
+                                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                                </div>');
+                echo "<script>location.reload();</script>";;
+                    } else {
+                        echo "Email '$eCheck' sudah pernah didaftarkan!";
+                    }
+                } else {
+                    echo validation_errors();
+                }
+            } else {
+                $data['htm'] = strtoupper($htm);
+                $data['tanggal'] = date("d/m/Y", $this->DataModel->getOTSOpen() + 1);
+                echo $this->load->view('src/iitf_register_seminar_full', $data, TRUE);
+                
+            }
+        } else if ($htm == "ots") {
+            $this->db->select('*');
+            $this->db->from('tb_seminar');
+            $this->db->where('htm_status', $htm);
+            $query = $this->db->get();
+            $num = $query->num_rows();
+            if ($num < 5) {
+                $code = $this->DataModel->noDaf();
+
+                $nama = $this->input->post('nama');
+                $email = $this->input->post('email');
+                $alamat = $this->input->post('alamat');
+                $nohp = $this->input->post('notelp');
+                $asal = $this->input->post('asal');
+                
+                $this->form_validation->set_rules('nama', 'Nama Lengkap', 'trim|required|min_length[5]|max_length[50]');
+                $this->form_validation->set_rules('email', 'Email', 'valid_email|required|min_length[5]|max_length[50]');
+                $this->form_validation->set_rules('alamat', 'Alamat', 'trim|required|min_length[5]');
+                $this->form_validation->set_rules('notelp', 'Nomor HP/WA', 'trim|required|min_length[5]|max_length[13]');
+                
+                if ($this->form_validation->run() == TRUE) {
+                    $eCheck = $this->db->select('email')
+                                        ->from("tb_seminar")
+                                        ->where("email", $email)
+                                        ->get();
+                    if ($eCheck->num_rows() == 0) {
+                        $this->db->insert('tb_seminar', array(
+                            "id_daf" => $code,
+                            "nama" => $nama,
+                            "alamat" => $alamat,
+                            "email" => $email,
+                            "notelp" => $nohp,
+                            "institusi" => $asal,
+                            "status_bayar" => FALSE,
+                            "status_ulang" => FALSE,
+                            "htm_status" => $htm
+                        ));
+                        
+                        $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissable fade show" role="alert">
+                                                <span class="alert-inner--icon"><i class="ni ni-bulb-61"></i></span>
+                                                <span class="alert-inner--text"> Tambah Data Berhasil </span>
+                                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                                </div>');
+                        echo "<script>location.reload();</script>";
+                    } else {
+                        echo "Email '$eCheck' sudah pernah didaftarkan!";
+                    }
+                } else {
+                    echo validation_errors();
+                }
+            } else {
+                $data['htm'] = strtoupper($htm);
+                $data['tanggal'] = "null";
+                echo $this->load->view('src/iitf_register_seminar_full', $data, TRUE);
+            }
+        } else {
+            // teuing kunaon nya euy :(
+        }
+    }
+
     public function export()
     {
         if ($this->IsLoggedIn()) {
-            $this->load->library("excel");
-            $object = new PHPExcel();
-            $object->setActiveSheetIndex(0);
-            $table_columns = array("ID Pendaftaran", "Nama Peserta", "Email", "Alamat", "Nomor HP/WA", "Asal Sekolah/Institusi");
-            $column = 0;
-            foreach ($table_columns as $field) {
-                $object->getActiveSheet()->setCellValueByColumnAndRow($column, 1, $field);
-                $column++;
-            }
             $employee_data = $this->db->query("SELECT * FROM tb_seminar WHERE status_bayar = 1")->result();
-            $excel_row = 2;
-            foreach ($employee_data as $row) {
-                $object->getActiveSheet()->setCellValueByColumnAndRow(0, $excel_row, $row->id_daf);
-                $object->getActiveSheet()->setCellValueByColumnAndRow(1, $excel_row, $row->nama);
-                $object->getActiveSheet()->setCellValueByColumnAndRow(2, $excel_row, $row->email);
-                $object->getActiveSheet()->setCellValueByColumnAndRow(3, $excel_row, $row->alamat);
-                $object->getActiveSheet()->setCellValueByColumnAndRow(4, $excel_row, $row->notelp);
-                $object->getActiveSheet()->setCellValueByColumnAndRow(5, $excel_row, $row->institusi);
-
-                $excel_row++;
-            }
-            $object_writer = PHPExcel_IOFactory::createWriter($object, 'Excel5');
-            header('Content-Type: application/vnd.ms-excel');
-            header('Content-Disposition: attachment;filename="Daftar Peserta Seminar.xls"');
-            $object_writer->save('php://output');
+            $data['row'] = $employee_data;
+            $this->load->view('pages/admin/excel_seminar', $data, FALSE);
         } else {
             redirect('admin/home/login');
         }
@@ -78,6 +301,34 @@ class Seminar extends MY_Controller {
                                     ->get()->row();
             
             if ($cek_bayar->status_bayar == TRUE) {
+                $getInfo = $this->db->select('*')->from("tb_seminar")->where("id_daf", $id)->get()->row();
+            
+                $config = array(
+                    'protocol' => 'smtp',
+                    'smtp_host' => 'ssl://smtp.googlemail.com',
+                    'smtp_port' => '465',
+                    'smtp_user' => 'iitfintermedia@gmail.com', // informasi rahasia ini jangan di gunakan sembarangan
+                    'smtp_pass' => 'intermediaiitf2019', // informasi rahasia ini jangan di gunakan sembarangan
+                    'mailtype' => 'html',
+                    'charset' => 'iso-8859-1',
+                    'wordwrap' => TRUE
+                );
+        
+                $data['id_daf'] = $id;
+                $data['nama'] = $getInfo->nama;
+                $data['emailnya'] = $getInfo->email;
+                $data['nohp'] = $getInfo->notelp;
+        
+                $message = $this->load->view('emails/seminar_hadir', $data, TRUE);
+        
+                $this->load->library('email', $config);
+                $this->email->set_newline("\r\n");
+                $this->email->from($config['smtp_user']);
+                $this->email->to($getInfo->email);
+                $this->email->subject('Terimakasih sudah berpartisipasi, ' . $getInfo->nama . '!');
+                $this->email->message($message);
+        
+                $this->email->send();
                 $this->db->update('tb_seminar', array(
                     "status_ulang" => TRUE
                 ), array("id_daf" => $id));

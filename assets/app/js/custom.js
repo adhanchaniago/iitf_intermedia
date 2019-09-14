@@ -24,7 +24,7 @@ $(document).ready(function () {
   }
 
   $('textarea[name=alamat]').on('keypress', function (event) {
-    var regex = new RegExp("^[a-zA-Z\\s'.0-9/]+$");
+    var regex = new RegExp("^[a-zA-Z\\s',.0-9/]+$");
     var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
     if (!regex.test(key)) {
       event.preventDefault();
@@ -211,6 +211,51 @@ $(document).ready(function () {
     }
   });
 });
+
+function tryRegisterSeminarAdmin(home) {
+  $("#simpan").addClass("is-loading");
+  $.ajax({
+    url: home + "admin/seminar/tambah",
+    type: "POST",
+    data: new FormData($("form[name=formTambah]")[0]),
+    cache: false,
+    contentType: false,
+    processData: false,
+
+    // Custom XMLHttpRequest
+    xhr: function () {
+      var myXhr = $.ajaxSettings.xhr();
+      if (myXhr.upload) {
+        // For handling the progress of the upload
+        myXhr.upload.addEventListener(
+          "progress",
+          function (e) {
+            if (e.lengthComputable) {
+              $("progress").attr({
+                value: e.loaded,
+                max: e.total
+              });
+            }
+          },
+          false
+        );
+      }
+      return myXhr;
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+      console.log(xhr.status);
+      console.log(xhr.responseText);
+      console.log(thrownError);
+    },
+    success: function (data) {
+      //alert(data);
+      $("#warnings").html(data);
+    },
+    complete: function (data) {
+      $("#simpan").removeClass("is-loading");
+    }
+  });
+}
 
 function daftarulang(home, id) {
   $("#daful").addClass("is-loading");

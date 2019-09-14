@@ -147,7 +147,7 @@ class App_view extends CI_Controller
                     return;
                 }
 
-                if (!preg_match("/^[a-zA-Z\s'.0-9\/]+$/", $alamat)) {
+                if (!preg_match("/^[a-zA-Z\s',.0-9\/]+$/", $alamat)) {
                     echo "Kolom Alamat mengandung karakter yang tidak diizinkan!";
                     return;
                 }
@@ -170,6 +170,33 @@ class App_view extends CI_Controller
                                         ->where("email", $email)
                                         ->get();
                     if ($eCheck->num_rows() == 0) {
+                        $config = array(
+                            'protocol' => 'smtp',
+                            'smtp_host' => 'ssl://smtp.googlemail.com',
+                            'smtp_port' => '465',
+                            'smtp_user' => 'iitfintermedia@gmail.com', // informasi rahasia ini jangan di gunakan sembarangan
+                            'smtp_pass' => 'intermediaiitf2019', // informasi rahasia ini jangan di gunakan sembarangan
+                            'mailtype' => 'html',
+                            'charset' => 'iso-8859-1',
+                            'wordwrap' => TRUE
+                        );
+                
+                        $data['id_daf'] = $code;
+                        $data['nama'] = $nama;
+                        $data['htm'] = strtoupper($htm);
+                        $data['code'] = $code;
+                        $data['biaya'] = 30000;
+                
+                        $message = $this->load->view('emails/seminar_daftar', $data, TRUE);
+                
+                        $this->load->library('email', $config);
+                        $this->email->set_newline("\r\n");
+                        $this->email->from($config['smtp_user']);
+                        $this->email->to($email);
+                        $this->email->subject('Lakukan Pembayaran agar Anda dapat hadir pada acara Seminar UI/UX IITF 2019');
+                        $this->email->message($message);
+                
+                        $this->email->send();
                         $this->db->insert('tb_seminar', array(
                             "id_daf" => $code,
                             "nama" => $nama,
@@ -181,10 +208,7 @@ class App_view extends CI_Controller
                             "status_ulang" => FALSE,
                             "htm_status" => $htm
                         ));
-                        
-                        $data['htm'] = strtoupper($htm);
-                        $data['code'] = $code;
-                        $data['biaya'] = 30000;
+
                         echo $this->load->view('src/iitf_register_seminar_success', $data, TRUE);
                     } else {
                         echo "Email '$eCheck' sudah pernah didaftarkan!";
@@ -224,6 +248,33 @@ class App_view extends CI_Controller
                                         ->where("email", $email)
                                         ->get();
                     if ($eCheck->num_rows() == 0) {
+                        $config = array(
+                            'protocol' => 'smtp',
+                            'smtp_host' => 'ssl://smtp.googlemail.com',
+                            'smtp_port' => '465',
+                            'smtp_user' => 'iitfintermedia@gmail.com', // informasi rahasia ini jangan di gunakan sembarangan
+                            'smtp_pass' => 'intermediaiitf2019', // informasi rahasia ini jangan di gunakan sembarangan
+                            'mailtype' => 'html',
+                            'charset' => 'iso-8859-1',
+                            'wordwrap' => TRUE
+                        );
+                
+                        $data['id_daf'] = $code;
+                        $data['nama'] = $nama;
+                        $data['htm'] = strtoupper($htm);
+                        $data['code'] = $code;
+                        $data['biaya'] = 35000;
+                
+                        $message = $this->load->view('emails/seminar_daftar', $data, TRUE);
+                
+                        $this->load->library('email', $config);
+                        $this->email->set_newline("\r\n");
+                        $this->email->from($config['smtp_user']);
+                        $this->email->to($email);
+                        $this->email->subject('Lakukan Pembayaran agar Anda dapat hadir pada acara Seminar UI/UX IITF 2019');
+                        $this->email->message($message);
+                
+                        $this->email->send();
                         $this->db->insert('tb_seminar', array(
                             "id_daf" => $code,
                             "nama" => $nama,
@@ -236,9 +287,6 @@ class App_view extends CI_Controller
                             "htm_status" => $htm
                         ));
                         
-                        $data['htm'] = strtoupper($htm);
-                        $data['code'] = $code;
-                        $data['biaya'] = 35000;
                         echo $this->load->view('src/iitf_register_seminar_success', $data, TRUE);
                     } else {
                         echo "Email '$eCheck' sudah pernah didaftarkan!";
@@ -278,6 +326,33 @@ class App_view extends CI_Controller
                                         ->where("email", $email)
                                         ->get();
                     if ($eCheck->num_rows() == 0) {
+                        $config = array(
+                            'protocol' => 'smtp',
+                            'smtp_host' => 'ssl://smtp.googlemail.com',
+                            'smtp_port' => '465',
+                            'smtp_user' => 'iitfintermedia@gmail.com', // informasi rahasia ini jangan di gunakan sembarangan
+                            'smtp_pass' => 'intermediaiitf2019', // informasi rahasia ini jangan di gunakan sembarangan
+                            'mailtype' => 'html',
+                            'charset' => 'iso-8859-1',
+                            'wordwrap' => TRUE
+                        );
+                
+                        $data['id_daf'] = $code;
+                        $data['nama'] = $nama;
+                        $data['htm'] = strtoupper($htm);
+                        $data['code'] = $code;
+                        $data['biaya'] = 40000;
+                
+                        $message = $this->load->view('emails/seminar_daftar', $data, TRUE);
+                
+                        $this->load->library('email', $config);
+                        $this->email->set_newline("\r\n");
+                        $this->email->from($config['smtp_user']);
+                        $this->email->to($email);
+                        $this->email->subject('Lakukan Pembayaran agar Anda dapat hadir pada acara Seminar UI/UX IITF 2019');
+                        $this->email->message($message);
+                
+                        $this->email->send();
                         $this->db->insert('tb_seminar', array(
                             "id_daf" => $code,
                             "nama" => $nama,
@@ -290,9 +365,6 @@ class App_view extends CI_Controller
                             "htm_status" => $htm
                         ));
                         
-                        $data['htm'] = strtoupper($htm);
-                        $data['code'] = $code;
-                        $data['biaya'] = 40000;
                         echo $this->load->view('src/iitf_register_seminar_success', $data, TRUE);
                     } else {
                         echo "Email '$eCheck' sudah pernah didaftarkan!";
