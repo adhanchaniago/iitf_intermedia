@@ -213,7 +213,7 @@ class App_view extends CI_Controller
 
                         echo $this->load->view('src/iitf_register_seminar_success', $data, TRUE);
                     } else {
-                        echo "Email '$eCheck' sudah pernah didaftarkan!";
+                        echo "Email '$email' sudah pernah didaftarkan!";
                     }
                 } else {
                     echo validation_errors();
