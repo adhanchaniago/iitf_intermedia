@@ -94,7 +94,7 @@ class Seminar extends MY_Controller {
         $this->db->where('htm_status', $htm);
         $query = $this->db->get();
         $num = $query->num_rows();
-        if ($num < 74) { // Kuota Anggota - 1
+        if ($num < 75) { // Kuota Anggota
             $code = $this->DataModel->noDaf();
 
             $nama = $this->input->post('nama');
