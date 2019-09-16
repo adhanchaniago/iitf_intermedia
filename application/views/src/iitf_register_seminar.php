@@ -60,56 +60,47 @@ transform: scale(1.0);
                 <!-- Landing page Title -->
                 <div class="column is-half-desktop is-full-mobile landing-caption">
                     <h1 class="title is-3 is-semibold is-spaced main-title has-text-centered">Pendaftaran<br>Peserta Seminar UI/UX</h1>
+                    <br><br>
                     <form class="login-form" action="javascript:tryRegisterSeminar('<?= base_url(); ?>');">
-                        <!-- Field -->
-                        <div class="column">
-                            <div class="control-material is-primary">
-                                <input name="nama" class="material-input" id="n" type="text" required>
-                                <span class="material-highlight"></span>
-                                <span class="bar"></span>
-                                <label for="nama">Nama Lengkap</label>
-                            </div>
+                        <div class="field">
+                            <label class="label">Nama Lengkap</label>
+                            <p class="control has-icons-left">
+                                <input class="input" type="text" name="nama" id="n" placeholder="misal: Tarjo Ramadhan">
+                                <span class="icon is-small is-left"><i class="fas fa-user"></i></span>
+                            </p>
                         </div>
-                        <!-- Field -->
-                        <div class="column">
-                            <div class="control-material is-primary">
-                                <textarea name="alamat" class="material-input" id="al" style="color: black;" required></textarea>
-                                <span class="material-highlight"></span>
-                                <span class="bar"></span>
-                                <label for="alamat">Alamat Lengkap</label>
-                            </div>
+                        <div class="field">
+                            <label class="label">Alamat Lengkap</label>
+                            <p class="control has-icons-left">
+                                <textarea class="input" name="alamat" id="al" placeholder="misal: Jalan Kenanga No. 313 Jakarta Pusat"></textarea>
+                                <span class="icon is-small is-left"><i class="fas fa-home"></i></span>
+                            </p>
                         </div>
-                        <!-- Field -->
-                        <div class="column">
-                            <div class="control-material is-primary">
-                                <input name="email" class="material-input" id="email" type="email" required>
-                                <span class="material-highlight"></span>
-                                <span class="bar"></span>
-                                <label for="email">Email</label>
-                            </div>
+                        <div class="field">
+                            <label class="label">E-Mail:</label>
+                            <p class="control has-icons-left">
+                                <input class="input" type="email" name="email" id="email" placeholder="misal: john.doe@example.com">
+                                <span class="icon is-small is-left"><i class="fas fa-envelope"></i></span>
+                            </p>
                         </div>
-                        <!-- Field -->
-                        <div class="column">
-                            <div class="control-material is-primary">
-                                <input name="notelp" class="material-input" id="no_hp" type="text" required>
-                                <span class="material-highlight"></span>
-                                <span class="bar"></span>
-                                <label for="notelp">Nomor HP/WA</label>
-                            </div>
+                        <div class="field">
+                            <label class="label">Nomor HP/WA:</label>
+                            <p class="control has-icons-left">
+                                <input class="input" type="tel" name="notelp" id="no_hp" placeholder="misal: 0823xxxxxxxx">
+                                <span class="icon is-small is-left"><i class="fas fa-phone"></i></span>
+                            </p>
                         </div>
-                        <!-- Field -->
-                        <div class="column">
-                            <div class="control-material is-primary">
-                                <input name="asal" class="material-input" id="asal" type="text">
-                                <span class="material-highlight"></span>
-                                <span class="bar"></span>
-                                <label for="asal">Asal Sekolah/Institusi</label>
-                            </div>
+                        <div class="field">
+                            <label class="label">Asal Sekolah/Institusi:</label>
+                            <p class="control has-icons-left">
+                                <input class="input" type="text" name="asal" id="asal" placeholder="Isi asal institusi atau sekolah disini.">
+                                <span class="icon is-small is-left"><i class="fas fa-building"></i></span>
+                            </p>
                         </div>
 
                         <!-- Label Login -->
                         <div id="warnings"></div><br>
-
+                        <br>
                         <!-- Submit -->
                         <div class="column">
                             <button id="simpan" type="submit" class="button is-button k-button k-primary raised has-gradient is-bold">

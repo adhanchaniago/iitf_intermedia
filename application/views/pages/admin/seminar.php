@@ -146,9 +146,15 @@
                                     <input type="text" name="asal" class="form-control" placeholder="Asal Sekolah/Institusi">
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12" id="warnings"></div>
+                            <div class="col-md-12">
+                                <label class="checkbox">
+                                    <input type="checkbox" name="anggota">
+                                    Anggota Intermedia?
+                                </label>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12" id="warnings"></div>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">

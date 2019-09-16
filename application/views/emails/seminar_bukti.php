@@ -5,7 +5,7 @@
 <body>
     <h2>Dear <?= $nama; ?>,</h2>
     <p>Terimakasih telah menjadi Peserta Seminar UI/UX di Intermedia Information Technology Festival (IITF) 2019!<br>
-    Berikut rincian pendaftaran peserta Anda.</p><br>
+    Berikut rincian pendaftaran Anda.</p><br>
     <table>
         <tr>
             <th>ID Pendaftaran:</th>

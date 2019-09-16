@@ -118,466 +118,163 @@ class App_view extends CI_Controller
         $this->load->view('component/footer');
     }
 
+    // public function getHTM()
+    // {
+    //     echo $this->DataModel->getHTMPrice();
+    // }
+
     public function regnow_seminar()
     {
         $htm = $this->DataModel->getHTS();
-        if ($htm == "presale") {
-            $this->db->select('*');
-            $this->db->from('tb_seminar');
-            $this->db->where('htm_status', $htm);
-            $query = $this->db->get();
-            $num = $query->num_rows();
-            if ($num < 30) {
-                $code = $this->DataModel->noDaf();
+        $price = $this->DataModel->getHTMPrice();
+        $this->db->select('*');
+        $this->db->from('tb_seminar');
+        $this->db->where('htm_status', $htm);
+        $query = $this->db->get();
+        $num = $query->num_rows();
+        if ($num < 74) { // Kuota Anggota - 1
+            $code = $this->DataModel->noDaf();
 
-                $nama = $this->input->post('nama');
-                $email = $this->input->post('email');
-                $alamat = $this->input->post('alamat');
-                $nohp = $this->input->post('notelp');
-                $asal = $this->input->post('asal');
+            $nama = $this->input->post('nama');
+            $email = $this->input->post('email');
+            $alamat = $this->input->post('alamat');
+            $nohp = $this->input->post('notelp');
+            $asal = $this->input->post('asal');
 
-                // Verify
-                if (!preg_match("/^[a-zA-Z\s']+$/", $nama)) {
-                    //echo "Kolom Nama Lengkap mengandung karakter yang tidak diizinkan!";
-                    echo "<script>
-                            Swal.fire({
-                                title:\"Oops, ada kesalahan!\",
-                                html: `Kolom Nama Lengkap mengandung karakter yang tidak diizinkan!`, 
-                                type: \"error\"}).then(ok => {
-                            //do anything
-                            });
-                        </script>";
-                    return;
-                }
-                
-                if (!preg_match("/^[0-9]+$/", $nohp)) {
-                    //echo "Kolom Nomor HP/WA mengandung karakter yang tidak diizinkan!";
-                    echo "<script>
-                            Swal.fire({
-                                title:\"Oops, ada kesalahan!\",
-                                html: `Kolom Nomor HP/WA mengandung karakter yang tidak diizinkan!`, 
-                                type: \"error\"}).then(ok => {
-                            //do anything
-                            });
-                        </script>";
-                    return;
-                }
-
-                if (!preg_match("/^[a-zA-Z\s',.0-9\/]+$/", $alamat)) {
-                    //echo "Kolom Alamat mengandung karakter yang tidak diizinkan!";
-                    echo "<script>
-                            Swal.fire({
-                                title:\"Oops, ada kesalahan!\",
-                                html: `Kolom Alamat mengandung karakter yang tidak diizinkan!`, 
-                                type: \"error\"}).then(ok => {
-                            //do anything
-                            });
-                        </script>";
-                    return;
-                }
-
-                if ($asal != "") {
-                    if (!preg_match("/^[a-zA-Z\s'.0-9\/]+$/", $asal)) {
-                        //echo "Kolom Asal Sekolah/Institusi mengandung karakter yang tidak diizinkan!";
-                        echo "<script>
-                            Swal.fire({
-                                title:\"Oops, ada kesalahan!\",
-                                html: `Kolom Asal Sekolah/Institusi mengandung karakter yang tidak diizinkan!`, 
-                                type: \"error\"}).then(ok => {
-                            //do anything
-                            });
-                        </script>";
-                    return;
-                    }
-                }
-                
-                $this->form_validation->set_rules('nama', 'Nama Lengkap', 'trim|required|min_length[5]|max_length[50]');
-                $this->form_validation->set_rules('email', 'Email', 'valid_email|required|min_length[5]|max_length[50]');
-                $this->form_validation->set_rules('alamat', 'Alamat', 'trim|required|min_length[5]');
-                $this->form_validation->set_rules('notelp', 'Nomor HP/WA', 'trim|required|min_length[5]|max_length[13]');
-                
-                if ($this->form_validation->run() == TRUE) {
-                    $eCheck = $this->db->select('email')
-                                        ->from("tb_seminar")
-                                        ->where("email", $email)
-                                        ->get();
-                    if ($eCheck->num_rows() == 0) {
-                        $config = array(
-                            'protocol' => 'smtp',
-                            'smtp_host' => 'smtp.gmail.com',
-                            'smtp_crypto' => 'tls',
-                            'smtp_port' => '587',
-                            
-                            'smtp_user' => 'iitfintermedia@gmail.com', // informasi rahasia ini jangan di gunakan sembarangan
-                            'smtp_pass' => 'intermediaiitf2019', // informasi rahasia ini jangan di gunakan sembarangan
-                            'mailtype' => 'html',
-                            'charset' => 'iso-8859-1',
-                            'wordwrap' => TRUE
-                        );
-                
-                        $data['id_daf'] = $code;
-                        $data['nama'] = $nama;
-                        $data['htm'] = strtoupper($htm);
-                        $data['code'] = $code;
-                        $data['biaya'] = 30000;
-                
-                        $message = $this->load->view('emails/seminar_daftar', $data, TRUE);
-                
-                        $this->load->library('email', $config);
-                        $this->email->set_newline("\r\n");
-                        $this->email->from($config['smtp_user']);
-                        $this->email->to($email);
-                        $this->email->subject('Konfirmasi Pembayaran acara Seminar UI/UX IITF 2019');
-                        $this->email->message($message);
-                
-                        $this->email->send();
-                        $this->db->insert('tb_seminar', array(
-                            "id_daf" => $code,
-                            "nama" => $nama,
-                            "alamat" => $alamat,
-                            "email" => $email,
-                            "notelp" => $nohp,
-                            "institusi" => $asal,
-                            "status_bayar" => FALSE,
-                            "status_ulang" => FALSE,
-                            "htm_status" => $htm
-                        ));
-
-                        echo $this->load->view('src/iitf_register_seminar_success', $data, TRUE);
-                    } else {
-                        //echo "Email '$email' sudah pernah didaftarkan!";
-                        echo "<script>
-                            Swal.fire({
-                                title:\"Oops, ada kesalahan!\",
-                                html: `Email '$email' sudah pernah didaftarkan!`, 
-                                type: \"error\"}).then(ok => {
-                            //do anything
-                            });
-                        </script>";
-                    }
-                } else {
-                    //echo validation_errors();
-                    echo "<script>
+            // Verify
+            if (!preg_match("/^[a-zA-Z\s']+$/", $nama)) {
+                //echo "Kolom Nama Lengkap mengandung karakter yang tidak diizinkan!";
+                echo "<script>
                         Swal.fire({
                             title:\"Oops, ada kesalahan!\",
-                            html: `" . validation_errors() . "`, 
+                            html: `Kolom Nama Lengkap mengandung karakter yang tidak diizinkan!`, 
                             type: \"error\"}).then(ok => {
                         //do anything
                         });
                     </script>";
-                    return;
-                }
-            } else {
-                $data['htm'] = strtoupper($htm);
-                $data['tanggal'] = date("d/m/Y", $this->DataModel->getSOpen() + 1);
-                echo $this->load->view('src/iitf_register_seminar_full', $data, TRUE);
-                
+                return;
             }
-        } else if ($htm == "sale") {
-            $this->db->select('*');
-            $this->db->from('tb_seminar');
-            $this->db->where('htm_status', $htm);
-            $query = $this->db->get();
-            $num = $query->num_rows();
-            if ($num < 15) {
-                $code = $this->DataModel->noDaf();
-
-                $nama = $this->input->post('nama');
-                $email = $this->input->post('email');
-                $alamat = $this->input->post('alamat');
-                $nohp = $this->input->post('notelp');
-                $asal = $this->input->post('asal');
-
-                // Verify
-                if (!preg_match("/^[a-zA-Z\s']+$/", $nama)) {
-                    //echo "Kolom Nama Lengkap mengandung karakter yang tidak diizinkan!";
-                    echo "<script>
-                            Swal.fire({
-                                title:\"Oops, ada kesalahan!\",
-                                html: `Kolom Nama Lengkap mengandung karakter yang tidak diizinkan!`, 
-                                type: \"error\"}).then(ok => {
-                            //do anything
-                            });
-                        </script>";
-                    return;
-                }
-                
-                if (!preg_match("/^[0-9]+$/", $nohp)) {
-                    //echo "Kolom Nomor HP/WA mengandung karakter yang tidak diizinkan!";
-                    echo "<script>
-                            Swal.fire({
-                                title:\"Oops, ada kesalahan!\",
-                                html: `Kolom Nomor HP/WA mengandung karakter yang tidak diizinkan!`, 
-                                type: \"error\"}).then(ok => {
-                            //do anything
-                            });
-                        </script>";
-                    return;
-                }
-
-                if (!preg_match("/^[a-zA-Z\s',.0-9\/]+$/", $alamat)) {
-                    //echo "Kolom Alamat mengandung karakter yang tidak diizinkan!";
-                    echo "<script>
-                            Swal.fire({
-                                title:\"Oops, ada kesalahan!\",
-                                html: `Kolom Alamat mengandung karakter yang tidak diizinkan!`, 
-                                type: \"error\"}).then(ok => {
-                            //do anything
-                            });
-                        </script>";
-                    return;
-                }
-
-                if ($asal != "") {
-                    if (!preg_match("/^[a-zA-Z\s'.0-9\/]+$/", $asal)) {
-                        //echo "Kolom Asal Sekolah/Institusi mengandung karakter yang tidak diizinkan!";
-                        echo "<script>
-                            Swal.fire({
-                                title:\"Oops, ada kesalahan!\",
-                                html: `Kolom Asal Sekolah/Institusi mengandung karakter yang tidak diizinkan!`, 
-                                type: \"error\"}).then(ok => {
-                            //do anything
-                            });
-                        </script>";
-                    return;
-                    }
-                }
-                
-                $this->form_validation->set_rules('nama', 'Nama Lengkap', 'trim|required|min_length[5]|max_length[50]');
-                $this->form_validation->set_rules('email', 'Email', 'valid_email|required|min_length[5]|max_length[50]');
-                $this->form_validation->set_rules('alamat', 'Alamat', 'trim|required|min_length[5]');
-                $this->form_validation->set_rules('notelp', 'Nomor HP/WA', 'trim|required|min_length[5]|max_length[13]');
-                
-                if ($this->form_validation->run() == TRUE) {
-                    $eCheck = $this->db->select('email')
-                                        ->from("tb_seminar")
-                                        ->where("email", $email)
-                                        ->get();
-                    if ($eCheck->num_rows() == 0) {
-                        $config = array(
-                            'protocol' => 'smtp',
-                            'smtp_host' => 'smtp.gmail.com',
-                            'smtp_crypto' => 'tls',
-                            'smtp_port' => '587',
-                            
-                            'smtp_user' => 'iitfintermedia@gmail.com', // informasi rahasia ini jangan di gunakan sembarangan
-                            'smtp_pass' => 'intermediaiitf2019', // informasi rahasia ini jangan di gunakan sembarangan
-                            'mailtype' => 'html',
-                            'charset' => 'iso-8859-1',
-                            'wordwrap' => TRUE
-                        );
-                
-                        $data['id_daf'] = $code;
-                        $data['nama'] = $nama;
-                        $data['htm'] = strtoupper($htm);
-                        $data['code'] = $code;
-                        $data['biaya'] = 35000;
-                
-                        $message = $this->load->view('emails/seminar_daftar', $data, TRUE);
-                
-                        $this->load->library('email', $config);
-                        $this->email->set_newline("\r\n");
-                        $this->email->from($config['smtp_user']);
-                        $this->email->to($email);
-                        $this->email->subject('Konfirmasi Pembayaran acara Seminar UI/UX IITF 2019');
-                        $this->email->message($message);
-                
-                        $this->email->send();
-                        $this->db->insert('tb_seminar', array(
-                            "id_daf" => $code,
-                            "nama" => $nama,
-                            "alamat" => $alamat,
-                            "email" => $email,
-                            "notelp" => $nohp,
-                            "institusi" => $asal,
-                            "status_bayar" => FALSE,
-                            "status_ulang" => FALSE,
-                            "htm_status" => $htm
-                        ));
-                        
-                        echo $this->load->view('src/iitf_register_seminar_success', $data, TRUE);
-                    } else {
-                        //echo "Email '$email' sudah pernah didaftarkan!";
-                        echo "<script>
-                            Swal.fire({
-                                title:\"Oops, ada kesalahan!\",
-                                html: `Email '$email' sudah pernah didaftarkan!`, 
-                                type: \"error\"}).then(ok => {
-                            //do anything
-                            });
-                        </script>";
-                    }
-                } else {
-                    //echo validation_errors();
-                    echo "<script>
+            
+            if (!preg_match("/^[0-9]+$/", $nohp)) {
+                //echo "Kolom Nomor HP/WA mengandung karakter yang tidak diizinkan!";
+                echo "<script>
                         Swal.fire({
                             title:\"Oops, ada kesalahan!\",
-                            html: `" . validation_errors() . "`, 
+                            html: `Kolom Nomor HP/WA mengandung karakter yang tidak diizinkan!`, 
                             type: \"error\"}).then(ok => {
                         //do anything
                         });
                     </script>";
-                    return;
-                }
-            } else {
-                $data['htm'] = strtoupper($htm);
-                $data['tanggal'] = date("d/m/Y", $this->DataModel->getOTSOpen() + 1);
-                echo $this->load->view('src/iitf_register_seminar_full', $data, TRUE);
-                
+                return;
             }
-        } else if ($htm == "ots") {
-            $this->db->select('*');
-            $this->db->from('tb_seminar');
-            $this->db->where('htm_status', $htm);
-            $query = $this->db->get();
-            $num = $query->num_rows();
-            if ($num < 5) {
-                $code = $this->DataModel->noDaf();
 
-                $nama = $this->input->post('nama');
-                $email = $this->input->post('email');
-                $alamat = $this->input->post('alamat');
-                $nohp = $this->input->post('notelp');
-                $asal = $this->input->post('asal');
-
-                // Verify
-                if (!preg_match("/^[a-zA-Z\s']+$/", $nama)) {
-                    //echo "Kolom Nama Lengkap mengandung karakter yang tidak diizinkan!";
-                    echo "<script>
-                            Swal.fire({
-                                title:\"Oops, ada kesalahan!\",
-                                html: `Kolom Nama Lengkap mengandung karakter yang tidak diizinkan!`, 
-                                type: \"error\"}).then(ok => {
-                            //do anything
-                            });
-                        </script>";
-                    return;
-                }
-                
-                if (!preg_match("/^[0-9]+$/", $nohp)) {
-                    //echo "Kolom Nomor HP/WA mengandung karakter yang tidak diizinkan!";
-                    echo "<script>
-                            Swal.fire({
-                                title:\"Oops, ada kesalahan!\",
-                                html: `Kolom Nomor HP/WA mengandung karakter yang tidak diizinkan!`, 
-                                type: \"error\"}).then(ok => {
-                            //do anything
-                            });
-                        </script>";
-                    return;
-                }
-
-                if (!preg_match("/^[a-zA-Z\s',.0-9\/]+$/", $alamat)) {
-                    //echo "Kolom Alamat mengandung karakter yang tidak diizinkan!";
-                    echo "<script>
-                            Swal.fire({
-                                title:\"Oops, ada kesalahan!\",
-                                html: `Kolom Alamat mengandung karakter yang tidak diizinkan!`, 
-                                type: \"error\"}).then(ok => {
-                            //do anything
-                            });
-                        </script>";
-                    return;
-                }
-
-                if ($asal != "") {
-                    if (!preg_match("/^[a-zA-Z\s'.0-9\/]+$/", $asal)) {
-                        //echo "Kolom Asal Sekolah/Institusi mengandung karakter yang tidak diizinkan!";
-                        echo "<script>
-                            Swal.fire({
-                                title:\"Oops, ada kesalahan!\",
-                                html: `Kolom Asal Sekolah/Institusi mengandung karakter yang tidak diizinkan!`, 
-                                type: \"error\"}).then(ok => {
-                            //do anything
-                            });
-                        </script>";
-                    return;
-                    }
-                }
-                
-                $this->form_validation->set_rules('nama', 'Nama Lengkap', 'trim|required|min_length[5]|max_length[50]');
-                $this->form_validation->set_rules('email', 'Email', 'valid_email|required|min_length[5]|max_length[50]');
-                $this->form_validation->set_rules('alamat', 'Alamat', 'trim|required|min_length[5]');
-                $this->form_validation->set_rules('notelp', 'Nomor HP/WA', 'trim|required|min_length[5]|max_length[13]');
-                
-                if ($this->form_validation->run() == TRUE) {
-                    $eCheck = $this->db->select('email')
-                                        ->from("tb_seminar")
-                                        ->where("email", $email)
-                                        ->get();
-                    if ($eCheck->num_rows() == 0) {
-                        $config = array(
-                            'protocol' => 'smtp',
-                            'smtp_host' => 'smtp.gmail.com',
-                            'smtp_crypto' => 'tls',
-                            'smtp_port' => '587',
-                            
-                            'smtp_user' => 'iitfintermedia@gmail.com', // informasi rahasia ini jangan di gunakan sembarangan
-                            'smtp_pass' => 'intermediaiitf2019', // informasi rahasia ini jangan di gunakan sembarangan
-                            'mailtype' => 'html',
-                            'charset' => 'iso-8859-1',
-                            'wordwrap' => TRUE
-                        );
-                
-                        $data['id_daf'] = $code;
-                        $data['nama'] = $nama;
-                        $data['htm'] = strtoupper($htm);
-                        $data['code'] = $code;
-                        $data['biaya'] = 40000;
-                
-                        $message = $this->load->view('emails/seminar_daftar', $data, TRUE);
-                
-                        $this->load->library('email', $config);
-                        $this->email->set_newline("\r\n");
-                        $this->email->from($config['smtp_user']);
-                        $this->email->to($email);
-                        $this->email->subject('Konfirmasi Pembayaran acara Seminar UI/UX IITF 2019');
-                        $this->email->message($message);
-                
-                        $this->email->send();
-                        $this->db->insert('tb_seminar', array(
-                            "id_daf" => $code,
-                            "nama" => $nama,
-                            "alamat" => $alamat,
-                            "email" => $email,
-                            "notelp" => $nohp,
-                            "institusi" => $asal,
-                            "status_bayar" => FALSE,
-                            "status_ulang" => FALSE,
-                            "htm_status" => $htm
-                        ));
-                        
-                        echo $this->load->view('src/iitf_register_seminar_success', $data, TRUE);
-                    } else {
-                        //echo "Email '$email' sudah pernah didaftarkan!";
-                        echo "<script>
-                            Swal.fire({
-                                title:\"Oops, ada kesalahan!\",
-                                html: `Email '$email' sudah pernah didaftarkan!`, 
-                                type: \"error\"}).then(ok => {
-                            //do anything
-                            });
-                        </script>";
-                    }
-                } else {
-                    //echo validation_errors();
-                    echo "<script>
+            if (!preg_match("/^[a-zA-Z\s',.0-9\/]+$/", $alamat)) {
+                //echo "Kolom Alamat mengandung karakter yang tidak diizinkan!";
+                echo "<script>
                         Swal.fire({
                             title:\"Oops, ada kesalahan!\",
-                            html: `" . validation_errors() . "`, 
+                            html: `Kolom Alamat mengandung karakter yang tidak diizinkan!`, 
                             type: \"error\"}).then(ok => {
                         //do anything
                         });
                     </script>";
-                    return;
+                return;
+            }
+
+            if ($asal != "") {
+                if (!preg_match("/^[a-zA-Z\s'.0-9\/]+$/", $asal)) {
+                    //echo "Kolom Asal Sekolah/Institusi mengandung karakter yang tidak diizinkan!";
+                    echo "<script>
+                        Swal.fire({
+                            title:\"Oops, ada kesalahan!\",
+                            html: `Kolom Asal Sekolah/Institusi mengandung karakter yang tidak diizinkan!`, 
+                            type: \"error\"}).then(ok => {
+                        //do anything
+                        });
+                    </script>";
+                return;
+                }
+            }
+            
+            $this->form_validation->set_rules('nama', 'Nama Lengkap', 'trim|required|min_length[5]|max_length[50]');
+            $this->form_validation->set_rules('email', 'Email', 'valid_email|required|min_length[5]|max_length[50]');
+            $this->form_validation->set_rules('alamat', 'Alamat', 'trim|required|min_length[5]');
+            $this->form_validation->set_rules('notelp', 'Nomor HP/WA', 'trim|required|min_length[5]|max_length[13]');
+            
+            if ($this->form_validation->run() == TRUE) {
+                $eCheck = $this->db->select('email')
+                                    ->from("tb_seminar")
+                                    ->where("email", $email)
+                                    ->get();
+                if ($eCheck->num_rows() == 0) {
+                    $config = array(
+                        'protocol' => 'smtp',
+                        'smtp_host' => 'smtp.gmail.com',
+                        'smtp_crypto' => 'tls',
+                        'smtp_port' => '587',
+                        
+                        'smtp_user' => 'iitfintermedia@gmail.com', // informasi rahasia ini jangan di gunakan sembarangan
+                        'smtp_pass' => 'intermediaiitf2019', // informasi rahasia ini jangan di gunakan sembarangan
+                        'mailtype' => 'html',
+                        'charset' => 'iso-8859-1',
+                        'wordwrap' => TRUE
+                    );
+            
+                    $data['id_daf'] = $code;
+                    $data['nama'] = $nama;
+                    $data['htm'] = strtoupper($htm);
+                    $data['code'] = $code;
+                    $data['biaya'] = $price;
+            
+                    $message = $this->load->view('emails/seminar_daftar', $data, TRUE);
+            
+                    $this->load->library('email', $config);
+                    $this->email->set_newline("\r\n");
+                    $this->email->from($config['smtp_user']);
+                    $this->email->to($email);
+                    $this->email->subject('Konfirmasi Pembayaran acara Seminar UI/UX IITF 2019');
+                    $this->email->message($message);
+            
+                    $this->email->send();
+                    $this->db->insert('tb_seminar', array(
+                        "id_daf" => $code,
+                        "nama" => $nama,
+                        "alamat" => $alamat,
+                        "email" => $email,
+                        "notelp" => $nohp,
+                        "institusi" => $asal,
+                        "status_bayar" => FALSE,
+                        "status_ulang" => FALSE,
+                        "htm_status" => $htm
+                    ));
+
+                    echo $this->load->view('src/iitf_register_seminar_success', $data, TRUE);
+                } else {
+                    //echo "Email '$email' sudah pernah didaftarkan!";
+                    echo "<script>
+                        Swal.fire({
+                            title:\"Oops, ada kesalahan!\",
+                            html: `Email '$email' sudah pernah didaftarkan!`, 
+                            type: \"error\"}).then(ok => {
+                        //do anything
+                        });
+                    </script>";
                 }
             } else {
-                $data['htm'] = strtoupper($htm);
-                $data['tanggal'] = "null";
-                echo $this->load->view('src/iitf_register_seminar_full', $data, TRUE);
+                //echo validation_errors();
+                echo "<script>
+                    Swal.fire({
+                        title:\"Oops, ada kesalahan!\",
+                        html: `" . validation_errors() . "`, 
+                        type: \"error\"}).then(ok => {
+                    //do anything
+                    });
+                </script>";
+                return;
             }
         } else {
-            // teuing kunaon nya euy :(
+            $data['nu'] = "";
+            echo $this->load->view('src/iitf_register_seminar_full', $data, TRUE);
         }
     }
 

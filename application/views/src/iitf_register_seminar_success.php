@@ -25,10 +25,28 @@
                         
                         Lalu, konfirmasi ke salah satu nomor berikut terkait pembayaran dan berikan kode pendaftaran dan bukti pembayarannya:
                         <table>
-                            <tr><td>Erina Setyawati</td><td><a href="https://api.whatsapp.com/send?phone=6282211538043">0822-1153-8043</a></td><td><a href="tel:+6282211538043" class="button is-primary"><i class="fas fa-phone"></i></a></td></tr>
-                            <tr><td>Tri Suci Desiana</td><td><a href="https://api.whatsapp.com/send?phone=6282328691559">0823-2869-1559</a></td><td><a href="tel:+6282328691559" class="button is-primary"><i class="fas fa-phone"></i></a></td></tr>
+                            <tr>
+                                <td>Erina Setyawati</td>
+                                <td>
+                                    <a href="https://api.whatsapp.com/send?phone=6282211538043">0822-1153-8043</a>
+                                </td>
+                                <td>
+                                    <a href="tel:+6282211538043" class="button is-primary is-small"><i class="fas fa-phone"></i></a>
+                                    <a href="https://api.whatsapp.com/send?phone=6282211538043" class="button is-primary is-small"><i class="fab fa-whatsapp"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Tri Suci Desiana</td>
+                                <td>
+                                    <a href="https://api.whatsapp.com/send?phone=6282328691559">0823-2869-1559</a>
+                                </td>
+                                <td>
+                                    <a href="tel:+6282328691559" class="button is-primary is-small"><i class="fas fa-phone"></i></a>
+                                    <a href="https://api.whatsapp.com/send?phone=6282328691559" class="button is-primary is-small"><i class="fab fa-whatsapp"></i></a>
+                                </td>
+                            </tr>
                         </table>
-                        <br>
+                        <b>CATATAN:</b><br>Kami telah mengirimkan Kode Pendaftaran ke email yang Anda berikan. Silakan periksa inbox pada email Anda. Apabila tidak ada pesan baru, periksalah di kotak spam.<br>
                         <p align="right">
                             <a class="button k-button k-primary raised has-gradient slanted" href="<?= base_url(); ?>">
                                 <span class="text">

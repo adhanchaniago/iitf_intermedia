@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 13 Sep 2019 pada 23.28
+-- Waktu pembuatan: 16 Sep 2019 pada 19.30
 -- Versi server: 10.1.37-MariaDB
 -- Versi PHP: 7.3.0
 
@@ -38,7 +38,7 @@ CREATE TABLE `tb_seminar` (
   `status_bayar` tinyint(1) NOT NULL DEFAULT '0',
   `status_ulang` tinyint(1) NOT NULL DEFAULT '0',
   `tgl_daftar` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `htm_status` enum('presale','sale','ots') NOT NULL
+  `htm_status` enum('presale','sale','ots','anggota') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --

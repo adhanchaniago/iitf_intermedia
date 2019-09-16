@@ -14,8 +14,17 @@
                 </div>
 
                 <div class="content">
-                    Mohon maaf, kuota untuk <?= $htm; ?> sudah penuh. Silakan coba lagi setelah tanggal <?= $tanggal; ?>
+                    Kuota peserta Seminar UI/UX sudah penuh. Maaf, ya :(
+                    <p align="right">
+                        <a class="button k-button k-primary raised has-gradient slanted" href="<?= base_url(); ?>">
+                            <span class="text">
+                                Oke
+                            </span>
+                            <span class="front-gradient"></span>
+                        </a>
+                    </p>
                 </div>
+                
             </div>
         </div>
     </div>

@@ -48,6 +48,25 @@ class DataModel extends CI_Model
     }
     // bug over
 
+    function getHTMPrice() {
+        $htm = 0;
+        switch ($this->getHTS()) {
+            case 'presale':
+                $htm = 30000;
+                break;
+            case 'sale':
+                $htm = 35000;
+                break;
+            case 'ots':
+                $htm = 40000;
+                break;
+            default:
+                $htm = 0;
+                break;
+        }
+        return $htm;
+    }
+
     function getHTS()
     {
         $hts = "";
