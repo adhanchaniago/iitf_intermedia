@@ -207,35 +207,35 @@
             }
           });
 
-          // $("input[type=file]").change(function(e) {
-          //   var fileExtension = ["pdf", "doc", "docx"];
-          //   if (
-          //     $.inArray(
-          //       $(this)
-          //       .val()
-          //       .split(".")
-          //       .pop()
-          //       .toLowerCase(),
-          //       fileExtension
-          //     ) == -1
-          //   ) {
-          //     alert(
-          //       "Hanya format file berikut yang dapat diterima : " +
-          //       fileExtension.join(", ")
-          //     );
-          //   } else {
-          //     var namafile = e.target.files[0].name;
-          //     var ukurfile = e.target.files[0].size;
-          //     if (ukurfile <= 1 * Math.pow(2, 20)) { // Ukuran (satuan MB) dikali 2 pangkat 20 = Ukuran MB
-          //       console.log(currentForm);
-          //       $("#filename" + currentForm).html(namafile);
-          //     } else {
-          //       alert(
-          //         "Ukuran file tersebut terlalu besar. Batas maksimum ukuran file adalah 1 MB"
-          //       );
-          //     }
-          //   }
-          // });
+          $("input[type=file]").change(function(e) {
+            var fileExtension = ["pdf", "doc", "docx"];
+            if (
+              $.inArray(
+                $(this)
+                .val()
+                .split(".")
+                .pop()
+                .toLowerCase(),
+                fileExtension
+              ) == -1
+            ) {
+              alert(
+                "Hanya format file berikut yang dapat diterima : " +
+                fileExtension.join(", ")
+              );
+            } else {
+              var namafile = e.target.files[0].name;
+              var ukurfile = e.target.files[0].size;
+              if (ukurfile <= 1 * Math.pow(2, 20)) { // Ukuran (satuan MB) dikali 2 pangkat 20 = Ukuran MB
+                console.log(currentForm);
+                $("#filename" + currentForm).html(namafile);
+              } else {
+                alert(
+                  "Ukuran file tersebut terlalu besar. Batas maksimum ukuran file adalah 1 MB"
+                );
+              }
+            }
+          });
 
           //console.log(currentForm);
           if (currentForm >= <?= $anggota->jumlah_anggota ?>) {

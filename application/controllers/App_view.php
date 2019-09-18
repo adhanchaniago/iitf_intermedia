@@ -569,7 +569,7 @@ class App_view extends CI_Controller
                         swal(
                         \"Gagal\",
                         \"Ada masalah saat mencoba mengirimkan email verifikasi. Coba lagi nanti.\",
-                        {icon:\"success\"}
+                        {icon:\"error\"}
                         ).then(ok => {
                         
                         });
@@ -584,10 +584,11 @@ class App_view extends CI_Controller
     {
         $config = array(
             'protocol' => 'smtp',
-            'smtp_host' => 'ssl://smtp.googlemail.com',
-            'smtp_port' => '465',
+            'smtp_host' => 'smtp.googlemail.com',
+            'smtp_port' => '587',
             'smtp_user' => 'iitfintermedia@gmail.com', // informasi rahasia ini jangan di gunakan sembarangan
             'smtp_pass' => 'intermediaiitf2019', // informasi rahasia ini jangan di gunakan sembarangan
+            'smtp_crypto' => 'tls',
             'mailtype' => 'html',
             'charset' => 'iso-8859-1',
             'wordwrap' => TRUE

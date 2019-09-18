@@ -42,6 +42,7 @@ class Lomba extends MY_Controller
                 $harga = $this->input->post('harga');
                 $nl = $this->input->post('nama_lomba');
                 $nom = $this->input->post('nominal');
+                $pre = $this->input->post('pre');
                 if ($ket == "individu") {
                     $jml = 0;
                 }
@@ -83,6 +84,7 @@ class Lomba extends MY_Controller
                                     "jumlah_anggota" => $jml,
                                     "deskripsi" => $desk,
                                     "lampiran" => $lam,
+                                    "pre_registration" => $pre,
                                     "guide_book" => $n_gb . "." . $eks,
                                     "file_gambar" => $n_g . "." . $eksG,
                                     "harga" => $harga

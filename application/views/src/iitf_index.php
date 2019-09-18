@@ -429,27 +429,130 @@
             <!-- Content wrapper -->
             <div class="content-wrapper is-large">
                 <!-- Partner logos -->
+                <!-- <div class="partners"> -->
                 <div class="partners">
-                    <!-- Partner -->
-                    <!-- <div class="partner-item">
+                    <div class="columns is-12 is-mobile">
+                        <div class="partner-item">
+                            <a href="https://puskomedia.id" target="_blank">
+                                <img src="assets/app/images/media-partner/puskomedia.png" alt="puskomedia">
+                            </a>
+                        </div>
+                        <div class="partner-item">
+                            <a href="#" target="_blank">
+                                <img src="assets/app/images/media-partner/inviz.png" alt="inul vizta">
+                            </a>
+                        </div>
+                        <div class="partner-item">
+                            <a href="#" target="_blank">
+                                <img src="assets/app/images/media-partner/arpuz.png" alt="Arpuz Store">
+                            </a>
+                        </div>
+                        <div class="partner-item">
+                            <a href="#" target="_blank">
+                                <img src="assets/app/images/media-partner/bem.png" alt="puskomedia">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="partners">
+                    <div class="columns is-12 is-mobile">
+                        <div class="partner-item">
+                            <a href="#" target="_blank">
+                                <img src="assets/app/images/media-partner/cyber-amikom-solo.png" alt="puskomedia">
+                            </a>
+                        </div>
+                        <div class="partner-item">
+                            <a href="#" target="_blank">
+                                <img src="assets/app/images/media-partner/amikomfm.png" alt="inul vizta">
+                            </a>
+                        </div>
+                        <div class="partner-item">
+                            <a href="#" target="_blank">
+                                <img src="assets/app/images/media-partner/pitcom.png" alt="Arpuz Store">
+                            </a>
+                        </div>
+                        <div class="partner-item">
+                            <a href="#" target="_blank">
+                                <img src="assets/app/images/media-partner/Assem.png" alt="puskomedia">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="partners">
+                    <div class="columns is-12 is-mobile">
+                        <div class="partner-item">
+                            <a href="#" target="_blank">
+                                <img src="assets/app/images/media-partner/eventpelajar.png" alt="puskomedia">
+                            </a>
+                        </div>
+                        <div class="partner-item">
+                            <a href="#" target="_blank">
+                                <img src="assets/app/images/media-partner/infolomba.jpg" alt="inul vizta">
+                            </a>
+                        </div>
+                        <div class="partner-item">
+                            <a href="#" target="_blank">
+                                <img src="assets/app/images/media-partner/infobanyumasan.png" alt="Arpuz Store">
+                            </a>
+                        </div>
+                        <div class="partner-item">
+                            <a href="#" target="_blank">
+                                <img src="assets/app/images/media-partner/petanikode.png" alt="Arpuz Store">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Partner -->
+                <!-- <div class="partner-item">
                         <img src="assets/app/images/media-partner/biznet.png" alt="biznet">
                     </div> -->
-                    <!-- Partner -->
-                    <!-- <div class="partner-item">
+                <!-- Partner -->
+                <!-- <div class="partner-item">
                         <img src="assets/app/images/media-partner/ampu-studio.png" alt="ampu studio">
                     </div> -->
-                    <!-- Partner -->
-                    <div class="partner-item">
+                <!-- Partner -->
+                <!-- <div class="partner-item">
                         <a href="https://puskomedia.id" target="_blank">
                             <img src="assets/app/images/media-partner/puskomedia.png" alt="puskomedia">
                         </a>
                     </div>
-                    <!-- Partner -->
-                    <!-- <div class="partner-item">
+                    <div class="partner-item">
+                        <a href="#" target="_blank">
+                            <img src="assets/app/images/media-partner/cyber-amikom-solo.png" alt="puskomedia">
+                        </a>
+                    </div>
+                    <div class="partner-item">
+                        <a href="#" target="_blank">
+                            <img src="assets/app/images/media-partner/bem.png" alt="puskomedia">
+                        </a>
+                    </div>
+                    <div class="partner-item">
+                        <a href="#" target="_blank">
+                            <img src="assets/app/images/media-partner/inviz.png" alt="puskomedia">
+                        </a>
+                    </div>
+                    <div class="partner-item">
+                        <a href="#" target="_blank">
+                            <img src="assets/app/images/media-partner/Assem.png" alt="puskomedia">
+                        </a>
+                    </div>
+                    <div class="partner-item">
+                        <a href="#" target="_blank">
+                            <img src="assets/app/images/media-partner/petanikode-logo.png" alt="puskomedia">
+                        </a>
+                    </div>
+                    <div class="partner-item">
+                        <a href="#" target="_blank">
+                            <img src="assets/app/images/media-partner/pitcom-logo-fix.png" alt="puskomedia">
+                        </a>
+                    </div> -->
+
+                <!-- Partner -->
+                <!-- <div class="partner-item">
                         <img src="assets/app/images/media-partner/kaskus.png" alt="kaskus">
                     </div> -->
 
-                </div>
+                <!-- </div> -->
             </div>
 
 
