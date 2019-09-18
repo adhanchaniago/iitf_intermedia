@@ -33,7 +33,7 @@ class Pengumuman extends MY_Controller
                 $data = array(
                     "judul" => $judul,
                     "deskripsi" => $des,
-                    "tanggal" => date("Y-m-d")
+                    "tanggal" => date("Y-m-d H:i:s")
                 );
                 $this->DataModel->insert('tb_pengumuman', $data);
                 $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissable fade show" role="alert">
@@ -61,7 +61,7 @@ class Pengumuman extends MY_Controller
                 $data = array(
                     "judul" => $judul,
                     "deskripsi" => $des,
-                    "tanggal" => date("Y-m-d")
+                    "tanggal" => date("Y-m-d H:i:s")
                 );
                 $this->DataModel->getWhere('id',$id);
                 $this->DataModel->update('tb_pengumuman', $data);

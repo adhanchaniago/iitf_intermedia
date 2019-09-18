@@ -66,7 +66,7 @@
                                         <div class="col-lg-12">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-nama">Tema</label>
-                                                <input type="text" name="tema" class="form-control form-control-alternative" placeholder="Masukkan tema perlombaan" value="<?=$lomba[0]['tema']?>">
+                                                <input type="text" name="tema" class="form-control form-control-alternative" placeholder="Masukkan tema perlombaan" value="<?= $lomba[0]['tema'] ?>">
                                             </div>
                                         </div>
                                     </div>
@@ -76,15 +76,19 @@
                                                 <label class="form-control-label" for="input-nama">Keterangan</label>
                                                 <select name="keterangan" class="form-control form-control-alternative">
                                                     <option value="">Pilih Keterangan Lomba</option>
-                                                    <option value="individu" <?php if($lomba[0]['keterangan'] == "individu"){ echo "selected"; } ?>>Individu</option>
-                                                    <option value="kelompok" <?php if($lomba[0]['keterangan'] == "kelompok"){ echo "selected"; } ?>>Kelompok</option>
+                                                    <option value="individu" <?php if ($lomba[0]['keterangan'] == "individu") {
+                                                                                    echo "selected";
+                                                                                } ?>>Individu</option>
+                                                    <option value="kelompok" <?php if ($lomba[0]['keterangan'] == "kelompok") {
+                                                                                    echo "selected";
+                                                                                } ?>>Kelompok</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-nama">Jumlah Anggota</label>
-                                                <input type="number" name="jumlah" class="form-control form-control-alternative" value="<?=$lomba[0]['jumlah_anggota']?>" placeholder="Dihitung anggota saja (koor tidak masuk)">
+                                                <input type="number" name="jumlah" class="form-control form-control-alternative" value="<?= $lomba[0]['jumlah_anggota'] ?>" placeholder="Dihitung anggota saja (koor tidak masuk)">
                                             </div>
                                         </div>
                                     </div>
@@ -124,7 +128,7 @@
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                            <label class="form-control-label" for="input-nama">Gambar</label>
+                                                <label class="form-control-label" for="input-nama">Gambar</label>
                                                 <input type="file" class="form-control form-control-alternative" name="gambar">
                                             </div>
                                         </div>
@@ -133,8 +137,28 @@
                                                 <label class="form-control-label" for="input-nama">Lampiran File</label>
                                                 <select name="lampiran" class="form-control form-control-alternative">
                                                     <option value="">Pilih Status Lampiran File</option>
-                                                    <option value="true" <?php if($lomba[0]['lampiran'] == "true"){echo "selected"; } ?> >Dibutuhkan</option>
-                                                    <option value="false" <?php if($lomba[0]['lampiran'] == "false"){echo "selected"; } ?>>Tidak Dibutuhkan</option>
+                                                    <option value="true" <?php if ($lomba[0]['lampiran'] == "true") {
+                                                                                echo "selected";
+                                                                            } ?>>Dibutuhkan</option>
+                                                    <option value="false" <?php if ($lomba[0]['lampiran'] == "false") {
+                                                                                echo "selected";
+                                                                            } ?>>Tidak Dibutuhkan</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="input-nama">Pre Registration</label>
+                                                <select name="pre" class="form-control form-control-alternative">
+                                                    <option value="">Pilih Status Pre Registration</option>
+                                                    <option value="true" <?php if ($lomba[0]['pre_registration'] == "true") {
+                                                                                echo "selected";
+                                                                            } ?>>Dibutuhkan</option>
+                                                    <option value="false" <?php if ($lomba[0]['pre_registration'] == "false") {
+                                                                                echo "selected";
+                                                                            } ?>>Tidak Dibutuhkan</option>
                                                 </select>
                                             </div>
                                         </div>

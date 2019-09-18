@@ -1,6 +1,7 @@
 $(document).ready(function () {
   // Form Filtration
   // console.log(currentForm);
+
   if (typeof currentForm !== 'undefined') {
     var i;
     for (i = 1; i <= currentForm; i++) {
@@ -63,10 +64,10 @@ $(document).ready(function () {
     if (
       $.inArray(
         $(this)
-        .val()
-        .split(".")
-        .pop()
-        .toLowerCase(),
+          .val()
+          .split(".")
+          .pop()
+          .toLowerCase(),
         fileExtension
       ) == -1
     ) {
@@ -92,10 +93,10 @@ $(document).ready(function () {
     if (
       $.inArray(
         $(this)
-        .val()
-        .split(".")
-        .pop()
-        .toLowerCase(),
+          .val()
+          .split(".")
+          .pop()
+          .toLowerCase(),
         fileExtension
       ) == -1
     ) {
@@ -126,10 +127,10 @@ $(document).ready(function () {
       if (
         $.inArray(
           $(this)
-          .val()
-          .split(".")
-          .pop()
-          .toLowerCase(),
+            .val()
+            .split(".")
+            .pop()
+            .toLowerCase(),
           fileExtension
         ) == -1
       ) {
@@ -158,10 +159,10 @@ $(document).ready(function () {
     if (
       $.inArray(
         $(this)
-        .val()
-        .split(".")
-        .pop()
-        .toLowerCase(),
+          .val()
+          .split(".")
+          .pop()
+          .toLowerCase(),
         fileExtension
       ) == -1
     ) {
@@ -187,10 +188,10 @@ $(document).ready(function () {
     if (
       $.inArray(
         $(this)
-        .val()
-        .split(".")
-        .pop()
-        .toLowerCase(),
+          .val()
+          .split(".")
+          .pop()
+          .toLowerCase(),
         fileExtension
       ) == -1
     ) {
@@ -328,7 +329,7 @@ function tryLogin(home) {
           console.log(xhr.responseText);
           console.log(thrownError);
         },
-        success: function (data) {}
+        success: function (data) { }
       });
 
       update.done(function (json) {

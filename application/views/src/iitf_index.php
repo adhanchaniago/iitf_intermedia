@@ -240,6 +240,12 @@
                             $j++;
                             $k++;
                         } ?>
+                        <div class="cta-wrapper has-text-centered animated preFadeInUp fadeInUp">
+                            <a href="<?= base_url() ?>daftar" class="button k-button k-primary raised has-gradient is-fat is-bold">
+                                <span class="text">Daftar Sekarang</span>
+                                <span class="front-gradient"></span>
+                            </a>
+                        </div>
                         <!-- /Tab 1 -->
                     </div>
                 </div>
@@ -275,21 +281,21 @@
                                     <li>
                                         <a href="#0" data-date="22/08/2019">
                                             <span>AUG</span>
-                                            <span>22</span>
+                                            <span>20</span>
                                         </a>
                                     </li>
                                     <!-- Event -->
                                     <li>
                                         <a href="#0" data-date="28/08/2019">
-                                            <span>AUG</span>
-                                            <span>28</span>
+                                            <span>SEP</span>
+                                            <span>02</span>
                                         </a>
                                     </li>
                                     <!-- Event -->
                                     <li>
                                         <a href="#0" data-date="28/09/2019">
-                                            <span>SEP</span>
-                                            <span>28</span>
+                                            <span>OCT</span>
+                                            <span>12</span>
                                         </a>
                                     </li>
                                     <li>
@@ -327,7 +333,7 @@
                                         <!-- Title & date -->
                                         <div>
                                             <span class="event-title">Roadshow</span>
-                                            <small>Kamis 22 Agustus 2019</small>
+                                            <small> 20 - 29 Agustus 2019</small>
                                         </div>
                                     </div>
                                     <p>
@@ -343,11 +349,13 @@
                                         <img src="<?= base_url() ?>assets/app/images/icons/ico/presale.svg" alt="">
                                         <div>
                                             <span class="event-title">Pembukaan Pendaftaran Perlombaan</span>
-                                            <small>Rabu 28 Agustus 2019</small>
+                                            <small>Senin 02 Oktober 2019</small>
                                         </div>
                                     </div>
                                     <p>
-                                        Pembukaan Pendaftaran untuk Lomba IT yang akan diadakan pada tanggal 28 September 2019 mendatang.
+                                        Pembukaan Pendaftaran untuk Lomba IT yang akan diadakan pada tanggal 02 September 2019 mendatang. Pendaftaran dapat dilakukan secara online pada website IITF
+                                        atau mendaftar secara offline dengan datang langsung ke stand
+                                        pendaftaran IITF di Universitan Amikom Purwokerto
                                     </p>
                                 </div>
                             </li>
@@ -359,11 +367,11 @@
                                         <img src="<?= base_url() ?>assets/app/images/icons/ico/ico.svg" alt="">
                                         <div>
                                             <span class="event-title">Perlombaan</span>
-                                            <small>Sabtu 28 September 2019</small>
+                                            <small> 12 & 13 Oktober 2019</small>
                                         </div>
                                     </div>
                                     <p>
-                                        Hari Perlombaan yang kami selenggarakan di UNIVERSITAS AMIKOM Purwokerto.
+                                        Hari Perlombaan yang kami selenggarakan di Universitas AMIKOM Purwokerto.
                                     </p>
                                 </div>
                             </li>

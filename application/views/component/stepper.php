@@ -33,24 +33,32 @@
   </div>
   <div id="step4" class="step ">
     <div class="step-header">
-      <?php if ($step >= 3 && $keterangan == "kelompok") { ?>
+      <?php if ($step >= 3 && $keterangan == "kelompok" && $pre_regis == "false") { ?>
         <a href="<?= base_url('user') ?>?step=3" class="header">Step 4 : Pembayaran</a>
         <div class="subheader">Pembayaran dan aktivasi pendaftaran</div>
+      <?php } else if ($step >= 3 && $keterangan == "kelompok" && $pre_regis == "true") { ?>
+        <a href="<?= base_url('user') ?>?step=4" class="header">Step 4 : Submit File</a>
+        <div class="subheader">
+          Mengunggah file keperluan lomba
+        </div>
       <?php } else if ($step >= 3 && $keterangan == "individu" && $status == "active") { ?>
         <a href="<?= base_url('user') ?>?step=4" class="header">Step 4 : Submit File</a>
         <div class="subheader">
           Mengunggah file keperluan lomba
         </div>
-      <?php } else if($keterangan == "kelompok") { ?>
+      <?php } else if ($step < 3 && $keterangan == "individu" && $status == "unactive") { ?>
+        <div class="header">Step 4 : Submit File</div>
+        <div class="subheader">Mengunggah file keperluan lomba</div>
+      <?php } else if ($step < 3 && $pre_regis == "false") { ?>
         <div class="header">Step 4 : Pembayaran</div>
         <div class="subheader">Pembayaran dan aktivasi pendaftaran</div>
-      <?php }else{ ?>
+      <?php } else { ?>
         <div class="header">Step 4 : Submit File</div>
         <div class="subheader">Mengunggah file keperluan lomba</div>
       <?php } ?>
     </div>
   </div>
-  <?php if ($keterangan == null || $keterangan == "kelompok") { ?>
+  <?php if ($keterangan == null || $keterangan == "kelompok" && $pre_regis == "false") { ?>
     <div id="step5" class="step ">
       <div class="step-header">
         <?php if ($step >= 4 && $status == "active") { ?>

@@ -130,7 +130,7 @@ class Lomba extends MY_Controller
     public function ubah($id)
     {
         if ($this->IsLoggedIn()) {
-            $lomba = $this->DataModel->select('tb_lomba.nama,tb_lomba.deskripsi,tb_lomba.harga,tb_lomba.id_kategori,tb_juara.nama as nama_lomba,tb_juara.nominal, tb_lomba.tema,tb_lomba.keterangan,tb_lomba.jumlah_anggota,tb_lomba.lampiran');
+            $lomba = $this->DataModel->select('tb_lomba.nama,tb_lomba.deskripsi,tb_lomba.harga,tb_lomba.id_kategori,tb_juara.nama as nama_lomba,tb_juara.nominal, tb_lomba.tema,tb_lomba.keterangan,tb_lomba.jumlah_anggota,tb_lomba.lampiran,tb_lomba.guide_book,tb_lomba.pre_registration');
             $lomba = $this->DataModel->getWhere('id', $id);
             $lomba = $this->DataModel->getJoin('tb_juara', 'tb_juara.id_lomba = tb_lomba.id', 'inner');
             $lomba = $this->DataModel->getData('tb_lomba')->result_array();
@@ -143,6 +143,7 @@ class Lomba extends MY_Controller
                 $ket = $this->input->post('keterangan');
                 $jml = $this->input->post('jumlah');
                 $lam = $this->input->post('lampiran');
+                $pre = $this->input->post('pre');
                 $harga = $this->input->post('harga');
                 $nl = $this->input->post('nama_lomba');
                 $nom = $this->input->post('nominal');
@@ -151,8 +152,10 @@ class Lomba extends MY_Controller
                 }
                 if (!empty($_FILES['gb']['name'])) {
                     $n_gb = str_replace(' ', '_', $nama) . "IITF2019";
-                    $path = "assets/Guide_book/" . $lomba->guide_book;
-                    unlink(FCPATH . $path);
+                    $path = "assets/Guide_book/" . $lomba[0]['guide_book'];
+                    if(file_exists($path)){
+                        unlink(FCPATH . $path);
+                    }
                     $this->_uploadFile($n_gb, "zip|rar");
                     if (!$this->upload->do_upload('gb')) {
                         $data = array(
@@ -174,6 +177,7 @@ class Lomba extends MY_Controller
                             "deskripsi" => $desk,
                             "lampiran" => $lam,
                             "keterangan" => $ket,
+                            "pre_registration" => $pre,
                             "jumlah_anggota" => $jml,
                             "guide_book" => $n_gb . "." . $eks,
                             "harga" => $harga
@@ -191,7 +195,9 @@ class Lomba extends MY_Controller
                         //     $a++;
                         // }
                     }
-                } else if (!empty($_FILES['gambar']['name'])) {
+                } 
+                
+                if (!empty($_FILES['gambar']['name'])) {
                     $n_g =  "G-" . $id;
                     $path = "assets/Guide_book/" . $lomba->file_gambar;
                     if (file_exists($path)) {
@@ -218,6 +224,7 @@ class Lomba extends MY_Controller
                             "deskripsi" => $desk,
                             "lampiran" => $lam,
                             "keterangan" => $ket,
+                            "pre_registration" => $pre,
                             "jumlah_anggota" => $jml,
                             "file_gambar" => $n_g . "." . $eksG,
                             "harga" => $harga
@@ -237,6 +244,7 @@ class Lomba extends MY_Controller
                         "nama" => $nama,
                         "tema" => $tema,
                         "lampiran" => $lam,
+                        "pre_registration" => $pre,
                         "keterangan" => $ket,
                         "jumlah_anggota" => $jml,
                         "deskripsi" => $desk,

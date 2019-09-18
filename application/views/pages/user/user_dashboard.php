@@ -97,9 +97,9 @@
                 </div>
                 <div class="column is-6">
                   : <?php if ($lomba->status == "active") {
-                      echo "Aktif";
+                      echo "<p class='tag is-success'>Aktif</p>";
                     } else {
-                      echo "Tidak Aktif";
+                      echo "<p class='tag is-danger'>Tidak Aktif</p>";
                     } ?>
                 </div>
               </div>
@@ -129,10 +129,119 @@
         </div>
       </div>
       <div class="column is-8">
-        <!-- <div class="notification is-danger">
-          <button class="delete" onclick="((this).parentNode.remove())"></button>
-          ini pengumuan kalo ada notif mendadak up to you dah
-				</div> -->
+        <?php
+        // $status_pendaftaran = "true";
+        if ($status_pendaftaran == "true") { ?>
+          <div class="notification is-info">
+            <?php if ($pendaftaran->bukti_bayar == null) { ?>
+              <!-- <button class="delete" onclick="((this).parentNode.remove())"></button> -->
+              Selamat anda telah lolos tahap seleksi. Silahkan Lakukan Pembayaran.
+              <!-- <br><button class="button is-success" data-target="modal" data->Lakukan Pembayaran</button> -->
+              <br><button class="button is-success modal-button" data-target="#myModal" aria-haspopup="true">Lakukan Pembayaran</button>
+            <?php }else if($pendaftaran->status=="unactive"){ ?>
+              Terima kasih sudah mengirimkan bukti pembayaran, tunggu 1 * 24 Jam untuk konfirmasi aktif dari admin. Apabila dalam rentang waktu tersebut status masih <b class="tag is-danger">tidak aktif</b> harap menghubungi Contact Person yang ada.
+            <?php }else if($pendaftaran->status=="active"){ ?>
+              Selamat anda lolos seleksi finalis perlombaan, dimohon untuk hadir pada tanggal 13 Oktober 2019 untuk melakukan presentasi final ditempat yang sudah ditentukan.
+            <?php } ?>
+            <div class="modal" id="myModal">
+              <div class="modal-background"></div>
+              <div class="modal-content">
+                <div class="box">
+                  <div id="warning" class=""></div>
+                  <div class="columns is-12">
+                    <div class="column is-6">
+                      <table class="table is-stripped">
+                        <tr>
+                          <th colspan="2">Rincian Pembayaran</th>
+                        </tr>
+                        <tr>
+                          <td>ID Daftar</td>
+                          <td><?= $pendaftaran->id ?></td>
+                        </tr>
+                        <?php if ($pendaftaran->jumlah_anggota > 0) { ?>
+                          <tr>
+                            <td>Nama Team</td>
+                            <td><?= $pendaftaran->nama_team; ?></td>
+                          </tr>
+                        <?php } ?>
+                        <tr>
+                          <td>Tanggal Daftar</td>
+                          <td><?= date("d/m/Y", strtotime($pendaftaran->tanggal_daftar)) ?></td>
+                        </tr>
+                        <tr>
+                          <td>Kategori Lomba</td>
+                          <td><?= $pendaftaran->namalomba; ?></td>
+                        </tr>
+                        <tr>
+                          <td>Biaya Pendaftaran</td>
+                          <td>Rp<?= number_format($lombaI->harga, 0, ",", ".") ?>,-</td>
+                        </tr>
+                      </table>
+                    </div>
+                    <div class="column is-6">
+                      <table class="table is-stripped">
+                        <tr>
+                          <th colspan="2">Transfer ke:</td>
+                        </tr>
+                        <tr>
+                          <td>Nama Bank</th>
+                          <td>002 - Bank Rakyat Indonesia (BRI)</td>
+                        </tr>
+                        <tr>
+                          <td>Atas Nama</th>
+                          <td>Rahmat Hidayat Fitrianto</td>
+                        </tr>
+                        <tr>
+                          <td>Nomor Rekening</th>
+                          <td>0077 - 01 - 100172 - 50 - 8</td>
+                        </tr>
+                        <tr>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
+                  <div id="progress"></div>
+                  <div class="field">
+                    <label class="label">Bukti Transfer (ekstensi diterima: JPG, JPEG, PNG; Batas maksimum: 1 MB)</label>
+                    <form action="javascript:trySaveBayar('<?= base_url(); ?>');" method="POST" enctype="multipart/form-data">
+                      <div class="field is-grouped">
+                        <div class="file is-boxed is-success has-name">
+                          <label class="file-label">
+                            <input class="file-input" type="file" name="bukti" id="bukti" />
+                            <span class="file-cta">
+                              <span class="file-icon">
+                                <i class="fas fa-upload"></i>
+                              </span>
+                              <span class="file-label">
+                                Upload Foto
+                              </span>
+                            </span>
+                            <span id="filename" class="file-name">
+                              <?= ($pendaftaran->bukti_bayar == "" ? "Pilih berkas foto terlebih dahulu" : $pendaftaran->bukti_bayar); ?>
+                            </span>
+                          </label>
+                        </div>
+                      </div>
+                      <div class="field is-grouped">
+                        <div class="control">
+                          <input onclick="trySaveBayar('<?= base_url(); ?>');" type="submit" id="simpan" name="kirim" value="Simpan" class="button is-link">
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <button class="modal-close is-large" aria-label="close"></button>
+            </div>
+          </div>
+        <?php  } else if($status_pendaftaran == "false") { ?>
+          <div class="notification is-danger">
+            <!-- <button class="delete" onclick="((this).parentNode.remove())"></button> -->
+            Mohon maaf anda tidak lolos tahap seleksi, Silahkan coba lagi tahun depan. Tetap Semangat!!
+          </div>
+        <?php } ?>
         <h3 style="margin-bottom:20px;">Pengumuman</h3>
         <div class="box">
 
@@ -176,6 +285,7 @@
     </div>
   </div>
 </section>
+
 <footer class="footer" style="padding-bottom:3rem !important;">
   <div class="content has-text-centered">
     <div class="container">
@@ -184,7 +294,7 @@
         <div class="columns">
           <div class="column">
             <br>
-            <a href="#">
+            <a href="https://api.whatsapp.com/send?phone=6282326295275" target="_blank">
               <i class="fab fa-whatsapp" style="color:black"></i>
               <p style="color:black">WhatsApp</p>
             </a>
@@ -197,7 +307,7 @@
           </div>
           <div class="column">
             <br>
-            <a href="#">
+            <a href="https://www.instagram.com/iitf_intermedia/?hl=en" target="_blank">
               <i class="fab fa-instagram" style="color:black"></i>
               <p style="color:black">Instagram</p>
             </a>
@@ -209,3 +319,16 @@
     </div>
   </div>
 </footer>
+<script>
+  document.querySelectorAll('.modal-button').forEach(function(el) {
+    el.addEventListener('click', function() {
+      var target = document.querySelector(el.getAttribute('data-target'));
+
+      target.classList.add('is-active');
+
+      target.querySelector('.modal-close').addEventListener('click', function() {
+        target.classList.remove('is-active');
+      });
+    });
+  });
+</script>

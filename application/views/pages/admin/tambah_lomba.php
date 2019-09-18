@@ -137,6 +137,18 @@
                                         </div>
                                     </div>
                                     <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="input-nama">Pre Registration</label>
+                                                <select name="pre" class="form-control form-control-alternative">
+                                                    <option value="">Pilih Status Pre Registration</option>
+                                                    <option value="true">Dibutuhkan</option>
+                                                    <option value="false">Tidak Dibutuhkan</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group focused">
                                                 <input type="submit" value="simpan" name="kirim" class="btn btn-primary">

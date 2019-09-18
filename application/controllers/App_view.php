@@ -56,8 +56,14 @@ class App_view extends CI_Controller
         $payload['koor'] = $koor;
         $payload['lomba'] = $ket;
         $payload['anggota'] = $jml;
+        $payload['status_pendaftaran'] = $pendaftaran->status_pendaftaran;
         $payload['pendaftaran'] = $pendaftaran;
         $payload['pengumuman'] = $pengumuman;
+        $query = $this->db->query('SELECT b.id, b.tanggal_daftar, b.bukti_bayar,b.status, a.harga, b.nama_team, a.jumlah_anggota, b.id_koor, a.namalomba, a.keterangan FROM listlomba a INNER JOIN tb_pendaftaran b ON a.id = b.id_lomba WHERE b.id_koor = "' . $koor->id . '"');
+        //$query = $this->db->query('SELECT b.id_koor, a.harga FROM listlomba a INNER JOIN tb_pendaftaran b ON a.id = b.id_lomba WHERE b.id_koor = "' . $koor->id . '"');
+
+        $payload['lombaI'] = $query->row();
+        $payload['pendaftaran'] = $query->row();
         $lomba = $this->DataModel->getData('tb_lomba')->result_array();
         $this->load->view('component/header', $payload);
         $this->load->view('pages/user/user_dashboard');
@@ -372,7 +378,7 @@ class App_view extends CI_Controller
             # username salah
             echo json_encode(array(
                 "success" => false,
-                "msg" => "email belum ada"
+                "msg" => "email belum terdaftar"
             ));
         }
     }
@@ -416,7 +422,7 @@ class App_view extends CI_Controller
             echo "<script>
                 swal.stopLoading();
                 swal.close();
-                swal(\"Gagal\", \"Anda wajib memasukkan Nama Lengkap Anda!\", \"danger\").then(ok => {
+                swal(\"Gagal\", \"Anda wajib memasukkan Nama Lengkap Anda!\", {icon:\"error\"}).then(ok => {
                 //do anything
                 });
             </script>";
@@ -425,7 +431,7 @@ class App_view extends CI_Controller
             echo "<script>
                 swal.stopLoading();
                 swal.close();
-                swal(\"Gagal\", \"Anda wajib memasukkan Alamat E-Mail Anda!\", \"danger\").then(ok => {
+                swal(\"Gagal\", \"Anda wajib memasukkan Alamat E-Mail Anda!\", {icon:\"error\"}).then(ok => {
                 //do anything
                 });
             </script>";
@@ -434,7 +440,7 @@ class App_view extends CI_Controller
             echo "<script>
                 swal.stopLoading();
                 swal.close();
-                swal(\"Gagal\", \"Anda wajib memasukkan Kata Sandi Anda!\", \"danger\").then(ok => {
+                swal(\"Gagal\", \"Anda wajib memasukkan Kata Sandi Anda!\", {icon:\"error\"}).then(ok => {
                 //do anything
                 });
             </script>";
@@ -443,7 +449,7 @@ class App_view extends CI_Controller
             echo "<script>
                 swal.stopLoading();
                 swal.close();
-                swal(\"Gagal\", \"Anda wajib memasukkan ulang Kata Sandinya!\", \"danger\").then(ok => {
+                swal(\"Gagal\", \"Anda wajib memasukkan ulang Kata Sandinya!\", {icon:\"error\"}).then(ok => {
                 //do anything
                 });
             </script>";
@@ -452,7 +458,7 @@ class App_view extends CI_Controller
             echo "<script>
                 swal.stopLoading();
                 swal.close();
-                swal(\"Gagal\", \"Anda wajib memasukkan Nama Lengkap Anda!\", \"danger\").then(ok => {
+                swal(\"Gagal\", \"Anda wajib memasukkan Nama Lengkap Anda!\", {icon:\"error\"}).then(ok => {
                 //do anything
                 });
             </script>";
@@ -461,7 +467,7 @@ class App_view extends CI_Controller
             echo "<script>
                 swal.stopLoading();
                 swal.close();
-                swal(\"Gagal\", \"Anda wajib memasukkan Kata Sandi Anda!\", \"danger\").then(ok => {
+                swal(\"Gagal\", \"Anda wajib memasukkan Kata Sandi Anda!\", {icon:\"error\"}).then(ok => {
                 //do anything
                 });
             </script>";
@@ -470,7 +476,7 @@ class App_view extends CI_Controller
             echo "<script>
                 swal.stopLoading();
                 swal.close();
-                swal(\"Gagal\", \"Anda wajib memasukkan Kata Sandi minimal 6 karakter!\", \"danger\").then(ok => {
+                swal(\"Gagal\", \"Anda wajib memasukkan Kata Sandi minimal 6 karakter!\", {icon:\"error\"}).then(ok => {
                 //do anything
                 });
             </script>";
@@ -480,31 +486,31 @@ class App_view extends CI_Controller
                 echo "<script>
                     swal.stopLoading();
                     swal.close();
-                    swal(\"Gagal\", \"Kata Sandi yang Anda masukkan tidak sama, periksa kembali!\", \"danger\").then(ok => {
+                    swal(\"Gagal\", \"Kata Sandi yang Anda masukkan tidak sama, periksa kembali!\", {icon:\"error\"}).then(ok => {
                     //do anything
                     });
                 </script>";
                 return;
             } else {
                 $cekemail = $this->db->select('email')
-                                    ->from('tb_user')
-                                    ->where('email', $mail)
-                                    ->get();
+                    ->from('tb_user')
+                    ->where('email', $mail)
+                    ->get();
                 $cekemail2 = $this->db->select('email')
-                                    ->from('tb_admin')
-                                    ->where('email', $mail)
-                                    ->get();
+                    ->from('tb_admin')
+                    ->where('email', $mail)
+                    ->get();
                 if (($cekemail->num_rows() != 0) || ($cekemail2->num_rows() != 0)) {
                     echo "<script>
                         swal.stopLoading();
                         swal.close();
-                        swal(\"Gagal\", \"Email $mail sudah pernah didaftarkan!\", \"danger\").then(ok => {
+                        swal(\"Gagal\", \"Email $mail sudah pernah didaftarkan!\", {icon:\"error\"}).then(ok => {
                         //do anything
                         });
                     </script>";
                     return;
                 }
-                
+
                 $prefixUser = "U-";
                 $prefixKoor = "K-";
                 $randID = date("YmdHis");
@@ -546,7 +552,7 @@ class App_view extends CI_Controller
                         swal(
                         \"Berhasil\",
                         \"Selamat $nama, Anda berhasil mendaftarkan diri ke Perlombaan IITF 2019! Silahkan cek email untuk aktivasi akun\",
-                        \"success\"
+                        {icon:\"success\"}
                         ).then(ok => {
                         window.location.replace(\"$uri\");
                         });
@@ -563,7 +569,7 @@ class App_view extends CI_Controller
                         swal(
                         \"Gagal\",
                         \"Ada masalah saat mencoba mengirimkan email verifikasi. Coba lagi nanti.\",
-                        \"success\"
+                        {icon:\"success\"}
                         ).then(ok => {
                         
                         });
@@ -578,10 +584,8 @@ class App_view extends CI_Controller
     {
         $config = array(
             'protocol' => 'smtp',
-            'smtp_host' => 'smtp.gmail.com',
-                            'smtp_crypto' => 'tls',
-                            'smtp_port' => '587',
-            
+            'smtp_host' => 'ssl://smtp.googlemail.com',
+            'smtp_port' => '465',
             'smtp_user' => 'iitfintermedia@gmail.com', // informasi rahasia ini jangan di gunakan sembarangan
             'smtp_pass' => 'intermediaiitf2019', // informasi rahasia ini jangan di gunakan sembarangan
             'mailtype' => 'html',
@@ -826,8 +830,7 @@ class App_view extends CI_Controller
             $nohp = $this->input->post('no_hp');
             $instansi = $this->input->post('instansi');
 
-            if(empty(trim($nama)))
-            {
+            if (empty(trim($nama))) {
                 // Its empty so throw a validation error
                 echo "<script>
                         $('#warnings').addClass('notification is-danger');
@@ -1033,12 +1036,24 @@ class App_view extends CI_Controller
             // die();
             // die(json_encode($dataa));
             if ($step_lalu < 3) {
-                $this->db->update('tb_user', array(
-                    'step_selesai' => 3
-                ), array(
-                    'id' => $this->session->userdata('id')
-                ));
-                redirect('user', 'refresh');
+                $ket = $this->db->query('SELECT a.pre_registration,a.id FROM listlomba a INNER JOIN tb_pendaftaran b ON a.id = b.id_lomba WHERE b.id_koor = "' . $koor->id . '"')->row();
+                // die(json_encode($ket));
+                // $cek = $this->DataModel->getWhere('id', $ket->id);
+                // $cek = $this->DataModel->getData('tb_lomba')->row();
+                if ($ket->pre_registration == "true") {
+                    $this->db->update('tb_user', array(
+                        'step_selesai' => 4
+                    ), array(
+                        'id' => $this->session->userdata('id')
+                    ));
+                } else {
+                    $this->db->update('tb_user', array(
+                        'step_selesai' => 3
+                    ), array(
+                        'id' => $this->session->userdata('id')
+                    ));
+                }
+                // redirect('user', 'refresh');
             }
             // die();
             redirect('user', 'refresh');
@@ -1197,16 +1212,23 @@ class App_view extends CI_Controller
             ));
             $koor = $koorq->row();
         }
-        $ket = $this->db->query('SELECT a.keterangan FROM listlomba a INNER JOIN tb_pendaftaran b ON a.id = b.id_lomba WHERE b.id_koor = "' . $koor->id . '"')->row();
+        $ket = $this->db->query('SELECT a.keterangan ,a.pre_registration as pre FROM listlomba a INNER JOIN tb_pendaftaran b ON a.id = b.id_lomba WHERE b.id_koor = "' . $koor->id . '"')->row();
+        $pre = $this->db->query('SELECT a.pre_registration FROM listlomba a INNER JOIN tb_pendaftaran b ON a.id = b.id_lomba WHERE b.id_koor = "' . $koor->id . '"')->row();
+        // die(json_encode($ket));
+        // die(json_encode($ket));
         if ($ket != null) {
             $ket = $ket->keterangan;
+            $pre = $pre->pre_registration;
+            // $preaaa = $ket->pre;
         } else {
-            $ket == null;
+            $ket = null;
+            $pre = null;
         }
+        // die(json_encode($pre));
         $email = "";
-        if($this->session->userdata('email') != "" && $userdata->step_selesai == 5){
-            $email = "Dashboard";   
-        }else if($this->session->userdata('email') != ""){
+        if ($this->session->userdata('email') != "" && $userdata->step_selesai == 5) {
+            $email = "Dashboard";
+        } else if ($this->session->userdata('email') != "") {
             $email = "LANJUTKAN DAFTAR: " . $this->session->userdata('email');
         }
         $pendaftaran = $this->DataModel->select('status');
@@ -1215,9 +1237,10 @@ class App_view extends CI_Controller
         // die(json_encode($pendaftaran));
 
         if ($pendaftaran != null) {
-            $pendaftaran = $pendaftaran->status;
+            $stat = $pendaftaran->status;
         } else {
-            $pendaftaran = "";
+            $stat = "";
+            // $pre = "";
         }
 
         $payload['judul'] = "PENDAFTARAN LOMBA";
@@ -1231,8 +1254,9 @@ class App_view extends CI_Controller
         $payload['lampiran'] = ($koor->lampiran_identitas == "" ? "Pilih berkas foto terlebih dahulu" : $koor->lampiran_identitas);
         $payload['step'] = $userdata->step_selesai;
         $payload['keterangan'] = $ket;
-        $payload['status'] = $pendaftaran;
-
+        $payload['pre_regis'] = $pre;
+        $payload['status'] = $stat;
+        // die(json_encode($payload));
         @$loadstep = $this->input->get('step');
         if (isset($loadstep)) {
             if ($loadstep <= $payload['step']) {
