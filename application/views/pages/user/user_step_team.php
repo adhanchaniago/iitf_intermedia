@@ -120,6 +120,7 @@
         function setForm() {
           // alert('g');
           currentForm++;
+          // console.log(currentForm);
           var data = 
 						'<div id="form' + currentForm + '" class="column box">' +
             	'<div class="columns">'+
@@ -147,17 +148,17 @@
             	'</div>' +
             '</div>' +
             '<div class="field">' +
-            	'<label class="label">No Telpon/WA</label>' +
-            		'<div class="control has-icons-left">' +
-            			'<input id="no_hp'+currentForm+'" name="no_hp[]" class="input" type="text" placeholder="contoh : 08xxxx" value=""/>' +
-            				'<span class="icon is-small is-left">' +
-            					'<i class="fas fa-phone"></i>' +
-            					'</span>'
+            '<label class="label">No Telpon/WA</label>' +
+            '<div class="control has-icons-left">' +
+            '<input id="no_hp'+currentForm+'" name="no_hp[]" class="input" type="text" placeholder="contoh : 08xxxx" value=""/>' +
+            '<span class="icon is-small is-left">' +
+            '<i class="fas fa-phone"></i>' +
+            '</span>'
             // +'<span class="icon is-small is-right">'
             //   +'<i class="fas fa-check"></i>'
             // +'</span>'
             +
-            		'</div>'
+            '</div>'
             // +'<p class="help is-success">Kalo sukses</p>'
             +
             '</div>' +
@@ -166,7 +167,7 @@
             		'<div class="control">' +
             			'<div class="file is-info has-name">' +
             				'<label class="file-label">' +
-            				'<input id="fileup" class="file-input" type="file" name="identitas' + currentForm + '" id="identitas' + currentForm + '" />' +
+            				'<input class="file-input" type="file" name="identitas' + currentForm + '" id="identitas' + currentForm + '" />' +
             				'<span class="file-cta">' +
             					'<span class="file-icon">' +
             						'<i class="fas fa-upload"></i>' +
@@ -180,9 +181,6 @@
            					'</span>' +
             				'</label>' +
             			'</div>' +
-									'<div class="control">'+
-            				'<input  type="submit" name="kirim" value="Download" class="button is-link">'+
-          			'</div>'+
             		'</div>' +
 								
             '</div>'+
@@ -209,35 +207,35 @@
             }
           });
 
-          $("input[type=file]").change(function(e) {
-            var fileExtension = ["pdf", "doc", "docx"];
-            if (
-              $.inArray(
-                $(this)
-                .val()
-                .split(".")
-                .pop()
-                .toLowerCase(),
-                fileExtension
-              ) == -1
-            ) {
-              alert(
-                "Hanya format file berikut yang dapat diterima : " +
-                fileExtension.join(", ")
-              );
-            } else {
-              var namafile = e.target.files[0].name;
-              var ukurfile = e.target.files[0].size;
-              if (ukurfile <= 1 * Math.pow(2, 20)) { // Ukuran (satuan MB) dikali 2 pangkat 20 = Ukuran MB
-                console.log(currentForm);
-                $("#filename" + currentForm).html(namafile);
-              } else {
-                alert(
-                  "Ukuran file tersebut terlalu besar. Batas maksimum ukuran file adalah 1 MB"
-                );
-              }
-            }
-          });
+          // $("input[type=file]").change(function(e) {
+          //   var fileExtension = ["pdf", "doc", "docx"];
+          //   if (
+          //     $.inArray(
+          //       $(this)
+          //       .val()
+          //       .split(".")
+          //       .pop()
+          //       .toLowerCase(),
+          //       fileExtension
+          //     ) == -1
+          //   ) {
+          //     alert(
+          //       "Hanya format file berikut yang dapat diterima : " +
+          //       fileExtension.join(", ")
+          //     );
+          //   } else {
+          //     var namafile = e.target.files[0].name;
+          //     var ukurfile = e.target.files[0].size;
+          //     if (ukurfile <= 1 * Math.pow(2, 20)) { // Ukuran (satuan MB) dikali 2 pangkat 20 = Ukuran MB
+          //       console.log(currentForm);
+          //       $("#filename" + currentForm).html(namafile);
+          //     } else {
+          //       alert(
+          //         "Ukuran file tersebut terlalu besar. Batas maksimum ukuran file adalah 1 MB"
+          //       );
+          //     }
+          //   }
+          // });
 
           //console.log(currentForm);
           if (currentForm >= <?= $anggota->jumlah_anggota ?>) {
