@@ -106,34 +106,6 @@ class Seminar extends MY_Controller {
             
             // echo ($anggota == TRUE ? "True" : "False");
             // return;
-
-            // Verify
-            if (!preg_match("/^[a-zA-Z\s']+$/", $nama)) {
-                //echo "Kolom Nama Lengkap mengandung karakter yang tidak diizinkan!";
-                echo "<script>alert(\"Kolom Nama Lengkap mengandung karakter yang tidak diizinkan!\");</script>";
-                return;
-            }
-            
-            if (!preg_match("/^[0-9]+$/", $nohp)) {
-                //echo "Kolom Nomor HP/WA mengandung karakter yang tidak diizinkan!";
-                echo "<script>alert(\"Kolom Nomor HP/WA mengandung karakter yang tidak diizinkan!\");</script>";
-                return;
-            }
-
-            if (!preg_match("/^[a-zA-Z\s',.0-9\/]+$/", $alamat)) {
-                //echo "Kolom Alamat mengandung karakter yang tidak diizinkan!";
-                echo "<script>alert(\"Kolom Alamat mengandung karakter yang tidak diizinkan!\");</script>";
-                return;
-            }
-
-            if ($asal != "") {
-                if (!preg_match("/^[a-zA-Z\s'.0-9\/]+$/", $asal)) {
-                    //echo "Kolom Asal Sekolah/Institusi mengandung karakter yang tidak diizinkan!";
-                    echo "<script>alert(\"Kolom Asal Sekolah/Institusi mengandung karakter yang tidak diizinkan!\");
-                    </script>";
-                return;
-                }
-            }
             
             $this->form_validation->set_rules('nama', 'Nama Lengkap', 'trim|required|min_length[5]|max_length[50]');
             $this->form_validation->set_rules('email', 'Email', 'valid_email|required|min_length[5]|max_length[50]');
@@ -141,6 +113,33 @@ class Seminar extends MY_Controller {
             $this->form_validation->set_rules('notelp', 'Nomor HP/WA', 'trim|required|min_length[5]|max_length[13]');
             
             if ($this->form_validation->run() == TRUE) {
+                // Verify
+                if (!preg_match("/^[a-zA-Z\s']+$/", $nama)) {
+                    //echo "Kolom Nama Lengkap mengandung karakter yang tidak diizinkan!";
+                    echo "<script>alert(\"Kolom Nama Lengkap mengandung karakter yang tidak diizinkan!\");</script>";
+                    return;
+                }
+                
+                if (!preg_match("/^[0-9]+$/", $nohp)) {
+                    //echo "Kolom Nomor HP/WA mengandung karakter yang tidak diizinkan!";
+                    echo "<script>alert(\"Kolom Nomor HP/WA mengandung karakter yang tidak diizinkan!\");</script>";
+                    return;
+                }
+
+                if (!preg_match("/^[a-zA-Z\s',.0-9\/]+$/", $alamat)) {
+                    //echo "Kolom Alamat mengandung karakter yang tidak diizinkan!";
+                    echo "<script>alert(\"Kolom Alamat mengandung karakter yang tidak diizinkan!\");</script>";
+                    return;
+                }
+
+                if ($asal != "") {
+                    if (!preg_match("/^[a-zA-Z\s'.0-9\/]+$/", $asal)) {
+                        //echo "Kolom Asal Sekolah/Institusi mengandung karakter yang tidak diizinkan!";
+                        echo "<script>alert(\"Kolom Asal Sekolah/Institusi mengandung karakter yang tidak diizinkan!\");
+                        </script>";
+                    return;
+                    }
+                }
                 $eCheck = $this->db->select('email')
                                     ->from("tb_seminar")
                                     ->where("email", $email)
