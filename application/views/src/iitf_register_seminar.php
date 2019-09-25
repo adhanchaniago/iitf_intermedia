@@ -119,19 +119,19 @@ transform: scale(1.0);
                         </div>
                         <ul id="countdown" class="is-ico">
                             <li id="days">
-                                <div class="timer-number">00</div>
+                                <div class="timer-number2">00</div>
                                 <div class="label">Days</div>
                             </li>
                             <li id="hours">
-                                <div class="timer-number">00</div>
+                                <div class="timer-number2">00</div>
                                 <div class="label">Hours</div>
                             </li>
                             <li id="minutes">
-                                <div class="timer-number">00</div>
+                                <div class="timer-number2">00</div>
                                 <div class="label">Minutes</div>
                             </li>
                             <li id="seconds">
-                                <div class="timer-number">00</div>
+                                <div class="timer-number2">00</div>
                                 <div class="label">Seconds</div>
                             </li>
                         </ul>
