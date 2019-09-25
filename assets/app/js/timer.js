@@ -7,7 +7,7 @@ $(document).ready(function () {
      * -------------------------- */
     // The date you want to count down to
     var targetDate = new Date("2019/09/29 23:59:59");
-    var targetDate2 = new Date("2019/10/13 12:00:01");
+    var targetDate2 = new Date("2019/10/13 08:59:59");
 
     // Other date related variables
     var days;
