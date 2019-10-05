@@ -59,10 +59,9 @@
                      </form>
 
                  </div>
-                 <!-- Hero image -->
+                 <!-- Hero image
                  <div class="column is-half-desktop is-full-mobile ico-countdown">
                      <div class="ico-card animated preFadeInUp fadeInUp">
-                         <!-- Countdown -->
                          <div class="buy-title is-centered">
                              Pendaftaran akan berakhir pada
                          </div>
@@ -84,9 +83,7 @@
                                  <div class="label">Seconds</div>
                              </li>
                          </ul>
-                         <!-- Progress bar -->
                          <div class="progress-block">
-                             <!-- Tags -->
                              <div class="progress-tags">
                                  <div>Pendaftaran</div>
                                  <div>Administrasi</div>
@@ -96,6 +93,7 @@
                          </div>
                      </div>
                  </div>
+                 -->
              </div>
          </div>
      </div>

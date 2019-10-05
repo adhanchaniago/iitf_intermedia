@@ -16,6 +16,11 @@ class App_view extends CI_Controller
         $this->load->library('dropbox');
     }
 
+    public function reg_close()
+    {
+        echo "<script>alert('Maaf, Pendaftaran lomba IITF 2019 sudah ditutup!');location.href='" . base_url('login') . "';</script>";
+    }
+
     public function dash()
     {
         $check = $this->db->get_where('tb_user', array(
