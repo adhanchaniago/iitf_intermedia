@@ -91,10 +91,10 @@ class Seminar extends MY_Controller {
         $price = $this->DataModel->getHTMPrice();
         $this->db->select('*');
         $this->db->from('tb_seminar');
-        $this->db->where('htm_status', $htm);
+        //$this->db->where('htm_status', $htm);
         $query = $this->db->get();
         $num = $query->num_rows();
-        if ($num < 75) { // Kuota Anggota
+        if ($num < 100) { // Kuota Anggota
             $code = $this->DataModel->noDaf();
 
             $nama = $this->input->post('nama');
